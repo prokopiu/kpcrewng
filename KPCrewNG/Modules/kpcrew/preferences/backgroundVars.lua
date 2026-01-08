@@ -17,6 +17,11 @@ ui:add(kcPreference:new("main_wnd_width", 950, kcPreference.typeInt, "Main Windo
 ui:add(kcPreference:new("main_wnd_height", 950, kcPreference.typeInt, "Main Window Height|"))
 ui:add(kcPreference:new("main_wnd_xpos", 70, kcPreference.typeInt, "Main Window X Pos|"))
 ui:add(kcPreference:new("main_wnd_ypos", 50, kcPreference.typeInt, "Main Window Y Pos|"))
+ui:add(kcPreference:new("sop_wnd_ypos",		 70,		kcPreference.typeInt,	"SOP Window Y Pos|"))
+ui:add(kcPreference:new("sop_wnd_xoffset",	 50,		kcPreference.typeInt,	"SOP Window x offset from right|"))
+ui:add(kcPreference:new("flow_wnd_xpos",	 30,		kcPreference.typeInt,	"Flow Window x position|"))
+ui:add(kcPreference:new("flow_wnd_ypos",	 70,		kcPreference.typeInt,	"Flow Window y position|"))
+ui:add(kcPreference:new("flow_line_length",	 55,		kcPreference.typeInt,	"Flow text line length|"))
 
 activeBckVars:addGroup(general)
 activeBckVars:addGroup(ui)

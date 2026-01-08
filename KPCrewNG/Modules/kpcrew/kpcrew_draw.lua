@@ -29,10 +29,22 @@ return function()
 
 	-- render SOP tab
 	local function render_main_tab_1()
+		
 		imgui.BeginGroup()
-			kc_imgui_out_text(color_white, "test2")
+		
+		kc_imgui_in_button("flowprev", "<", 25, 30, 			function () if getActiveSOP():getActiveFlowIndex() > 1 then
+			getActiveSOP():setActiveFlowIndex(getActiveSOP():getActiveFlowIndex() -1)
+			end end) 
+		imgui.SameLine() 
+		kc_imgui_in_button("flownext", ">", 25, 30, function () 
+			if getActiveSOP():getActiveFlowIndex() < 20 then
+				getActiveSOP():setActiveFlowIndex(getActiveSOP():getActiveFlowIndex() +1)
+			end end) 
+
 			getActiveSOP():render()
+--			getActiveSOP():getActiveFlow():render()
 		imgui.EndGroup()
+		
 	end
 
 	local function render_main_tab_2()

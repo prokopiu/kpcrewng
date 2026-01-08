@@ -39,7 +39,7 @@ color_ctrl_selected = 0xFF303030
 color_mstr_flow_open = 0xFF404040
 
 if FLYWITHLUA == false then -- use for Linux dev environment with cimgui
-	imgui.constant = {Col = {Text=0}, StyleVar = {FramePadding=10}}
+	imgui.constant = {Col = {Text=0, Button=21, ButtonActive=23, ButtonHovered=22}, StyleVar = {FramePadding=10}}
 	imgui.PushStyleColor = imgui.PushStyleColor_U32
 	imgui.PushStyleVar = imgui.PushStyleVar_Float 
 	imgui.PushID = imgui.PushID_Str	

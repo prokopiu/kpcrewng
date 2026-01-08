@@ -60,8 +60,10 @@ if kc_file_exists(SCRIPT_DIRECTORY .. "../Modules/kpcrew_prefs/" .. kc_acf_icao 
 	dbgMsg(SCRIPT_DIRECTORY .. "../Modules/kpcrew_prefs/" .. kc_acf_icao .. ".preferences")
 	getActivePrefs():load()
 end
+
 kcLoadedSOP 			= require("kpcrew.sops.SOP_" .. kc_acf_icao)
 kcLoadedVars 			= require("kpcrew.preferences.backgroundVars")
+
 
 -- ============================================================================================
 if FLYWITHLUA then
@@ -69,7 +71,7 @@ if FLYWITHLUA then
 	-- initializing steps when in XP12
 
 else
-	
+	local ts = 0
 	-- === Love runtime stuff outside XP12
 	love.load = function()
 	
@@ -88,6 +90,12 @@ else
 	love.update = function(dt)
 	    imgui.Update(dt)
 	    imgui.NewFrame()
+		
+		ts = ts + dt
+		if ts > 1.0 then
+--			print("1 second" .. ts)
+			ts= 0
+		end
 	end
 	
 	love.mousemoved = function(x, y, ...)

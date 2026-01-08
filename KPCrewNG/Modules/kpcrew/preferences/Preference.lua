@@ -35,7 +35,7 @@ function kcPreference:new(key, value, datatype, title)
 	obj.datatype = datatype
 	obj.title = title
 
-	dbgMsg("Preference: Created "..obj.key)
+--	dbgMsg("Preference: Created "..obj.key)
     return obj
 end
 

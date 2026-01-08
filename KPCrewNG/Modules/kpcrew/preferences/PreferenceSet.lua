@@ -139,20 +139,13 @@ function kcPreferenceSet:render()
 		-- filename and load/save button
 		imgui.Separator()
 		kc_imgui_in_tfield("", 70, color_orange, 20, self.filename, function (textin) self:filename(textin) end)
---		local changed, textin = imgui.InputText("", self.filename, 20)
---		if changed then
---				self.filename = textin
---		end
+
 		imgui.SameLine()
 		kc_imgui_in_button("loadprefset", "LOAD", 40, 20, function () elf:load() end)
---		if imgui.Button("LOAD") then
---			self:load()
---		end
+
 		imgui.SameLine()
 		kc_imgui_in_button("setprefset", "SAVE", 40, 20, function () elf:save() end)
---		if imgui.Button("SAVE") then
---			self:save()
---		end		
+		
 		imgui.Separator()
 	end
 end

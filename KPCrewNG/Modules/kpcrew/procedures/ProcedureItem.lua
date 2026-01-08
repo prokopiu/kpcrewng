@@ -1,8 +1,9 @@
 -- Standard Procedure Item to be added to procedures
 --
--- @classmod ProcedureItem
+-- @classmod ProcedureItem inherits from FlowItem
 -- @author Kosta Prokopiu
 -- @copyright 2022 Kosta Prokopiu
+
 local kcProcedureItem = {
 }
 

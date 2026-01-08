@@ -2,7 +2,8 @@
 --
 -- @classmod FlowItem
 -- @author Kosta Prokopiu
--- @copyright 2022 Kosta Prokopiu
+-- @copyright 2026 Kosta Prokopiu
+
 local kcFlowItem = {
     INIT		 		= 0,
 	RUN					= 1,
@@ -37,15 +38,15 @@ local kcFlowItem = {
 	colorManual			= color_dark_green
 }
 
--- Instantiate a new FlowItem
--- @tparam string challengeText is the left hand text 
--- @tparam string responseText is specific state of the item
--- @tparam string actor is the actor for the item; see list below
--- @tparam int wait time in seconds during execution 
--- @tparam function reference validFunc shall return true or false to verify if condition is met
--- @tparam function reference  actionFunc will be executed and make changes to aircraft settings
--- @tparam function reference  skipFunc if true will skip the item and not diaply in list
--- @treturn local object
+--- Instantiate a new FlowItem (generic)
+-- @param string challengeText - is the left hand text 
+-- @param string responseText - is specific state of the item
+-- @param string actor - is the actor for the item
+-- @param int waittime - waiting time for item in seconds during execution 
+-- @param function() validFunc - shall return true or false to verify if condition is met or not
+-- @param function() actionFunc - will be executed and make changes to aircraft settings
+-- @param function() skipFunc - if true will skip the item and not display in list
+-- @return object flowitem
 function kcFlowItem:new(challengeText,responseText,actor,waittime,validFunc,actionFunc,skipFunc)
     kcFlowItem.__index = kcFlowItem
     local obj = {}
@@ -68,55 +69,42 @@ function kcFlowItem:new(challengeText,responseText,actor,waittime,validFunc,acti
     return obj
 end
 
--- return the type of flow for distinction later
--- @treturn string "Flow" or "Procedure" or "Checklist"
-function kcFlowItem:getClassName()
-	return self.className
-end
+--- return the type of flow for distinction later
+-- @return string "FlowItem" or "ProcedureItem" or "ChecklistItem"
+function kcFlowItem:getClassName() return self.className end
 
--- return true if the actor for the item is the sim pilot
--- @treturn boolean true = is the user's role as CPT,PF,LHS, CM1
+--- return true if the actor for the item is the sim pilot (user)
+-- @return boolean true = is the user's role as CPT,PF,LHS,CM1
 function kcFlowItem:isUserRole()
 	local userroles = {	self.actorPF, self.actorCPT, self.actorLHS, self.actorBOTH, self.actorCM1 }
 	return kc_hasValue(userroles, self.actor)
 end	
 	
--- get the actor string for this checklist item
--- @treturn string role name
-function kcFlowItem:getActor()
-	return self.actor
-end
+--- get the actor string for this checklist item
+-- @return string role name
+function kcFlowItem:getActor() return self.actor end
 
--- get the left hand action text for the item
--- @treturn string challenge text
-function kcFlowItem:getChallengeText()
-	if self.challengeText == nil then
-		return ""
-	else
-		return self.challengeText
-	end
-end
+--- get the left hand action text for the item
+-- @return string challenge text
+function kcFlowItem:getChallengeText() if self.challengeText == nil then return "" else return self.challengeText end end
 
--- set left hand action text
--- @tparam string text challenge text
-function kcFlowItem:setChallengeText(text)
-	self.challengeText = text
-end
+--- set left hand action text
+-- @param string text - challenge text
+function kcFlowItem:setChallengeText(text) self.challengeText = text end
 
--- speak the challenge text
-function kcFlowItem:speakChallengeText()
-    kc_speakNoText(0,kc_parse_string(self.challengeText))
-end
+--- speak the challenge text
+function kcFlowItem:speakChallengeText() kc_speakNoText(0,kc_parse_string(self.challengeText)) end
 
--- get the right hand result text for the item
+--- get the right hand result text for the item
+-- @return string response text
 function kcFlowItem:getResponseText()
-	if string.find(self.responseText,"%%") == nil then
+	if string.find(self.responseText,"%%") == nil then -- no macro
 		return self.responseText
 	else
-		if string.find(self.responseText,"|") == nil then
+		if string.find(self.responseText,"|") == nil then -- no splits
 			return self.responseText
 		else
-			local resArr = kc_split(self.responseText,"|")
+			local resArr = kc_split(self.responseText,"|") -- split on | chars
 			kcLoadString = "return string.format(\"" .. resArr[1] .. "\""
 			if table.getn(resArr) > 1 then kcLoadString = kcLoadString .. "," .. resArr[2] end
 			if table.getn(resArr) > 2 then kcLoadString = kcLoadString .. "," .. resArr[3] end
@@ -128,60 +116,44 @@ function kcFlowItem:getResponseText()
 	end
 end
 
--- speak the response text
-function kcFlowItem:speakResponseText()
-	kc_speakNoText(0,kc_parse_string(self:getResponseText()))
-end
+--- speak the response text
+function kcFlowItem:speakResponseText() kc_speakNoText(0,kc_parse_string(self:getResponseText())) end
 
--- set the right hand result text for the item
--- @tparam string text response text
-function kcFlowItem:setResponseText(text)
-	self.responseText = text
-end
+--- set the right hand result text for the item
+-- @param string text - response text
+function kcFlowItem:setResponseText(text) self.responseText = text end
 
--- get the time in seconds this item is to be waited on
--- @treturn int seconds
-function kcFlowItem:getWaitTime()
-	return self.waittime
-end
+--- get the time in seconds this item is to be waited on
+-- @return int seconds
+function kcFlowItem:getWaitTime() return self.waittime end
 
--- set the wait time in seconds
--- @tparam int number of seconds
-function kcFlowItem:setWaitTime(seconds)
-	self.waittime = seconds
-end
+--- set the wait time in seconds
+-- @param int second - number of seconds
+function kcFlowItem:setWaitTime(seconds) self.waittime = seconds end
 
--- change the state of the checklist item
--- @tparam int state id
-function kcFlowItem:setState(state)
-    self.state = state
-end
+--- change the state of the checklist item
+-- @param int state - state id
+function kcFlowItem:setState(state) self.state = state end
 
--- get the current state of this checklist item
+--- get the current state of this checklist item
 -- @return int get state id
 function kcFlowItem:getState()
 	if type(self.skipFunc) == 'function' then
-		if self.skipFunc() then
-			return self.SKIP
-		end
+		if self.skipFunc() then	return self.SKIP end
 	end
     return self.state
 end
 
--- get current color of the procedure item
--- @treturn int color code
-function kcFlowItem:getColor()
-	return self.color
-end
+--- get current color of the procedure item
+-- @return int color code
+function kcFlowItem:getColor() print("get "..self.color) return self.color end
 
--- set the color of the checklist item
--- @tparam int color code
-function kcFlowItem:setColor(color)
-	self.color = color
-end
+--- set the color of the checklist item
+-- @param int color - color code
+function kcFlowItem:setColor(color) self.color = color end
 
--- return the color code linked to the state
--- @treturn int matching color code for item
+--- get current color for current state from colorcode table
+-- @return the matching color for the current state of this flow item 
 function kcFlowItem:getStateColor()
 	local statecolors = { 
 		self.colorInitial,	-- INIT 
@@ -195,55 +167,66 @@ function kcFlowItem:getStateColor()
 	return statecolors[self.state + 1]
 end
 
--- reset the item to its initial state
+--- reset the item to its initial state
 function kcFlowItem:reset()
     self:setState(self.INIT)
 	self.valid = true
 	self:setColor(self.colorInitial)
 end
 
--- are the conditions for this item met?
--- @treturn boolean true = valid
+--- are the conditions for this item met?
+-- @return boolean true = valid
 function kcFlowItem:isValid()
-	if type(self.validFunc) == 'function' then
-		self.valid = self.validFunc(self)
-	end
+	if type(self.validFunc) == 'function' then self.valid = self.validFunc(self) end
     return self.valid
 end
 
--- execute the automation function if available
+--- execute the automation function if available
 function kcFlowItem:execute()
 	if activePrefSet:get("general:assistance") > 2 then
 		if (activePrefSet:get("general:assistance") == 3 and self:isUserRole() == false) or activePrefSet:get("general:assistance") == 4 then
-			if type(self.actionFunc) == 'function' then
-				self.actionFunc()
-			end
+			if type(self.actionFunc) == 'function' then self.actionFunc() end
 		end
 	end
 end
 	
--- return the visual line to put in the checklist displays
+--- return the visual line of text to put in a checklist displays
+-- @param FlowItem flowItem - item from which to get the line
+-- @param int linelength in chars - needed to calculate dots 
 function kcFlowItem:getLine(lineLength)
 	local line = {}
-	local unparsedChallengeText = kc_unparse_string(self.challengeText)
+	local unparsedChallengeText = kc_unparse_string(self.getChallengeText())
 	local unparsedResponseText = kc_unparse_string(self:getResponseText())
 	local dots = lineLength - string.len(unparsedChallengeText) - string.len(unparsedResponseText) - 7
 	line[#line + 1] = unparsedChallengeText
 	local dotchar = "."
-	if unparsedResponseText == "" then
-		dotchar = " "
-	end
-	for i=0,dots-1,1 do
-		line[#line + 1] = dotchar
-	end
+	if unparsedResponseText == "" then dotchar = " " end
+	for i=0,dots-1,1 do line[#line + 1] = dotchar end
 	line[#line + 1] = unparsedResponseText
-	if self.actor ~= "" then
+	if flowItem.actor ~= "" then
 		line[#line + 1] = " ("
-		line[#line + 1] = self.actor
+		line[#line + 1] = flowItem.actor
 		line[#line + 1] = ")"
 	end
 	
 	return table.concat(line)
+end
+
+-- render a flow line in SOP view
+function kcFlowItem:render(isSOP)
+	-- render in SOP view
+	if isSOP then
+		imgui.TableNextRow();
+		if self:isUserRole() then
+			imgui.TableSetColumnIndex(0) imgui.Text(self:getLine(60));
+			imgui.TableSetColumnIndex(1) imgui.Text("");
+		else
+			imgui.TableSetColumnIndex(1) imgui.Text(self:getLine(60));
+			imgui.TableSetColumnIndex(0) imgui.Text("");
+		end
+	else -- render in control window
+		
+	end
 end
 
 return kcFlowItem

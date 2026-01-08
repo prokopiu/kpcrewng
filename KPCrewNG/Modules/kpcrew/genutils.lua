@@ -15,6 +15,24 @@ local MultiStateCmdSwitch 	= require "kpcrew.systems.MultiStateCmdSwitch"
 local InopSwitch 			= require "kpcrew.systems.InopSwitch"
 local KeepPressedSwitchCmd	= require "kpcrew.systems.KeepPressedSwitchCmd"
 
+------------- Simulator functionality --------------
+
+--- speak text but don't show in sim, speakMode is used to prevent repetitive playing
+-- @param int speakMode - 1 will talk and show, 0 will only speak
+-- @param string text - text to speak
+function kc_speakNoText(speakMode, text)
+	if text ~= "" and text ~= nil then
+	
+		if speakMode == 0 then
+			set("sim/operation/prefs/text_out",0)
+			XPLMSpeakString(text)
+		else	
+			set("sim/operation/prefs/text_out",1)
+			XPLMSpeakString(text)
+		end
+	end
+end
+
 ------------- file related functions ---------------
 
 --- check if external lua file exists
@@ -49,6 +67,53 @@ end
 -- @return array string
 function kc_pref_split(s)
 	return kc_split(s,"|")
+end
+
+--- return index position of value in an array
+-- @param array - the array
+-- @param value - value to serach for in the array
+-- @return int index
+function kc_indexOf(array, value)
+    for i, v in ipairs(array) do if v == value then return i end end
+    return nil
+end
+
+--- see if a value is found in given array
+-- @param array array, array to check vaöue in
+-- @param object value, value to check against
+-- @return book - true was found in table 
+function kc_hasValue (array, value)
+    for i, v in ipairs(array) do
+        if v == value then
+            return true
+        end
+    end
+    return false
+end
+
+-------------- string related functions ------------------
+
+--- parse string for function macros and replace for spoken text
+-- @param string instring - string to unparse
+function kc_unparse_string(instring)
+	local outstring = ""
+	local elements = kc_split(instring,"#")
+	for _, item in ipairs(elements) do
+		local pitem = ""
+		if string.sub(item,1,6) == "spell|" then
+			pitem = kc_split(item,"|")[2]
+		elseif string.sub(item,1,5) == "nato|" then
+			pitem = kc_split(item,"|")[2]
+		elseif string.sub(item,1,4) == "rwy|" then
+			pitem = kc_split(item,"|")[2]
+		elseif string.sub(item,1,9) == "exchange|" then
+			pitem = kc_split(item,"|")[2]
+		else
+			pitem = item
+		end
+		outstring = outstring .. pitem
+	end
+	return outstring
 end
 
 -------------- process variable related utilities ---------------
