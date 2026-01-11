@@ -23,7 +23,7 @@ function kcPreferenceGroup:new(name,title)
 	obj.lineLength = 60
 	obj.initialOpen = false
 
-	dbgMsg("PreferenceGroup: Created "..obj.name.."["..obj.title.."]")
+--	dbgMsg("PreferenceGroup: Created "..obj.name.."["..obj.title.."]")
 
     return obj
 end

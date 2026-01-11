@@ -57,7 +57,7 @@
 local sysMCP = {
 }
 
-logMsg("DFLT sysMCP")
+--logMsg("DFLT sysMCP")
 
 local TwoStateDrefSwitch 	= require "kpcrew.systems.TwoStateDrefSwitch"
 local TwoStateCmdSwitch	 	= require "kpcrew.systems.TwoStateCmdSwitch"

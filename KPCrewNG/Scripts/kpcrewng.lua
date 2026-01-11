@@ -35,6 +35,8 @@ kc_simversion = get("sim/version/xplane_internal_version") -- XP version
 
 require "kpcrew.acft_select"
 require "kpcrew.genutils"
+require "kpcrew.Addon.SOP.FlightPhases"
+require "kpcrew.Addon.SOP.FlowItemRole"
 
 logMsg ( "FWL: ** Starting KPCrew version " .. kc_VERSION .. " on XP " .. kc_simversion .. " **" )
 
@@ -61,8 +63,40 @@ if kc_file_exists(SCRIPT_DIRECTORY .. "../Modules/kpcrew_prefs/" .. kc_acf_icao 
 	getActivePrefs():load()
 end
 
-kcLoadedSOP 			= require("kpcrew.sops.SOP_" .. kc_acf_icao)
-kcLoadedVars 			= require("kpcrew.preferences.backgroundVars")
+--kcLoadedSOP 			= require("kpcrew.sops.SOP_" .. kc_acf_icao)
+--kcLoadedVars 			= require("kpcrew.preferences.backgroundVars")
+
+-- build new object structure
+local Addon = require("kpcrew.Addon.Addon")
+local SOP = require("kpcrew.Addon.SOP.SOP")
+local Flow = require("kpcrew.Addon.SOP.Flow")
+local FlowItem = require("kpcrew.Addon.SOP.FlowItem")
+
+activeAddon = Addon:new("DFLT","Default Aircraft")
+function ng_get_active_addon() return activeAddon end
+
+local activeSOP = SOP:new("SOP Default Aircraft")
+activeAddon:setSop(activeSOP)
+function ng_get_active_sop() return activeSOP end
+
+local flow1 = Flow:new("PRELIMINARY COCKPIT PREPARATION",ng_phase_flight_planning,Flow.classProcedureFlow)
+flow1:appendFlowItem(FlowItem:new("ENG 1,2 MASTERS","OFF",ng_firole_PM))
+flow1:appendFlowItem(FlowItem:new("ENG MODE SELECTOR","OFF",ng_firole_PM))
+flow1:appendFlowItem(FlowItem:new("WEATHER RADAR","OFF",ng_firole_PM))
+flow1:appendFlowItem(FlowItem:new("LANDING GEAR LEVER","DOWN",ng_firole_PM))
+flow1:appendFlowItem(FlowItem:new("WIPER SELECTORS","BOTH OFF",ng_firole_PM))
+flow1:appendFlowItem(FlowItem:new("BATTERY","CHECKED/AUTO",ng_firole_PM))
+flow1:appendFlowItem(FlowItem:new("EXT PWR","AS REQD",ng_firole_PM))
+flow1:appendFlowItem(FlowItem:new("APU FIRE","CHECK/TEST",ng_firole_PM))
+flow1:appendFlowItem(FlowItem:new("APU","START",ng_firole_PM))
+flow1:appendFlowItem(FlowItem:new("When APU is avail","",ng_firole_PM))
+flow1:appendFlowItem(FlowItem:new("EXT PWR","OFF",ng_firole_PM))
+flow1:appendFlowItem(FlowItem:new("AIR COND PANEL","SET",ng_firole_PM))
+--flow1:appendFlowItem(FlowItem:new("COCKPIT LIGHTS","AS REQUIRED",ng_firole_BOTH))
+
+activeSOP:appendFlow(flow1)
+
+print(ng_get_flight_phase_title(ng_phase_before_start))
 
 
 -- ============================================================================================

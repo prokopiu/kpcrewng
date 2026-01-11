@@ -53,7 +53,7 @@ Macro: kc_macro_fuel
 local sysFuel = {
 }
 
-logMsg("DFLT sysFuel")
+--logMsg("DFLT sysFuel")
 
 local TwoStateDrefSwitch 	= require "kpcrew.systems.TwoStateDrefSwitch"
 local TwoStateCmdSwitch	 	= require "kpcrew.systems.TwoStateCmdSwitch"

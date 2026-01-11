@@ -192,7 +192,7 @@ end
 electricalPowerUpProc:addItem(ProcedureItem:new("AIR CONDITIONING","AS REQUIRED",FlowItem.actorPM,0,
 	function () return true end,
 	function () kc_macro_air(kc_phase_turnaround) end))
-electri	calPowerUpProc:addItem(ProcedureItem:new("ALTIMETERS","ALL SET QNH",FlowItem.actorBOTH,0,
+electricalPowerUpProc:addItem(ProcedureItem:new("ALTIMETERS","ALL SET QNH",FlowItem.actorBOTH,0,
 	function () return true end,
 	function () kc_macro_set_local_baro() end))
 if kc_has_transponder then

@@ -8,8 +8,11 @@ if FLYWITHLUA == false then -- for dev environment on Linux and cimgui
 	local ffi = require "ffi"
 	require "teststubs"
 end
+
 require "kpcrew.genutils"
 require "kpcrew.imgui_utils"
+
+local SOP = require("kpcrew.Addon.SOP.SOP")
 
 kc_imgui_current_main_tab = 0
 kc_imgui_main_wnd_width = 950
@@ -21,9 +24,9 @@ return function()
 	-- render flight planning tab
 	local function render_main_tab_0()
 		imgui.BeginGroup()
-			kc_imgui_out_text(color_white, "test1")
-			kc_imgui_in_button("test1", "HT", 25, 30, function () kc_imgui_main_wnd_height = 300 end)
-			kc_imgui_in_button("test2", "HT2", 25, 30, function () kc_imgui_main_wnd_height = 950 end)
+		
+		ng_get_active_addon():getSop():render(i)
+		
 		imgui.EndGroup()
 	end
 
@@ -32,17 +35,17 @@ return function()
 		
 		imgui.BeginGroup()
 		
-		kc_imgui_in_button("flowprev", "<", 25, 30, 			function () if getActiveSOP():getActiveFlowIndex() > 1 then
-			getActiveSOP():setActiveFlowIndex(getActiveSOP():getActiveFlowIndex() -1)
-			end end) 
-		imgui.SameLine() 
-		kc_imgui_in_button("flownext", ">", 25, 30, function () 
-			if getActiveSOP():getActiveFlowIndex() < 20 then
-				getActiveSOP():setActiveFlowIndex(getActiveSOP():getActiveFlowIndex() +1)
-			end end) 
-
-			getActiveSOP():render()
---			getActiveSOP():getActiveFlow():render()
+--		kc_imgui_in_button("flowprev", "<", 25, 30, 			function () if getActiveSOP():getActiveFlowIndex() > 1 then
+--			getActiveSOP():setActiveFlowIndex(getActiveSOP():getActiveFlowIndex() -1)
+--			end end) 
+--		imgui.SameLine() 
+--		kc_imgui_in_button("flownext", ">", 25, 30, function () 
+--			if getActiveSOP():getActiveFlowIndex() < 20 then
+--				getActiveSOP():setActiveFlowIndex(getActiveSOP():getActiveFlowIndex() +1)
+--			end end) 
+--
+--			getActiveSOP():render()
+----			getActiveSOP():getActiveFlow():render()
 		imgui.EndGroup()
 		
 	end
@@ -56,7 +59,7 @@ return function()
 	local function render_main_tab_3()
 		imgui.BeginGroup()
 			kc_imgui_out_text(color_white, "test4")
-			getActiveBriefings():render()
+--			getActiveBriefings():render()
 --			getActivePrefs():render()
 		imgui.EndGroup()
 	end

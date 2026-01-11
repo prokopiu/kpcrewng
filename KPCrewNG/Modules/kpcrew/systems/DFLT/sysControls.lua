@@ -39,7 +39,7 @@ local sysControls = {
 	flaps_name= {[0] = "UP", [1] =   "1", [2] =  "2", [3] =   "3", [4] = "4", [5] =   "5", [6] =  "6", [7] =   "7", [8] = "FULL"}
 }
 
-logMsg("DFLT sysControls")
+--logMsg("DFLT sysControls")
 
 local TwoStateDrefSwitch 	= require "kpcrew.systems.TwoStateDrefSwitch"
 local TwoStateCmdSwitch	 	= require "kpcrew.systems.TwoStateCmdSwitch"

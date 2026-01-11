@@ -20,7 +20,7 @@ function kcPreferenceSet:new(name)
 	obj.preferenceGroups = {}
 	obj.filename = kc_acf_icao
 	
-	dbgMsg("PreferenceSet: Created "..obj.name.." File: "..obj.filename)
+--	dbgMsg("PreferenceSet: Created "..obj.name.." File: "..obj.filename)
 
     return obj
 end

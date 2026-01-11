@@ -27,7 +27,7 @@ sysHydraulic.hydPressureLow
 local sysHydraulic = {
 }
 
-logMsg("DFLT sysHydraulic")
+--logMsg("DFLT sysHydraulic")
 
 local TwoStateDrefSwitch 	= require "kpcrew.systems.TwoStateDrefSwitch"
 local TwoStateCmdSwitch	 	= require "kpcrew.systems.TwoStateCmdSwitch"

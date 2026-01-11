@@ -29,7 +29,7 @@ sysAice.probeHeatGroup
 local sysAice = {
 }
 
-dbgMsg("DFLT sysAice")
+--dbgMsg("DFLT sysAice")
 
 local TwoStateDrefSwitch 	= require "kpcrew.systems.TwoStateDrefSwitch"
 local TwoStateCmdSwitch	 	= require "kpcrew.systems.TwoStateCmdSwitch"

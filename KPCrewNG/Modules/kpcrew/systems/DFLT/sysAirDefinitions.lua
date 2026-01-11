@@ -27,7 +27,7 @@
 	}
 ]]
 
-logMsg("Air Definitions DFLT")
+--logMsg("Air Definitions DFLT")
 
 -- Definitions:
 kc_has_press_cab	= true		-- Aircraft has pressurized cabine

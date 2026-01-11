@@ -42,7 +42,7 @@ sysAir.vacuumAnc
 local sysAir = {
 }
 
-logMsg("DFLT sysAir")
+--logMsg("DFLT sysAir")
 
 local TwoStateDrefSwitch 	= require "kpcrew.systems.TwoStateDrefSwitch"
 local TwoStateCmdSwitch	 	= require "kpcrew.systems.TwoStateCmdSwitch"

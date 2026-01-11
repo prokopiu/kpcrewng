@@ -8,7 +8,7 @@
 local sysMacros = {
 }
 
-logMsg("DFLT sysMacros")
+--logMsg("DFLT sysMacros")
 
 -- ====================================== States related macros
 

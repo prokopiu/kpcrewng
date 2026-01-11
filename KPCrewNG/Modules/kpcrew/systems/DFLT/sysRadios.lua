@@ -8,7 +8,7 @@
 local sysRadios = {
 }
 
-logMsg("DFLT sysRadio")
+--logMsg("DFLT sysRadio")
 
 local TwoStateDrefSwitch 	= require "kpcrew.systems.TwoStateDrefSwitch"
 local TwoStateCmdSwitch	 	= require "kpcrew.systems.TwoStateCmdSwitch"

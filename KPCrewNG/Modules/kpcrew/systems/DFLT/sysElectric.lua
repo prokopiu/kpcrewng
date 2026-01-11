@@ -52,7 +52,7 @@ local MultiStateCmdSwitch 	= require "kpcrew.systems.MultiStateCmdSwitch"
 local InopSwitch 			= require "kpcrew.systems.InopSwitch"
 local KeepPressedSwitchCmd	= require "kpcrew.systems.KeepPressedSwitchCmd"
 
-logMsg("DFLT sysElectric")
+--logMsg("DFLT sysElectric")
 
 local def = require("kpcrew.systems." .. kc_acf_icao ..".sysElectricDefinitions")
 

@@ -8,7 +8,7 @@
 local sysFMC = {
 }
 
-logMsg("DFLT sysFMC")
+--logMsg("DFLT sysFMC")
 
 local TwoStateDrefSwitch 	= require "kpcrew.systems.TwoStateDrefSwitch"
 local TwoStateCmdSwitch	 	= require "kpcrew.systems.TwoStateCmdSwitch"

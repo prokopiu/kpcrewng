@@ -63,7 +63,7 @@ kc_has_nosmoke_sgn	= true		-- Aircraft has no smoking signs
 local sysGeneral = {
 }
 
-logMsg("DFLT sysGeneral")
+--logMsg("DFLT sysGeneral")
 
 local TwoStateDrefSwitch 	= require "kpcrew.systems.TwoStateDrefSwitch"
 local TwoStateCmdSwitch	 	= require "kpcrew.systems.TwoStateCmdSwitch"
