@@ -12,17 +12,18 @@ ng_flightphases = {
 	[7] 	= "Taxi to Runway",
 	[8] 	= "Before Takeoff",
 	[9] 	= "Takeoff",
-	[10] 	= "Climb",
-	[11] 	= "Cruise",
-	[12] 	= "Descent",
-	[13] 	= "Arrival",
-	[14] 	= "Approach",
-	[15] 	= "Landing",
-	[16] 	= "Go Around",
-	[17] 	= "Turnoff",
-	[18] 	= "Taxi to Stand",
-	[19] 	= "Shutdown",
-	[20] 	= "Turnaround"
+	[10] 	= "After Takeoff",
+	[11] 	= "Climb",
+	[12] 	= "Cruise",
+	[13] 	= "Descent",
+	[14] 	= "Arrival",
+	[15] 	= "Approach",
+	[16] 	= "Landing",
+	[17] 	= "Go Around",
+	[18] 	= "Turnoff",
+	[19] 	= "Taxi to Stand",
+	[20] 	= "Shutdown",
+	[21] 	= "Turnaround"
 }
 
 -- flight phase index
@@ -35,7 +36,8 @@ ng_phase_after_start 	= 6
 ng_phase_taxi_rwy	 	= 7
 ng_phase_before_takeoff	= 8
 ng_phase_takeoff	 	= 9
-ng_phase_climb 		 	= 10
+ng_phase_after_takeoff 	= 10
+ng_phase_climb 		 	= 11
 ng_phase_enroute	 	= 12
 ng_phase_descent 	 	= 13
 ng_phase_arrival 	 	= 14
@@ -51,4 +53,4 @@ ng_phase_turnaround  	= 21
 -- @param int index - index of phase
 -- @return string - flight phase title
 function ng_get_flight_phase_title(key)
-	print("test") return ng_flightphases[key] end
+	return ng_flightphases[key] end

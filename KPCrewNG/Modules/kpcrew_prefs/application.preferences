@@ -1,0 +1,13 @@
+general:assistance=true
+general:jumpflow=false
+general:simbriefuser="prokopiu"
+general:xpdrmode=1
+general:weightunit=1
+general:barounit=1
+general:deftransalt=5000
+general:deftranslvl=6000
+general:mcpdefspd=100
+general:mcpdefhdg=1
+general:mcpdefalt=4900
+general:startupapu=false
+general:startupgpu=true

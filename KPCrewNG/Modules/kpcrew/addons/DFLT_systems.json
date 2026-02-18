@@ -1,0 +1,431 @@
+{
+    "icao": "DFLT",
+    "title": "Default Laminar aircraft systems",
+    "addonsystems": {
+        "categories": [
+            {
+                "name": "aice",
+                "systems": [
+                    {
+                        "name": "engaice",
+                        "elements": [
+                            {
+                                "name": "engaice1",
+                                "title": "Engine Antiice 1",
+                                "type": "dataref",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle",
+                                    "set"
+                                ],
+                                "dref": "sim/cockpit/switches/anti_ice_inlet_heat_per_engine",
+                                "indx": 0
+                            },
+                            {
+                                "name": "engaice2",
+                                "title": "Engine Antiice 2",
+                                "type": "dataref",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle",
+                                    "set"
+                                ],
+                                "dref": "sim/cockpit/switches/anti_ice_inlet_heat_per_engine",
+                                "indx": 1
+                            },
+                            {
+                                "name": "engaice3",
+                                "title": "Engine Antiice 3",
+                                "type": "dataref",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle",
+                                    "set"
+                                ],
+                                "dref": "sim/cockpit/switches/anti_ice_inlet_heat_per_engine",
+                                "indx": 2
+                            },
+                            {
+                                "name": "engaice4",
+                                "title": "Engine Antiice 4",
+                                "type": "dataref",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle",
+                                    "set"
+                                ],
+                                "dref": "sim/cockpit/switches/anti_ice_inlet_heat_per_engine",
+                                "indx": 3
+                            }
+                        ]
+                    },
+                    {
+                        "name": "wingaice",
+                        "elements": [
+                            {
+                                "name": "wingaice1",
+                                "title": "Wing Anti Ice 1",
+                                "type": "dataref",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle",
+                                    "set"
+                                ],
+                                "dref": "sim/cockpit2/ice/ice_surfce_heat_on"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "windowheat",
+                        "elements": [
+                            {
+                                "name": "windowheat1",
+                                "title": "Window Heat 1",
+                                "type": "2state",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle"
+                                ],
+                                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
+                                "indx": 0,
+                                "cmdon": "sim/ice/window_heat_on",
+                                "cmdoff": "sim/ice/window_heat_on",
+                                "cmdtgl": "sim/ice/window_heat_on"
+                            },
+                            {
+                                "name": "windowheat2",
+                                "title": "Window Heat 2",
+                                "type": "2state",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle"
+                                ],
+                                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
+                                "indx": 1,
+                                "cmdon": "sim/ice/window2_heat_on",
+                                "cmdoff": "sim/ice/window2_heat_on",
+                                "cmdtgl": "sim/ice/window2_heat_on"
+                            },
+                            {
+                                "name": "windowheat3",
+                                "title": "Window Heat 3",
+                                "type": "2state",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle"
+                                ],
+                                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
+                                "indx": 2,
+                                "cmdon": "sim/ice/window3_heat_on",
+                                "cmdoff": "sim/ice/window3_heat_on",
+                                "cmdtgl": "sim/ice/window3_heat_on"
+                            },
+                            {
+                                "name": "windowheat4",
+                                "title": "Window Heat 4",
+                                "type": "2state",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle"
+                                ],
+                                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
+                                "indx": 3,
+                                "cmdon": "sim/ice/window4_heat_on",
+                                "cmdoff": "sim/ice/window4_heat_on",
+                                "cmdtgl": "sim/ice/window4_heat_on"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "probeheat",
+                        "elements": [
+                            {
+                                "name": "probeheat1",
+                                "title": "Window Heat 1",
+                                "type": "2state",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle"
+                                ],
+                                "dref": "sim/cockpit/switches/pitot_heat_on",
+                                "cmdon": "sim/ice/window_heat_on",
+                                "cmdoff": "sim/ice/window_heat_on",
+                                "cmdtgl": "sim/ice/window_heat_on"
+                            },
+                            {
+                                "name": "probeheat2",
+                                "title": "Window Heat 2",
+                                "type": "2state",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle"
+                                ],
+                                "dref": "sim/cockpit/switches/pitot_heat_on2",
+                                "cmdon": "sim/ice/window2_heat_on",
+                                "cmdoff": "sim/ice/window2_heat_on",
+                                "cmdtgl": "sim/ice/window2_heat_on"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "antiiceann",
+                        "elements": [
+                            {
+                                "name": "antiiceann",
+                                "title": "Anti-Ice Annunciator",
+                                "type": "function",
+                                "acts": [
+                                ],
+                                "fcheck": "return ng_check_system(\"engaice\",\"off\") or ng_check_system(\"wingaice\",\"on\")"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "air",
+                "systems": [
+                    {
+                        "name": "packs",
+                        "elements": [
+                            {
+                                "name": "pack1",
+                                "title": "Pack 1",
+                                "type": "dataref",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle",
+                                    "set"
+                                ],
+                                "dref": "sim/cockpit2/bleedair/actuators/pack_left"
+                            },
+                            {
+                                "name": "pack2",
+                                "title": "Pack 2",
+                                "type": "dataref",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle",
+                                    "set"
+                                ],
+                                "dref": "sim/cockpit2/bleedair/actuators/pack_right"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bleeds",
+                        "elements": [
+                            {
+                                "name": "bleed1",
+                                "title": "Engine Bleed 1",
+                                "type": "dataref",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle",
+                                    "set"
+                                ],
+                                "dref": "sim/cockpit2/pressurization/actuators/bleed_air_mode"
+                            },
+                            {
+                                "name": "bleed2",
+                                "title": "Engine Bleed 2"
+                            },
+                            {
+                                "name": "bleed3",
+                                "title": "Engine Bleed 3"
+                            },
+                            {
+                                "name": "bleed4",
+                                "title": "Engine Bleed 4"
+                            },
+                            {
+                                "name": "apubleed",
+                                "title": "APU Bleed",
+                                "type": "dataref",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle",
+                                    "set"
+                                ],
+                                "dref": "sim/cockpit2/bleedair/actuators/apu_bleed"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "cooling",
+                        "elements": [
+                            {
+                                "name": "equipcooling",
+                                "title": "Equipment Cooling"
+                            },
+                            {
+                                "name": "gasper",
+                                "title": "Gasper"
+                            },
+                            {
+                                "name": "apubleed",
+                                "title": "APU Bleed",
+                                "type": "dataref",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle",
+                                    "set"
+                                ],
+                                "dref": "sim/cockpit2/bleedair/actuators/apu_bleed"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "isovalves",
+                        "elements": [
+                            {
+                                "name": "isovalve1",
+                                "title": "Isolation Valve 1"
+                            },
+                            {
+                                "name": "isovalve2",
+                                "title": "Isolation Valve 2"
+                            },
+                            {
+                                "name": "isovalve3",
+                                "title": "Isolation Valve 3"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "recirculation",
+                        "elements": [
+                            {
+                                "name": "recirc1",
+                                "title": "Recirculation 1"
+                            },
+                            {
+                                "name": "recirc2",
+                                "title": "Recirculation 2"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "trimair",
+                        "elements": [
+                            {
+                                "name": "trimair",
+                                "title": "Trim Air"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "tempzones",
+                        "elements": [
+                            {
+                                "name": "temppzone1",
+                                "title": "Temperature Zone 1"
+                            },
+                            {
+                                "name": "temppzone2",
+                                "title": "Temperature Zone 2"
+                            },
+                            {
+                                "name": "temppzone3",
+                                "title": "Temperature Zone 3"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "cargoheat",
+                        "elements": [
+                            {
+                                "name": "cargoheat1",
+                                "title": "Cargo Heat 1"
+                            },
+                            {
+                                "name": "cargoheat2",
+                                "title": "Cargo Heat 2"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "altselect",
+                        "elements": [
+                            {
+                                "name": "flightalt",
+                                "title": "Flight Altitude"
+                            },
+                            {
+                                "name": "landalt",
+                                "title": "Landing Altitude"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "oxygen",
+                        "elements": [
+                            {
+                                "name": "oxygenmaster",
+                                "title": "Oxygen Master",
+                                "type": "dataref",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle",
+                                    "set"
+                                ],
+                                "dref": "sim/cockpit2/oxygen/actuators/demand_flow_setting"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "vacuumann",
+                        "elements": [
+                            {
+                                "name": "vacuumann",
+                                "title": "Vacuum Annunciator",
+                                "type": "function",
+                                "acts": [
+                                ],
+                                "fcheck": "if get(\"sim/cockpit2/annunciators/low_vacuum\",0)==1 or get(\"sim/cockpit2/annunciators/low_vacuum\",1) == 1 then return 1 else return 0 end end"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "general",
+                "systems": [
+                    {
+                        "name": "parkbrake",
+                        "elements": [
+                            {
+                                "name": "parkbrake",
+                                "title": "Parkingbrake",
+                                "type": "dataref",
+                                "acts": [
+                                    "on",
+                                    "off",
+                                    "toggle"
+                                ],
+                                "dref": "sim/cockpit2/controls/parking_brake_ratio"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

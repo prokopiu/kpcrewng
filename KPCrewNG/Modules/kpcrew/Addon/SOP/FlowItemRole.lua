@@ -15,7 +15,8 @@ ng_flowItemRoles = {
 	[10] = "CM1",	-- Crew Management 1 = Captain
 	[11] = "CM2",	-- Crew Management 2 = FO
 	[12] = "CM3",	-- Crew Management 3 = FE
-	[13] = "ALL"	-- All crew members
+	[13] = "ALL",	-- All crew members
+	[14] = "SYS"	-- System actor
 }
 
 -- flight phase index
@@ -32,6 +33,7 @@ ng_firole_CM1 	= 10
 ng_firole_CM2 	= 11
 ng_firole_CM3 	= 12
 ng_firole_ALL 	= 13
+ng_firole_SYS	= 14
 
 --- get fi role string based on index
 -- @param int index - index of role

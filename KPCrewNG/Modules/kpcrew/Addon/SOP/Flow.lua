@@ -13,28 +13,30 @@ local ngFlow = {
 	classFlow = "Flow",
 	classChecklistFlow = "ChecklistFlow",
 	classProcedureFlow = "ProcedureFlow",
-	classBackgroundFlow = "BackgroundFlow",
-	classStateFlow = "StateFlow"
+	classBackgroundFlow = "BackgroundFlow"
 }
 
 --- Instantiate a new Flow
 -- @param string title - Title of the flow
--- @param string flightPhase - the phase this flow belongs to
+-- @param string flightphase - the phase this flow belongs to
+-- @@param string optional classname
 -- @return Flow - the created flow object
-function ngFlow:new(title, flightPhase, className)
+function ngFlow:new(title, flightphase, classname)
     ngFlow.__index = ngFlow
     local obj = {}
     setmetatable(obj, ngFlow)
 
-	obj.className = className
+	obj.className = classname
 	
     obj.title = title
 	obj.state = ng_flowstate_new
-	obj.flightPhase = flightPhase 
-	obj.flowItems = {} -- list of FlowItems
-	
-	dbgMsg("+ "..obj.className.." {"..obj.title.."}")
+	obj.flightphase = flightphase 
+	obj.items = {} -- list of flow items
+	obj.activeItem = 0
+	obj.selected = false
 
+	print("+ "..obj.className.." {"..obj.title.."}")
+	
     return obj
 end
 
@@ -44,7 +46,7 @@ function ngFlow:getClassName() return self.className end
 
 --- set classname
 -- @param string classname
-function ngFlow:setClassName(className) self.className = className end
+function ngFlow:setClassName(className) self.className = classname end
 
 --- Get title of Flow
 -- @return string - title of Flow
@@ -64,20 +66,20 @@ function ngFlow:setState(state) self.state = state end
 
 --- get associated flightphase
 -- @return int flightphase of flow
-function ngFlow:getFlightPhase() return self.flightPhase end
+function ngFlow:getFlightPhase() return self.flightphase end
 
 --- Set the flightphase of the Flow
 -- @param int phase 
-function ngFlow:setState(phase) self.flightPhase = phase end
+function ngFlow:setPhase(phase) self.flightphase = phase end
 
 --- Add a flow item to Flow
 -- @param FlowItem flowItem - flow item to be appended to flow
-function ngFlow:appendFlowItem(flowItem) table.insert(self.flowItems,flowItem) end
+function ngFlow:appendFlowItem(flowItem) table.insert(self.items,flowItem) end
 
 --- Insert a flow item at specific position
 -- @param FlowItem flowItem - flow item to be inserted
 -- @param int index - index at which to add
-function ngFlow:insertFlowItem(flowItem, index) table.insert(self.flowItems,index,flowItem) end
+function ngFlow:insertFlowItem(flowItem, index) table.insert(self.items,index,flowItem) end
 	
 --- Get a specific flow item based on index
 -- @param int index - flow item's' index in table
@@ -87,26 +89,76 @@ function ngFlow:getFlowItem(index) return self.items[index] end
 --- Get filtered number of flow items
 -- @param string filter - filter by classname (optional)
 -- @return int - number of flow items
-function ngFlow:getNumberFlowItems(filter)
+function ngFlow:getNumberItems(filter)
 	local cnt = 0
-	for k,v in pairs(self.flowItems) do
+	for k,v in pairs(self.items) do
 	    if filter ~= nil and v:getClassName() == filter then cnt=cnt+1 end
 	end
 	return cnt
 end
 
+function ngFlow:getItems() return self.items end
+
+function ngFlow:getActiveItemIdx() return self.activeItem end
+
+function ngFlow:setActiveItemIdx(idx) if idx <= #self.items then self.activeItem = idx end end
+
+function ngFlow:isSelected() return self.selected end
+
+function ngFlow:setSelected(flag) self.selected = flag end
+
+function ngFlow:getActiveItem()
+		if self.activeItem > 0 then 
+			return self.items[self.activeItem] 
+	end
+	return nil
+end
+
+function ngFlow:reset() 
+	if self.state ~= ng_flowstate_new then
+		for k, item in ipairs(self.items) do
+			item:setState(ng_flowstate_new)
+		end
+		self.state = ng_flowstate_new
+		self.activeItem = 0
+		-- self.selected = false
+		ng_stateindex = 0
+	end
+end
+
 -- Output and render functions
 
 function ngFlow:render(type)
-	local textout = ""
-	if type == "t" then
-		textout = "Flow: "..self.title
-		print(textout)
-	else
-		kc_imgui_out_text(color_white, "Flow: "..self.title)
+	if type == "f" then
+		imgui.BeginTable(self:getTitle(),2,color_white)
+		if FLYWITHLUA then
+			imgui.TableHeadersRow()
+		else
+			imgui.TableSetupColumn("CM1",1)
+			imgui.TableSetupColumn("CM2",1)
+			imgui.TableHeadersRow()
+		end
+		for _, item in pairs(self.items) do
+			if item:getItemNode().condition ~= nil then
+				if loadstring(item:getItemNode().condition)() then 
+					item:render("f")
+				end
+			else
+				item:render("f")
+			end
+		end
+		imgui.EndTable()
 	end
-	for k,v in pairs(self.flowItems) do
-	    v:render(type)
+	if type == "i" then
+		for _, item in pairs(self.items) do
+			if item:getItemNode().condition ~= nil then
+				if loadstring(item:getItemNode().condition)() then 
+					item:render("i")
+				end
+			else
+				item:render("i")
+			end
+		end
 	end
 end
 

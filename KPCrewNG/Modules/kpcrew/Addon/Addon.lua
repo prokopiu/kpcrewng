@@ -4,6 +4,8 @@
 -- @author Kosta Prokopiu
 -- @copyright 2026 Kosta Prokopiu
 
+require "kpcrew.nggenutils"
+
 local ngAddon = {
 }
 
@@ -22,8 +24,11 @@ function ngAddon:new(icao, title)
 	obj.icao = icao
 	
 	obj.sop = nil -- the SOP associated to this Addon
+	obj.preferences = nil -- addon specific preferences
+	obj.briefing = nil -- briefing
+	obj.systems = nil -- systems
 
-	dbgMsg("+ "..obj.className.." {"..obj.icao..","..obj.title.."}")
+	if DEBUGMODE then logMsg("+ "..obj.className.." {"..obj.icao..","..obj.title.."}") end
 
     return obj
 end
@@ -56,10 +61,28 @@ function ngAddon:getSop() return self.sop end
 -- @param SOP sop - SOP for Addon
 function ngAddon:setSop(sop) self.sop = sop end
 
---- Pull a profile from configuration files to set up all
---- aspects of the addon
-function initialize()
+--- Get Aircraft Prefs
+-- @return PreferenceSet - Associated preferences
+function ngAddon:getPreferences() return self.preferences end
 
-end
+--- Set Aircraft preferences
+-- @param PreferenceSet set - SOP for Addon
+function ngAddon:setPreferences(set) self.preferences = set end
+
+--- Get Briefing Prefs
+-- @return PreferenceSet - Associated briefing
+function ngAddon:getBriefing() return self.briefing end
+
+--- Set Briefing preferences
+-- @param PreferenceSet set - Briefing for Addon
+function ngAddon:setBriefing(set) self.briefing = set end
+
+--- Get Systems 
+-- @return Systems - Associated acf systems
+function ngAddon:getSystems() return self.systems end
+
+--- Set Systems
+-- @param Systems set - Systems for Addon
+function ngAddon:setSystems(systems) self.systems = systems end
 	
 return ngAddon

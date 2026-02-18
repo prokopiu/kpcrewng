@@ -1,0 +1,1077 @@
+{
+    "icao": "DFLT",
+    "title": "Default Laminar aircraft addon",
+    "sop": {
+        "title": "DFLT SOP",
+        "flow": [
+            {
+                "phase": "ng_phase_colddark",
+                "classname": "ProcedureFlow",
+                "title": "SAFETY & POWER ON",
+                "flowitem": [
+                    {
+                        "challenge": "PARKING BRAKE",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem",
+						"delay": 5,
+                        "setelements": [
+                            {
+                                "element": "parkbrake",
+                                "action": "on"
+                            }
+                        ]
+                    },
+                    {
+                        "challenge": "DOORS",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_SYS",
+                        "classname": "ProcedureItem",
+                        "nocheck": 1,
+                        "setelements": [
+                            {
+                                "element": "#externaldoors",
+                                "action": "close"
+                            },
+                            {
+                                "element": "doorfwdleft",
+                                "action": "open"
+                            },
+                            {
+                                "element": "cockpitdoor",
+                                "action": "open"
+                            }
+                        ]
+                    },
+                    {
+                        "challenge": "LANDING GEAR HANDLE",
+                        "response": "DOWN",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "SPEED BRAKES / GROUND SPOILERS",
+                        "response": "DOWN",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "FLAP LEVER",
+                        "response": "UP",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "WINDSHIELD WIPER SELECTORS",
+                        "response": "PARK/OFF",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "BATTERY SWITCHES",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "EXTERNAL POWER",
+                        "response": "CONNECT",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "-- Connect External Power via X-Plane Ground menu",
+                        "response": "",
+                        "role": "ng_firole_CPT",
+                        "classname": "InfoLine"
+                    },
+                    {
+                        "challenge": "EXTERNAL POWER",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "APU START",
+                        "response": "PERFORm",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "GREEN LANDING GEAR LIGHT",
+                        "response": "CHECK ILLUMINATED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "LIGHTS",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "POWER LEVERS",
+                        "response": "IDLE",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "HYDRAULIC PUMPS",
+                        "response": "INITIAL SETTINGS",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "AVIONICS SWITCH",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "AILERON & RUDDER TRIm",
+                        "response": "RESET",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "FUEL TRANSFER/XFEED",
+                        "response": "OFF",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "AIR CONDITIONING PACK SWITCHES",
+                        "response": "AUTO/ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "NAV/POSITION LIGHTS",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ENGINE GENERATORS",
+                        "response": "OFF",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ESSENTIAL BUS",
+                        "response": "OFF",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "INVERTER/ESSENTIAL BUS",
+                        "response": "ON/AUTO",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "DC & AC BUS TIES",
+                        "response": "ON/AUTO",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ALTIMETERS",
+                        "response": "ALL SET QNH",
+                        "role": "ng_firole_BOTH",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "TRANSPONDER CODE",
+                        "response": "SET 2000",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "TRANSPONDER MODE",
+                        "response": "STBY",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ADIRU/IRS",
+                        "response": "ALIGN/NAV",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "SEAT BELT LIGHTS",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "NO SMOKING LIGHTS",
+                        "response": "ARm",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "STANDBY POWER",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_before_start",
+                "classname": "ProcedureFlow",
+                "title": "ENGINE START CHECKS",
+                "flowitem": [
+                    {
+                        "challenge": "ELECTRICAL POWER UP (SKIP IF BATT ONLY)",
+                        "response": "COMPLETE",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "HYDRAULIC SYSTEM",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "STAIRS",
+                        "response": "RETRACT",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "DOORS",
+                        "response": "CLOSED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "LIGHTS",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "PARKING BRAKE",
+                        "response": "SET",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "FUEL SYSTEM",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "APU START",
+                        "response": "PERFORM",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ANTI-ICE SETTINGS",
+                        "response": "OFF",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem",
+                        "setelements": [
+                            {
+                                "element": "engantice1",
+                                "action": "off"
+                            },
+                            {
+                                "element": "engantice2",
+                                "action": "off"
+                            },
+                            {
+                                "element": "wingantice1",
+                                "action": "off"
+                            }
+                        ],
+                        "checkelements": [
+                            {
+                                "element": "engantice1",
+                                "action": "off"
+                            },
+                            {
+                                "element": "engantice2",
+                                "action": "off"
+                            },
+                            {
+                                "element": "wingantice1",
+                                "action": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "challenge": "ENGINE BLEED SWITCHES",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "FLIGHT DIRECTOR",
+                        "response": "SET",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ELECTRIC SYSTEM",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_before_start",
+                "classname": "ProcedureFlow",
+                "title": "PRE PUSH & ENGINE START",
+                "flowitem": [
+                    {
+                        "challenge": "DOORS",
+                        "response": "CLOSED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "PARKING BRAKE",
+                        "response": "SET",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "FLAP LEVER",
+                        "response": "UP",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "SET EXTERNAL LIGHTS",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "APU BLEED AIR",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "EXTERNAL POWER",
+                        "response": "OFF",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "EXTERNAL POWER",
+                        "response": "DISCONNECT",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "SEAT BELT LIGHTS",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "NO SMOKING LIGHTS",
+                        "response": "ARM",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "TRANSPONDER",
+                        "response": "STBY",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "PUSHBACK SERVICE",
+                        "response": "ENGAGE IF NEEDED",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "EXT PWR",
+                        "response": "OFF/DISCONNECT",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "COMMUNICATION WITH GROUND CREW",
+                        "response": "ESTABLISH",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "START CLEARANCE",
+                        "response": "RECEIVED",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "PARKING BRAKE",
+                        "response": "RELEASED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "THRUST LEVERS",
+                        "response": "IDLE",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_before_start",
+                "classname": "ProcedureFlow",
+                "title": "ENGINE START",
+                "flowitem": [
+                    {
+                        "challenge": "START SEQUENCE",
+                        "response": "n then y",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "FUEL SYSTEM",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "AIR CONDITIONING / PACKS",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_PM",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ENGINE MODE",
+                        "response": "IGN/START",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "IGNITION",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ENGINE",
+                        "response": "START",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "START FIRST ENGINE",
+                        "response": "STARTING FIRST ENGINE",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "CHRONO",
+                        "response": "RESET/START",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "POWER LEVERS",
+                        "response": "IDLE",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ENGINE START SWITCH",
+                        "response": "ENGAGE",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ENGINE N2",
+                        "response": "INCREASING",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "TOW BAR DISCONNECTED",
+                        "response": "VERIFY",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "LOCKOUT PIN REMOVED",
+                        "response": "VERIFY",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "PARKING BRAKE",
+                        "response": "SET",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ENGINE MODE",
+                        "response": "NORM",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_after_start",
+                "classname": "ProcedureFlow",
+                "title": "AFTER START ITEMS",
+                "flowitem": [
+                    {
+                        "challenge": "PARKING BRAKE",
+                        "response": "SET",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ELECTRIC SYSTEM",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "AIR CONDITIONING",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "EXT PWR",
+                        "response": "OFF/DISCONNECT",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "APU GENERATOR",
+                        "response": "OFF",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "APU BLEED AIR",
+                        "response": "OFF",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "APU MASTER",
+                        "response": "OFF",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "SPEED BRAKES & GROUND SPOILERS",
+                        "response": "DOWN",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ANTI-ICE SYSTEMS",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "HYDRAULIC PUMPS",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "V SPEEDS",
+                        "response": "SET AND CHECKED",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "TAKEOFF BRIEFING",
+                        "response": "COMPLETED",
+                        "role": "ng_firole_PF",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "FLIGHT CONTROLS",
+                        "response": "CHECKED",
+                        "role": "ng_firole_BOTH",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ELEVATOR TRIM",
+                        "response": "SET FOR TAKEOFF & CHECK",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "TIME",
+                        "response": "NOTED",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "FLAPS",
+                        "response": "SET TAKEOFF FLAPS x",
+                        "role": "ng_firole_PF",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "MCP",
+                        "response": "INITIALIZE",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "TRANSPONDER",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "TAXI LIGHTS",
+                        "response": "ON WHEN TAXI BEGINS",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_before_takeoff",
+                "classname": "ProcedureFlow",
+                "title": "BEFORE TAKEOFF PROCEDURE",
+                "flowitem": [
+                    {
+                        "challenge": "FLAPS",
+                        "response": "CHECK T/O FLAPS",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "A/P ALTITUDE",
+                        "response": "SET",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "A/P HEADING BUG",
+                        "response": "SET",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ANTI-ICE SETTINGS",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "AUTOBRAKE",
+                        "response": "R T O",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "MCP",
+                        "response": "INITIALIZE",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "SPEEDBRAKE",
+                        "response": "ARM",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "TAKEOFF CONFIG",
+                        "response": "CHECK",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_takeoff",
+                "classname": "ProcedureFlow",
+                "title": "runway entry",
+                "flowitem": [
+                    {
+                        "challenge": "EXTERNAL LIGHTS",
+                        "response": "SET",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "TRANSPONDER",
+                        "response": "ON/TA RA",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "PACKS / BLEEDS",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "WEATHER RADAR",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "CLOCK",
+                        "response": "START",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "GEAR",
+                        "response": "UP",
+                        "role": "ng_firole_PM",
+                        "classname": "ProcedureItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_takeoff",
+                "classname": "ProcedureFlow",
+                "title": "Takeoff",
+                "flowitem": [
+                    {
+                        "challenge": "YAW DAMPER",
+                        "response": "ON",
+                        "role": "ng_firole_PF",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "GEAR",
+                        "response": "UP",
+                        "role": "ng_firole_PM",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "FLAPS",
+                        "response": "RETRACT AT",
+                        "role": "ng_firole_PF",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "A/P 1",
+                        "response": "ACTIVATE",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "BLEEDS / PACKS",
+                        "response": "ON",
+                        "role": "ng_firole_PM",
+                        "classname": "ProcedureItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_climb",
+                "classname": "ChecklistFlow",
+                "title": "AFTER TAKEOFF CHECKLIST",
+                "flowitem": [
+                    {
+                        "challenge": "LANDING GEAR",
+                        "response": "RETRACTED",
+                        "role": "ng_firole_PM",
+                        "classname": "ChecklistItem"
+                    },
+                    {
+                        "challenge": "FLAPS",
+                        "response": "UP",
+                        "role": "ng_firole_PM",
+                        "classname": "ChecklistItem"
+                    },
+                    {
+                        "challenge": "AUTOBRAKE",
+                        "response": "OFF",
+                        "role": "ng_firole_FO",
+                        "classname": "ChecklistItem"
+                    },
+                    {
+                        "challenge": "CLIMB SPEED",
+                        "response": "SET",
+                        "role": "ng_firole_FO",
+                        "classname": "ChecklistItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_climb",
+                "classname": "ProcedureFlow",
+                "title": "CLIMB CHECKS",
+                "flowitem": [
+                    {
+                        "challenge": "PACKS / BLEEDS",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "OXYGEN SUPPLY",
+                        "response": "ON",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ANTI-ICE",
+                        "response": "OFF",
+                        "role": "ng_firole_CPT",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ENGINE ANTI-ICE",
+                        "response": "OFF",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "WING ANTI-ICE",
+                        "response": "OFF",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_descent",
+                "classname": "ProcedureFlow",
+                "title": "DESCENT CHECKS",
+                "flowitem": [
+                    {
+                        "challenge": "VREF",
+                        "response": "CHECK IN FMC",
+                        "role": "ng_firole_PF",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "LANDING DATA",
+                        "response": "VREF i, MINIMUMS i",
+                        "role": "ng_firole_PM",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "ANTI-ICE SETTINGS",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_PM",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "AUTOBRAKE",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "SEAT BELT LIGHTS",
+                        "response": "ON",
+                        "role": "ng_firole_PM",
+                        "classname": "ProcedureItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_approach",
+                "classname": "ProcedureFlow",
+                "title": "APPROACH PROCEDURE",
+                "flowitem": [
+                    {
+                        "challenge": "ALTIMETERS",
+                        "response": "QNH xx",
+                        "role": "ng_firole_BOTH",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "COURSE NAV 1",
+                        "response": "SET 999",
+                        "role": "ng_firole_PF",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "COURSE NAV 2",
+                        "response": "SET 999",
+                        "role": "ng_firole_PM",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "AIR CONDITIONING PACK SWITCHES",
+                        "response": "AS REQUIRED",
+                        "role": "ng_firole_PM",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "LANDING LIGHTS",
+                        "response": "ON",
+                        "role": "ng_firole_PF",
+                        "classname": "ProcedureItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_approach",
+                "classname": "ProcedureFlow",
+                "title": "LANDING FLOW",
+                "flowitem": [
+                    {
+                        "challenge": "RETRACT FLAPS",
+                        "response": "...",
+                        "role": "ng_firole_PF",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "GO AROUND ALTITUDE",
+                        "response": "SET 9999",
+                        "role": "ng_firole_PM",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "GO AROUND HEADING",
+                        "response": "SET 999",
+                        "role": "ng_firole_PM",
+                        "classname": "ProcedureItem"
+                    },
+                    {
+                        "challenge": "SPEEDBRAKE",
+                        "response": "ARM",
+                        "role": "ng_firole_FO",
+                        "classname": "ProcedureItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_landing",
+                "classname": "ChecklistFlow",
+                "title": "LANDING CHECKLIST",
+                "flowitem": [
+                    {
+                        "challenge": "FLAPS",
+                        "response": "RETRACTED",
+                        "role": "ng_firole_PF",
+                        "classname": "ChecklistItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_afterland",
+                "classname": "ProcedureFlow",
+                "title": "AFTER LANDING FLOW",
+                "flowitem": [
+                    {
+                        "challenge": "RETRACT FLAPS",
+                        "response": "...",
+                        "role": "ng_firole_PF",
+                        "classname": "ProcedureItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_shutdown",
+                "classname": "ProcedureFlow",
+                "title": "SHUTDOWN FLOW",
+                "flowitem": [
+                    {
+                        "challenge": "RETRACT FLAPS",
+                        "response": "...",
+                        "role": "ng_firole_PF",
+                        "classname": "ProcedureItem"
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_colddark",
+                "classname": "StateFlow",
+                "title": "STATE COLD & DARK",
+                "flowitem": [
+                    {
+                        "challenge": "Step",
+                        "response": "...",
+                        "role": "ng_firole_PF",
+                        "classname": "ProcedureItem",
+                        "setelements": [
+                            {
+                                "element": "doorfwdleft",
+                                "action": "open"
+                            },
+                            {
+                                "element": "doorfwdcargo",
+                                "action": "open"
+                            },
+                            {
+                                "element": "dooraftcargo",
+                                "action": "open"
+                            },
+                            {
+                                "element": "doorfwright",
+                                "action": "close"
+                            },
+                            {
+                                "element": "dooraftright",
+                                "action": "close"
+                            },
+                            {
+                                "element": "cockpitdoor",
+                                "action": "open"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "phase": "ng_phase_colddark",
+                "classname": "BackgroundFlow",
+                "title": "Background flow 1",
+                "flowitem": [
+                    {
+                        "challenge": "Step",
+                        "response": "...",
+                        "role": "ng_firole_PF",
+                        "classname": "ProcedureItem",
+                        "setelements": [
+                            {
+                                "element": "doorfwdleft",
+                                "action": "open"
+                            },
+                            {
+                                "element": "doorfwdcargo",
+                                "action": "open"
+                            },
+                            {
+                                "element": "dooraftcargo",
+                                "action": "open"
+                            },
+                            {
+                                "element": "doorfwright",
+                                "action": "close"
+                            },
+                            {
+                                "element": "dooraftright",
+                                "action": "close"
+                            },
+                            {
+                                "element": "cockpitdoor",
+                                "action": "open"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
