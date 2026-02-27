@@ -4,8 +4,13 @@
 	Kosta Prokopiu, 2026
 --]]
 
+-- -------------- General functions -----------------
 
-------------- Simulator functionality --------------
+function dprint(text)
+	if DEBUGMODE then print(text) end
+end
+		
+-- ----------- Simulator functionality --------------
 
 --- speak text but don't show in sim, speakMode is used to prevent repetitive playing
 -- @param int speakMode - 1 will talk and show, 0 will only speak
@@ -23,27 +28,22 @@ function ng_speakNoText(speakMode, text)
 	end
 end
 
-------------- file related functions ---------------
+-- ----------- file related functions ---------------
 
 --- check if external lua file exists
 -- @param string name path and filename to search
 -- @return true/false for existance
 function ng_file_exists(name)
 	local f=io.open(name,"r")
-	if f~=nil then 
-		io.close(f) 
-		return true 
-	else 
-		return false 
-	end
+	if f~=nil then io.close(f) return true else return false end
 end
 
-------------- coordinates related functions ---------------
+-- ----------- coordinates related functions ---------------
 
 --- convert a coordinate from x-plane to deg,min,sec format
 -- @param float coordinate - x-plane coordinate
 -- @return string coordinate string
-function kc_toDegMinSec(coordinate) 
+function ng_toDegMinSec(coordinate) 
     local absolute = math.abs(coordinate);
     local degrees  = math.floor(absolute);
     local minutesNotTruncated = (absolute - degrees) * 60;
@@ -56,7 +56,7 @@ end
 --- convert coordinates to CIVA INS format
 -- @param float coordinate - x-plane coordinate
 -- @return string coordinate string
-function kc_toDMS1(coordinate) 
+function ng_toDMS1(coordinate) 
     local absolute = math.abs(coordinate);
     local degrees  = math.floor(absolute);
     local minutesNotTruncated = (absolute - degrees) * 60;
@@ -70,11 +70,11 @@ end
 -- @param float lat - x-plane coordinate latitude
 -- @param float lng - x-plane coordinate longitude
 -- @return string coordinate string
-function kc_convertINS(lat, lng) 
-    local latitude = kc_toDMS1(lat);
+function ng_convertINS(lat, lng) 
+    local latitude = ng_toDMS1(lat);
     local latitudeCardinal = (lat >= 0) and "N" or "S";
 
-    local longitude = kc_toDMS1(lng);
+    local longitude = ng_toDMS1(lng);
     local longitudeCardinal = (lng >= 0) and "E" or "W";
 
     return string.format("%s%s %s%s",latitudeCardinal,latitude,longitudeCardinal,longitude);
@@ -84,11 +84,11 @@ end
 -- @param float lat - x-plane coordinate latitude
 -- @param float lng - x-plane coordinate longitude
 -- @return string coordinate string
-function kc_convertDMS(lat, lng) 
-    local latitude = kc_toDegMinSec(lat);
+function ng_convertDMS(lat, lng) 
+    local latitude = ng_toDegMinSec(lat);
     local latitudeCardinal = (lat >= 0) and "N" or "S";
 
-    local longitude = kc_toDegMinSec(lng);
+    local longitude = ng_toDegMinSec(lng);
     local longitudeCardinal = (lng >= 0) and "E" or "W";
 
     return latitude .. " " .. latitudeCardinal .. " - " .. longitude .. " " .. longitudeCardinal;
@@ -99,7 +99,7 @@ end
 --- return a full time string from given time in seconds of day
 -- @param int timeseconds
 -- @return string time string
-function kc_dispTimeFull(timeseconds)
+function ng_dispTimeFull(timeseconds)
 	local lhours = math.floor(timeseconds/3600)
 	local lminutes = math.floor((timeseconds - lhours * 3600)/60)
 	local lsec = math.floor(timeseconds - (lhours * 3600) - (lminutes * 60))
@@ -109,7 +109,7 @@ end
 --- return a hh:mm string from given time in seconds of day
 -- @param int timeseconds
 -- @return string time string
-function kc_dispTimeHHMM(timeseconds)
+function ng_dispTimeHHMM(timeseconds)
 	local lhours = math.floor(timeseconds/3600)
 	local lminutes = math.floor((timeseconds - lhours * 3600)/60)
 	return string.format("%2.2i:%2.2i",lhours,lminutes)
@@ -118,7 +118,7 @@ end
 --- Gets the current time. (patrickl92)
 -- The function uses the <code>gettime()</code> function of LuaSocket, which provides the current time with seconds resolution.
 -- @treturn number The current time.
-function kc_getPcTime()
+function ng_getPcTime()
 	return socket.gettime()
 end
 
@@ -126,7 +126,7 @@ end
 -- @return true if daylight, false if towards darkness
 function ng_is_daylight()
 	local lightthreshold = 0
-	if kc_simversion > 120000 then
+	if ng_simversion > 120000 then
 		lightthreshold = 0.1
 	else
 		lightthreshold = 0.1
@@ -208,7 +208,7 @@ end
 
 --- parse string for function macros and replace for spoken text
 -- @param string instring - string to unparse
-function kc_unparse_string(instring)
+function ng_unparse_string(instring)
 	local outstring = ""
 	local elements = ng_split(instring,"#")
 	for _, item in ipairs(elements) do
@@ -234,14 +234,14 @@ end
 --- does procvar exist?
 -- @param string procvarid - identifier for procvar
 -- @return bool - true if exists
-function kc_procvar_exists(procvarid)
+function ng_procvar_exists(procvarid)
 	local procvar = getBckVars():find("procvars:" .. procvarid)
 	if procvar == nil then return false else return true end
 end
 	
 --- toggle a boolean procvar
 -- @param string procvarid - identifier for procvar
-function kc_procvar_toggle(procvarid)
+function ng_procvar_toggle(procvarid)
 	local procvar = getBckVars():find("procvars:" .. procvarid)
 	if procvar:getValue() == true then 
 		procvar:setValue(false)
@@ -253,7 +253,7 @@ end
 --- set a procvar
 -- @param string procvarid - identifier for procvar
 -- @param string value - value to set
-function kc_procvar_set(procvarid, value)
+function ng_procvar_set(procvarid, value)
 	local procvar = getBckVars():find("procvars:" .. procvarid)
 	procvar:setValue(value)
 end
@@ -261,43 +261,43 @@ end
 --- initialize a boolean procvar
 -- @param string procvarid - identifier for procvar
 -- @param bool value - value to set
-function kc_procvar_initialize_bool(procvarid, value)
+function ng_procvar_initialize_bool(procvarid, value)
 	local procvar = getBckVars():find("procvars:" .. procvarid)
 	if procvar == nil then 
-		kc_global_procvars:add(kcPreference:new(procvarid,value,kcPreference.typeToggle,procvarid .. "|TRUE|FALSE"))
+		ng_global_procvars:add(kcPreference:new(procvarid,value,kcPreference.typeToggle,procvarid .. "|TRUE|FALSE"))
 	else
-		kc_procvar_set(procvarid,value)
+		ng_procvar_set(procvarid,value)
 	end
 end
 
 --- initialize a counter procvar
 -- @param string procvarid - identifier for procvar
 -- @param int value - value to set
-function kc_procvar_initialize_count(procvarid, value)
+function ng_procvar_initialize_count(procvarid, value)
 	local procvar = getBckVars():find("procvars:" .. procvarid)
 	if procvar == nil then 
-		kc_global_procvars:add(kcPreference:new(procvarid,value,kcPreference.typeInt,procvarid .. "|0"))
+		ng_global_procvars:add(kcPreference:new(procvarid,value,kcPreference.typeInt,procvarid .. "|0"))
 	else
-		kc_procvar_set(procvarid,value)
+		ng_procvar_set(procvarid,value)
 	end
 end
 
 --- initialize a string procvar
 -- @param string procvarid - identifier for procvar
 -- @param string value - value to set
-function kc_procvar_initialize_string(procvarid, value)
+function ng_procvar_initialize_string(procvarid, value)
 	local procvar = getBckVars():find("procvars:" .. procvarid)
 	if procvar == nil then 
-		kc_global_procvars:add(kcPreference:new(procvarid,value,kcPreference.typeText,procvarid .. "|"))
+		ng_global_procvars:add(kcPreference:new(procvarid,value,kcPreference.typeText,procvarid .. "|"))
 	else
-		kc_procvar_set(procvarid,value)
+		ng_procvar_set(procvarid,value)
 	end
 end
 
 --- get boolean procvar
 -- @param string procvarid - identifier for procvar
 -- @return bool - true or false
-function kc_procvar_get(procvarid)
+function ng_procvar_get(procvarid)
 	local procvar = getBckVars():find("procvars:".. procvarid)
 	return procvar:getValue()
 end
@@ -305,7 +305,6 @@ end
 ---------------------- File related functions
 --- find latest file in folder for XP12 weather
 function ng_get_latest_filename(folder)
-logMsg(folder)
 	local command = ""
 	if SYSTEM == "IBM" then
     	command = 'dir /a-d /o-n /tc /b "'.. folder ..'" 2>nul:'
@@ -328,7 +327,7 @@ function ng_get_xp_metar(icao)
 	
 	metarpath = "no"
 	
-	if kc_simversion > 120000 then
+	if ng_simversion > 120000 then
 		if SYSTEM == "LIN" then
 			latestwxfile = ng_get_latest_filename(SYSTEM_DIRECTORY .. "Output/real\\ weather/metar*")
 		else
@@ -343,7 +342,6 @@ function ng_get_xp_metar(icao)
 	else
 		metarpath = SYSTEM_DIRECTORY .. "METAR.rwx"
 	end
-		logMsg(metarpath)
 
     if not ng_file_exists(metarpath) then return "-- NO FILE --" end
 
@@ -364,26 +362,3 @@ function ng_get_xp_metar(icao)
     else return "-- NO ICAO --" end
 end 
 
----------------------- SOP related functions ---------
-
---- generically set up a system element (switch) for more generic setup
--- @param table eDef - definition of system element 
-function kc_setup_element(eDef)
-	if eDef.etype == kc_swtype_2StateCmd then
-		return TwoStateCmdSwitch:new(eDef.name,eDef.drefName,eDef.drefIndex,eDef.cmd1,eDef.cmd2,eDef.cmd3)
-	elseif eDef.etype == kc_swtype_toggleCmd then
-		return TwoStateToggleSwitch:new(eDef.name,eDef.drefName,eDef.drefIndex,eDef.cmd1)
-	elseif eDef.etype == kc_swtype_multistate then
-		return MultiStateCmdSwitch:new(eDef.name,eDef.drefName,eDef.drefIndex,eDef.cmd1,eDef.cmd2,eDef.msMin,eDef.msMax,eDef.msRead,eDef.msDiff)
-	elseif eDef.etype == kc_swtype_dref then
-		return TwoStateDrefSwitch:new(eDef.name,eDef.drefName,eDef.drefIndex)
-	elseif eDef.etype == kc_swtype_inop then 
-		return InopSwitch:new(eDef.name)
-	elseif eDef.etype == kc_swtype_customCmd then 
-		return TwoStateCustomSwitch:new(eDef.name,eDef.drefName,eDef.drefIndex,eDef.funcOn,eDef.funcOff,eDef.funcTgl,eDef.funcStat,eDef.funcStep,eDef.funcSet)
-	elseif eDef.etype == kc_swtype_annunciator then 
-		return SimpleAnnunciator:new(eDef.name,eDef.drefName,eDef.drefIndex)
-	elseif eDef.etype == kc_swtype_customAnn then 
-		return CustomAnnunciator:new(eDef.name,eDef.funcOn)
-	end
-end
