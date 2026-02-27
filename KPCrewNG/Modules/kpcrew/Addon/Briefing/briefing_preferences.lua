@@ -84,6 +84,7 @@ takeoff:add(preference:new("windhdg",0,ng_type_int,"Takeoff Wind Heading|10","tl
 takeoff:add(preference:new("windspd",0,ng_type_int,"Takeoff Wind Speed|1","tlr.takeoff.conditions.wind_speed"))
 takeoff:add(preference:new("temperature",0,ng_type_int,"Takeoff Temperature|1","tlr.takeoff.conditions.temperature"))
 takeoff:add(preference:new("altimeter",0,ng_type_float,"Takeoff Altimeter|1","tlr.takeoff.conditions.altimeter"))
+takeoff:add(preference:new("qaltimeter",0,ng_type_float,"Takeoff Altimeter|1"))
 takeoff:add(preference:new("surfacecond","",ng_type_text,"Takeoff Surface Condition|","tlr.takeoff.conditions.surface_condition"))
 
 takeoff:add(preference:new("rwyident","",ng_type_text,"Takeoff Runway|","tlr.takeoff.runway[ng_briefing_to_rwyidx].identifier"))
@@ -95,7 +96,7 @@ takeoff:add(preference:new("rwyheadwind",0,ng_type_int,"Takeoff Runway Headwind|
 takeoff:add(preference:new("rwycrosswind",0,ng_type_int,"Takeoff Runway Crosswind|10","tlr.takeoff.runway[ng_briefing_to_rwyidx].crosswind_component"))
 takeoff:add(preference:new("rwyilsfreq","",ng_type_text,"Takeoff Runway ILS Freq|","tlr.takeoff.runway[ng_briefing_to_rwyidx].ils_frequency"))
 takeoff:add(preference:new("rwyflaps","",ng_type_text,"Takeoff Flaps|","tlr.takeoff.runway[ng_briefing_to_rwyidx].flap_setting"))
-takeoff:add(preference:new("selectedflaps","UP",ng_type_text,"Selected Flaps|"))
+takeoff:add(preference:new("selectedflaps",1,ng_type_int,"Selected Flaps|"))
 takeoff:add(preference:new("rwythrust","",ng_type_text,"Takeoff Thrust|","tlr.takeoff.runway[ng_briefing_to_rwyidx].thrust_setting"))
 takeoff:add(preference:new("selectedthrust",1,ng_type_int,"Selected Thrust|"))
 takeoff:add(preference:new("rwybleed","",ng_type_text,"Takeoff Bleed|","tlr.takeoff.runway[ng_briefing_to_rwyidx].bleed_setting"))
@@ -114,7 +115,8 @@ local landing = preferenceGroup:new("landing","BRIEFING - LANDING")
 landing:add(preference:new("windhdg",0,ng_type_int,"Landing Wind Heading|10","tlr.landing.conditions.wind_direction"))
 landing:add(preference:new("windspd",0,ng_type_int,"Landing Wind Speed|1","tlr.landing.conditions.wind_speed"))
 landing:add(preference:new("temperature",0,ng_type_int,"Landing Temperature|1","tlr.landing.conditions.temperature"))
-landing:add(preference:new("altimeter",0,ng_type_float,"Landing Altimeter|1","tlr.landing.conditions.altimeter"))
+landing:add(preference:new("altimeter",0,ng_type_float,"Landing Altimeter A|1","tlr.landing.conditions.altimeter"))
+landing:add(preference:new("qaltimeter",0,ng_type_float,"Landing Altimeter Q|1"))
 landing:add(preference:new("surfacecond","",ng_type_text,"Landing Surface Condition|","tlr.landing.conditions.surface_condition"))
 landing:add(preference:new("plannedwgt",0,ng_type_info,"Landing Planned Weight|","tlr.landing.conditions.planned_weight"))
 landing:add(preference:new("dryflaps","",ng_type_text,"Landing Flaps Dry|","tlr.landing.distance_dry.flap_setting"))
@@ -127,9 +129,10 @@ landing:add(preference:new("wetbrakes","",ng_type_text,"Landing Brake Wet|","tlr
 landing:add(preference:new("wetvref",0,ng_type_int,"Landing VREF Wet|1","tlr.landing.distance_wet.speeds_vref"))
 landing:add(preference:new("wetactdist",0,ng_type_int,"Landing Actual Distance Wet|1","tlr.landing.distance_wet.actual_distance"))
 landing:add(preference:new("wetfactdist",0,ng_type_int,"Landing Factored Distance Wet|1","tlr.landing.distance_wet.factored_distance"))
-landing:add(preference:new("selectedflaps","FULL",ng_type_text,"Selected ldg Flaps|"))
+landing:add(preference:new("selectedflaps",1,ng_type_int,"Selected ldg Flaps|"))
 landing:add(preference:new("selectedbleed",1,ng_type_int,"Selected Ldg Bleeds|"))
 landing:add(preference:new("selectedaice",1,ng_type_int,"Selected Ldg Aice|"))
+landing:add(preference:new("selectedabrk",1,ng_type_int,"Selected Autobrake|"))
 landing:add(preference:new("rwyvref",0,ng_type_int,"landing Vref|1"))
 landing:add(preference:new("rwyvapp",0,ng_type_int,"landing Vapp|1"))
 
@@ -233,6 +236,7 @@ function ng_load_simbrief()
 		parser:parse(xmlfile)
 		-- get runway array from xml
 		if xmlhandler.root.OFP.tlr.takeoff ~= nil then
+			ng_getBriefPrefs():set("takeoff:qaltimeter",(ng_getBriefPrefs():get("takeoff:altimeter") * 33.86548913)+1)
 			ng_briefing_to_rwys = xmlhandler.root.OFP.tlr.takeoff.runway
 			for i=1,#ng_briefing_to_rwys do 
 				if ng_briefing_to_rwys[i].identifier == xmlhandler.root.OFP.origin.plan_rwy then
@@ -243,13 +247,33 @@ function ng_load_simbrief()
 					ng_getBriefPrefs():set("takeoff:selectedthrust",ng_indexOf(splitTitle,ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].thrust_setting)-1) 
 					local splitTitle = ng_split(ng_getAcfPrefs():find("air:takeoffbleeds"):getTitle(),"|")
 					ng_getBriefPrefs():set("takeoff:selectedbleed",ng_indexOf(splitTitle,ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].bleed_setting)-1) 
-					local splitTitle = ng_split(ng_getAcfPrefs():find("aice:takeoffaice"):getTitle(),"|")
-					ng_getBriefPrefs():set("takeoff:selectedaice",ng_indexOf(splitTitle,ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].anti_ice_setting)-1)
+					local splitTitle = ng_split(ng_getAcfPrefs():get("aice:takeoffaice"),"|")
+					-- ng_getBriefPrefs():set("takeoff:selectedaice",ng_indexOf(splitTitle,ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].anti_ice_setting)-1)
 					ng_getBriefPrefs():set("takeoff:rwyflextemp",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].flex_temperature) 						
 					ng_getBriefPrefs():set("takeoff:rwyv1",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].speeds_v1) 						
 					ng_getBriefPrefs():set("takeoff:rwyvr",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].speeds_vr) 						
 					ng_getBriefPrefs():set("takeoff:rwyv2",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].speeds_v2) 	
-					ng_getBriefPrefs():set("takeoff:inithdg",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].magnetic_course)					
+					ng_getBriefPrefs():set("takeoff:inithdg",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].magnetic_course)
+				end
+			end
+		end
+		if xmlhandler.root.OFP.tlr.landing ~= nil then
+			-- ng_getBriefPrefs():set("takeoff:qaltimeter",(ng_getBriefPrefs():get("takeoff:altimeter") * 33.86548913)+1)
+			-- ng_briefing_to_rwys = xmlhandler.root.OFP.tlr.takeoff.runway
+			for i=1,#ng_briefing_ld_rwys do 
+				if ng_briefing_ld_rwys[i].identifier == xmlhandler.root.OFP.destination.plan_rwy then
+					ng_briefing_ld_rwyidx = i 
+					ng_getBriefPrefs():set("destination:selectedrwy",i)
+					-- ng_getBriefPrefs():set("takeoff:selectedflaps",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].flap_setting)
+					-- local splitTitle = ng_split(ng_getAcfPrefs():find("engines:tothrust"):getTitle(),"|") 
+					-- ng_getBriefPrefs():set("takeoff:selectedthrust",ng_indexOf(splitTitle,ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].thrust_setting)-1) 
+					-- local splitTitle = ng_split(ng_getAcfPrefs():find("air:takeoffbleeds"):getTitle(),"|")
+					-- ng_getBriefPrefs():set("takeoff:selectedbleed",ng_indexOf(splitTitle,ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].bleed_setting)-1) 
+					-- ng_getBriefPrefs():set("takeoff:rwyflextemp",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].flex_temperature) 						
+					-- ng_getBriefPrefs():set("takeoff:rwyv1",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].speeds_v1) 						
+					-- ng_getBriefPrefs():set("takeoff:rwyvr",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].speeds_vr) 						
+					-- ng_getBriefPrefs():set("takeoff:rwyv2",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].speeds_v2) 	
+					-- ng_getBriefPrefs():set("takeoff:inithdg",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].magnetic_course)
 				end
 			end
 		end
