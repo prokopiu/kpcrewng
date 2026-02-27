@@ -1,0 +1,1875 @@
+{
+	"icao": "DFLT",
+	"title": "DEFAULT AIRCRAFT",
+	"addonsystems": {
+		"categories": [
+			{
+				"name": "general",
+				"systems": [
+					{
+						"name": "parkbrake",
+						"elements": [
+							{
+								"name": "parkbrake",
+								"title": "Parkingbrake",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/controls/parking_brake_ratio"
+							}
+						]
+					},
+					{
+						"name": "gearhandle",
+						"elements": [
+							{
+								"name": "gearhandle",
+								"title": "Gearhandle",
+								"type": "onoff",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/switches/gear_handle_status",
+								"cmdon": "sim/flight_controls/landing_gear_down",
+								"cmdoff": "sim/flight_controls/landing_gear_up"
+							},
+							{
+								"name": "gearlightsgreen",
+								"title": "Gear lights green",
+								"type": "function",
+								"acts": [],
+								"fcheck": "return true"
+							},
+							{
+								"name": "gearlightsred",
+								"title": "Gear lights red",
+								"type": "function",
+								"acts": [],
+								"fcheck": "return true"
+							}
+						]
+					},
+					{
+						"name": "speedbrake",
+						"elements": [
+							{
+								"name": "speedbrake",
+								"title": "Speedbrake Lever",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle",
+									"set"
+								],
+								"dref": "sim/cockpit2/controls/speedbrake_ratio"
+							}
+						]
+					},
+					{
+						"name": "flaplever",
+						"elements": [
+							{
+								"name": "flapleverUP",
+								"title": "Flap Lever UP",
+								"type": "function",
+								"acts": [
+									"on"
+								],
+								"dref": "sim/cockpit2/controls/flap_ratio",
+								"funcon": "set(\"sim/cockpit2/controls/flap_ratio\",0)",
+								"fcheck": "return get(\"sim/cockpit2/electrical/GPU_generator_on\") == 0" 
+							},
+							{
+								"name": "flaplever1",
+								"title": "Flap Lever 1",
+								"type": "function",
+								"acts": [
+									"on"
+								],
+								"dref": "sim/cockpit2/controls/flap_ratio",
+								"funcon": "set(\"sim/cockpit2/controls/flap_ratio\",0.125)",
+								"fcheck": "return get(\"sim/cockpit2/electrical/GPU_generator_on\") == 0.125" 
+							},
+							{
+								"name": "flaplever2",
+								"title": "Flap Lever 2",
+								"type": "function",
+								"acts": [
+									"on"
+								],
+								"dref": "sim/cockpit2/controls/flap_ratio",
+								"funcon": "set(\"sim/cockpit2/controls/flap_ratio\",0.250)",
+								"fcheck": "return get(\"sim/cockpit2/electrical/GPU_generator_on\") == 0.250" 
+							},
+							{
+								"name": "flaplever3",
+								"title": "Flap Lever 3",
+								"type": "function",
+								"acts": [
+									"on"
+								],
+								"dref": "sim/cockpit2/controls/flap_ratio",
+								"funcon": "set(\"sim/cockpit2/controls/flap_ratio\",0.375)",
+								"fcheck": "return get(\"sim/cockpit2/electrical/GPU_generator_on\") == 0.375" 
+							},
+							{
+								"name": "flaplever4",
+								"title": "Flap Lever 4",
+								"type": "function",
+								"acts": [
+									"on"
+								],
+								"dref": "sim/cockpit2/controls/flap_ratio",
+								"funcon": "set(\"sim/cockpit2/controls/flap_ratio\",0.5)",
+								"fcheck": "return get(\"sim/cockpit2/electrical/GPU_generator_on\") == 0.5" 
+							},
+							{
+								"name": "flaplever5",
+								"title": "Flap Lever 5",
+								"type": "function",
+								"acts": [
+									"on"
+								],
+								"dref": "sim/cockpit2/controls/flap_ratio",
+								"funcon": "set(\"sim/cockpit2/controls/flap_ratio\",0.625)",
+								"fcheck": "return get(\"sim/cockpit2/electrical/GPU_generator_on\") == 0.625" 
+							},
+							{
+								"name": "flaplever6",
+								"title": "Flap Lever 6",
+								"type": "function",
+								"acts": [
+									"on"
+								],
+								"dref": "sim/cockpit2/controls/flap_ratio",
+								"funcon": "set(\"sim/cockpit2/controls/flap_ratio\",0.750)",
+								"fcheck": "return get(\"sim/cockpit2/electrical/GPU_generator_on\") == 0.750" 
+							},
+							{
+								"name": "flaplever7",
+								"title": "Flap Lever 7",
+								"type": "function",
+								"acts": [
+									"on"
+								],
+								"dref": "sim/cockpit2/controls/flap_ratio",
+								"funcon": "set(\"sim/cockpit2/controls/flap_ratio\",0.875)",
+								"fcheck": "return get(\"sim/cockpit2/electrical/GPU_generator_on\") == 0.875" 
+							},
+							{
+								"name": "flapleverfull",
+								"title": "Flap Lever FULL",
+								"type": "function",
+								"acts": [
+									"on"
+								],
+								"dref": "sim/cockpit2/controls/flap_ratio",
+								"funcon": "set(\"sim/cockpit2/controls/flap_ratio\",1)",
+								"fcheck": "return get(\"sim/cockpit2/electrical/GPU_generator_on\") == 1" 
+							}
+						]
+					},
+					{
+						"name": "wipers",
+						"elements": [
+							{
+								"name": "wiperleft",
+								"title": "Left Windhshield Wiper",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"set"
+								],
+								"dref": "sim/cockpit2/switches/wiper_speed_switch"
+							},
+							{
+								"name": "wiperright",
+								"title": "Left Windhshield Wiper",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"set"
+								],
+								"dref": "sim/cockpit2/switches/wiper_speed_switch"
+							}
+						]
+					},
+					{
+						"name": "autobrake",
+						"elements": [
+							{
+								"name": "autobrake",
+								"title": "Autobrake",
+								"type": "dataref",
+								"acts": [
+									"set"
+								],
+								"dref": "sim/cockpit2/switches/auto_brake_level"
+							}
+						]
+					},
+					{
+						"name": "stairs",
+						"elements": [
+							{
+								"name": "stairs",
+								"title": "Stairs extendable",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return true"
+							}
+						]
+					},
+					{
+						"name": "externaldoors",
+						"elements": [
+							{
+								"name": "doorl1",
+								"title": "Door Forward Left",
+								"type": "toggle",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/door_open",
+								"index": 0,
+								"cmdtgl": "sim/flight_controls/door_open_1"
+							},
+							{
+								"name": "doorl2",
+								"title": "Door Aft Left",
+								"type": "toggle",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/door_open",
+								"index": 1,
+								"cmdtgl": "sim/flight_controls/door_open_2"
+							},
+							{
+								"name": "doorr1",
+								"title": "Door Fwd Right",
+								"type": "toggle",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/door_open",
+								"index": 2,
+								"cmdtgl": "sim/flight_controls/door_open_3"
+							},
+							{
+								"name": "doorr2",
+								"title": "Door Aft Right",
+								"type": "toggle",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/door_open",
+								"index": 3,
+								"cmdtgl": "sim/flight_controls/door_open_4"
+							},
+							{
+								"name": "doorfcargo",
+								"title": "Forward Cargo",
+								"type": "toggle",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/door_open",
+								"index": 4,
+								"cmdtgl": "sim/flight_controls/door_open_5"
+							},
+							{
+								"name": "dooracargo",
+								"title": "Aft Cargo",
+								"type": "toggle",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/door_open",
+								"index": 5,
+								"cmdtgl": "sim/flight_controls/door_open_6"
+							}
+						]
+					},
+					{
+						"name": "adirus",
+						"elements": [
+							{
+								"name": "adiru1",
+								"title": "IRS Unit 1",
+								"type": "function",
+								"acts": [
+								],
+								"dref": "",
+								"fcheck": "return true"
+							}
+						]
+					},
+					{
+						"name": "paxsigns",
+						"elements": [
+							{
+								"name": "seatbelts",
+								"title": "Seatbelt Signs",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/switches/fasten_seat_belts"
+							},
+							{
+								"name": "nosmoking",
+								"title": "No Smoking",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/no_smoking"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "aice",
+				"systems": [
+					{
+						"name": "engaice",
+						"elements": [
+							{
+								"name": "engaice1",
+								"title": "Engine Antiice 1",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/switches/anti_ice_inlet_heat_per_engine",
+								"indx": 0
+							},
+							{
+								"name": "engaice2",
+								"title": "Engine Antiice 2",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/switches/anti_ice_inlet_heat_per_engine",
+								"indx": 1
+							}
+						]
+					},
+					{
+						"name": "wingaice",
+						"elements": [
+							{
+								"name": "wingaice1",
+								"title": "Wing Anti Ice 1",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/switches/anti_ice_surf_heat_left"
+							},
+							{
+								"name": "wingaice2",
+								"title": "Wing Anti Ice 2",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/switches/anti_ice_surf_heat_right"
+							}
+						]
+					},
+					{
+						"name": "windowheat",
+						"elements": [
+							{
+								"name": "windowheat1",
+								"title": "Window Heat 1",
+								"type": "onoff",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/ice/ice_window_heat_on_window",
+								"indx": 0,
+								"cmdon": "sim/ice/window_heat_on",
+								"cmdoff": "sim/ice/window_heat_off",
+								"cmdtgl": "sim/ice/window_heat_tog"
+							},
+							{
+								"name": "windowheat2",
+								"title": "Window Heat 2",
+								"type": "onoff",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/ice/ice_window_heat_on_window",
+								"indx": 1,
+								"cmdon": "sim/ice/window2_heat_on",
+								"cmdoff": "sim/ice/window2_heat_off",
+								"cmdtgl": "sim/ice/window2_heat_tog"
+							},
+							{
+								"name": "windowheat3",
+								"title": "Window Heat 3",
+								"type": "onoff",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/ice/ice_window_heat_on_window",
+								"indx": 2,
+								"cmdon": "sim/ice/window3_heat_on",
+								"cmdoff": "sim/ice/window3_heat_off",
+								"cmdtgl": "sim/ice/window3_heat_tog"
+							},
+							{
+								"name": "windowheat4",
+								"title": "Window Heat 4",
+								"type": "onoff",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/ice/ice_window_heat_on_window",
+								"indx": 3,
+								"cmdon": "sim/ice/window4_heat_on",
+								"cmdoff": "sim/ice/window4_heat_off",
+								"cmdtgl": "sim/ice/window4_heat_tog"
+							}
+						]
+					},
+					{
+						"name": "probeheat",
+						"elements": [
+							{
+								"name": "probeheat1",
+								"title": "Probe Heat 1",
+								"type": "onoff",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/switches/pitot_heat_on",
+								"cmdon": "sim/ice/pitot_heat0_on",
+								"cmdoff": "sim/ice/pitot_heat0_off",
+								"cmdtgl": "sim/ice/pitot_heat0_tog"
+							},
+							{
+								"name": "probeheat2",
+								"title": "Probe Heat 2",
+								"type": "onoff",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/switches/pitot_heat_on2",
+								"cmdon": "sim/ice/pitot_heat1_on",
+								"cmdoff": "sim/ice/pitot_heat1_off",
+								"cmdtgl": "sim/ice/pitot_heat1_tog"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "air",
+				"systems": [
+					{
+						"name": "packs",
+						"elements": [
+							{
+								"name": "pack1",
+								"title": "Pack 1",
+								"type": "dataref",
+								"acts": [
+									"set",
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/bleedair/actuators/pack_left"
+							},
+							{
+								"name": "pack2",
+								"title": "Pack 2",
+								"type": "dataref",
+								"acts": [
+									"set",
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/bleedair/actuators/pack_right"
+							}
+						]
+					},
+					{
+						"name": "bleeds",
+						"elements": [
+							{
+								"name": "bleed1",
+								"title": "Engine Bleed 1",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle",
+									"set"
+								],
+								"dref": "sim/cockpit2/pressurization/actuators/bleed_air_mode"
+							}
+						]
+					},
+					{
+						"name": "apubleed",
+						"elements": [
+							{
+								"name": "apubleed",
+								"title": "APU Bleed",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/bleedair/actuators/apu_bleed"
+							}
+						]
+					},
+					{
+						"name": "isovalves",
+						"elements": [
+							{
+								"name": "isovalve1",
+								"title": "Isolation Valve 1",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle",
+									"set"
+								],
+								"dref": "sim/cockpit2/bleedair/actuators/isol_valve_left"
+							},
+							{
+								"name": "isovalve2",
+								"title": "Isolation Valve 2",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle",
+									"set"
+								],
+								"dref": "sim/cockpit2/bleedair/actuators/isol_valve_right"
+							}
+						]
+					},
+					{
+						"name": "paltitudes",
+						"elements": [
+							{
+								"name": "flightalt",
+								"title": "Flight Altitude",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return true"
+							},
+							{
+								"name": "landalt",
+								"title": "Landing Altitude",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return true"
+							}
+						]
+					},
+					{
+						"name": "recircfans",
+						"elements": [
+							{
+								"name": "recircfan1",
+								"title": "Recirc Fan 1",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return true"
+							},
+							{
+								"name": "recircfan2",
+								"title": "Recirc Fan 2",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return true"
+							}
+						]
+					},
+					{
+						"name": "tempcontrols",
+						"elements": [
+							{
+								"name": "tempcontrol1",
+								"title": "Temp Control 1",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return true"
+							},
+														{
+								"name": "tempcontrol2",
+								"title": "Temp Control 2",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return true"
+							},							{
+								"name": "tempcontrol3",
+								"title": "Temp Control 3",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return true"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "autopilot",
+				"systems": [
+					{
+						"name": "flightdirs",
+						"elements": [
+							{
+								"name": "flightdir1",
+								"title": "FD 1",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/autopilot/flight_director_mode"
+							},
+							{
+								"name": "flightdir2",
+								"title": "FD 2",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/autopilot/flight_director2_mode"
+							}
+						]
+					},
+					{
+						"name": "autopilots",
+						"elements": [
+							{
+								"name": "ap1",
+								"title": "AP 1",
+								"type": "toggle",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/autopilot/servos_on",
+								"cmdtgl": "sim/autopilot/servos_toggle"
+							}
+						]
+					},
+					{
+						"name": "althold",
+						"elements": [
+							{
+								"name": "althold",
+								"title": "Altitude Hold",
+								"type": "toggle",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/autopilot/altitude_hold_status",
+								"cmdtgl": "sim/autopilot/altitude_hold"
+							}
+						]
+					},
+					{
+						"name": "hdghold",
+						"elements": [
+							{
+								"name": "hdghold",
+								"title": "Heading Hold",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/autopilot/heading_mode"
+							}
+						]
+					},
+					{
+						"name": "navhold",
+						"elements": [
+							{
+								"name": "navhold",
+								"title": "Nav Hold",
+								"type": "toggle",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/autopilot/nav_status",
+								"cmdtgl": "sim/autopilot/NAV"
+							}
+						]
+					},
+					{
+						"name": "approach",
+						"elements": [
+							{
+								"name": "approach",
+								"title": "Approach mode",
+								"type": "toggle",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/autopilot/approach_status",
+								"cmdtgl": "sim/autopilot/approach"
+							}
+						]
+					},
+					{
+						"name": "vspmode",
+						"elements": [
+							{
+								"name": "vspmode",
+								"title": "Vertical Speed mode",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return true"
+							}
+						]
+					},
+					{
+						"name": "yokedisc",
+						"elements": [
+							{
+								"name": "yokedisc",
+								"title": "Yoke disc",
+								"type": "toggle",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/annunciators/autopilot_disconnect",
+								"cmdtgl": "sim/autopilot/disconnect"
+							}
+						]
+					},
+					{
+						"name": "toga",
+						"elements": [
+							{
+								"name": "toga",
+								"title": "TOGO Btn",
+								"type": "toggle",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/autopilot/TOGA_status",
+								"cmdtgl": "sim/autopilot/take_off_go_arounds"
+							}
+						]
+					},
+					{
+						"name": "autothrottle",
+						"elements": [
+							{
+								"name": "autothrottle",
+								"title": "Autothrottle",
+								"type": "toggle",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/autopilot/autothrottle_enabled",
+								"cmdtgl": "sim/autopilot/autothrottle_toggle"
+							}
+						]
+					},
+					{
+						"name": "courses",
+						"elements": [
+							{
+								"name": "crs1",
+								"title": "Course 1",
+								"type": "dial",
+								"min": 0,
+								"max": 360,
+								"incr": 1,
+								"acts": [
+									"set",
+									"dn",
+									"up",
+									"function"
+								],
+								"dref": "sim/cockpit2/radios/actuators/nav1_obs_deg_mag_pilot",
+								"cmddn": "sim/radios/obs_HSI_down",
+								"cmdup": "sim/radios/obs_HSI_up"
+							},
+							{
+								"name": "crs2",
+								"title": "Course 2",
+								"type": "dial",
+								"min": 0,
+								"max": 360,
+								"incr": 1,
+								"acts": [
+									"set",
+									"dn",
+									"up",
+									"function"
+								],
+								"dref": "sim/cockpit2/radios/actuators/nav2_obs_deg_mag_pilot",
+								"cmddn": "sim/radios/copilot_obs_HSI_down",
+								"cmdup": "sim/radios/copilot_obs_HSI_up"
+							}
+						]
+					},
+					{
+						"name": "speedsel",
+						"elements": [
+							{
+								"name": "speedsel",
+								"title": "A/P Speed",
+								"type": "dial",
+								"min": 0,
+								"max": 999,
+								"incr": 1,
+								"acts": [
+									"set",
+									"dn",
+									"up"
+								],
+								"dref": "sim/cockpit2/autopilot/airspeed_dial_kts",
+								"cmddn": "sim/autopilot/airspeed_down",
+								"cmdup": "sim/autopilot/airspeed_up"
+							}
+						]
+					},
+					{
+						"name": "hdgsel",
+						"elements": [
+							{
+								"name": "hdgsel",
+								"title": "A/P Heading",
+								"type": "dial",
+								"min": 0,
+								"max": 359,
+								"incr": 1,
+								"acts": [
+									"set",
+									"dn",
+									"up"
+								],
+								"dref": "sim/cockpit2/autopilot/heading_dial_deg_mag_pilot",
+								"cmddn": "sim/autopilot/heading_down",
+								"cmdup": "sim/autopilot/heading_up"
+							}
+						]
+					},
+					{
+						"name": "altsel",
+						"elements": [
+							{
+								"name": "altsel",
+								"title": "A/P Altitude",
+								"type": "dial",
+								"min": 0,
+								"max": 99999,
+								"incr": 1,
+								"acts": [
+									"set",
+									"dn",
+									"up"
+								],
+								"dref": "sim/cockpit2/autopilot/altitude_dial_ft",
+								"cmddn": "sim/autopilot/altitude_down",
+								"cmdup": "sim/autopilot/altitude_up"
+							}
+						]
+					},
+					{
+						"name": "vspsel",
+						"elements": [
+							{
+								"name": "vspsel",
+								"title": "A/P VSP",
+								"type": "dial",
+								"min": -7900,
+								"max": 7900,
+								"incr": 1,
+								"acts": [
+									"set",
+									"dn",
+									"up"
+								],
+								"dref": "sim/cockpit2/autopilot/vvi_dial_fpm",
+								"cmddn": "sim/autopilot/vertical_speed_down",
+								"cmdup": "sim/autopilot/vertical_speed_up"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "controls",
+				"systems": [
+					{
+						"name": "ailerontrim",
+						"elements": [
+							{
+								"name": "ailerontrim",
+								"title": "Aileron Trim",
+								"type": "dataref",
+								"acts": [
+									"set"
+								],
+								"dref": "sim/cockpit2/controls/aileron_trim"
+							}
+						]
+					},
+					{
+						"name": "ruddertrim",
+						"elements": [
+							{
+								"name": "ruddertrim",
+								"title": "Rudder Trim",
+								"type": "dataref",
+								"acts": [
+									"set"
+								],
+								"dref": "sim/cockpit2/controls/rudder_trim"
+							}
+						]
+					},
+					{
+						"name": "pitchtrim",
+						"elements": [
+							{
+								"name": "pitchtrim",
+								"title": "Pitch Trim",
+								"type": "function",
+								"acts": [
+									"set",
+									"function"
+								],
+								"dref": "sim/cockpit2/controls/elevator_trim",
+								"fcheck": "return -1 + ((2/17) * ng_getBriefPrefs():get(\"takeoff:pitchtrim\"))"
+							}
+						]
+					},
+					{
+						"name": "yawdamper",
+						"elements": [
+							{
+								"name": "yawdamper",
+								"title": "Yaw Damper",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/yaw_damper_on"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "efis",
+				"systems": [
+					{
+						"name": "barostdbtns",
+						"elements": [
+							{
+								"name": "barostd1",
+								"title": "Baro STD Knob left",
+								"type": "toggle",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/misc/barometer_setting",
+								"cmdtgl": "sim/instruments/barometer_std"
+							}
+						]
+					},
+					{
+						"name": "baromodes",
+						"elements": [
+							{
+								"name": "baromode1",
+								"title": "Baro Mode left",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return true"
+							},
+							{
+								"name": "baromode2",
+								"title": "Baro mode right",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return true"
+							},
+							{
+								"name": "baromode3",
+								"title": "Baro mode standby",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return true"
+							}
+						]
+					},
+					{
+						"name": "barovalues",
+						"elements": [
+							{
+								"name": "barovaluel",
+								"title": "Baro Mode left",
+								"type": "dataref",
+								"min": 22,
+								"max": 32,
+								"incr": 0.01,
+								"acts": [
+									"set",
+									"dn",
+									"up"
+								],
+								"dref": "sim/cockpit2/gauges/actuators/barometer_preset_in_hg_pilot",
+								"cmddn": "sim/instruments/barometer_down",
+								"cmdup": "sim/instruments/barometer_up",
+								"fcheck": "return math.ceil(get(\"sim/cockpit2/gauges/actuators/barometer_preset_in_hg_pilot\")*100)/100"
+							},
+							{
+								"name": "barovaluer",
+								"title": "Baro mode right",
+								"type": "dial",
+								"min": 22,
+								"max": 32,
+								"incr": 0.01,
+								"acts": [
+									"set",
+									"dn",
+									"up"
+								],
+								"dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot",
+								"cmddn": "sim/instruments/barometer_copilot_down",
+								"cmdup": "sim/instruments/barometer_copilot_up",
+								"fcheck": "return math.ceil(get(\"sim/cockpit2/gauges/actuators/barometer_preset_in_hg_pilot\")*100)/100"
+							},
+							{
+								"name": "barovaluec",
+								"title": "Baro mode standby",
+								"type": "dial",
+								"min": 22,
+								"max": 32,
+								"incr": 0.01,
+								"acts": [
+									"set",
+									"dn",
+									"up"
+								],
+								"dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_stby",
+								"cmddn": "sim/instruments/barometer_stby_down",
+								"cmdup": "sim/instruments/barometer_stby__up"
+							}
+						]
+					}
+				]
+			},				
+			{
+				"name": "electric",
+				"systems": [
+					{
+						"name": "batteries",
+						"elements": [
+							{
+								"name": "battery1",
+								"title": "Battery",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/electrical/battery_on",
+								"indx": 0
+							}
+						]
+					},
+					{
+						"name": "generators",
+						"elements": [
+							{
+								"name": "generator1",
+								"title": "Engine Generator 1",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off"
+								],
+								"dref": "sim/cockpit2/electrical/generator_on",
+								"indx": 0
+							},
+							{
+								"name": "generator2",
+								"title": "Engine Generator 2",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off"
+								],
+								"dref": "sim/cockpit2/electrical/generator_on",
+								"indx": 1
+							}
+						]
+					},
+					{
+						"name": "gpuconnect",
+						"elements": [
+							{
+								"name": "gpuconnect",
+								"title": "GPU Connect",
+								"type": "function",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/electrical/GPU_generator_on",
+								"funcon": "set(\"sim/cockpit2/electrical/GPU_generator_on\",1) command_once(\"sim/ground_ops/service_plane\")",
+								"funcoff": "set(\"sim/cockpit2/electrical/GPU_generator_on\",0)",
+								"functgl": "",
+								"fcheck": "return get(\"sim/cockpit2/electrical/GPU_generator_on\")" 
+							}
+						]
+					},
+					{
+						"name": "gpugens",
+						"elements": [
+							{
+								"name": "gpugen1",
+								"title": "GPU Generator",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/electrical/GPU_generator_on"
+							}
+						]
+					},
+					{
+						"name": "apurunning",
+						"elements": [
+							{
+								"name": "apurunning",
+								"title": "APU running Annunciator",
+								"type": "function",
+								"acts": [],
+								"fcheck": "return get(\"sim/cockpit/engine/APU_N1\") > 99"
+							}
+						]
+					},
+					{
+						"name": "apugens",
+						"elements": [
+							{
+								"name": "apugen1",
+								"title": "APU Generator 1",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"set"
+								],
+								"dref": "sim/cockpit/electrical/generator_apu_on"
+							}
+						]
+					},
+					{
+						"name": "stbypower",
+						"elements": [
+							{
+								"name": "stbypower1",
+								"title": "Standby Power",
+								"type": "dataref",
+								"acts": [ ],
+								"dref": "",
+								"fcheck": "return true"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "engines",
+				"systems": [
+					{
+						"name": "thrustlevers",
+						"elements": [
+							{
+								"name": "thrustlever1",
+								"title": "Thrust lever1",
+								"type": "dataref",
+								"acts": ["set"],
+								"dref": "sim/cockpit2/engine/actuators/throttle_ratio_all"
+							}
+						]
+					},
+					{
+						"name": "engstrtlvrs",
+						"elements": [
+							{
+								"name": "engstrtlvr1",
+								"title": "Engine Start lever 1",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return get(\"sim/flightmodel2/engines/starter_is_running\",0)"
+							},
+							{
+								"name": "engstrtlvr2",
+								"title": "Engine Start lever 2",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return get(\"sim/flightmodel2/engines/starter_is_running\",1)"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "fuel",
+				"systems": [
+					{
+						"name": "fuelxfeeds",
+						"elements": [
+							{
+								"name": "fuelxfeed1",
+								"title": "Fuel Crossfeed",
+								"type": "onoff",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/fuel/auto_crossfeed",
+								"cmdon": "sim/fuel/auto_crossfeed_on_open",
+								"cmdoff": "sim/fuel/auto_crossfeed_off"
+							}
+						]
+					},
+					{
+						"name": "fuelpumps",
+						"elements": [
+							{
+								"name": "fuelpump1",
+								"title": "Fuel pump left 1",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/engine/fuel_pump_on",
+								"indx": 0
+							},
+							{
+								"name": "fuelpump2",
+								"title": "Fuel pump left 2",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/engine/fuel_pump_on",
+								"indx": 1
+							},
+							{
+								"name": "fuelpump3",
+								"title": "Fuel pump right 1",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/engine/fuel_pump_on",
+								"indx": 2
+							},
+							{
+								"name": "fuelpump4",
+								"title": "Fuel pump right 2",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/engine/fuel_pump_on",
+								"indx": 3
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "hydraulics",
+				"systems": [
+					{
+						"name": "elechydpumps",
+						"elements": [
+							{
+								"name": "elechydpump1",
+								"title": "Electric Hydraulic Pump 1",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/electric_hydraulic_pump_on"
+							},
+							{
+								"name": "elechydpump2",
+								"title": "Electric Hydraulic Pump 2",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/electric_hydraulic_pump2_on"
+							}
+						]
+					},
+					{
+						"name": "enghydpumps",
+						"elements": [
+							{
+								"name": "enghydpump1",
+								"title": "Engine Hydraulic Pump 1",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/hydraulics/actuators/engine_pump"
+							},
+							{
+								"name": "enghydpump2",
+								"title": "Engine Hydraulic Pump 2",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/hydraulics/actuators/engine_pump2"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "lightsexternal",
+				"systems": [
+					{
+						"name": "beacons",
+						"elements": [
+							{
+								"name": "beacon",
+								"title": "Beacon light",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/electrical/beacon_lights_on"
+							}
+						]
+					},
+					{
+						"name": "taxilights",
+						"elements": [
+							{
+								"name": "taxilight1",
+								"title": "Taxi light",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/electrical/taxi_light_on"
+							}
+						]
+					},
+					{
+						"name": "rwylights",
+						"elements": [
+							{
+								"name": "rwylight1",
+								"title": "Runway light left",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/generic_lights_switch",
+								"indx": 1
+							},
+							{
+								"name": "rwylight2",
+								"title": "Runway light right",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/generic_lights_switch",
+								"indx": 2
+							}
+						]
+					},
+					{
+						"name": "winglights",
+						"elements": [
+							{
+								"name": "winglight",
+								"title": "Wing light",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/generic_lights_switch",
+								"indx": 3
+							}
+						]
+					},
+					{
+						"name": "wheellights",
+						"elements": [
+							{
+								"name": "wheellight",
+								"title": "Wheel light",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/generic_lights_switch",
+								"indx": 11
+							}
+						]
+					},
+					{
+						"name": "logolights",
+						"elements": [
+							{
+								"name": "logolight",
+								"title": "Logo light",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/generic_lights_switch",
+								"indx": 10
+							}
+						]
+					},
+					{
+						"name": "alllandlights",
+						"elements": [
+							{
+								"name": "landlight1",
+								"title": "Left retractable LL",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/landing_lights_switch",
+								"indx": 0
+							},
+							{
+								"name": "landlight2",
+								"title": "Right retractable LL",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/landing_lights_switch",
+								"indx": 1
+							}
+						]
+					},
+					{
+						"name": "positionlights",
+						"elements": [
+							{
+								"name": "positionlight",
+								"title": "Position light",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/navigation_lights_on"
+							}
+						]
+					},
+					{
+						"name": "strobelights",
+						"elements": [
+							{
+								"name": "strobelight",
+								"title": "Strobe light",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/electrical/strobe_lights_on"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "lightsinternal",
+				"systems": [
+					{
+						"name": "domelights",
+						"elements": [
+							{
+								"name": "domelight",
+								"title": "Dome light",
+								"type": "dataref",
+								"acts": [
+									"set",
+									"on",
+									"off",
+									"toggle"
+								],
+								"dref": "sim/cockpit/electrical/cockpit_lights",
+								"indx": 0
+							}
+						]
+					},
+					{
+						"name": "panellights",
+						"elements": [
+							{
+								"name": "panellight1",
+								"title": "Panel light 1",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"set",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/panel_brightness_ratio",
+								"indx": 0
+							},
+							{
+								"name": "panellight2",
+								"title": "Panel light 2",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"set",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/panel_brightness_ratio",
+								"indx": 1
+							},
+							{
+								"name": "panellight3",
+								"title": "Panel light 3",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"set",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/panel_brightness_ratio",
+								"indx": 2
+							},
+							{
+								"name": "panellight4",
+								"title": "Panel light 4",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"set",
+									"toggle"
+								],
+								"dref": "sim/cockpit2/switches/panel_brightness_ratio",
+								"indx": 3
+							}
+						]
+					},
+					{
+						"name": "instrlights",
+						"elements": [
+							{
+								"name": "instrlight1",
+								"title": "Instrument light 1",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"set",
+									"toogle"
+								],
+								"dref": "sim/cockpit2/switches/instrument_brightness_ratio",
+								"indx": 0
+							},
+							{
+								"name": "instrlight2",
+								"title": "Instrument light 2",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"set",
+									"toogle"
+								],
+								"dref": "sim/cockpit2/switches/instrument_brightness_ratio",
+								"indx": 1
+							},
+							{
+								"name": "instrlight3",
+								"title": "Instrument light 3",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"set",
+									"toogle"
+								],
+								"dref": "sim/cockpit2/switches/instrument_brightness_ratio",
+								"indx": 2
+							},
+							{
+								"name": "instrlight4",
+								"title": "Instrument light 4",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"set",
+									"toogle"
+								],
+								"dref": "sim/cockpit2/switches/instrument_brightness_ratio",
+								"indx": 3
+							},
+							{
+								"name": "instrlight5",
+								"title": "Instrument light 5",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"set",
+									"toogle"
+								],
+								"dref": "sim/cockpit2/switches/instrument_brightness_ratio",
+								"indx": 4
+							},
+							{
+								"name": "instrlight6",
+								"title": "Instrument light 6",
+								"type": "dataref",
+								"acts": [
+									"on",
+									"off",
+									"set",
+									"toogle"
+								],
+								"dref": "sim/cockpit2/switches/instrument_brightness_ratio",
+								"indx": 5
+							}
+						]
+					},
+					{
+						"name": "emerlights",
+						"elements": [
+							{
+								"name": "emerlight",
+								"title": "EMER light",
+								"type": "function",
+								"acts": [
+								],
+								"fcheck": "return true"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "radios",
+				"systems": [
+					{
+						"name": "transponder",
+						"elements": [
+							{
+								"name": "xpdrcode",
+								"title": "XPDR Code",
+								"type": "dataref",
+								"acts": [
+									"set"
+								],
+								"dref": "sim/cockpit2/radios/actuators/transponder_code"
+							},
+							{
+								"name": "xpdrmode",
+								"title": "XPDR Mode",
+								"type": "dataref",
+								"acts": [
+									"set"
+								],
+								"dref": "sim/cockpit2/radios/actuators/transponder_mode"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "annunciators",
+				"systems": [
+					{
+						"name": "antiiceann",
+						"elements": [
+							{
+								"name": "antiiceann",
+								"title": "Anti-Ice Annunciator",
+								"type": "function",
+								"acts": [],
+								"fcheck": "return ng_check_system(\"engaice\",\"off\") or ng_check_system(\"wingaice\",\"on\")"
+							}
+						]
+					},
+					{
+						"name": "vacuumann",
+						"elements": [
+							{
+								"name": "vacuumann",
+								"title": "Vacuum Annunciator",
+								"type": "function",
+								"acts": [],
+								"fcheck": "if get(\"sim/cockpit2/annunciators/low_vacuum\",0)==1 or get(\"sim/cockpit2/annunciators/low_vacuum\",1) == 1 then return 1 else return 0 end end"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "custom",
+				"systems": [
+					
+				]
+			}
+		]
+	}
+}
