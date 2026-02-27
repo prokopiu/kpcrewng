@@ -10,7 +10,7 @@ ng_acf_icao = "DFLT" -- ICAO code to control what aircraft to load
 
 logMsg ("FWL: ** Starting KPHWNG version " .. KPH_VERSION .." **")
 
-ng_acf_icao = ng_acft_select()
+ng_acf_icao = ng_acft_select(2)
 logMsg("ICAO: "..ng_acf_icao)
 
 -- Aircraft Specific SOP/Checklist/Procedure Definitions & Preferences
