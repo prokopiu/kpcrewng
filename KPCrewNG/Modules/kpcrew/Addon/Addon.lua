@@ -28,7 +28,7 @@ function ngAddon:new(icao, title)
 	obj.briefing = nil -- briefing
 	obj.systems = nil -- systems
 
-	if DEBUGMODE then logMsg("+ "..obj.className.." {"..obj.icao..","..obj.title.."}") end
+	dprint("+ "..obj.className.." {"..obj.icao..","..obj.title.."}")
 
     return obj
 end

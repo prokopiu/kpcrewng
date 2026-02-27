@@ -15,7 +15,7 @@ local ngPreferenceGroup = {
 -- Instantiate a new preference group
 -- @param string name Name of the set 
 -- @param string title Title string to display in window
-function ngPreferenceGroup:new(name,title)
+function ngPreferenceGroup:new(name, title)
     ngPreferenceGroup.__index = ngPreferenceGroup
     local obj = {}
     setmetatable(obj, ngPreferenceGroup)
@@ -26,6 +26,8 @@ function ngPreferenceGroup:new(name,title)
 	obj.title = title
 	obj.preferences = {}
 
+	dprint("+ "..obj.className.." {"..obj.name..","..obj.title.." }")
+	
     return obj
 end
 
@@ -152,6 +154,7 @@ function ngPreferenceGroup:render(type)
 		if type == "tree" then
 			if imgui.TreeNode(self.title) then
 				for _, pref in pairs(self.preferences) do
+					imgui.SetNextItemOpen(true)
 					pref:render(type)
 				end
 				imgui.TreePop()

@@ -3,16 +3,16 @@
 -- @copyright 2026 Kosta Prokopiu
 
 ng_preferenceDataType = {
-	[1]  = "INT",	-- Integer
-    [2]  = "FLAG",	-- Bitflag
-    [3]  = "FLOAT",	-- Floating point number
-    [4]  = "TOGGLE",-- On/Off toggle
-    [5]  = "TEXT",	-- Text string
-    [6]  = "LIST",	-- List selection
-    [7]  = "COMFREQ",-- COM Frequency
-    [8]  = "NAVFREQ",-- NAV Frequency
-    [9]  = "EXEC",	-- Execute Button
-    [10] = "DIVIDER"-- Divider
+	[1]  = "INT",		-- Integer
+    [2]  = "FLAG",		-- Bitflag
+    [3]  = "FLOAT",		-- Floating point number
+    [4]  = "TOGGLE",	-- On/Off toggle
+    [5]  = "TEXT",		-- Text string
+    [6]  = "LIST",		-- List selection
+    [7]  = "COMFREQ",	-- COM Frequency
+    [8]  = "NAVFREQ",	-- NAV Frequency
+    [9]  = "EXEC",		-- Execute Button
+    [10] = "DIVIDER"	-- Divider
 	
 }
 
@@ -26,10 +26,5 @@ ng_type_list    = 6
 ng_type_comfreq = 7 
 ng_type_navfreq = 8 
 ng_type_exec    = 9 
-ng_type_divider = 10
-ng_type_info    = 11
+ng_type_info    = 10
 
---- get datatype string based on index
--- @param int index - index of type
--- @return string - data type text
-function ng_get_prefDataType(index) return ng_preferenceDataType[index] end

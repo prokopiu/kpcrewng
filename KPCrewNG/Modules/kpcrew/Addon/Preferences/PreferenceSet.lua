@@ -20,7 +20,7 @@ local ngPreferenceSet = {
 -- @param string name - Name of the set
 -- @param string title - title of set
 -- @return PreferenceSet - the created preference set object 
-function ngPreferenceSet:new(name, title, filePath)
+function ngPreferenceSet:new(name, title, filePath, loadfunc)
     ngPreferenceSet.__index = ngPreferenceSet
     local obj = {}
     setmetatable(obj, ngPreferenceSet)
@@ -29,9 +29,12 @@ function ngPreferenceSet:new(name, title, filePath)
 	
     obj.name = name
 	obj.title = title
+	obj.loadfunc = loadfunc
 	obj.groups = {}
 	obj.filePath = filePath
 	
+	dprint("+ "..obj.className.." {"..obj.name..","..obj.title.."}")
+
     return obj
 end
 
@@ -63,6 +66,14 @@ function ngPreferenceSet:getFilePath() return self.filePath end
 -- @param string path - filePath of set
 function ngPreferenceSet:setFilePath(path) self.filePath = path end
 
+--- Get custom load function  of preference set file
+-- @return function loadfunc of set
+function ngPreferenceSet:getCustomLoad() return self.loadfunc end
+
+--- set filePath of preference set file
+-- @param string loadfunc - function of set
+function ngPreferenceSet:setCustomLoad(loadfunc) self.loadfunc = loadfunc end
+
 --- Add a preference group to the set
 -- @param PreferenceGroup group to add
 function ngPreferenceSet:addGroup(group) table.insert(self.groups, group) end
@@ -81,6 +92,18 @@ function ngPreferenceSet:find(inkey)
 		if ngroup ~= nil and splits[1] == ngroup:getName() then
 			local found = ngroup:find(splits[2])
 			if found ~= nil then return found end
+		end
+	end
+	return nil
+end
+
+--- Find a group object 
+-- @param string inkey Key of group to find
+-- @return PreferenceItem found group or nil
+function ngPreferenceSet:findGroup(inkey)
+	for _, ngroup in ipairs(self.groups) do
+		if ngroup ~= nil and inkey == ngroup:getName() then
+			return ngroup
 		end
 	end
 	return nil
@@ -131,11 +154,14 @@ function ngPreferenceSet:load()
 			group:load(filePrefs)
 			filePrefs:close()
 		end
+		-- execute custom load steps
+		if self.loadfunc ~= nil then
+			self.loadfunc()
+		end
 	end
 end	
 
---- Read values from simbrief xml
--- @param xml2lua handler
+--- Set preferences from simbrief xml previously loaded
 function ngPreferenceSet:sbLoad()
 	for _, group in ipairs(self.groups) do
 		if xmlhandler then
@@ -151,8 +177,10 @@ end
 function ngPreferenceSet:render(type)
 	if self ~= nil then
 		if type == "tree" then
+			imgui.SetNextItemOpen(true)
 			if imgui.TreeNode(self.title) then
 				for _, group in ipairs(self.groups) do
+					imgui.SetNextItemOpen(true)
 					group:render(type)
 				end		
 			imgui.TreePop()

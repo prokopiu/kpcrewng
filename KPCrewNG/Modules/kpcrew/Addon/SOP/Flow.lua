@@ -35,7 +35,7 @@ function ngFlow:new(title, flightphase, classname)
 	obj.activeItem = 0
 	obj.selected = false
 
-	print("+ "..obj.className.." {"..obj.title.."}")
+	dprint("+ "..obj.className.." {"..obj.title.."}")
 	
     return obj
 end

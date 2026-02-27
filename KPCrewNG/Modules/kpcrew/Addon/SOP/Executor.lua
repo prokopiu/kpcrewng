@@ -67,10 +67,8 @@ print("ng_action_element: "..element.title)
 		local function getvalue()
 			local result = nil
 			if fset ~= nil then
-			print("fset: "..loadstring(fset)())
 				result = loadstring(fset)()
 			else
-			print("value: "..value)
 				result = value
 			end
 			return result
@@ -79,7 +77,6 @@ print("ng_action_element: "..element.title)
 		-- check if there is a condition and skip element
 		if condition ~= nil then
 			if loadstring(condition)() == false then 
-print("skipping element "..element.title)
 				return
 			end
 		end
@@ -162,6 +159,29 @@ print("skipping element "..element.title)
 					
 				elseif action == "toggle" then 
 					command_once(element.cmdtgl)
+				end
+			else
+				print("Action not allowed: "..action)
+			end
+			
+		-- ======= function switch
+		elseif etype == "function" then
+			
+			local found = 0
+			-- check if action is allowed for the element
+			for _,defaction in pairs(element.acts) do
+				if (defaction == action) then found = 1 end
+			end
+			
+			-- if allowed because found then continue, otherwise skip
+			if found == 1 then
+				
+				if action == "on" then
+					if element.funcon ~= nil then loadstring(element.funcon)() end
+				elseif action == "off" then
+					if element.funcoff ~= nil then loadstring(element.funcoff)() end					
+				elseif action == "toggle" then 
+					if element.functgl ~= nil then loadstring(element.functgl)() end
 				end
 			else
 				print("Action not allowed: "..action)
@@ -292,12 +312,12 @@ end
 -- @param string elementname - name of system to execute (lowercase)
 -- @param string action - standardized action name (lowercase)
 -- @param value - value to use when non-standard
+-- @param string fset function code frm procstep
 -- @return boolean true/false
 function ng_check_element(elementname, action, value, fset)
 	
 	if ng_get_active_systems():find(elementname) ~= nil then
 		local element = ng_get_active_systems():find(elementname):getElementNode()
-print("ng_check_element: "..element.title)
 		local dref = element.dref
 		local idx = element.indx
 		local etype = string.lower(element.type)
@@ -348,14 +368,14 @@ print("ng_check_element: "..element.title)
 			
 		-- ======= function check
 		elseif etype == "function" then
-			if element.fset ~= nil then 
-				return loadstring(element.fset)() 
+			if element.fcheck ~= nil then 
+				return loadstring(element.fcheck)() 
 			else
 				return true
 			end
 				
 		-- ======= onoff switch	
-		elseif element.type == "onoff" then
+		elseif etype == "onoff" then
 			
 			local found = 0
 			-- check if action is allowed for the element
@@ -478,8 +498,6 @@ print("ng_check_element: "..element.title)
 					if getvalue() == nil then 
 						print("Value missing for set action")
 					else
-					print("xxxxxxxxxx: "..getdref())
-					print("yyyyyyyyyy: "..getvalue())
 						return getdref() == getvalue()
 					end
 				else
@@ -501,7 +519,6 @@ end
 function ng_check_step(procstep)
 
 	if procstep ~= nil then
-print("ng_check_step: "..procstep:getChallenge())
 
 		-- find the system or system element to be triggered
 		-- skip if the step as a whole is set to nocheck
@@ -604,12 +621,12 @@ function ng_master_action()
 			aflow:setState(ng_flowstate_pause)
 			aflow:getActiveItem():setState(ng_fistate_pause)
 			ng_stateindex = 60
-			print("State ["..ng_stateindex.."]")
+			dprint("State ["..ng_stateindex.."]")
 		elseif aflow:getState() == ng_flowstate_pause then
 			aflow:setState(ng_flowstate_run)
 			aflow:getActiveItem():setState(ng_fistate_run)
 			ng_stateindex = 8
-			print("State ["..ng_stateindex.."]")
+			dprint("State ["..ng_stateindex.."]")
 		end
 
 		if aflow:getState() == ng_flowstate_end then
@@ -638,7 +655,7 @@ function ng_flow_executor()
 	local aflowstate = ng_flowstate_na
 	if aflow ~= nil then aflowstate = aflow:getState() end
 
-	if ng_stateindex == 0 and aflow ~= nil then ng_stateindex = 1 print("State ["..ng_stateindex.."]") end
+	if ng_stateindex == 0 and aflow ~= nil then ng_stateindex = 1 dprint("State ["..ng_stateindex.."]") end
 	
 	-- initialize the active step
 	local astep = nil -- initialize the active step
@@ -648,15 +665,13 @@ function ng_flow_executor()
 	local astepstate = 0
 	if astep ~= nil then astepstate = astep:getState() end 
 
-	if ng_stateindex == 1 and aflowstate == ng_flowstate_start then ng_stateindex = 3 print("State ["..ng_stateindex.."]") end
+	if ng_stateindex == 1 and aflowstate == ng_flowstate_start then ng_stateindex = 3 dprint("State ["..ng_stateindex.."]") end
 
 	-- State 0: inital state all new, no flow and item
 	-- State 1: flow defined; step Undefined
 	-- State 2: not used
 	-- State 3: flow in start mode
-	-- print("State ["..ng_stateindex.."]")
 
-	
 	-- stop this executor run as there is nothing to do
 	if aflowstate == ng_flowstate_na then return end
 
@@ -669,7 +684,7 @@ function ng_flow_executor()
 		aflow:setState(ng_flowstate_run)
 		aflowstate = ng_flowstate_run
 		ng_stateindex = 4
-		print("State ["..ng_stateindex.."]")
+		dprint("State ["..ng_stateindex.."]")
 	end
 
 	if ng_stateindex == 4 then -- at start of flow set 1 item to active
@@ -679,14 +694,14 @@ function ng_flow_executor()
 		astepstate = ng_fistate_new
 		astep:setState(ng_fistate_new)
 		ng_stateindex = 5
-		print("State ["..ng_stateindex.."]")
+		dprint("State ["..ng_stateindex.."]")
 	end
 
 	if ng_stateindex == 5 then -- set current item to run mode
 		astep:setState(ng_fistate_run)
 		astepstate = ng_fistate_run
 		ng_stateindex = 6
-		print("State ["..ng_stateindex.."]")
+		dprint("State ["..ng_stateindex.."]")
 	end
 
 	if ng_stateindex == 30 then -- error occurred in previous loop - check again until checked
@@ -697,7 +712,7 @@ function ng_flow_executor()
 			aflow:setState(ng_flowstate_run)
 			aflowstate = ng_flowstate_run --resume execution
 			ng_stateindex = 9
-			print("State ["..ng_stateindex.."]")			
+			dprint("State ["..ng_stateindex.."]")			
 		end
 	end
 
@@ -705,13 +720,13 @@ function ng_flow_executor()
 		astep:setState(ng_fistate_end)
 		astepstate = ng_fistate_end
 		ng_stateindex = 10
-		print("State ["..ng_stateindex.."]")
+		dprint("State ["..ng_stateindex.."]")
 	end 
 	
 	if ng_stateindex == 50 then -- second loop after response in checklist
 		if astep:isSimUser() == false then ng_speakNoText(0, astep:getResponse()) end
 		ng_stateindex = 51
-		print("State ["..ng_stateindex.."]")
+		dprint("State ["..ng_stateindex.."]")
 	end 
 
 	if ng_stateindex == 60 then -- loop while paused
@@ -726,7 +741,7 @@ function ng_flow_executor()
 					return
 				else
 					ng_stateindex = 8
-					print("State ["..ng_stateindex.."]")
+					dprint("State ["..ng_stateindex.."]")
 				end
 			end
 		end
@@ -741,7 +756,7 @@ function ng_flow_executor()
 				aflow:setState(ng_flowstate_pause)
 				astep:setState(ng_fistate_pause)
 				ng_stateindex = 60
-				print("State ["..ng_stateindex.."]")
+				dprint("State ["..ng_stateindex.."]")
 				return
 			end
 		end
@@ -759,12 +774,12 @@ function ng_flow_executor()
 				astep:setState(ng_fistate_del)
 				astepstate = ng_fistate_del
 				ng_stateindex = 20
-				print("State ["..ng_stateindex.."]")
+				dprint("State ["..ng_stateindex.."]")
 				return
 			end
 		end
 		ng_stateindex = 8
-		print("State ["..ng_stateindex.."]")
+		dprint("State ["..ng_stateindex.."]")
 	end
 
 	if ng_stateindex == 8 then -- check the item
@@ -776,7 +791,7 @@ function ng_flow_executor()
 			astep:setState(ng_fistate_chk)
 			astepstate = ng_fistate_chk
 			ng_stateindex = 9
-			print("State ["..ng_stateindex.."]")
+			dprint("State ["..ng_stateindex.."]")
 		else
 			astep:setState(ng_fistate_err)
 			astepstate = ng_fistate_err
@@ -784,7 +799,7 @@ function ng_flow_executor()
 			aflowstate = ng_flowstate_err
 			-- print("Current execution stopped due to validation error")
 			ng_stateindex = 30
-			print("State ["..ng_stateindex.."]")
+			dprint("State ["..ng_stateindex.."]")
 		end				
 	end
 
@@ -798,7 +813,7 @@ function ng_flow_executor()
 		astep:setState(ng_fistate_end)
 		astepstate = ng_fistate_end
 		ng_stateindex = 10
-		print("State ["..ng_stateindex.."]")
+		dprint("State ["..ng_stateindex.."]")
 	end
 	
 	if ng_stateindex == 10 then -- if last item end flow otherwise increase step
@@ -806,7 +821,7 @@ function ng_flow_executor()
 			aflow:setState(ng_flowstate_end)
 			aflowstate = ng_flowstate_end
 			ng_stateindex = 40
-			print("State ["..ng_stateindex.."]")
+			dprint("State ["..ng_stateindex.."]")
 		else
 			indxastep = indxastep + 1
 			aflow:setActiveItemIdx(indxastep)
@@ -819,7 +834,7 @@ function ng_flow_executor()
 			astep:setState(ng_fistate_run)
 			astepstate = ng_fistate_run
 			ng_stateindex = 5 -- return with next execution
-			print("State ["..ng_stateindex.."]")
+			dprint("State ["..ng_stateindex.."]")
 		end
 	end
 

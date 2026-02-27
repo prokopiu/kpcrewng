@@ -28,7 +28,7 @@ function ngAddonSystems:new(title, filePath)
 	
 	obj.categories = {} -- all associated flows
 	
-	print("+ "..obj.className.." {"..obj.title.."}")
+	dprint("+ "..obj.className.." {"..obj.title.."}")
 	
     return obj
 end
@@ -111,51 +111,41 @@ end
 
 --- Load Systems
 function ngAddonSystems:load()
+	
 	if ng_file_exists(self.filePath) then
+		
 		local json = require "kpcrew.json"
 		local file = io.open(self.filePath, "r")
 		local jsonstr = ""
-		for line in file:lines() do
-		    jsonstr = jsonstr .. line
-		end
+		for line in file:lines() do jsonstr = jsonstr .. line end
 		file:close()
-
 		local systems = json.parse(jsonstr)
 
 		for catkey,catnode in pairs(systems.addonsystems.categories) do
 		    local category = Category:new(catnode.name)
 			local systems = catnode.systems
+			
 			if systems ~= nil then
+				
 			    for syskey,systemnode in pairs(systems) do
+					
 			        local system = System:new(systemnode.name)
 			        category:appendSystem(system)
 					local elements = systemnode.elements
 					if elements ~= nil then
 						for elemkey,elemnode in pairs(elements) do
+							
 							local element = Element:new(elemnode.name, elemnode.title, elemnode)
 							system:appendElement(element)
+							
 						end
 					end
+					
 			    end
+				
 			end
-		    self:appendCategory(category)
+		    self:appendCategory(category)			
 		end
-	end
-end
-
---- save systems
-function ngAddonSystems:save() 
-	print(JsonExport:pretty_print(self.categories))
-end
-	
--- ===== UI related functionality =====
-
-function ngAddonSystems:render()
-	if self ~= nil then
-		if imgui.TreeNode(self.title) then
-			for _, category in ipairs(self.categories) do category:render() end		
-		imgui.TreePop()
-        end
 	end
 end
 

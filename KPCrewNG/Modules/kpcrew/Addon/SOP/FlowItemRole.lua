@@ -35,7 +35,3 @@ ng_firole_CM3 	= 12
 ng_firole_ALL 	= 13
 ng_firole_SYS	= 14
 
---- get fi role string based on index
--- @param int index - index of role
--- @return string - flow item role text
-function ng_get_firole(key) return ng_flowItemRoles[key] end

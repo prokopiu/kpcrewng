@@ -24,7 +24,7 @@ function ngSystemElement:new(name, title, elementNode)
 	obj.title = title
 	obj.elementNode = elementNode
 	
-	print("+ "..obj.className.." {"..obj.name.."}")
+	dprint("+ "..obj.className.." {"..obj.name.."}")
 
     return obj
 end

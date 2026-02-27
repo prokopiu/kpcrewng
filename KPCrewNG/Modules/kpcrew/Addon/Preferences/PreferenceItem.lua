@@ -15,7 +15,9 @@ local ngPreferenceItem = {
 -- @param object value of preference
 -- @param int datatype 
 -- @param string title 
-function ngPreferenceItem:new(name, value, datatype, title, xpath)
+-- @param string xpath to Simbrief
+-- @param string visible control if preference is shown on screen
+function ngPreferenceItem:new(name, value, datatype, title, xpath, visible)
     ngPreferenceItem.__index = ngPreferenceItem
     local obj = {}
     setmetatable(obj, ngPreferenceItem)
@@ -23,10 +25,14 @@ function ngPreferenceItem:new(name, value, datatype, title, xpath)
 	obj.className = "PreferenceItem"
 	
 	obj.name = name -- = key
+	obj.title = title
 	obj.value = value
 	obj.type = datatype
-	obj.title = title
-	obj.xpath = xpath -- optional xpath
+	obj.xpath = xpath -- optional xpath for simbrief
+	if visible == nil then obj.visible = function () return true end 
+	else obj.visible = loadstring(visible) end 
+
+	dprint("+ "..obj.className.." {"..obj.name..","..obj.title.." }")
 
     return obj
 end
@@ -99,83 +105,8 @@ function ngPreferenceItem:setTitle(title)
 	end
 end
 
--- ===== UI related functionality =====
-
--- Render preference in imgui window
-function ngPreferenceItem:render(type)
-	if self ~= nil then
-		local splitTitle = ng_split(self:getTitle(),"|")
-		if type == "tree" then
-			if self.type == ng_type_int then
-				ng_imgui_in_lintfield(self:getName(), 10+string.len(self:getValue())*7, color_orange, tonumber(splitTitle[2]), splitTitle[1], color_white, 
-				tonumber(self:getValue()), function (textin) self:setValue(textin) end, 200)
-			end
-			if self.type == ng_type_float then
-				ng_imgui_in_lfloatfield(self:getName(), 25+string.len(self:getValue())*7, color_orange, tonumber(splitTitle[2]), splitTitle[3], splitTitle[1], color_white, 
-				tonumber(self:getValue()), function (textin) self:setValue(textin) end, 200)
-			end
-			if self.type == ng_type_text then
-				ng_imgui_in_ltfield(self:getName(), 10+string.len(self:getValue())*7, color_orange, 255, splitTitle[1], color_white, 
-				self:getValue(), function (textin) self:setValue(textin) end, 200)
-			end
-			if self.type == ng_type_divider then
-				imgui.PushTextWrapPos(330)
-				imgui.PopTextWrapPos()
-			end
-			if self.type == ng_type_info then
-				if splitTitle[2] == nil or splitTitle[2] == "" then splitTitle[2] = 0xFF95C857 end
-				ng_imgui_out_text(splitTitle[2], splitTile[1], color_white, ""..self.name.."="..tostring(self.value),200)
-			end
-			if self.type == ng_type_flag then
-				ng_imgui_out_text(color_white, splitTitle[1]) imgui.SameLine(200)
-				imgui.PushID(splitTitle[1])
-					ng_imgui_in_rbtoggle(splitTitle[2], splitTitle[3], self:getValue(), function (textin) self:setValue(textin) end)
-				imgui.PopID()
-			end
-			if self.type == ng_type_list then
-				ng_imgui_out_text(color_white, splitTitle[1]) imgui.SameLine(200)
-				local function ff(a,...)x=...and f(...)return x and#x>#a and x or a end
-				ng_imgui_in_combolist(splitTitle[1], splitTitle, self:getValue(), function (textin) self:setValue(textin) end, 100)
-			end
-			if self.datatype == ng_type_comfreq then
-				ng_imgui_in_floatfield(splitTitle[1], 0, color_orange, 0.005, "%6.3f",
-				tonumber(self:getValue()), function (textin) self:setValue(textin) end)
-				imgui.SameLine(200)
-				ng_imgui_in_button(splitTitle[1].."btn", "<->", 20, 15, 
-					function () set("sim/cockpit2/radios/actuators/com1_frequency_hz_833",self:getValue()*1000) end)
-			end
-			if self.datatype == ng_type_navfreq then
-				ng_imgui_in_floatfield(splitTitle[1], 0, color_orange, 0.05, "%5.2f",
-				tonumber(self:getValue()), function (textin) self:setValue(textin) end)
-				imgui.SameLine(200)
-				ng_imgui_in_button(splitTitle[1].."btn", "<->", 20, 15, 
-					function ()
-						if splitTitle[2] ~= "2" then 
-							set("sim/cockpit2/radios/actuators/nav1_frequency_hz",self:getValue()*100) 
-						else
-							set("sim/cockpit2/radios/actuators/nav2_frequency_hz",self:getValue()*100) 
-						end 
-					end)
-			end
-
-		end
-	end
-end
-
---
---	if self.datatype == self.typeExecButton then
---		imgui.PushID(splitTitle[1])
---			if imgui.Button(splitTitle[2]) then
---				local fnct = loadstring(splitTitle[3])
---				fnct()
---			end
---		imgui.PopID()
---	end
---		end
---	end
---end
-
--- return the line to be written into the .preferences file
+--- return the line to be written into the .preferences file
+-- @return string complete line to write to preference file
 function ngPreferenceItem:getSaveLine()
 	
 	if self.type == ng_type_int or self.type == ng_type_float or self.type == ng_type_list or self.type == ng_type_comfreq or self.type == ng_type_navfreq then
@@ -192,6 +123,70 @@ function ngPreferenceItem:getSaveLine()
 		return self.name .. "=\"" .. self.value .. "\"\n"
 	end
 	return "" 
+end
+
+-- ===== UI related functionality =====
+
+--- Render preference in imgui window
+function ngPreferenceItem:render(type)
+	if self ~= nil then
+		if self.visible() then
+			local splitTitle = ng_split(self:getTitle(),"|")
+			if type == "tree" then
+				if self.type == ng_type_int then
+					ng_imgui_in_lintfield(self:getName(), 10+string.len(self:getValue())*7, color_orange, tonumber(splitTitle[2]), splitTitle[1], color_white, 
+					tonumber(self:getValue()), function (textin) self:setValue(textin) end, 200)
+				end
+				if self.type == ng_type_float then
+					ng_imgui_in_lfloatfield(self:getName(), 25+string.len(self:getValue())*7, color_orange, tonumber(splitTitle[2]), splitTitle[3], splitTitle[1], color_white, 
+					tonumber(self:getValue()), function (textin) self:setValue(textin) end, 200)
+				end
+				if self.type == ng_type_text then
+					ng_imgui_in_ltfield(self:getName(), 10+string.len(self:getValue())*7, color_orange, 255, splitTitle[1], color_white, 
+					self:getValue(), function (textin) self:setValue(textin) end, 200)
+				end
+				if self.type == ng_type_divider then
+					imgui.PushTextWrapPos(330)
+					imgui.PopTextWrapPos()
+				end
+				if self.type == ng_type_info then
+					if splitTitle[2] == nil or splitTitle[2] == "" then splitTitle[2] = 0xFF95C857 end
+					ng_imgui_out_text(splitTitle[2], splitTile[1], color_white, ""..self.name.."="..tostring(self.value),200)
+				end
+				if self.type == ng_type_flag then
+					ng_imgui_out_text(color_white, splitTitle[1]) imgui.SameLine(200)
+					imgui.PushID(splitTitle[1])
+						ng_imgui_in_rbtoggle(splitTitle[2], splitTitle[3], self:getValue(), function (textin) self:setValue(textin) end)
+					imgui.PopID()
+				end
+				if self.type == ng_type_list then
+					ng_imgui_out_text(color_white, splitTitle[1]) imgui.SameLine(200)
+					local function ff(a,...)x=...and f(...)return x and#x>#a and x or a end
+					ng_imgui_in_combolist(splitTitle[1], splitTitle, self:getValue(), function (textin) self:setValue(textin) end, 100)
+				end
+				if self.datatype == ng_type_comfreq then
+					ng_imgui_in_floatfield(splitTitle[1], 0, color_orange, 0.005, "%6.3f",
+					tonumber(self:getValue()), function (textin) self:setValue(textin) end)
+					imgui.SameLine(200)
+					ng_imgui_in_button(splitTitle[1].."btn", "<->", 20, 15, 
+						function () set("sim/cockpit2/radios/actuators/com1_frequency_hz_833",self:getValue()*1000) end)
+				end
+				if self.datatype == ng_type_navfreq then
+					ng_imgui_in_floatfield(splitTitle[1], 0, color_orange, 0.05, "%5.2f",
+					tonumber(self:getValue()), function (textin) self:setValue(textin) end)
+					imgui.SameLine(200)
+					ng_imgui_in_button(splitTitle[1].."btn", "<->", 20, 15, 
+						function ()
+							if splitTitle[2] ~= "2" then 
+								set("sim/cockpit2/radios/actuators/nav1_frequency_hz",self:getValue()*100) 
+							else
+								set("sim/cockpit2/radios/actuators/nav2_frequency_hz",self:getValue()*100) 
+							end 
+						end)
+				end
+			end
+		end
+	end
 end
 
 return ngPreferenceItem

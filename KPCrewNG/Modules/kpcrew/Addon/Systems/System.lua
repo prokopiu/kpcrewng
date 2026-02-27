@@ -19,7 +19,7 @@ function ngSystem:new(name)
     obj.name = name
 	obj.elements = {} -- list of elements
 	
-	print("+ "..obj.className.." {"..obj.name.."}")
+	dprint("+ "..obj.className.." {"..obj.name.."}")
 
     return obj
 end

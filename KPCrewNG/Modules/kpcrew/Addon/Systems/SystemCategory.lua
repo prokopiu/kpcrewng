@@ -21,7 +21,7 @@ function ngSystemCategory:new(name)
     obj.name = name
 	obj.systems = {} -- list of systems
 	
-	print("+ "..obj.className.." {"..obj.name.."}")
+	dprint("+ "..obj.className.." {"..obj.name.."}")
 
     return obj
 end

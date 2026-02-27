@@ -35,7 +35,7 @@ function ngFlowItem:new(flowitem)
 		
 	obj.state = ng_fistate_new
 
-	print("+ "..obj.className.." {"..obj.item.challenge.."}")
+	dprint("+ "..obj.className.." {"..obj.item.challenge.."}")
 	
     return obj
 end
@@ -120,8 +120,8 @@ end
 -- @param int linelength in chars - needed to calculate dots 
 function ngFlowItem:getLine(lineLength)
 	local line = {}
-	local unparsedChallengeText = kc_unparse_string(self.item.challenge)
-	local unparsedResponseText = kc_unparse_string(self.item.response)
+	local unparsedChallengeText = ng_unparse_string(self.item.challenge)
+	local unparsedResponseText = ng_unparse_string(self.item.response)
 	local dots = lineLength - string.len(unparsedChallengeText) - string.len(unparsedResponseText) - 7
 	line[#line + 1] = unparsedChallengeText
 	local dotchar = "."
@@ -130,7 +130,7 @@ function ngFlowItem:getLine(lineLength)
 	line[#line + 1] = unparsedResponseText
 	if self.role ~= 0 then
 		line[#line + 1] = " (" 
-		line[#line + 1] = ng_get_firole(loadstring("return "..self.item.role)())
+		line[#line + 1] = ng_flowItemRoles[loadstring("return "..self.item.role)()]
 		line[#line + 1] = ")"
 	end
 	

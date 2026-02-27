@@ -34,7 +34,7 @@ function ngSOP:new(title, filepath)
 	obj.flows = {} -- all associated flows
 	obj.activeFlow = 0
 
-	print("+ "..obj.className.." {"..obj.title.."}")
+	dprint("+ "..obj.className.." {"..obj.title.."}")
 	
     return obj
 end
