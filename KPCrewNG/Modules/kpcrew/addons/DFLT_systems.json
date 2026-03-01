@@ -1149,21 +1149,24 @@
           {
             "elements": [
               {
-                "acts": {},
+                "acts": [
+                ],
                 "fcheck": "return true",
                 "name": "baromode1",
                 "title": "Baro Mode left",
                 "type": "function"
               },
               {
-                "acts": {},
+                "acts": [
+                ],
                 "fcheck": "return true",
                 "name": "baromode2",
                 "title": "Baro mode right",
                 "type": "function"
               },
               {
-                "acts": {},
+                "acts": [
+                ],
                 "fcheck": "return true",
                 "name": "baromode3",
                 "title": "Baro mode standby",
@@ -1189,7 +1192,7 @@
                 "min": 22,
                 "name": "barovalue1",
                 "title": "Baro Mode left",
-                "type": "dataref"
+                "type": "dial"
               },
               {
                 "acts": [

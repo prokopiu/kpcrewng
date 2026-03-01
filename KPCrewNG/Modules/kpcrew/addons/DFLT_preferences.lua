@@ -6,13 +6,19 @@ local preference = require("kpcrew.Addon.Preferences.PreferenceItem")
 
 local aircraftPrefSet = preferenceSet:new("DFLT","DEFAULT AIRCRAFT",SCRIPT_DIRECTORY .. "../Modules/kpcrew_prefs/DFLT.preferences")
 
+local addon = preferenceGroup:new("addon","ADDON PREFERENCES")
+addon:add(preference:new("icao","DFLT",ng_type_text,"Aircraft ICAO in use|"))
+addon:add(preference:new("aircraftname","DEFAULT AIRCRAFT",ng_type_text,"Aircraft name|"))
+addon:add(preference:new("filepath",SCRIPT_DIRECTORY.."../Modules/kpcrew_prefs/DFLT.preferences",ng_type_text,"Preference filepath|"))
+
 -- -------- General settings not associated with a preference group --------
 local general = preferenceGroup:new("general","GENERAL PREFERENCES")
 general:add(preference:new("iscargo",false,ng_type_flag,"Is Cargo Aircraft?|Yes|No"))
 general:add(preference:new("hasautobrk",false,ng_type_flag,"Has Autobrake?|Yes|No"))
 general:add(preference:new("hasgroundobj",false,ng_type_flag,"Has Ground Objects?|Yes|No"))
 general:add(preference:new("haswipers",false,ng_type_flag,"Has Wipers?|Yes|No"))
-general:add(preference:new("hasfiretest",false,ng_type_flag,"Has Firetests?|Yes|No"))
+general:add(preference:new("hasseatbelts",false,ng_type_flag,"Has Seatbelt Signs?|Yes|No"))
+general:add(preference:new("hasnosmoking",false,ng_type_flag,"Has No Smoking Signs?|Yes|No"))
 -- autobreak related setting
 general:add(preference:new("abrkmodelblt","|RTO|OFF|1|2|3|4",ng_type_text,"A/BRK Labels|",nil,"return ng_getAcfPrefs():get(\"general:hasautobrk\")"))
 general:add(preference:new("abrkmodevals","|0|1|2|3|4|5",ng_type_text,"A/BRK Values|",nil,"return ng_getAcfPrefs():get(\"general:hasautobrk\")"))
@@ -34,6 +40,8 @@ local air = preferenceGroup:new("air","AIR SUPPLY SYSTEMS")
 air:add(preference:new("hastempcontrol",false,ng_type_flag,"Has Temp Control|Yes|No"))
 air:add(preference:new("hastrimair",false,ng_type_flag,"Has Trim Air?|Yes|No"))
 air:add(preference:new("hasrecircfans",false,ng_type_flag,"Has Recirc Fans?|Yes|No"))
+air:add(preference:new("hasenginebleeds",false,ng_type_flag,"Has Engine Bleds?|Yes|No"))
+air:add(preference:new("hasoxygen",false,ng_type_flag,"Oxygen Supply?|Yes|No"))
 
 -- air:add(preference:new("haspressurecab",true,ng_type_flag,"Pressure Cabin?|Yes|No"))
 -- air:add(preference:new("numpacks",2,ng_type_int,"# Packs|0"))
@@ -45,7 +53,6 @@ air:add(preference:new("hasrecircfans",false,ng_type_flag,"Has Recirc Fans?|Yes|
 -- air:add(preference:new("numcargoheat",0,ng_type_int,"# Cargo Heat|0"))
 -- air:add(preference:new("haslandalt",false,ng_type_flag,"Landing Alt?|Yes|No"))
 -- air:add(preference:new("hasflightalt",false,ng_type_flag,"Flight Alt?|Yes|No"))
--- air:add(preference:new("hasoxygen",false,ng_type_flag,"Oxygen Supply?|Yes|No"))
 air:add(preference:new("takeoffpacks",2,ng_type_list,"Takeoff Packs|OFF|ON"))
 air:add(preference:new("landingpacks",2,ng_type_list,"Landing Packs|OFF|ON"))
 air:add(preference:new("takeoffbleeds",2,ng_type_list,"Takeoff Bleeds|ON|OFF"))
@@ -130,6 +137,8 @@ electric:add(preference:new("hasstbypower",false,ng_type_flag,"Has Standby Power
 electric:add(preference:new("hasgpu",false,ng_type_flag,"Has GPU?|Yes|No"))
 electric:add(preference:new("hasapu",false,ng_type_flag,"Has APU?|Yes|No"))
 electric:add(preference:new("apun1run",98,ng_type_int,"APU N1 running|0",nil,"return ng_getAcfPrefs():get(\"electric:apun1run\")"))
+electric:add(preference:new("hascabinpwr",false,ng_type_flag,"Has Cabin Power?|Yes|No"))
+electric:add(preference:new("hasifepwr",false,ng_type_flag,"Has IFE Power?|Yes|No"))
 -- electric:add(preference:new("numgenerators",2,ng_type_int,"# Generators|0"))
 -- electric:add(preference:new("numinverters",0,ng_type_int,"# Inverters|0"))
 -- electric:add(preference:new("numgpugens",1,ng_type_int,"# GPU Generators|0"))
@@ -141,6 +150,8 @@ electric:add(preference:new("apun1run",98,ng_type_int,"APU N1 running|0",nil,"re
 -- ----------------------- Engines related settings ------------------------
 local engines = preferenceGroup:new("engines","ENGINE SYSTEMS")
 engines:add(preference:new("startseq",1,ng_type_list,"Start Sequence|2 THEN 1|1 THEN 2|"))
+engines:add(preference:new("hasfiretests",false,ng_type_flag,"Has Fire Test?|Yes|No"))
+
 -- engines:add(preference:new("numengines",2,ng_type_int,"# Engines|0"))
 -- engines:add(preference:new("numignition",2,ng_type_int,"# Ignition|0"))
 -- engines:add(preference:new("numreversers",2,ng_type_int,"# Reversers|0"))
@@ -158,12 +169,12 @@ engines:add(preference:new("tothrust",1,ng_type_list,"Takeoff Thrust|OPTIMUM|D-T
 -- engines:add(preference:new("mixrich",1,ng_type_float,"Mixture Rich Pos|0|%4.1f"))
 -- engines:add(preference:new("n2start",40,ng_type_float,"N2 after Start|0|%4.1f"))
 
--- All fuel related settings
+-- ------------------------- Fuel related settings ---------------------------
 local fuel = preferenceGroup:new("fuel","FUEL SYSTEMS")
 fuel:add(preference:new("canloadfuel",true,ng_type_flag,"Can load fuel?|Yes|No"))
+fuel:add(preference:new("hasfuelxfeed",false,ng_type_flag,"Has Fuel Crossfeeds|Yes|No"))
 -- fuel:add(preference:new("numfueltanks",2,ng_type_int,"# Fuel Tanks|0"))
 -- fuel:add(preference:new("numfuelpumps",2,ng_type_int,"# Fuel Pumps|0"))
--- fuel:add(preference:new("numfuelxfeed",1,ng_type_int,"# Fuel Crossfeeds|0"))
 -- fuel:add(preference:new("hasfuelselect",false,ng_type_flag,"Fuel Select?|Yes|No"))
 -- fuel:add(preference:new("numfuelcutoff",2,ng_type_int,"# Fuel Cutoffs|0"))
 
@@ -214,6 +225,7 @@ weights:add(preference:new("maxfuel",-1,ng_type_int,"Max Fuel|0"))
 
 -- ng_start_seq	= { [1] = {"2", "1"}, [2] = {"1", "2"} }
 
+aircraftPrefSet:addGroup(addon)
 aircraftPrefSet:addGroup(general)
 aircraftPrefSet:addGroup(aice)
 aircraftPrefSet:addGroup(air)
