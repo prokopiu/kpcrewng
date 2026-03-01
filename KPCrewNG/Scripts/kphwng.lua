@@ -4,43 +4,62 @@
 	Kosta Prokopiu, 2026
 --]]
 
+require "kpcrew.Addon.SOP.Executor" -- executing the flows
+require "kpcrew.acft_select" -- get the running aircraft addon icao
+require "kpcrew.nggenutils" -- many utilities needed
+require "kpcrew.Addon.SOP.FlightPhases" -- enumerator for flightphases
+require "kpcrew.Addon.SOP.FlowItemRole" -- enumerator for pilot roles
+require "kpcrew.Addon.Preferences.application_preferences" -- application settings
+require "kpcrew.Addon.Preferences.background_vars" -- background variables
+require ("kpcrew.addons.DFLT_preferences") -- definition of aircraft settings
+
 -- ====== Global variables =======
-local KPH_VERSION = "NG-Dev V0.1"
-ng_acf_icao = "DFLT" -- ICAO code to control what aircraft to load
+local nh_version = "NG-Dev V0.1"
+nh_acf_icao = "DFLT" -- ICAO code to control what aircraft to load
 
-logMsg ("FWL: ** Starting KPHWNG version " .. KPH_VERSION .." **")
+logMsg ("FWL: ** Starting KPHWNG version " .. nh_version .." **")
 
-ng_acf_icao = ng_acft_select(2)
+nh_acf_icao = ng_acft_select(2) -- can differ from sop icao
 logMsg("ICAO: "..ng_acf_icao)
 
--- Aircraft Specific SOP/Checklist/Procedure Definitions & Preferences
+-- ====== Aircraft Addon Specific SOP/Checklist/Procedure Definitions & Preferences
 local PreferenceSet = require("kpcrew.Addon.Preferences.PreferenceSet")
-require "kpcrew.Addon.Preferences.application_preferences"
-require ("kpcrew.addons."..ng_acf_icao.."_preferences")
-local Addon = require("kpcrew.Addon.Addon")
-local Systems = require("kpcrew.Addon.Systems.AddonSystems")
+if ng_file_exists(SCRIPT_DIRECTORY.."kpcres.addons"..ng_acf_icao.."_preferences.lua") then 
+	require ("kpcrew.addons."..ng_acf_icao.."_preferences")
+end
 
--- application preferences
+-- ====== Build object structure (Addon deprecated, will be removed eventually)
+local Addon 	= require("kpcrew.Addon.Addon")
+local Systems 	= require("kpcrew.Addon.Systems.AddonSystems")
+
+-- ====== Initialize application preferences
 local appPreferences = ng_getAppPrefs()
+-- if no preferenes file found then write default
 if ng_file_exists(appPreferences:getFilePath()) == false then appPreferences:save() end
+-- load the preferences from kpcrew_prefs folder
 appPreferences:load()
 
--- Get aircraft specific preferences
+-- ====== Get aircraft specific preferences - first load DFLT preference set then overwrite with specific - then load prefs
 local acfPreferences = ng_getAcfPrefs()
+acfPreferences:setName(nh_acf_icao) -- set aircraft specific icao as name
+-- check if icao preferences file exists, if not create new
+acfPreferences:setFilePath(SCRIPT_DIRECTORY .."../Modules/kpcrew_prefs/"..nh_acf_icao..".preferences")
 if ng_file_exists(acfPreferences:getFilePath()) == false then acfPreferences:save() end
 acfPreferences:load()
+acfPreferences:setTitle(acfPreferences:get("addon:aircraftname")) -- set overloaded aircraft name
+function nh_get_active_prefs() return acfPreferences end -- global function to be used everywhere
 
--- Get Aicraft Systems
-local acfSystems = Systems:new("Aircraft Systems",SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_acf_icao.."_systems.json")
+-- ====== Get Aicraft Systems (all required switches and other elements)
+local acfSystems = Systems:new("Aircraft Systems",SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..nh_acf_icao.."_systems.json")
 acfSystems:load()
-ng_init_acf_prefs()
-function ng_get_active_systems() return acfSystems end
+ng_init_acf_prefs() -- initialize and make custom settings if available
+function nh_get_active_sys() return acfSystems end -- global function to be used everywhere
 
--- Initialize Addon
+-- ====== Initialize Addon
 local activeAddon = Addon:new(ng_acf_icao,"Addon")
-function ng_get_active_addon() return activeAddon end
-activeAddon:setPreferences(acfPreferences)
-activeAddon:setSystems(acfSystems)
+activeAddon:setPreferences(acfPreferences) -- deprecated - will be replaced eventually
+activeAddon:setSystems(acfSystems) -- deprecated
+function nh_get_active_addon() return activeAddon end -- global function to be used everywhere
 
 -- ========================================================================================
 
@@ -59,7 +78,7 @@ function ng_execute_actions(syselem,action,value)
 	
 end	
 
-xsp_bravo_mode 		= 1
+xsp_bravo_mode 			= 1
 xsp_bravo_layer 		= 0
 xsp_fine_coarse 		= 1
 
