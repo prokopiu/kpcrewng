@@ -21,9 +21,9 @@ print("skipped")
 				
 				-- # means it is a system not a system element
 				if string.find(step.element,"#") ~= nil then
-					ng_action_system(string.sub(step.element,2),step.action, step.value, step.condition, step.fset)
+					ng_action_system(string.sub(step.element,2),step.action, step.value, step.condition, step.fset, step.fcheck)
 				else
-					ng_action_element(step.element, step.action, step.value, step.condition, step.fset)
+					ng_action_element(step.element, step.action, step.value, step.condition, step.fset, step.fcheck)
 				end
 				
 			end
@@ -39,12 +39,12 @@ end
 -- @param string systemname - name of system to execute (lowercase)
 -- @param string action - standardized action name (lowercase)
 -- @param value - value to use when non-standard
-function ng_action_system(systemname, action, value, condition, fset)
+function ng_action_system(systemname, action, value, condition, fset, fcheck)
 	local system = ng_get_active_systems():findSystem(string.lower(systemname))
 	if system ~= nil then
 		for _,element in pairs(system.elements) do
 print("ng_action_system: "..element.name)
-			ng_action_element(element.name, string.lower(action), value, condition, fset)
+			ng_action_element(element.name, string.lower(action), value, condition, fset, fcheck)
 		end
 	end
 end
@@ -54,7 +54,7 @@ end
 -- @param string elementname - name of element to execute (lowercase)
 -- @param string action - standardized action name (lowercase)
 -- @param value - value to use when non-standard
-function ng_action_element(elementname, action, value, condition, fset)
+function ng_action_element(elementname, action, value, condition, fset, fcheck)
 	
 	if ng_get_active_systems():find(elementname) ~= nil then
 		local element = ng_get_active_systems():find(elementname):getElementNode()
@@ -233,7 +233,6 @@ print("ng_action_element: "..element.title)
 			
 		-- ======= Dial switch
 		elseif etype == "dial" then
-
 			local function setvalue(value)
 				if value ~= nil then
 					if value >= element.min and value <= element.max and value ~= getdref() then
@@ -259,11 +258,13 @@ print("ng_action_element: "..element.title)
 			-- if allowed because found then continue, otherwise skip
 			if found == 1 then
 				if action == "set" then
-					setdref(getvalue())
+					setvalue(getvalue())
 				elseif action == "up" then
 					command_once(element.cmdup)
 				elseif action == "dn" then
 					command_once(element.cmddn)
+				elseif action == "function" then
+					loadstring(fset)()
 				end
 			else
 				print("Action not allowed: "..action)
@@ -284,7 +285,7 @@ end
 -- @param string action - standardized action name (lowercase)
 -- @param value - value to use when non-standard
 -- @return combined true/false - all true means system checks out
-function ng_check_system(systemname, action, value, fset)
+function ng_check_system(systemname, action, value, fset, fcheck)
 	
 	local system = ng_get_active_systems():findSystem(systemname)
 	
@@ -294,7 +295,7 @@ function ng_check_system(systemname, action, value, fset)
 		
 		-- count the trues and if less trues then elements then return false
 		for _,element in pairs(system.elements) do
-			if ng_check_element(element.name, action, value, fset) then 
+			if ng_check_element(element.name, action, value, fset, fcheck) then 
 				cnt = cnt +1
 			end
 		end
@@ -314,20 +315,21 @@ end
 -- @param value - value to use when non-standard
 -- @param string fset function code frm procstep
 -- @return boolean true/false
-function ng_check_element(elementname, action, value, fset)
+function ng_check_element(elementname, action, value, fset, fcheck)
 	
 	if ng_get_active_systems():find(elementname) ~= nil then
 		local element = ng_get_active_systems():find(elementname):getElementNode()
 		local dref = element.dref
 		local idx = element.indx
 		local etype = string.lower(element.type)
-		-- local getdref = function () if idx ~= nil then return get(element.dref,idx) else return get(element.dref) end end
 		local setdref = function (invalue) if idx ~= nil then set_array(element.dref,idx,invalue) else set(element.dref,invalue) end end
 
 		local function getdref() 
 			local result = nil
 			-- if fcheck in element then use function else read dataref
-			if element.fcheck ~= nil then
+			if fcheck ~= nil then -- fcheck from function
+				result = loadstring(fcheck)()
+			elseif element.fcheck ~= nil then
 				result = loadstring(element.fcheck)()
 			else
 				if idx ~= nil then result = get(element.dref,idx) else result = get(element.dref) end
@@ -337,7 +339,7 @@ function ng_check_element(elementname, action, value, fset)
 		
 		-- ======= dataref driven elements
 		if etype == "dataref" then
-			
+			print("dataref")
 			local found = 0
 			-- check if action is allowed for the element
 			for _,defaction in pairs(element.acts) do
@@ -348,6 +350,7 @@ function ng_check_element(elementname, action, value, fset)
 			if found == 1 then
 
 				if action == "on" then
+				print("on")
 					if value == nil then value = 1 end 
 					return getdref() == value
 					
@@ -368,7 +371,9 @@ function ng_check_element(elementname, action, value, fset)
 			
 		-- ======= function check
 		elseif etype == "function" then
-			if element.fcheck ~= nil then 
+			if fcheck ~= nil then 
+				return loadstring(fcheck)()
+			elseif element.fcheck ~= nil then 
 				return loadstring(element.fcheck)() 
 			else
 				return true
@@ -376,7 +381,7 @@ function ng_check_element(elementname, action, value, fset)
 				
 		-- ======= onoff switch	
 		elseif etype == "onoff" then
-			
+			print("onoff")
 			local found = 0
 			-- check if action is allowed for the element
 			for _,defaction in pairs(element.acts) do
@@ -471,7 +476,9 @@ function ng_check_element(elementname, action, value, fset)
 			
 			local function getvalue()
 				local result = nil
-				if fset ~= nil then
+				if fcheck ~= nil then
+					result = loadstring(fcheck)()
+				elseif fset ~= nil then
 					result = loadstring(fset)()
 				else
 					result = value
@@ -500,6 +507,8 @@ function ng_check_element(elementname, action, value, fset)
 					else
 						return getdref() == getvalue()
 					end
+				elseif action == "function" then
+						return getdref() == getvalue()
 				else
 					print("Action not allowed: "..action)
 				end
@@ -533,9 +542,9 @@ function ng_check_step(procstep)
 					if step.nocheck == nil then 
 						-- # means it is a system not a system element
 						if string.find(step.element,"#") ~= nil then
-							accresult = ng_check_system(string.sub(step.element,2),step.action,step.value, step.fset)
+							accresult = ng_check_system(string.sub(step.element,2),step.action,step.value, step.fset, step.fcheck)
 						else
-							accresult = ng_check_element(step.element, step.action, step.value, step.fset)
+							accresult = ng_check_element(step.element, step.action, step.value, step.fset, step.fcheck)
 						end
 					else
 						accresult = true
@@ -625,7 +634,11 @@ function ng_master_action()
 		elseif aflow:getState() == ng_flowstate_pause then
 			aflow:setState(ng_flowstate_run)
 			aflow:getActiveItem():setState(ng_fistate_run)
-			ng_stateindex = 8
+			if ng_stateindex == 61 then
+				ng_stateindex = 9
+			else
+				ng_stateindex = 8
+			end
 			dprint("State ["..ng_stateindex.."]")
 		end
 
@@ -691,6 +704,13 @@ function ng_flow_executor()
 		aflow:setActiveItemIdx(1)
 		indxastep = 1
 		astep = aflow:getActiveItem()
+		if astep:getItemNode().condition ~= nil then
+			if loadstring(astep:getItemNode().condition)() == false then
+				indxastep = 2
+				aflow:setActiveItemIdx(2)
+				astep = aflow:getActiveItem()
+			end
+		end
 		astepstate = ng_fistate_new
 		astep:setState(ng_fistate_new)
 		ng_stateindex = 5
@@ -733,6 +753,10 @@ function ng_flow_executor()
 		return
 	end 
 	
+	if ng_stateindex == 61 then -- loop while paused
+		return
+	end 
+	
 	if ng_stateindex == 20 then -- if in delay reduce the counter next loop and when 0 jump to 8
 		if astep ~= nil then
 			if astep:getDelay() ~= nil  then
@@ -752,13 +776,6 @@ function ng_flow_executor()
 		if astep:getClassName() == "ProcedureItem" then ng_execute_step_actions(astep) end
 		if astep:getClassName() == "ChecklistItem" then 
 			ng_speakNoText(0, astep:getChallenge()) 
-			if astep:isSimUser() then
-				aflow:setState(ng_flowstate_pause)
-				astep:setState(ng_fistate_pause)
-				ng_stateindex = 60
-				dprint("State ["..ng_stateindex.."]")
-				return
-			end
 		end
 		astep:setState(ng_fistate_act)
 		astepstate = ng_fistate_act
@@ -790,6 +807,13 @@ function ng_flow_executor()
 		if checked then 
 			astep:setState(ng_fistate_chk)
 			astepstate = ng_fistate_chk
+			if astep:isSimUser() and astep:getClassName() == "ChecklistItem" then
+				aflow:setState(ng_flowstate_pause)
+				-- astep:setState(ng_fistate_pause)
+				ng_stateindex = 61
+				dprint("State ["..ng_stateindex.."]")
+				return
+			end
 			ng_stateindex = 9
 			dprint("State ["..ng_stateindex.."]")
 		else

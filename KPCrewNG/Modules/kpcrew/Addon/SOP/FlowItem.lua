@@ -82,7 +82,7 @@ function ngFlowItem:getCheckElements() return self.item.checkElements end
 
 function ngFlowItem:setItemNode(item) self.item = item end
 
-function ngFlowItem:getItemNode(item) return self.item end
+function ngFlowItem:getItemNode() return self.item end
 
 --- Get delays after this step in seconds
 -- @return int delay seconds
