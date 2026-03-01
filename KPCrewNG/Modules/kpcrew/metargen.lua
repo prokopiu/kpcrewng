@@ -1,33 +1,33 @@
 -- Based on the Get METAR for Airport from sparker
 
----- True if VR is enabled, false if it is disabled
---dataref("vr_enabled","sim/graphics/VR/enabled","readonly")
----- What system is currently controlling the weather. 0 = Preset, 1 = Real Weather, 2 = Controlpad, 3 = Plugin.
---dataref("weather_source","sim/weather/region/weather_source","readonly")
---
----- degrees	[0 - 360] The direction the wind is blowing from in degrees from true north clockwise.
---wind_direction_degt = dataref_table("sim/weather/aircraft/wind_direction_degt")
----- >=	0. The wind speed in knots.
---wind_speed_kts = dataref_table("sim/weather/aircraft/wind_speed_kts")
----- Gust speed in knots	
---dataref("wind_gust_kts","sim/weather/view/wind_gust_kts","readonly")
----- >= 0. The reported visibility (e.g. what the METAR/weather window says).
---dataref("visibility_reported_sm","sim/weather/aircraft/visibility_reported_sm","readonly")
---dataref("visibility_reported_m","sim/weather/visibility_reported_m","readonly")
---
----- CLR = 0  FEW = 0.125  SCT = 0.375  BKN = 0.75  OVC = 1
----- These numbers are only correct if "Manually Enter Weather" is selected.
----- If "Download Real Weather" is selected they are very different.
----- Not sure if at this time it is a bug or just the way it is.    
---cloud_coverage = dataref_table("sim/weather/aircraft/cloud_coverage_percent")
----- meters	MSL >= 0. The base altitude for this cloud layer.
---cloud_base_msl_m = dataref_table("sim/weather/aircraft/cloud_base_msl_m")
----- degreesC Temperature	and ISA temperature at pressure altitudes given in C
---dataref("temperatures_aloft_deg_c","sim/weather/aircraft/temperatures_aloft_deg_c","readonly")
----- degreesC	The dew point at specified levels in the atmosphere.
---dataref("dewpoint_deg_c","sim/weather/aircraft/dewpoint_deg_c","readonly")
----- pascals	Pressure at sea level, current planet
---dataref("sealevel_pressure_pas","sim/weather/region/sealevel_pressure_pas","readonly")
+-- True if VR is enabled, false if it is disabled
+dataref("vr_enabled","sim/graphics/VR/enabled","readonly")
+-- What system is currently controlling the weather. 0 = Preset, 1 = Real Weather, 2 = Controlpad, 3 = Plugin.
+dataref("weather_source","sim/weather/region/weather_source","readonly")
+
+-- degrees	[0 - 360] The direction the wind is blowing from in degrees from true north clockwise.
+wind_direction_degt = dataref_table("sim/weather/aircraft/wind_direction_degt")
+-- >=	0. The wind speed in knots.
+wind_speed_kts = dataref_table("sim/weather/aircraft/wind_speed_kts")
+-- Gust speed in knots	
+dataref("wind_gust_kts","sim/weather/view/wind_gust_kts","readonly")
+-- >= 0. The reported visibility (e.g. what the METAR/weather window says).
+dataref("visibility_reported_sm","sim/weather/aircraft/visibility_reported_sm","readonly")
+dataref("visibility_reported_m","sim/weather/visibility_reported_m","readonly")
+
+-- CLR = 0  FEW = 0.125  SCT = 0.375  BKN = 0.75  OVC = 1
+-- These numbers are only correct if "Manually Enter Weather" is selected.
+-- If "Download Real Weather" is selected they are very different.
+-- Not sure if at this time it is a bug or just the way it is.    
+cloud_coverage = dataref_table("sim/weather/aircraft/cloud_coverage_percent")
+-- meters	MSL >= 0. The base altitude for this cloud layer.
+cloud_base_msl_m = dataref_table("sim/weather/aircraft/cloud_base_msl_m")
+-- degreesC Temperature	and ISA temperature at pressure altitudes given in C
+dataref("temperatures_aloft_deg_c","sim/weather/aircraft/temperatures_aloft_deg_c","readonly")
+-- degreesC	The dew point at specified levels in the atmosphere.
+dataref("dewpoint_deg_c","sim/weather/aircraft/dewpoint_deg_c","readonly")
+-- pascals	Pressure at sea level, current planet
+dataref("sealevel_pressure_pas","sim/weather/region/sealevel_pressure_pas","readonly")
 
 local d = ""
 local dd = ""
