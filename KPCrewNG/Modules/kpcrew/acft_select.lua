@@ -68,7 +68,7 @@ function ng_acft_select(component)
 	-- Laminar SF50
 	elseif PLANE_ICAO == "SF50" then
 		icao = "SF50"
-		sopicao = "DFLT"
+		sopicao = "SF50"
 		
 	-- XP12 Citation X
 	elseif PLANE_ICAO == "C750" and PLANE_TAILNUMBER == "N750XP" then
@@ -286,17 +286,14 @@ function ng_acft_select(component)
 	end
 
 	if component == 1 then -- return only sop icao
-		if ng_file_exists(SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..sopicao.."_sop.json") and 
-		   ng_file_exists(SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..sopicao.."_systems.json") and
-		   ng_file_exists(SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..sopicao.."_preferences.lua") then
+		if ng_file_exists(SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..sopicao.."_sop.json") then 
 			return sopicao
 		else
 			print(sopicao.." files not complete in addons folder! Taking DFLT")
 			return "DFLT"
 		end
 	elseif component == 2 then -- system icao
-		if ng_file_exists(SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..icao.."_systems.json") and
-		   ng_file_exists(SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..icao.."_preferences.lua") then
+		if ng_file_exists(SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..icao.."_systems.json") then
 			return icao
 		else
 			print(icao.." files not complete in addons folder! Taking DFLT")
@@ -304,8 +301,7 @@ function ng_acft_select(component)
 		end
 	else
 		if ng_file_exists(SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..icao.."_sop.json") and 
-		   ng_file_exists(SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..icao.."_systems.json") and
-		   ng_file_exists(SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..icao.."_preferences.lua") then
+		   ng_file_exists(SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..icao.."_systems.json") then
 			return icao
 		else
 			print(icao.." files not complete in addons folder! Taking DFLT")
