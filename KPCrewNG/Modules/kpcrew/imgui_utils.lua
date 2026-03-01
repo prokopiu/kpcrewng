@@ -9,21 +9,21 @@ if FLYWITHLUA == false then -- use for Linux dev environment
 	ffi = require "ffi"
 end
 
--- color definitions
-color_black			= 0xFF000000
-color_red 			= 0xFF0000FF
-color_green 		= 0xFF558817
-color_bright_green 	= 0xFF00FF00
-color_dark_green 	= 0xFF002f00
-color_white 		= 0xFFFFFFFF
-color_light_blue 	= 0xFFFFFF00
-color_orange 		= 0xFF003FBF
-color_grey 			= 0xFFC0C0C0
-color_dark_grey 	= 0xFF606060
-color_left_display 	= 0xFFA0AFFF
-color_ocean_blue 	= 0xFFEC652B
-color_blue			= 0xFFFF0000
-color_yellow 		= 0xFF00FFFF
+-- ===== color definitions
+color_black				= 0xFF000000
+color_red 				= 0xFF0000FF
+color_green 			= 0xFF558817
+color_bright_green 		= 0xFF00FF00
+color_dark_green 		= 0xFF002f00
+color_white 			= 0xFFFFFFFF
+color_light_blue 		= 0xFFFFFF00
+color_orange 			= 0xFF003FBF
+color_grey 				= 0xFFC0C0C0
+color_dark_grey 		= 0xFF606060
+color_left_display 		= 0xFFA0AFFF
+color_ocean_blue 		= 0xFFEC652B
+color_blue				= 0xFFFF0000
+color_yellow 			= 0xFF00FFFF
 
 color_flow_checklist	= 0xFF2d4e2c
 color_flow_procedure	= color_dark_grey
@@ -39,19 +39,20 @@ color_step_procitem		= color_white
 color_step_checkitem	= 0xFFb9f4b8
 color_step_info			= color_dark_grey
 
-color_mcp_button	= 0xFF303030
-color_mcp_active	= 0xFF606060
-color_mcp_hover		= 0xFF606060
-color_mcp_text		= 0xFFC0C0C0
-color_mcp_on		= 0xFF00FF00
-color_mcp_off		= 0xFFC0C0C0
+color_mcp_button		= 0xFF303030
+color_mcp_active		= 0xFF606060
+color_mcp_hover			= 0xFF606060
+color_mcp_text			= 0xFFC0C0C0
+color_mcp_on			= 0xFF00FF00
+color_mcp_off			= 0xFFC0C0C0
 
-color_ctrl_bckgr	= 0xFF101010
-color_ctrl_selected = 0xFF303030
-color_mstr_flow_open = 0xFF404040
+color_ctrl_bckgr		= 0xFF101010
+color_ctrl_selected 	= 0xFF303030
+color_mstr_flow_open 	= 0xFF404040
 
-dist_sameline = 200
+dist_sameline 			= 200 -- distance in points when to draw value after label 
 
+-- variations of lua when running outside of XP12 (only for dev with Löve)
 if FLYWITHLUA == false then -- use for Linux dev environment with cimgui
 	imgui.constant = {Col = {Text=0, Button=21, ButtonActive=23, ButtonHovered=22}, StyleVar = {FramePadding=10}}
 	imgui.PushStyleColor = imgui.PushStyleColor_U32
@@ -63,9 +64,9 @@ if FLYWITHLUA == false then -- use for Linux dev environment with cimgui
 	imgui.RadioButton = imgui.RadioButton_Bool
 end 
 
--- ==== Output functions
+-- ===== Output functions produce display only fields
 
---- textoutput with label
+--- Textoutput with label
 -- @param int color1 - color code of text to draw
 -- @param string label - label keep "" if no label
 -- @param int color2 - colr of label
@@ -87,9 +88,9 @@ function ng_imgui_out_text(color1, label, color2, input, dist, wrap)
 	imgui.PopStyleColor()
 end
 
--- ==== Input functions
+-- ===== Input functions - renders input fields for data types and w/wo labels
 
---- Input: simple button
+--- Input: Simple button - execute lua code on press
 -- @param string push_id - unique ID for element
 -- @param string btntext - text to show on button
 -- @param int width - width of button
@@ -107,6 +108,14 @@ function ng_imgui_in_button(push_id, btntext, width, height, action)
 	end
 end
 
+--- Input: Button with label - execute lua code on press
+-- @param string push_id - unique ID for element
+-- @param string btntext - text to show on button
+-- @param int width - width of button
+-- @param int height - height of button
+-- @param string label to render before button
+-- @param int color of label
+-- @param function() action - activity to be triggered as function code
 function ng_imgui_in_lbutton(push_id, btntext, width, height, label, color, action)
 	imgui.PushStyleColor(imgui.constant.Col.Text, color)
 		imgui.TextUnformatted(label)
@@ -121,7 +130,7 @@ end
 -- @param int color - color of text in field
 -- @param int incrdecr - step size to increment/decrement number
 -- @param int input - pre-fill number
--- @param function() action - code to return the new value
+-- @param function() output - code to return the new value
 function ng_imgui_in_intfield(push_id, itemwidth, color, incrdecr, input, output)
 	if itemwidth > 0 then imgui.PushItemWidth(itemwidth) end
 		imgui.PushID(push_id)
@@ -147,7 +156,8 @@ end
 -- @param string label - label
 -- @param int solor2 - colr of label
 -- @param int input - pre-fill number
--- @param function() action - code to return the new value
+-- @param function() output - code to return the new value
+-- @param int dist distance when to draw value from label 
 function ng_imgui_in_lintfield(push_id, itemwidth, color1, incrdecr, label, color2, input, output, dist)
 	imgui.PushStyleColor(imgui.constant.Col.Text, color2)
 		imgui.TextUnformatted(label)
@@ -160,10 +170,10 @@ end
 -- @param string push_id - unique ID for element
 -- @param int itemwidth - width of field in pixel, o takes max size
 -- @param int color - color of text in field
--- @param int incrdecr - step size to increment/decrement number
--- @param string - format
+-- @param int incrdecr - step size to increment/decrement number, 0 none
+-- @param string - format string
 -- @param float input - pre-fill number
--- @param function() action - code to return the new value
+-- @param function() output - code to return the new value
 function ng_imgui_in_floatfield(push_id, itemwidth, color, incrdecr, format, input, output)
 	if itemwidth > 0 then imgui.PushItemWidth(itemwidth) end
 		if format == nil or format == "" then format = "%08.2f" end
@@ -189,9 +199,10 @@ end
 -- @param int incrdecr - step size to increment/decrement number
 -- @param string - format
 -- @param string label - label
--- @param int color2 - colr of label
+-- @param int color2 - color of label
 -- @param float input - pre-fill number
 -- @param function() output - code to return the new value
+-- @param int dist distance when to draw value from label 
 function ng_imgui_in_lfloatfield(push_id, itemwidth, color1, incrdecr, format, label, color2, input, output, dist)
 	imgui.PushStyleColor(imgui.constant.Col.Text, color2)
 		imgui.TextUnformatted(label)
@@ -206,7 +217,7 @@ end
 -- @param int color - color of text in field
 -- @param int length # of characters
 -- @param string input - pre-fill text
--- @param function() action - code to return the new value
+-- @param function() output - code to return the new value
 function ng_imgui_in_tfield(push_id, itemwidth, color, length, input, output)
 	if itemwidth > 0 then imgui.PushItemWidth(itemwidth) end
 		imgui.PushID(push_id)
@@ -233,7 +244,8 @@ end
 -- @param string label - label
 -- @param int color2 - colr of label
 -- @param string input - pre-fill text
--- @param function() action - code to return the new value
+-- @param function() output - code to return the new value
+-- @param int dist distance when to draw value from label 
 function ng_imgui_in_ltfield(push_id, itemwidth, color1, length, label, color2, input, output, dist)
 	imgui.PushStyleColor(imgui.constant.Col.Text, color2)
 		imgui.TextUnformatted(label)
@@ -246,7 +258,7 @@ end
 -- @param string option1 - text for 1st option (true)
 -- @param string option2 - text for 2nd option (false)
 -- @param int input - current selection
--- @param function() action - code to return the new value
+-- @param function() output - code to return the new value
 function ng_imgui_in_rbtoggle(option1, option2, input, output)
 	local retval = input
 	if imgui.RadioButton(option1, input == true) then retval = true end
@@ -257,9 +269,10 @@ end
 
 --- Input: Combo list / drop-down
 -- @param string push_id - unique ID for element
--- @param string option 2 false
+-- @param string options list of options
 -- @param int input - current selection
--- @param function() action - code to return the new value
+-- @param function() output - code to return the new selection
+-- @param int width - width of drop-down
 function ng_imgui_in_combolist(push_id, options, input, output, width)
 	imgui.PushID(push_id)
 		if width then imgui.SetNextItemWidth(width) end
@@ -272,35 +285,4 @@ function ng_imgui_in_combolist(push_id, options, input, output, width)
 		imgui.EndCombo()
 		end				
 	imgui.PopID()
-end
-
--- ==== General drawing functions
-
---- Set up main window tabs with buttons
--- @param int index id of the tab (group) to be added
--- @param int size of tab in pixel
--- @param string name of tab/button  
-function ng_imgui_draw_add_main_tab(index, tabsize, text)
-	
-	local tabwidth = tabsize
-	local tabheight = 18
-	
-	imgui.PushStyleVar(12, 3)
-	
-	if index == 1 then imgui.SameLine(index * (tabwidth + 5))
-	elseif index > 1 then imgui.SameLine(index * (tabwidth + 4 - index)) end
- 
-	if ng_imgui_current_main_tab == index then
-		imgui.PushStyleColor(21, color_mcp_active)			
-	else
-		imgui.PushStyleColor(21, color_mcp_button)			
- 	end 
-	
-	imgui.PushStyleColor(22, color_mcp_hover)
-	imgui.PushStyleColor(23, color_orange)
-	
-	ng_imgui_in_button(text..index, text, tabwidth, tabheight, function () ng_imgui_current_main_tab=index end)
-	
-	imgui.PopStyleVar()
-	imgui.PopStyleColor(3)
 end
