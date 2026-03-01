@@ -169,6 +169,9 @@ function ng_indexOf(array, value)
     return nil
 end
 
+--- return table objects by their keys (index) as iterator
+-- @param table t - the table
+-- @return table iterator
 function ng_pairsByKeys (t)
   local a = {}
   for k,n in pairs(t) do table.insert(a, k) end
@@ -183,6 +186,9 @@ function ng_pairsByKeys (t)
   return iter
 end
 
+--- return number of table elements when # does not work
+-- @param t table
+-- @return int count
 function ng_tableCount (t)
 	local count = 0
 	for _,tn in pairs(t) do
@@ -192,9 +198,9 @@ function ng_tableCount (t)
 end 
 
 --- see if a value is found in given array
--- @param array array, array to check vaöue in
+-- @param array array to check value in
 -- @param object value, value to check against
--- @return book - true was found in table 
+-- @return bool - true was found in table 
 function ng_hasValue (array, value)
     for i, v in ipairs(array) do
         if v == value then
@@ -208,6 +214,7 @@ end
 
 --- parse string for function macros and replace for spoken text
 -- @param string instring - string to unparse
+-- @return the modified string
 function ng_unparse_string(instring)
 	local outstring = ""
 	local elements = ng_split(instring,"#")
@@ -229,7 +236,7 @@ function ng_unparse_string(instring)
 	return outstring
 end
 
--------------- process variable related utilities ---------------
+-------------- process variable related utilities (deprecated) ---------------
 
 --- does procvar exist?
 -- @param string procvarid - identifier for procvar
@@ -302,8 +309,11 @@ function ng_procvar_get(procvarid)
 	return procvar:getValue()
 end
 
----------------------- File related functions
+-- -------------------- File related functions --------------------------------
+
 --- find latest file in folder for XP12 weather
+-- @param string folder
+-- @return filename of latest file or nil
 function ng_get_latest_filename(folder)
 	local command = ""
 	if SYSTEM == "IBM" then
@@ -319,8 +329,9 @@ end
 
 ---------------------- Weather related function ------
 
--- pull the METAR from XP's METAR.wx when on real weather
--- sim/weather/use_real_weather_bool
+--- pull the METAR from XP's METAR.wx when on real weather
+-- @param string icao - airport to search for
+-- @return string metar code or message
 function ng_get_xp_metar(icao)
 
     if not icao then return "-- NO ICAO --" end
