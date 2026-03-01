@@ -153,25 +153,25 @@ function ng_draw_main_window()
 
 		ng_imgui_out_text(color_white,"Flight:")
 		imgui.SameLine()
-		ng_imgui_in_tfield("Flight Number", 70, color_orange, 8, 
+		ng_imgui_in_tfield("Flight Number", 70, color_white, 8, 
 			ng_getBriefPrefs():get("general:callsign"), function (textout) ng_getBriefPrefs():set("general:callsign",textout) end)
 
 		imgui.SameLine()
-		ng_imgui_in_ltfield("*Origin ICAO:", 38, color_orange, 5, "Departure:", color_white,
+		ng_imgui_in_ltfield("*Origin ICAO:", 38, color_white, 5, "Departure:", color_white,
 			ng_getBriefPrefs():get("origin:icao"), function (textout) ng_getBriefPrefs():set("origin:icao",textout) end)
 		imgui.SameLine()
 		ng_imgui_in_ltfield("*Origin name:", 123, color_white, 100, "/", color_white,
 			ng_getBriefPrefs():get("origin:name"), function (textout) ng_getBriefPrefs():set("origin:name",textout) end)
 		
 		imgui.SameLine()
-		ng_imgui_in_ltfield("*Destination ICAO:", 38, color_orange, 5, "Arrival:", color_white, 
+		ng_imgui_in_ltfield("*Destination ICAO:", 38, color_white, 5, "Arrival:", color_white, 
 			ng_getBriefPrefs():get("destination:icao"), function (textout) ng_getBriefPrefs():set("destination:icao",textout) end)
 		imgui.SameLine()
 		ng_imgui_in_ltfield("*Destination name:", 123, color_white, 100, "/", color_white,
 			ng_getBriefPrefs():get("destination:name"), function (textout) ng_getBriefPrefs():set("destination:name",textout) end)
 		
 		imgui.SameLine()
-		ng_imgui_in_ltfield("*Alternate ICAO:", 38, color_orange, 5, "Alternate:", color_white, 
+		ng_imgui_in_ltfield("*Alternate ICAO:", 38, color_white, 5, "Alternate:", color_white, 
 			ng_getBriefPrefs():get("alternate:icao"), function (textout) ng_getBriefPrefs():set("alternate:icao",textout) end)
 		imgui.SameLine()
 		ng_imgui_in_ltfield("*Alternate name:", 123, color_white, 100, "/", color_white,
@@ -184,7 +184,7 @@ function ng_draw_main_window()
 		-- --------------------------------------------------------------------------------------
 		ng_imgui_out_text(color_white,"Cruise altitude (level):")
 		imgui.SameLine()
-		ng_imgui_in_intfield("calt", 45, color_orange, 0, ng_getBriefPrefs():get("general:cruisealtitude"), 
+		ng_imgui_in_intfield("calt", 45, color_white, 0, ng_getBriefPrefs():get("general:cruisealtitude"), 
 			function (textout) ng_getBriefPrefs():set("general:cruisealtitude",textout) end)
 		imgui.SameLine()
 		ng_imgui_out_text(color_green, "(FL" .. ng_getBriefPrefs():get("general:cruisealtitude")/100 .. ")" )
@@ -448,7 +448,7 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"*BLOCK FUEL")
 			imgui.TableNextColumn()
-			ng_imgui_in_intfield("*BLOCK FUEL:", 50, color_orange, 0, ng_getBriefPrefs():get("fuel:planramp")*ng_kgslbs, 
+			ng_imgui_in_intfield("*BLOCK FUEL:", 50, color_white, 0, ng_getBriefPrefs():get("fuel:planramp")*ng_kgslbs, 
 			function (textout) ng_getBriefPrefs():set("fuel:planramp",textout) end )
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_green, string.format("%6.0f MAX",ng_getBriefPrefs():get("fuel:maxtanks")*ng_kgslbs))
@@ -720,7 +720,7 @@ function ng_draw_main_window()
 						ng_getBriefPrefs():set("takeoff:inithdg",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].magnetic_course)				
 					end, ddwidth)
 			else
-				ng_imgui_in_tfield("orwy", ddwidth, color_orange, 10, ng_getBriefPrefs():get("origin:planrwy"), 
+				ng_imgui_in_tfield("orwy", ddwidth, color_white, 10, ng_getBriefPrefs():get("origin:planrwy"), 
 					function (textout) ng_getBriefPrefs():set("origin:planrwy",textout) end )				
 			end
 			
@@ -833,8 +833,8 @@ function ng_draw_main_window()
 			ng_imgui_out_text(color_white,"TAKEOFF FLAPS")
 			imgui.TableNextColumn()
 			local splitTitle = ng_split(ng_getAcfPrefs():get("controls:toflapslbl"),"|")
-			ng_imgui_in_combolist("oflaps", splitTitle, ng_getBriefPrefs():get("takeoff:selectedflaps"), 
-				function (textin) ng_getBriefPrefs():set("takeoff:selectedflaps",textin) end, ddwidth)
+			-- ng_imgui_in_combolist("oflaps", splitTitle, ng_getBriefPrefs():get("takeoff:selectedflaps"), 
+				-- function (textin) ng_getBriefPrefs():set("takeoff:selectedflaps",textin) end, ddwidth)
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
@@ -871,8 +871,8 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"TAKEOFF FLEX TEMP")
 			imgui.TableNextColumn()
-			ng_imgui_in_intfield("otemp", ddwidth, color_white, 0, ng_getBriefPrefs():get("takeoff:rwyflextemp"), 
-				function (textout) ng_getBriefPrefs():set("takeoff:rwyflextemp",textout) end )
+			-- ng_imgui_in_intfield("otemp", ddwidth, color_white, 0, ng_getBriefPrefs():get("takeoff:rwyflextemp"), 
+				-- function (textout) ng_getBriefPrefs():set("takeoff:rwyflextemp",textout) end )
 					
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
@@ -996,7 +996,7 @@ function ng_draw_main_window()
 						ng_getBriefPrefs():set("takeoff:inithdg",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].magnetic_course)
 					end, ddwidth)
 			else
-				ng_imgui_in_tfield("drwy", ddwidth, color_orange, 10, ng_getBriefPrefs():get("destination:planrwy"), 
+				ng_imgui_in_tfield("drwy", ddwidth, color_white, 10, ng_getBriefPrefs():get("destination:planrwy"), 
 					function (textout) ng_getBriefPrefs():set("destination:planrwy",textout) end )				
 			end
 			
@@ -1308,7 +1308,7 @@ function ng_draw_main_window()
 				-- available types for elements
 				local elementtypes = { "", "dataref", "function", "onoff", "toggle", "multistate", "dial" }
 				-- available actions for elements
-				local actions = { "", "on", "off", "set", "toggle", "up", "down", "function", " "}
+				local actions = { "", "on", "off", "set", "toggle", "up", "dn", "function", " "}
 
 				local ename = nelement.name -- base name to use for imgui id 
 
@@ -1330,7 +1330,7 @@ function ng_draw_main_window()
 -- title	| [                                           ]				
 				ng_imgui_out_text(color_white, "title") imgui.NextColumn()
 				if nelement.title ~= nil then
-					ng_imgui_in_tfield(ename.."title", 300, color_orange, 255,  
+					ng_imgui_in_tfield(ename.."title", 300, color_white, 255,  
 						nelement.title, function (textout) nelement.title = textout end) imgui.NextColumn()
 				else
 					ng_imgui_in_button(ename.."addtitle", "+", 15, 20, 
@@ -1340,7 +1340,7 @@ function ng_draw_main_window()
 -- dref		| [                                           ]
 				ng_imgui_out_text(color_white, "dref") imgui.NextColumn()
 				if nelement.dref ~= nil then
-					ng_imgui_in_tfield(ename.."dref", 300, color_orange, 255,  
+					ng_imgui_in_tfield(ename.."dref", 300, color_white, 255,  
 					nelement.dref, function (textout) nelement.dref = textout end) imgui.NextColumn()
 				else
 					ng_imgui_in_button(ename.."adddref", "+", 15, 20, 
@@ -1350,7 +1350,7 @@ function ng_draw_main_window()
 -- indx		| [                                      ][-][+]
 				ng_imgui_out_text(color_white, "indx") imgui.NextColumn()
 				if nelement.indx ~= nil then
-					ng_imgui_in_intfield(ename.."indx", 300, color_orange, 1, 
+					ng_imgui_in_intfield(ename.."indx", 300, color_white, 1, 
 					nelement.indx, function (textout) nelement.indx = textout end) imgui.NextColumn()
 				else
 					ng_imgui_in_button(ename.."addindx", "+", 15, 20, 
@@ -1383,7 +1383,7 @@ function ng_draw_main_window()
 -- sth like return get(\"dataref/key\") == 1" for example
 				ng_imgui_out_text(color_white, "check()") imgui.NextColumn()
 				if nelement.fcheck ~= nil then
-					ng_imgui_in_tfield(ename.."fcheck", 300, color_orange, 255, 
+					ng_imgui_in_tfield(ename.."fcheck", 300, color_white, 255, 
 					nelement.fcheck, function (textout) nelement.fcheck = textout end) imgui.NextColumn()
 				else
 					ng_imgui_in_button(ename.."addfcheck", "+", 15, 20, 
@@ -1400,7 +1400,7 @@ function ng_draw_main_window()
 -- x-plane command id string to execute with command_once() to turn sth OFF
 						ng_imgui_out_text(color_white, "cmdoff") imgui.NextColumn()
 						if nelement.cmdoff ~= nil then
-							ng_imgui_in_tfield(ename.."cmdoff", 300, color_orange, 255,  
+							ng_imgui_in_tfield(ename.."cmdoff", 300, color_white, 255,  
 							nelement.cmdoff, function (textout) nelement.cmdoff = textout end) imgui.NextColumn()
 						else
 							ng_imgui_in_button(ename.."addcmdoff", "+", 15, 20, 
@@ -1411,7 +1411,7 @@ function ng_draw_main_window()
 -- x-plane command id string to execute with command_once() to turn sth ON
 						ng_imgui_out_text(color_white, "cmdon") imgui.NextColumn()
 						if nelement.cmdon ~= nil then
-							ng_imgui_in_tfield(ename.."cmdon", 300, color_orange, 255,  
+							ng_imgui_in_tfield(ename.."cmdon", 300, color_white, 255,  
 							nelement.cmdon, function (textout) nelement.cmdon = textout end) imgui.NextColumn()
 						else
 							ng_imgui_in_button(ename.."addcmdon", "+", 15, 20, 
@@ -1424,7 +1424,7 @@ function ng_draw_main_window()
 -- x-plane command id string to execute with command_once() to toggle the switch
 					ng_imgui_out_text(color_white, "cmdtgl") imgui.NextColumn()
 					if nelement.cmdtgl ~= nil then
-						ng_imgui_in_tfield(ename.."cmdtgl", 300, color_orange, 255,  
+						ng_imgui_in_tfield(ename.."cmdtgl", 300, color_white, 255,  
 						nelement.cmdtgl, function (textout) nelement.cmdtgl = textout end) imgui.NextColumn()
 					else
 						ng_imgui_in_button(ename.."addcmdtgl", "+", 15, 20, 
@@ -1440,7 +1440,7 @@ function ng_draw_main_window()
 -- function triggering actions to set a switch which is not simple 1/0 or commands
 					ng_imgui_out_text(color_white, "on()") imgui.NextColumn()
 					if nelement.funcon ~= nil then
-						ng_imgui_in_tfield(ename.."funcon", 300, color_orange, 255, 
+						ng_imgui_in_tfield(ename.."funcon", 300, color_white, 255, 
 						nelement.funcon, function (textout) nelement.funcon = textout end) imgui.NextColumn()
 					else
 						ng_imgui_in_button(ename.."addfuncon", "+", 15, 20, 
@@ -1451,7 +1451,7 @@ function ng_draw_main_window()
 -- function triggering actions to set a switch which is not simple 1/0 or commands
 					ng_imgui_out_text(color_white, "off()") imgui.NextColumn()
 					if nelement.funcoff ~= nil then
-						ng_imgui_in_tfield(ename.."funcoff", 300, color_orange, 255,  
+						ng_imgui_in_tfield(ename.."funcoff", 300, color_white, 255,  
 						nelement.funcoff, function (textout) nelement.funcoff = textout end) imgui.NextColumn()
 					else
 						ng_imgui_in_button(ename.."addfuncoff", "+", 15, 20, 
@@ -1462,7 +1462,7 @@ function ng_draw_main_window()
 -- function triggering actions to set a switch which is not simple 1/0 or commands
 					ng_imgui_out_text(color_white, "tgl()") imgui.NextColumn()
 					if nelement.functgl ~= nil then
-						ng_imgui_in_tfield(ename.."functgl", 300, color_orange, 255, 
+						ng_imgui_in_tfield(ename.."functgl", 300, color_white, 255, 
 						nelement.functgl, function (textout) nelement.functgl = textout end) imgui.NextColumn()
 					else
 						ng_imgui_in_button(ename.."addfunctgl", "+", 15, 20, 
@@ -1478,7 +1478,7 @@ function ng_draw_main_window()
 -- minimal value to dial/set
 					ng_imgui_out_text(color_white, "min") imgui.NextColumn()
 					if nelement.min ~= nil then
-						ng_imgui_in_intfield(ename.."min", 300, color_orange, 1,
+						ng_imgui_in_intfield(ename.."min", 300, color_white, 1,
 						nelement.min, function (textout) nelement.min = textout end) imgui.NextColumn()
 					else
 						ng_imgui_in_button(ename.."addmin", "+", 15, 20, 
@@ -1489,7 +1489,7 @@ function ng_draw_main_window()
 -- maximal value to dial/set
 					ng_imgui_out_text(color_white, "max") imgui.NextColumn()
 					if nelement.max ~= nil then
-						ng_imgui_in_intfield(ename.."max", 300, color_orange, 1, 
+						ng_imgui_in_intfield(ename.."max", 300, color_white, 1, 
 						nelement.max, function (textout) nelement.max = textout end) imgui.NextColumn()
 					else
 						ng_imgui_in_button(ename.."addmax", "+", 15, 20, 
@@ -1501,7 +1501,7 @@ function ng_draw_main_window()
 					if nelement.type == "dial" then
 						ng_imgui_out_text(color_white, "incr") imgui.NextColumn()
 						if nelement.incr ~= nil then
-							ng_imgui_in_intfield(ename.."incr", 300, color_orange, 1, 
+							ng_imgui_in_intfield(ename.."incr", 300, color_white, 1, 
 							nelement.incr, function (textout) nelement.incr = textout end) imgui.NextColumn()
 						else
 							ng_imgui_in_button(ename.."addincr", "+", 15, 20, 
@@ -1513,7 +1513,7 @@ function ng_draw_main_window()
 -- x-plane command id string to execute with command_once() decrease the value
 					ng_imgui_out_text(color_white, "cmddn") imgui.NextColumn()
 					if nelement.cmddn ~= nil then
-						ng_imgui_in_tfield(ename.."cmddn", 300, color_orange, 255,  
+						ng_imgui_in_tfield(ename.."cmddn", 300, color_white, 255,  
 						nelement.cmddn, function (textout) nelement.cmddn = textout end) imgui.NextColumn()
 					else
 						ng_imgui_in_button(ename.."addcmddn", "+", 15, 20, 
@@ -1524,7 +1524,7 @@ function ng_draw_main_window()
 -- x-plane command id string to execute with command_once() increase the value
 					ng_imgui_out_text(color_white, "cmdup") imgui.NextColumn()
 					if nelement.cmdup ~= nil then
-						ng_imgui_in_tfield(ename.."cmdup", 300, color_orange, 255,  
+						ng_imgui_in_tfield(ename.."cmdup", 300, color_white, 255,  
 						nelement.cmdup, function (textout) nelement.cmdup = textout end) imgui.NextColumn()
 					else
 						ng_imgui_in_button(ename.."addcmdup", "+", 15, 20, 
@@ -1574,7 +1574,7 @@ function ng_draw_main_window()
 					ng_imgui_in_button(sname.."append", "Append Element", 109, 20, 
 						function () if ng_editor_system_newelement ~= "" then newelement.name=ng_editor_system_newelement
 							table.insert (nsystem.elements, newelement) ng_editor_system_newelement = "" end end) 
-					imgui.SameLine() ng_imgui_in_tfield(sname.."name", 250, color_orange, 255, 
+					imgui.SameLine() ng_imgui_in_tfield(sname.."name", 250, color_white, 255, 
 						ng_editor_system_newelement, function (textout) ng_editor_system_newelement = textout end)
 						
 				end
@@ -1607,7 +1607,7 @@ function ng_draw_main_window()
 					ng_imgui_in_button(ncategory.name.."append", "Append System", 180, 20, 
 						function () if ng_editor_system_newsystem ~= "" then newsystem.name=ng_editor_system_newsystem
 							table.insert (ncategory.systems, newsystem) ng_editor_system_newsystem = "" end end) 
-					imgui.SameLine() ng_imgui_in_tfield(ncategory.name.."name", 200, color_orange, 255, 
+					imgui.SameLine() ng_imgui_in_tfield(ncategory.name.."name", 200, color_white, 255, 
 						ng_editor_system_newsystem, function (textout) ng_editor_system_newsystem = textout end)
 				end
 				for isystems,nsystems in ipairs(ncategory.systems) do
@@ -1662,7 +1662,7 @@ function ng_draw_main_window()
 			local roles = { "", "ng_firole_PF", "ng_firole_PNF", "ng_firole_PM", "ng_firole_BOTH", 
 				"ng_firole_FO", "ng_firole_CPT", "ng_firole_LHS", "ng_firole_RHS", "ng_firole_FE", 
 				"ng_firole_CM1", "ng_firole_CM2", "ng_firole_CM3", "ng_firole_ALL", "ng_firole_SYS" }
-			local actions = { "", "on", "off", "set", "toggle", "up", "down", "function", " "}
+			local actions = { "", "on", "off", "set", "toggle", "up", "dn", "function", " "}
 		
 			local nlabel = nitem.challenge
 
@@ -1694,7 +1694,7 @@ function ng_draw_main_window()
 				
 						ng_imgui_out_text(color_white, "Response:") imgui.SameLine()
 						if nitem.response ~= nil then
-							ng_imgui_in_tfield(nlabel.."response", 350, color_orange, 255, 
+							ng_imgui_in_tfield(nlabel.."response", 350, color_white, 255, 
 							nitem.response, function (textout) nitem.response = string.upper(textout) end)
 						else
 							ng_imgui_in_button(nlabel.."addresp", "+", 15, 20, 
@@ -1712,7 +1712,7 @@ function ng_draw_main_window()
 						
 						ng_imgui_out_text(color_white, "Condition:") imgui.SameLine()
 						if nitem.condition ~= nil then
-							ng_imgui_in_tfield(nlabel.."condition", 500, color_orange, 255, 
+							ng_imgui_in_tfield(nlabel.."condition", 500, color_white, 255, 
 								nitem.condition, function (textout) nitem.condition = textout end)
 						else
 							ng_imgui_in_button(nlabel.."addcond", "+", 15, 20, 
@@ -1721,13 +1721,22 @@ function ng_draw_main_window()
 						
 						ng_imgui_out_text(color_white, "No check:") imgui.SameLine()
 						if nitem.nocheck ~= nil then
-							ng_imgui_in_intfield(nlabel.."nchk", 320, color_orange, 0,   
+							ng_imgui_in_intfield(nlabel.."nchk", 320, color_white, 0,   
 								nitem.nocheck, function (textout) nitem.nocheck = textout end) 
 						else
 							ng_imgui_in_button(nlabel.."addncheck", "+", 15, 20, 
 								function () nitem.nocheck = 1 end) 
 						end
-						
+
+						ng_imgui_out_text(color_white, "delay:") imgui.SameLine()
+						if nitem.delay ~= nil then
+							ng_imgui_in_intfield(nlabel.."delay", 500, color_white, 1, 
+							nitem.delay, function (textout) nitem.delay = textout end)
+						else
+							ng_imgui_in_button(nlabel.."adddelay", "+", 15, 20, 
+								function () nitem.delay = 0 end) 
+						end
+								
 						ng_imgui_out_text(color_white, "Systems used:") 
 
 						-- Append item
@@ -1736,7 +1745,7 @@ function ng_draw_main_window()
 						ng_imgui_in_button(nlabel.."append", "Append Element", 105, 20, 
 							function () if ng_editor_sop_newelement ~= "" then newelement.element=ng_editor_sop_newelement table.insert (nitem.setelements, newelement) ng_editor_sop_newelement= "" end end) 
 
-						imgui.SameLine() ng_imgui_in_tfield(nlabel.."name", 200, color_orange, 255, 
+						imgui.SameLine() ng_imgui_in_tfield(nlabel.."name", 200, color_white, 255, 
 							ng_editor_sop_newelement, function (textout) ng_editor_sop_newelement = textout end)
 						
 						if nitem.setelements ~= nil then 
@@ -1757,7 +1766,7 @@ function ng_draw_main_window()
 								
 								ng_imgui_out_text(color_white, "Name:") imgui.SameLine()
 								if nelement.element ~= nil then
-									ng_imgui_in_tfield(nlabel..nelement.element, 320, color_orange, 255, 
+									ng_imgui_in_tfield(nlabel..nelement.element, 320, color_white, 255, 
 									nelement.element, function (textout) nelement.element = textout end)
 								else
 									ng_imgui_in_button(nlabel..nelement.element.."addnname", "+", 15, 20, 
@@ -1768,7 +1777,7 @@ function ng_draw_main_window()
 								if nelement.action ~= nil then
 									ng_imgui_in_combolist(nlabel..nelement.element.."act", actions, ng_indexOf(actions,nelement.action)-1, 
 										function (textin) nelement.action=actions[textin+1] end,320)
-									-- ng_imgui_in_tfield(nlabel..nelement.element.."act", 320, color_orange, 255, 
+									-- ng_imgui_in_tfield(nlabel..nelement.element.."act", 320, color_white, 255, 
 										-- nelement.action, function (textout) nelement.action = textout end)
 								else
 									ng_imgui_in_button(nlabel..nelement.element.."addact", "+", 15, 20, 
@@ -1777,7 +1786,7 @@ function ng_draw_main_window()
 								
 								ng_imgui_out_text(color_white, "Value:") imgui.SameLine()
 								if nelement.value ~= nil then
-									ng_imgui_in_floatfield(nlabel..nelement.element.."val", 320, color_orange, 0, "%7.2f",  
+									ng_imgui_in_floatfield(nlabel..nelement.element.."val", 320, color_white, 0, "%7.2f",  
 										nelement.value, function (textout) nelement.value = textout end) 
 								else
 									ng_imgui_in_button(nlabel..nelement.element.."addval", "+", 15, 20, 
@@ -1786,7 +1795,7 @@ function ng_draw_main_window()
 								
 								ng_imgui_out_text(color_white, "Condition:") imgui.SameLine()
 								if nelement.condition ~= nil then
-									ng_imgui_in_tfield(nlabel..nelement.element.."cond", 500, color_orange, 255, 
+									ng_imgui_in_tfield(nlabel..nelement.element.."cond", 500, color_white, 255, 
 									nelement.condition, function (textout) nelement.condition = textout end)
 								else
 									ng_imgui_in_button(nlabel..nelement.element.."addcond", "+", 15, 20, 
@@ -1795,20 +1804,29 @@ function ng_draw_main_window()
 																						
 								ng_imgui_out_text(color_white, "No check:") imgui.SameLine()
 								if nelement.nocheck ~= nil then
-									ng_imgui_in_intfield(nlabel..nelement.element.."nchk", 500, color_orange, 0,   
+									ng_imgui_in_intfield(nlabel..nelement.element.."nchk", 500, color_white, 0,   
 										nelement.nocheck, function (textout) nelement.nocheck = textout end) 
 								else
 									ng_imgui_in_button(nlabel..nelement.element.."addnchk", "+", 15, 20, 
 										function () nelement.nocheck = 1 end) 
 								end
-
+								
 								ng_imgui_out_text(color_white, "set():") imgui.SameLine()
 								if nelement.fset ~= nil then
-									ng_imgui_in_tfield(nlabel..nelement.element.."fset", 500, color_orange, 255, 
+									ng_imgui_in_tfield(nlabel..nelement.element.."fset", 500, color_white, 255, 
 									nelement.fset, function (textout) nelement.fset = textout end)
 								else
 									ng_imgui_in_button(nlabel..nelement.element.."addfset", "+", 15, 20, 
 										function () nelement.fset = "" end) 
+								end
+								
+								ng_imgui_out_text(color_white, "check():") imgui.SameLine()
+								if nelement.fcheck ~= nil then
+									ng_imgui_in_tfield(nlabel..nelement.element.."fcheck", 500, color_white, 255, 
+									nelement.fcheck, function (textout) nelement.fcheck = textout end)
+								else
+									ng_imgui_in_button(nlabel..nelement.element.."addfcheck", "+", 15, 20, 
+										function () nelement.fcheck = "" end) 
 								end
 
 								imgui.Separator()
@@ -1868,7 +1886,7 @@ function ng_draw_main_window()
 				ng_imgui_in_button(ntitle.."append", "Append Item", 90, 20, 
 					function () if ng_editor_sop_newitem ~= "" then newitem.challenge=string.upper(ng_editor_sop_newitem) table.insert (nflow.flowitem, newitem) ng_editor_sop_newitem = "" end end) 
 
-				imgui.SameLine() ng_imgui_in_tfield(ntitle.."name", 200, color_orange, 255, 
+				imgui.SameLine() ng_imgui_in_tfield(ntitle.."name", 200, color_white, 255, 
 					ng_editor_sop_newitem, function (textout) ng_editor_sop_newitem = textout end)
 
 				for nitemidx,nitem in ipairs(nflow.flowitem) do
@@ -1897,7 +1915,7 @@ function ng_draw_main_window()
 				imgui.SameLine() ng_imgui_in_button(ng_editor_sop_json.sop.title.."append", "Append Flow", 90, 20, 
 					function () if ng_editor_sop_newflow ~= "" then newflow.title=string.upper(ng_editor_sop_newflow) table.insert (ng_editor_sop_json.sop.flow, newflow) ng_editor_sop_newflow = "" end end) 
 
-				imgui.SameLine() ng_imgui_in_tfield(ng_editor_sop_json.sop.title.."name", 200, color_orange, 255, 
+				imgui.SameLine() ng_imgui_in_tfield(ng_editor_sop_json.sop.title.."name", 200, color_white, 255, 
 					ng_editor_sop_newflow, function (textout) ng_editor_sop_newflow = textout end)
 
 
@@ -2071,6 +2089,36 @@ function ng_draw_sop_window()
 end
 
 -- -----------------------------------------------------------------------------------------
+--- Set up main window tabs with buttons
+-- @param int index id of the tab (group) to be added
+-- @param int size of tab in pixel
+-- @param string name of tab/button  
+function ng_imgui_draw_add_main_tab(index, tabsize, text)
+	
+	local tabwidth = tabsize
+	local tabheight = 18
+	
+	imgui.PushStyleVar(12, 3)
+	
+	if index == 1 then imgui.SameLine(index * (tabwidth + 5))
+	elseif index > 1 then imgui.SameLine(index * (tabwidth + 4 - index)) end
+ 
+	if ng_imgui_current_main_tab == index then
+		imgui.PushStyleColor(21, color_mcp_active)			
+	else
+		imgui.PushStyleColor(21, color_mcp_button)			
+ 	end 
+	
+	imgui.PushStyleColor(22, color_mcp_hover)
+	imgui.PushStyleColor(23, color_orange)
+	
+	ng_imgui_in_button(text..index, text, tabwidth, tabheight, function () ng_imgui_current_main_tab=index end)
+	
+	imgui.PopStyleVar()
+	imgui.PopStyleColor(3)
+end
+
+-- -----------------------------------------------------------------------------------------
 -- drawing function for ctrl window
 function ng_draw_ctrl_window()
 	
@@ -2115,7 +2163,7 @@ function ng_draw_ctrl_window()
 			if flow:getActiveItem():getState() == ng_fistate_end then outcolor = color_flow_end 
 			elseif flow:getActiveItem():getState() == ng_fistate_err then outcolor = color_flow_err 
 			elseif flow:getActiveItem():getState() == ng_fistate_run then outcolor = color_white 
-			elseif flow:getActiveItem():getState() == ng_fistate_pause then outcolor = color_flow_pause
+			elseif flow:getState() == ng_flowstate_pause then outcolor = color_flow_pause
 			end
 			outtext = flow:getActiveItem():getLine(60)
 		end
