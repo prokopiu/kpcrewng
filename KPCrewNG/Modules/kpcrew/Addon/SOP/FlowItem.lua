@@ -116,17 +116,21 @@ end
 -- Output and render functions
 
 --- return the visual line of text to put in a checklist displays
--- @param FlowItem flowItem - item from which to get the line
--- @param int linelength in chars - needed to calculate dots 
+-- @param int line length in chars to output
+-- @return string checklist line for display
 function ngFlowItem:getLine(lineLength)
+
 	local line = {}
+
 	local unparsedChallengeText = ng_unparse_string(self.item.challenge)
 	local unparsedResponseText = ng_unparse_string(self.item.response)
 	local dots = lineLength - string.len(unparsedChallengeText) - string.len(unparsedResponseText) - 7
 	line[#line + 1] = unparsedChallengeText
 	local dotchar = "."
 	if unparsedResponseText == "" then dotchar = " " end
+
 	for i=0,dots-1,1 do line[#line + 1] = dotchar end
+
 	line[#line + 1] = unparsedResponseText
 	if self.role ~= 0 then
 		line[#line + 1] = " (" 
@@ -137,7 +141,10 @@ function ngFlowItem:getLine(lineLength)
 	return table.concat(line)
 end
 
-local function setItemColor(item)
+--- get the color for the flow item line depeindgin on state
+-- @param table flow item
+-- @return color code for flow item line
+local function getItemColor(item)
 	
 	local mycolor = color_white
 	if item:getClassName() == "ProcedureItem" then mycolor = color_step_procitem 
@@ -152,27 +159,30 @@ local function setItemColor(item)
 	return mycolor
 end
 
+--- external call for getItemColor
+-- @return int color code for this flow item object
 function ngFlowItem:getColor()
-	return setItemColor()
+	return getItemColor()
 end
 
-
+--- render the SOP flow step
+-- @param char type - "f" = full in SOP view, "i" for SOP Window
 function ngFlowItem:render(type)
 	if type == "f" then
 		imgui.TableNextRow();
 		if self:isSimUser() then
-			imgui.TableSetColumnIndex(0) ng_imgui_out_text(setItemColor(self), self:getLine(60))
-			imgui.TableSetColumnIndex(1) ng_imgui_out_text(setItemColor(self), "")
+			imgui.TableSetColumnIndex(0) ng_imgui_out_text(getItemColor(self), self:getLine(60))
+			imgui.TableSetColumnIndex(1) ng_imgui_out_text(getItemColor(self), "")
 		else
-			imgui.TableSetColumnIndex(1) ng_imgui_out_text(setItemColor(self), self:getLine(60))
-			imgui.TableSetColumnIndex(0) ng_imgui_out_text(setItemColor(self), "")
+			imgui.TableSetColumnIndex(1) ng_imgui_out_text(getItemColor(self), self:getLine(60))
+			imgui.TableSetColumnIndex(0) ng_imgui_out_text(getItemColor(self), "")
 		end
 	end
 	if type == "i" then
 		if self:isSimUser() then
-			ng_imgui_out_text(setItemColor(self), self:getLine(59))
+			ng_imgui_out_text(getItemColor(self), self:getLine(59))
 		else
-			ng_imgui_out_text(setItemColor(self), "  "..self:getLine(59))
+			ng_imgui_out_text(getItemColor(self), "  "..self:getLine(59))
 		end
 	end 
 end

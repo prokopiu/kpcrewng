@@ -70,8 +70,11 @@ end
 --- set value of preference
 -- @tparam object 
 function ngPreferenceItem:setValue(value)
+	if value == nil then self.value = "" return end
 	if type(self.value) ~= 'function' then
 		self.value = value
+	else
+		self.value = value()
 	end
 end
 
@@ -108,7 +111,6 @@ end
 --- return the line to be written into the .preferences file
 -- @return string complete line to write to preference file
 function ngPreferenceItem:getSaveLine()
-	
 	if self.type == ng_type_int or self.type == ng_type_float or self.type == ng_type_list or self.type == ng_type_comfreq or self.type == ng_type_navfreq then
 		return self.name .. "=" .. self.value .. "\n"
 	end

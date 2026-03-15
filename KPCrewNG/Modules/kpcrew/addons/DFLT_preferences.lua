@@ -1,229 +1,203 @@
+--[[
+	*** KPCREWNG 0.1 
+	Define the aircraft addon specific properties to tailor the DFLT definitions
+	Kosta Prokopiu, 2026
+--]]
+
 require "kpcrew.Addon.Preferences.PreferenceDataType"
+local preferenceSet 		= require( "kpcrew.Addon.Preferences.PreferenceSet" )
+local preferenceGroup 		= require( "kpcrew.Addon.Preferences.PreferenceGroup" )
+local preference 			= require("kpcrew.Addon.Preferences.PreferenceItem")
 
-local preferenceSet = require( "kpcrew.Addon.Preferences.PreferenceSet" )
-local preferenceGroup = require( "kpcrew.Addon.Preferences.PreferenceGroup" )
-local preference = require("kpcrew.Addon.Preferences.PreferenceItem")
+-- ===== initialize the preference set for aircraft
+local aircraftPrefSet 		= preferenceSet:new("DFLT","DEFAULT AIRCRAFT",SCRIPT_DIRECTORY .. "../Modules/kpcrew_prefs/DFLT.preferences")
 
-local aircraftPrefSet = preferenceSet:new("DFLT","DEFAULT AIRCRAFT",SCRIPT_DIRECTORY .. "../Modules/kpcrew_prefs/DFLT.preferences")
+-- --------------------------- Addon specific settings overwriting the base info
+local addon 				= preferenceGroup:new("addon","ADDON PREFERENCES")
+addon:add(preference:new("icao",			"DFLT",ng_type_text,"Aircraft ICAO in use|")) 		-- addon:icao
+addon:add(preference:new("aircraftname",	"AIRCRAFT",ng_type_text,"Aircraft name|")) 	-- addon:aircraftname
+addon:add(preference:new("filepath",SCRIPT_DIRECTORY.."../Modules/kpcrew_prefs/DFLT.preferences",
+	ng_type_text,"Preference filepath|")) 														-- addon:filepath
+-- --------------------------------------------------------------------------------------------
 
-local addon = preferenceGroup:new("addon","ADDON PREFERENCES")
-addon:add(preference:new("icao","DFLT",ng_type_text,"Aircraft ICAO in use|"))
-addon:add(preference:new("aircraftname","DEFAULT AIRCRAFT",ng_type_text,"Aircraft name|"))
-addon:add(preference:new("filepath",SCRIPT_DIRECTORY.."../Modules/kpcrew_prefs/DFLT.preferences",ng_type_text,"Preference filepath|"))
-
--- -------- General settings not associated with a preference group --------
-local general = preferenceGroup:new("general","GENERAL PREFERENCES")
-general:add(preference:new("iscargo",false,ng_type_flag,"Is Cargo Aircraft?|Yes|No"))
-general:add(preference:new("hasautobrk",false,ng_type_flag,"Has Autobrake?|Yes|No"))
-general:add(preference:new("hasgroundobj",false,ng_type_flag,"Has Ground Objects?|Yes|No"))
-general:add(preference:new("haswipers",false,ng_type_flag,"Has Wipers?|Yes|No"))
-general:add(preference:new("hasseatbelts",false,ng_type_flag,"Has Seatbelt Signs?|Yes|No"))
-general:add(preference:new("hasnosmoking",false,ng_type_flag,"Has No Smoking Signs?|Yes|No"))
+-- --------------------------- General settings not associated with a preference group
+local general 				= preferenceGroup:new("general","GENERAL PREFERENCES")
+general:add(preference:new("iscargo",		false,ng_type_flag,	"Is Cargo Aircraft?|Yes|No"))	-- general:iscargo
+general:add(preference:new("hasgroundobj",	false,ng_type_flag,	"Has Ground Objects?|Yes|No"))	-- general:hasgroundobj
+general:add(preference:new("haschocks",		false,ng_type_flag,	"Has Chocks?|Yes|No",
+nil,"return ng_getAcfPrefs():get(\"general:hasgroundobj\")"))										-- general:haschocks
+general:add(preference:new("haswipers",		false,ng_type_flag,	"Has Wipers?|Yes|No"))			-- general:haswipers
+general:add(preference:new("hasseatbelts",	false,ng_type_flag,	"Has Seatbelt Signs?|Yes|No"))	-- general:hasseatbelts
+general:add(preference:new("hasnosmoking",	false,ng_type_flag,	"Has No Smoking Signs?|Yes|No"))-- general:hasnosmoking
+general:add(preference:new("hasdoors",		true,ng_type_flag,	"Has External Doors?|Yes|No"))	-- general:hasdoors
+general:add(preference:new("hasretgear",	true,ng_type_flag,	"Has Retractable Gear?|Yes|No"))-- general:hasretgear
 -- autobreak related setting
-general:add(preference:new("abrkmodelblt","|RTO|OFF|1|2|3|4",ng_type_text,"A/BRK Labels|",nil,"return ng_getAcfPrefs():get(\"general:hasautobrk\")"))
-general:add(preference:new("abrkmodevals","|0|1|2|3|4|5",ng_type_text,"A/BRK Values|",nil,"return ng_getAcfPrefs():get(\"general:hasautobrk\")"))
-general:add(preference:new("abrkoffval",1,ng_type_int,"A/BRK OFF Value|0",nil,"return ng_getAcfPrefs():get(\"general:hasautobrk\")"))
-general:add(preference:new("abrktroval",0,ng_type_int,"A/BRK RTO Value|0",nil,"return ng_getAcfPrefs():get(\"general:hasautobrk\")"))
+general:add(preference:new("hasautobrk",	false,ng_type_flag,	"Has Autobrake?|Yes|No"))		-- general:hasautobrk
+	general:add(preference:new("abrkmodelblt",	"|MAX MAN|RTO|OFF|1|2|3|4",ng_type_text,"A/BRK Labels|",
+		nil,"return ng_getAcfPrefs():get(\"general:hasautobrk\")")) 								-- general:abrkmodelblt
+	general:add(preference:new("abrkmodevals",	"|-1|0|1|2|3|4|5|6",ng_type_text,"A/BRK Values|",
+		nil,"return ng_getAcfPrefs():get(\"general:hasautobrk\")"))									-- general:abrkmodevals
+	general:add(preference:new("abrkoffval",	1,ng_type_int,"A/BRK OFF Value|0",
+		nil,"return ng_getAcfPrefs():get(\"general:hasautobrk\")"))									-- general:abrkoffval
+	general:add(preference:new("abrkrtoval",	0,ng_type_int,"A/BRK RTO Value|0",
+		nil,"return ng_getAcfPrefs():get(\"general:hasautobrk\")"))									-- general:abrktroval
+general:add(preference:new("mcpdefspd",100,	ng_type_int,"MCP Initial Speed|0"))					-- general:mcpdefspd
+general:add(preference:new("mcpdefhdg",1,	ng_type_int,"MCP Initial Heading|0"))				-- general:mcpdefhdg
+general:add(preference:new("mcpdefalt",4900,ng_type_int,"MCP Initial Altitude|0"))				-- general:mcpdefalt
 
--- ----------------------- Anti-Ice related settings ------------------------
-local aice = preferenceGroup:new("aice","ANTI ICE SYSTEMS")
--- aice:add(preference:new("hasengaice",true,ng_type_flag,"Has Engine A-Ice|Yes|No"))
--- aice:add(preference:new("haswingaice",true,ng_type_flag,"Has Wing A-Ice|Yes|No"))
--- aice:add(preference:new("haswinheat",true,ng_type_flag,"Has Window Heat|Yes|No"))
--- aice:add(preference:new("haspitotheat",true,ng_type_flag,"Has Pitot Heat|Yes|No"))
--- AICE briefing
-aice:add(preference:new("takeoffaice","|OFF|ENGINE|ENGINE & WING",ng_type_text,"Takeoff A-Ice|"))
-aice:add(preference:new("landingaice","|OFF|ENGINE|ENGINE & WING",ng_type_text,"Landing A-Ice|"))
+-- --------------------------------------------------------------------------------------------
 
--- -------------------------- Air related settings --------------------------
-local air = preferenceGroup:new("air","AIR SUPPLY SYSTEMS")
-air:add(preference:new("hastempcontrol",false,ng_type_flag,"Has Temp Control|Yes|No"))
-air:add(preference:new("hastrimair",false,ng_type_flag,"Has Trim Air?|Yes|No"))
-air:add(preference:new("hasrecircfans",false,ng_type_flag,"Has Recirc Fans?|Yes|No"))
-air:add(preference:new("hasenginebleeds",false,ng_type_flag,"Has Engine Bleds?|Yes|No"))
-air:add(preference:new("hasoxygen",false,ng_type_flag,"Oxygen Supply?|Yes|No"))
+-- --------------------------- Anti-Ice related settings 
+local aice 					= preferenceGroup:new("aice","ANTI ICE SYSTEMS")
+aice:add(preference:new("takeoffaice",		"|OFF|ENGINE|ENGINE & WING",
+	ng_type_text,"Takeoff A-Ice|")) 															-- aice:takeoffaice
+aice:add(preference:new("landingaice",		"|OFF|ENGINE|ENGINE & WING",
+	ng_type_text,"Landing A-Ice|")) 															-- aice:landingaice
+aice:add(preference:new("haswindowht",		true,ng_type_flag,"Has Window Heat|Yes|No"))		-- aice:haswindowht
+aice:add(preference:new("haswingaice",		true,ng_type_flag,"Has Wing Anti-Ice Heat|Yes|No"))	-- aice:haswingaice
+aice:add(preference:new("hasengaice",		true,ng_type_flag,"Has Engine Anti-Ice|Yes|No"))	-- aice:hasengaice
+aice:add(preference:new("hasprobeheat",		true,ng_type_flag,"Has Probe Heat|Yes|No"))	-- aice:hasprobeheat
+-- --------------------------------------------------------------------------------------------
 
--- air:add(preference:new("haspressurecab",true,ng_type_flag,"Pressure Cabin?|Yes|No"))
--- air:add(preference:new("numpacks",2,ng_type_int,"# Packs|0"))
--- air:add(preference:new("numengbleeds",2,ng_type_int,"# Engine Bleeds|0"))
--- air:add(preference:new("hasapubleed",false,ng_type_flag,"APU Bleed?|Yes|No"))
--- air:add(preference:new("hasgasper",false,ng_type_flag,"Gasper Ctrl?|Yes|No"))
--- air:add(preference:new("numisovalves",1,ng_type_int,"# Isolation Valves|0"))
--- air:add(preference:new("hasequipcool",false,ng_type_flag,"Equip Cool?|Yes|No"))
--- air:add(preference:new("numcargoheat",0,ng_type_int,"# Cargo Heat|0"))
--- air:add(preference:new("haslandalt",false,ng_type_flag,"Landing Alt?|Yes|No"))
--- air:add(preference:new("hasflightalt",false,ng_type_flag,"Flight Alt?|Yes|No"))
-air:add(preference:new("takeoffpacks",2,ng_type_list,"Takeoff Packs|OFF|ON"))
-air:add(preference:new("landingpacks",2,ng_type_list,"Landing Packs|OFF|ON"))
-air:add(preference:new("takeoffbleeds",2,ng_type_list,"Takeoff Bleeds|ON|OFF"))
-air:add(preference:new("landingbleeds",2,ng_type_list,"Landing Bleeds|ON|OFF"))
+-- --------------------------- Air related settings
+local air 					= preferenceGroup:new("air","AIR SUPPLY SYSTEMS")
+air:add(preference:new("hastempcontrol",	false,ng_type_flag,"Has Temp Control|Yes|No"))		-- air:hastempcontrol
+air:add(preference:new("hastrimair",		false,ng_type_flag,"Has Trim Air|Yes|No"))			-- air:hastrimair
+air:add(preference:new("hasrecircfans",		false,ng_type_flag,"Has Recirc Fans|Yes|No"))		-- air:hasrecircfans
+air:add(preference:new("hasgasper",			false,ng_type_flag,"Has Gasper Fans|Yes|No"))		-- air:hasgasper
+air:add(preference:new("hasisovalves",		false,ng_type_flag,"Has Iso Valves|Yes|No"))		-- air:hasisovalves
+air:add(preference:new("haspacks",			false,ng_type_flag,"Has Packs|Yes|No"))			-- air:haspacks
+	air:add(preference:new("takeoffpacks",		"|OFF|ON",ng_type_text,"Takeoff Packs|",
+		nil,"return ng_getAcfPrefs():get(\"air:haspacks\")"))										-- air:takeoffpacks
+	air:add(preference:new("landingpacks",		"|OFF|ON",ng_type_text,"Landing Packs|",
+		nil,"return ng_getAcfPrefs():get(\"air:haspacks\")"))										-- air:landingpacks
+air:add(preference:new("hasenginebleeds",	false,ng_type_flag,"Has Engine Bleeds|Yes|No"))	-- air:hasenginebleeds
+	air:add(preference:new("takeoffbleeds",		"N/A|OFF|ON",ng_type_text,"Takeoff Bleeds|",
+		nil,"return ng_getAcfPrefs():get(\"air:hasenginebleeds\")"))								-- air:takeoffbleeds
+	air:add(preference:new("landingbleeds",		"N/A|OFF|ON",ng_type_text,"Landing Bleeds|",
+		nil,"return ng_getAcfPrefs():get(\"air:hasenginebleeds\")"))								-- air:landingbleeds
+air:add(preference:new("hasoxygen",			false,ng_type_flag,"Has Oxygen Supply|Yes|No"))		-- air:hasoxygen
+air:add(preference:new("haspresspnl",		false,ng_type_flag,"Has Pressure Panel|Yes|No"))	-- air:haspresspnl
+air:add(preference:new("hasequipcool",	false,ng_type_flag,"Has Equip Cooling|Yes|No"))		-- air:hasequipcooling
+-- --------------------------------------------------------------------------------------------
 
--- ----------------------- Autopilot related settings -----------------------
-local autopilot = preferenceGroup:new("autopilot","AUTOPILOT")
-autopilot:add(preference:new("hasirs",false,ng_type_flag,"Has IRS?|Yes|No"))
-autopilot:add(preference:new("irsoff",0,ng_type_int,"IRS OFF INDX|0",nil,"return ng_getAcfPrefs():get(\"autopilot:hasirs\")"))
-autopilot:add(preference:new("irsalign",1,ng_type_int,"IRS ALIGN INDX|0",nil,"return ng_getAcfPrefs():get(\"autopilot:hasirs\")"))
-autopilot:add(preference:new("irsnav",2,ng_type_int,"IRS NAV INDX|0",nil,"return ng_getAcfPrefs():get(\"autopilot:hasirs\")"))
-autopilot:add(preference:new("irsatt",3,ng_type_int,"IRS ATT INDX|0",nil,"return ng_getAcfPrefs():get(\"autopilot:hasirs\")"))
+-- --------------------------- Autopilot related settings 
+local autopilot 			= preferenceGroup:new("autopilot","AUTOPILOT")
+autopilot:add(preference:new("hasathr",	false,ng_type_flag,"Has A/THR?|Yes|No"))				-- autopilot:hasathr
+autopilot:add(preference:new("hasirs",		false,ng_type_flag,"Has IRS?|Yes|No"))				-- autopilot:hasirs
+	autopilot:add(preference:new("irsoff",		0,ng_type_int,"IRS OFF INDX|0",
+		nil,"return ng_getAcfPrefs():get(\"autopilot:hasirs\")"))									-- autopilot:irsoff
+	autopilot:add(preference:new("irsalign",	1,ng_type_int,"IRS ALIGN INDX|0",
+		nil,"return ng_getAcfPrefs():get(\"autopilot:hasirs\")"))									-- autopilot:irsalign
+	autopilot:add(preference:new("irsnav",		2,ng_type_int,"IRS NAV INDX|0",
+		nil,"return ng_getAcfPrefs():get(\"autopilot:hasirs\")"))									-- autopilot:irsnav
+	autopilot:add(preference:new("irsatt",		3,ng_type_int,"IRS ATT INDX|0",
+		nil,"return ng_getAcfPrefs():get(\"autopilot:hasirs\")"))									-- autopilot:irsatt
+-- --------------------------------------------------------------------------------------------
 
--- autopilot:add(preference:new("numfdirs",1,ng_type_int,"# Flight Dirs?|0"))
--- autopilot:add(preference:new("numautopilots",1,ng_type_int,"# Autopilots?|0"))
--- autopilot:add(preference:new("hasalthold",true,ng_type_flag,"A/P Alt Hold?|Yes|No"))
--- autopilot:add(preference:new("hasaltsel",false,ng_type_flag,"A/P Alt Select?|Yes|No"))
--- autopilot:add(preference:new("hashdgsel",true,ng_type_flag,"A/P Hdg Select?|Yes|No"))
--- autopilot:add(preference:new("hasvorloc",true,ng_type_flag,"A/P Alt LOC?|Yes|No"))
--- autopilot:add(preference:new("hasapp",true,ng_type_flag,"A/P Approach?|Yes|No"))
--- autopilot:add(preference:new("hasvs",true,ng_type_flag,"A/P Vertical Spd?|Yes|No"))
--- autopilot:add(preference:new("hasspdias",true,ng_type_flag,"A/P SPD/IAS?|Yes|No"))
--- autopilot:add(preference:new("hasathr",false,ng_type_flag,"A/P Autothrottle?|Yes|No"))
--- autopilot:add(preference:new("hasils",true,ng_type_flag,"A/P ILS?|Yes|No"))
--- autopilot:add(preference:new("hasattoga",true,ng_type_flag,"A/T TOGA?|Yes|No"))
--- autopilot:add(preference:new("haslnav",false,ng_type_flag,"A/P LNAV?|Yes|No"))
--- autopilot:add(preference:new("hasvnav",false,ng_type_flag,"A/P VNAV?|Yes|No"))
--- autopilot:add(preference:new("hasflch",false,ng_type_flag,"A/P FLCH?|Yes|No"))
--- autopilot:add(preference:new("hasn1",false,ng_type_flag,"A/P N1?|Yes|No"))
--- autopilot:add(preference:new("hasspdintv",false,ng_type_flag,"A/P Speed Intv?|Yes|No"))
--- autopilot:add(preference:new("hasaltintv",false,ng_type_flag,"A/P Alt Intv?|Yes|No"))
--- autopilot:add(preference:new("hasyawdamper",true,ng_type_flag,"A/P Yawdamper?|Yes|No"))
--- autopilot:add(preference:new("hasturnrate",false,ng_type_flag,"A/P Turnrate?|Yes|No"))
--- autopilot:add(preference:new("numcws",0,ng_type_int,"# CWS?|0"))
+-- -------------------------- Controls related settings 
+local controls 				= preferenceGroup:new("controls","FLIGHT CONTROLS")
+controls:add(preference:new("hasspdbreak",	false,ng_type_flag,"Has Speedbreak?|Yes|No"))		-- controls:hasspdbreak
+	controls:add(preference:new("spdbreakarms",	false,ng_type_flag,"Speedbreak Arms?|Yes|No",	-- controls:spdbreakarms
+		nil,"return ng_getAcfPrefs():get(\"controls:hasspdbreak\")"))
+	controls:add(preference:new("spdbreakapos",	0.0889,ng_type_float,"SpdBreak Arm Pos|0|%6.2f",-- controls:spdbreakapos
+		nil,"return ng_getAcfPrefs():get(\"controls:spdbreakarms\")"))
+controls:add(preference:new("flapsdetents",	9,ng_type_int,"Flaps Detents|0"))
+	controls:add(preference:new("flapspos",		"|0|0.125|0.25|0.375|0.5|0.625|0.75|0.875|1",
+		ng_type_text,"Flaps Positions")) 															-- controls:flapspos
+	controls:add(preference:new("flapsspd",		"|230|200|180|160|155|155|150|150|150",
+		ng_type_text,"Flaps Speeds")) 																-- controls:flapsspd
+	controls:add(preference:new("flapsnames",	"|UP|1|2|3|4|5|6|7|FULL",
+		ng_type_text,"Flaps Names")) 																-- controls:flapsnames
+controls:add(preference:new("numtoflaps",	5,ng_type_int,"# T/O Flaps|0"))						-- controls:numtoflaps
+	controls:add(preference:new("toflapslbl",	"|UP|1|2|3|4",ng_type_text,"T/O Flaps Lbls"))		-- controls:toflapslbl
+	controls:add(preference:new("toflapsind",	"|1|2|3|4|5",ng_type_text,"T/O Flaps Index|"))		-- controls:toflapsind
+controls:add(preference:new("numldflaps",	4,ng_type_int,"# LDG Flaps|0"))						-- controls:numldflaps
+	controls:add(preference:new("ldflapslbl",	"|5|6|7|FULL",ng_type_text,"LDG Flaps|"))				-- controls:ldflapslbl
+	controls:add(preference:new("ldflapsind",	"|6|7|8|9",ng_type_text,"LDG Flaps Index|"))			-- controls:ldflapsind
+-- --------------------------------------------------------------------------------------------
 
--- Anything associated to flight controls
-local controls = preferenceGroup:new("controls","FLIGHT CONTROLS")
-controls:add(preference:new("hasspdbreak",true,ng_type_flag,"Has Speedbreak?|Yes|No"))
-controls:add(preference:new("spdbreakarms",false,ng_type_flag,"Speedbreak Arms?|Yes|No",nil,"return ng_getAcfPrefs():get(\"controls:hasspdbreak\")"))
-controls:add(preference:new("spdbreakapos",0.0889,ng_type_float,"SpdBreak Arm Pos|0|%6.2f",nil,"return ng_getAcfPrefs():get(\"controls:spdbreakarms\")"))
+-- -------------------------- EFIS
+local efis 					= preferenceGroup:new("efis","EFIS")
+efis:add(preference:new("hasradaralt",	false,ng_type_flag,"Has Radar Altitude|Yes|No"))		-- efis:hasradaralt
+efis:add(preference:new("haswxradar",	false,ng_type_flag,"Has WX Radar|Yes|No"))				-- efis:haswxradar
+-- --------------------------------------------------------------------------------------------
 
+-- -------------------------- Electric related settings 
+local electric 				= preferenceGroup:new("electric","ELECTRIC SYSTEMS")
+electric:add(preference:new("hasstbypower",	false,ng_type_flag,"Has Standby Power|Yes|No"))		-- electric:hasstbypower
+electric:add(preference:new("hasgpu",		false,ng_type_flag,"Has GPU?|Yes|No"))				-- electric:hasgpu
+	electric:add(preference:new("startupgpu",true,ng_type_flag,"GPU @ start|On|Off",
+		nil,"return ng_getAcfPrefs():get(\"electric:hasgpu\")"))								-- electric:startupgpu
+electric:add(preference:new("hasapu",		false,ng_type_flag,"Has APU?|Yes|No"))				-- electric:hasapu
+	electric:add(preference:new("startupapu",false,ng_type_flag,"APU @ start|On|Off",
+		nil,"return ng_getAcfPrefs():get(\"electric:hasapu\")"))								-- electric:startupapu
+	electric:add(preference:new("apun1run",		98,ng_type_int,"APU N1 running|0",
+		nil,"return ng_getAcfPrefs():get(\"electric:hasapu\")"))								-- electric:apun1run
+electric:add(preference:new("hascabinpwr",	false,ng_type_flag,"Has Cabin Power?|Yes|No"))		-- electric:hascabinpwr
+electric:add(preference:new("hasifepwr",	false,ng_type_flag,"Has IFE Power?|Yes|No"))		-- electric:hasifepwr
+electric:add(preference:new("hasbusties",	false,ng_type_flag,"Has Bus Ties?|Yes|No"))			-- electric:hasbusties
+electric:add(preference:new("hasenggens",	true,ng_type_flag,"Has Engine Generators?|Yes|No")) -- electric:hasenggens
+-- --------------------------------------------------------------------------------------------
 
-controls:add(preference:new("flapsdetents",8,ng_type_int,"Flaps Detents|0"))
-controls:add(preference:new("flapspos","|0|0.125|0.25|0.375|0.5|0.625|0.75|0.875|1",ng_type_text,"Flaps Positions"))
-controls:add(preference:new("flapsspd","|230|200|180|160|155|155|150|150|150",ng_type_text,"Flaps Speeds"))
-controls:add(preference:new("flapsnames","|UP|1|2|5|10|15|25|30|40",ng_type_text,"Flaps Names"))
-controls:add(preference:new("numtoflaps",5,ng_type_int,"# T/O Flaps|0"))
-controls:add(preference:new("toflapslbl","|UP|1|5|10|15",ng_type_text,"T/O Flaps Lbls"))
-controls:add(preference:new("toflapsind","|1|2|3|4|5",ng_type_text,"T/O Flaps Index|"))
-controls:add(preference:new("numldflaps",3,ng_type_int,"# LDG Flaps|0"))
-controls:add(preference:new("ldflapslbl","|25|30|40",ng_type_text,"LDG Flaps|"))
-controls:add(preference:new("ldflapsind","|6|7|8",ng_type_text,"LDG Flaps Index|"))
--- controls:add(preference:new("gearextind",4,ng_type_int,"Gear extend ldg|0"))
--- controls:add(preference:new("announceflaps",false,ng_type_flag,"Announce Flaps?|Yes|No"))
--- controls:add(preference:new("armspdbrkto",false,ng_type_flag,"Arm Speedbreak T/O?|Yes|No"))
--- controls:add(preference:new("haspitchtrim",true,ng_type_flag,"Pitchtrim?|Yes|No"))
--- controls:add(preference:new("hasailtrim",true,ng_type_flag,"Aileron Trim?|Yes|No"))
--- controls:add(preference:new("hasruddtrim",true,ng_type_flag,"Rudder Trim?|Yes|No"))
--- controls:add(preference:new("rudderidx",0,ng_type_int,"Index of rudder axis|0"))
--- controls:add(preference:new("rudderfullrgt",14.9,ng_type_float,"Rudder full right|0|%6.2f"))
+-- ------------------------- Engines related settings 
+local engines 				= preferenceGroup:new("engines","ENGINE SYSTEMS")
+engines:add(preference:new("nrengines",		2,ng_type_int,"Number of Engines|0"))					-- engines:nrengines
+engines:add(preference:new("startseq",		"|2 THEN 1|1 THEN 2",ng_type_text,"Start Sequence|")) -- engines:startseq
+engines:add(preference:new("hasfiretests",	false,ng_type_flag,"Has Fire Test?|Yes|No"))		-- engines:hasfiretests
+engines:add(preference:new("haseec",		false,ng_type_flag,"Has EEC?|Yes|No"))				-- engines:haseec
+engines:add(preference:new("hasstartsels",	false,ng_type_flag,"Has Start Selectors?|Yes|No"))	-- engines:hasstartsels
+engines:add(preference:new("hastothrust",	false,ng_type_flag,
+	"Has Takeoff Thrust Rating?|Yes|No")) 														-- engines:hastothrust
+	engines:add(preference:new("tothrust",	"|OPTIMUM|D-TO|D-TO1|D-TO2",ng_type_text,"Takeoff Thrust|",	
+		nil,"return ng_getAcfPrefs():get(\"engines:hastothrust\")"))  								-- engines:tothrust
+	engines:add(preference:new("hasflextemp",	false,ng_type_flag,"Has Takeoff Flex Temperature?|Yes|No",
+		nil,"return ng_getAcfPrefs():get(\"controls:hastothrust\")"))								-- engines:hasflextemp
+engines:add(preference:new("n2afterstart",	50,ng_type_int,"N2 Value start|0"))					-- engines:n2afterstart
+-- --------------------------------------------------------------------------------------------
 
--- EFIS
-local efis = preferenceGroup:new("efis","EFIS")
--- efis:add(preference:new("hasmap",true,ng_type_flag,"ND MAP?|Yes|No"))
--- efis:add(preference:new("haswxr",false,ng_type_flag,"ND WXR?|Yes|No"))
--- efis:add(preference:new("hastfc",false,ng_type_flag,"ND Traffic?|Yes|No"))
--- efis:add(preference:new("hasterrain",false,ng_type_flag,"ND Terrain?|Yes|No"))
--- efis:add(preference:new("hasfpv",false,ng_type_flag,"FPV?|Yes|No"))
--- efis:add(preference:new("hasmeters",false,ng_type_flag,"PFD Meters?|Yes|No"))
--- efis:add(preference:new("numvoradf",0,ng_type_int,"# VORADF?|0"))
--- efis:add(preference:new("numranges",7,ng_type_int,"# MAP Ranges|0"))
--- efis:add(preference:new("mapranges",1,ng_type_list,"MAP Ranges|5|10|20|40|80|160|320|640"))
--- efis:add(preference:new("nummodes",4,ng_type_int,"# MAP Modes|0"))
--- efis:add(preference:new("mapmodes",1,ng_type_list,"MAP Modes|APP|VOR|MAP|PLAN"))
--- efis:add(preference:new("minstype",1,ng_type_list,"Minimums?|Radio|Baro"))
--- efis:add(preference:new("defbarunit",1,ng_type_list,"Baro Unit?|MB|INHG"))
--- efis:add(preference:new("numbaros",2,ng_type_int,"# Baro Dials|0"))
+-- -------------------------- Fuel related settings 
+local fuel 					= preferenceGroup:new("fuel","FUEL SYSTEMS")
+fuel:add(preference:new("canloadfuel",		false,ng_type_flag,"Can load fuel?|Yes|No"))		-- fuel:canloadfuel		
+fuel:add(preference:new("hasfuelxfeed",		false,ng_type_flag,"Has Fuel Crossfeeds|Yes|No"))	-- fuel:hasfuelxfeed
+fuel:add(preference:new("hasfuelselector",	false,ng_type_flag,"Has Fuel Selector|Yes|No"))		-- fuel:hasfuelselector
+fuel:add(preference:new("hasfuelpumps",		false,ng_type_flag,"Has Fuel Pump Sws|Yes|No"))		-- fuel:hasfuelpumps
+-- --------------------------------------------------------------------------------------------
 
--- ----------------------- Electric related settings ------------------------
-local electric = preferenceGroup:new("electric","ELECTRIC SYSTEMS")
-electric:add(preference:new("hasstbypower",false,ng_type_flag,"Has Standby Power|Yes|No"))
-electric:add(preference:new("hasgpu",false,ng_type_flag,"Has GPU?|Yes|No"))
-electric:add(preference:new("hasapu",false,ng_type_flag,"Has APU?|Yes|No"))
-electric:add(preference:new("apun1run",98,ng_type_int,"APU N1 running|0",nil,"return ng_getAcfPrefs():get(\"electric:apun1run\")"))
-electric:add(preference:new("hascabinpwr",false,ng_type_flag,"Has Cabin Power?|Yes|No"))
-electric:add(preference:new("hasifepwr",false,ng_type_flag,"Has IFE Power?|Yes|No"))
--- electric:add(preference:new("numgenerators",2,ng_type_int,"# Generators|0"))
--- electric:add(preference:new("numinverters",0,ng_type_int,"# Inverters|0"))
--- electric:add(preference:new("numgpugens",1,ng_type_int,"# GPU Generators|0"))
--- electric:add(preference:new("numapugens",1,ng_type_int,"# APU Generators|0"))
--- electric:add(preference:new("numavionics",0,ng_type_int,"# Avionics Switch|0"))
--- electric:add(preference:new("hasdcbustie",true,ng_type_flag,"DC Bustie?|Yes|No"))
--- electric:add(preference:new("hasacbustie",false,ng_type_flag,"AC Bustie?|Yes|No"))
+-- ----------------------- Hydraulic related settings
+local hydraulic 			= preferenceGroup:new("hydraulic","HYDRAULIC SYSTEMS")
+hydraulic:add(preference:new("hashydelecpmps",true,ng_type_flag,
+	"Has Electric Hyd Pumps|Yes|No"))															-- hydraulic:hashydelecpmps
+hydraulic:add(preference:new("hashydengpmps",true,ng_type_flag,
+	"Has Engine Hyd Pumps|Yes|No"))																-- hydraulic:hashydengpmps
+-- --------------------------------------------------------------------------------------------
 
--- ----------------------- Engines related settings ------------------------
-local engines = preferenceGroup:new("engines","ENGINE SYSTEMS")
-engines:add(preference:new("startseq",1,ng_type_list,"Start Sequence|2 THEN 1|1 THEN 2|"))
-engines:add(preference:new("hasfiretests",false,ng_type_flag,"Has Fire Test?|Yes|No"))
+-- ---------------------- Light related settings 
+local lights 				= preferenceGroup:new("lights","LIGHTS")
+lights:add(preference:new("hasbeacon",		true,ng_type_flag,"Has Beacon Lights?|Yes|No"))		-- lights:hasbeacon
+lights:add(preference:new("hastaxilights",	true,ng_type_flag,"Has Taxi Lights?|Yes|No"))		-- lights:hastaxilights
+lights:add(preference:new("hasdomelts",		true,ng_type_flag,"Has Dome Lights|Yes|No"))		-- lights:hasdomelts
+lights:add(preference:new("hasemerlts",		false,ng_type_flag,"Has Emergency Lights|Yes|No"))	-- lights:hasemerlts
+lights:add(preference:new("hasstrbbeacon",	false,ng_type_flag,"Has Strobes as Beacon|Yes|No"))	-- lights:hasstrbbeacon
+lights:add(preference:new("hasllastaxi",	false,ng_type_flag,"Has LLs as Taxilight|Yes|No"))	-- lights:hasllastaxi
+lights:add(preference:new("nrlandlights",	2,ng_type_int,"Number Landing Lights|0"))			-- lights:nrlandlights
 
--- engines:add(preference:new("numengines",2,ng_type_int,"# Engines|0"))
--- engines:add(preference:new("numignition",2,ng_type_int,"# Ignition|0"))
--- engines:add(preference:new("numreversers",2,ng_type_int,"# Reversers|0"))
--- engines:add(preference:new("nummagnetos",2,ng_type_int,"# Magnetos|0"))
--- engines:add(preference:new("hasproplvr",false,ng_type_flag,"Prop Levers?|Yes|No"))
--- engines:add(preference:new("hasmixlvr",false,ng_type_flag,"Mixture Levers?|Yes|No"))
-engines:add(preference:new("tothrust",1,ng_type_list,"Takeoff Thrust|OPTIMUM|D-TO|D-TO1|D-TO2"))
--- engines:add(preference:new("hasratedto",false,ng_type_flag,"Rated Takeoff?|Yes|No"))
--- engines:add(preference:new("throttleidle",true,ng_type_flag,"Idle Throttle @ Start?|Yes|No"))
--- engines:add(preference:new("propmin",125,ng_type_int,"Prop Min Pos|0"))
--- engines:add(preference:new("propmax",178,ng_type_int,"Prop Max Pos|0"))
--- engines:add(preference:new("propfeather",105,ng_type_int,"Prop Feather Pos|0"))
--- engines:add(preference:new("mixoff",0,ng_type_float,"Mixture Off Pos|0|%4.1f"))
--- engines:add(preference:new("mixmin",0.4,ng_type_float,"Mixture Min Pos|0|%4.1f"))
--- engines:add(preference:new("mixrich",1,ng_type_float,"Mixture Rich Pos|0|%4.1f"))
--- engines:add(preference:new("n2start",40,ng_type_float,"N2 after Start|0|%4.1f"))
+-- --------------------------------------------------------------------------------------------
 
--- ------------------------- Fuel related settings ---------------------------
-local fuel = preferenceGroup:new("fuel","FUEL SYSTEMS")
-fuel:add(preference:new("canloadfuel",true,ng_type_flag,"Can load fuel?|Yes|No"))
-fuel:add(preference:new("hasfuelxfeed",false,ng_type_flag,"Has Fuel Crossfeeds|Yes|No"))
--- fuel:add(preference:new("numfueltanks",2,ng_type_int,"# Fuel Tanks|0"))
--- fuel:add(preference:new("numfuelpumps",2,ng_type_int,"# Fuel Pumps|0"))
--- fuel:add(preference:new("hasfuelselect",false,ng_type_flag,"Fuel Select?|Yes|No"))
--- fuel:add(preference:new("numfuelcutoff",2,ng_type_int,"# Fuel Cutoffs|0"))
-
--- ----------------------- Hydraulic related settings -----------------------
-local hydraulic = preferenceGroup:new("hydraulic","HYDRAULIC SYSTEMS")
-hydraulic:add(preference:new("hashydelecpmps",false,ng_type_flag,"Has Electric Hyd Pumps|Yes|No"))
--- hydraulic:add(preference:new("numhydengpmps",2,ng_type_int,"# Engine Hyd Pumps|0"))
--- hydraulic:add(preference:new("hasptu",false,ng_type_flag,"PTU?|Yes|No"))
--- hydraulic:add(preference:new("hasrat",false,ng_type_flag,"RAT?|Yes|No"))
-
--- ----------------------- Light related settings ------------------------
-local lights = preferenceGroup:new("lights","LIGHTS")
-lights:add(preference:new("hasbeacon",true,ng_type_flag,"Has Beacon Lights?|Yes|No"))
-lights:add(preference:new("numbeaconlts",1,ng_type_int,"# Beacons|0",nil,"return ng_getAcfPrefs():get(\"lights:hasbeacon\")"))
-lights:add(preference:new("hasdomelts",true,ng_type_flag,"Has Dome Lights|Yes|No"))
-lights:add(preference:new("hasemerlts",false,ng_type_flag,"Has Emergency Lights|Yes|No"))
-
--- lights:add(preference:new("numnavlts",1,ng_type_int,"# NAV Lights|0"))
--- lights:add(preference:new("numstrobelts",1,ng_type_int,"# Strobe Lights|0"))
--- lights:add(preference:new("numtaxilts",1,ng_type_int,"# Taxi Lights|0"))
--- lights:add(preference:new("numldglts",2,ng_type_int,"# Landing Lights|0"))
--- lights:add(preference:new("numwinglts",1,ng_type_int,"# Wing Lights|0"))
--- lights:add(preference:new("numwheellts",1,ng_type_int,"# Wheel Lights|0"))
--- lights:add(preference:new("numlogolts",1,ng_type_int,"# Logo Lights|0"))
--- lights:add(preference:new("numrwylts",1,ng_type_int,"# Runway Lights|0"))
--- lights:add(preference:new("numinstrlts",6,ng_type_int,"# Instrument Lights|0"))
--- lights:add(preference:new("numpanellts",6,ng_type_int,"# Panel Lights|0"))
-
--- Weight settings
-local weights = preferenceGroup:new("weights","WEIGHTS")
-weights:add(preference:new("canloadpld",true,ng_type_flag,"Can load payload?|Yes|No"))
-weights:add(preference:new("maxramp",-1,ng_type_int,"Max Ramp Weight|0"))
-weights:add(preference:new("dow",-1,ng_type_int,"Dry Operating Weight|0"))
-weights:add(preference:new("maxzfw",-1,ng_type_int,"Max ZFW|0"))
-weights:add(preference:new("maxtow",-1,ng_type_int,"Max TOW|0"))
-weights:add(preference:new("maxldw",-1,ng_type_int,"Max LDW|0"))
-weights:add(preference:new("maxpayload",-1,ng_type_int,"Max Payload|0"))
-weights:add(preference:new("maxfuel",-1,ng_type_int,"Max Fuel|0"))
-
-
--- ng_apptypes 		= "ILS CAT 1|ILS CAT 2 OR 3|VOR|NDB|RNAV|VISUAL|TOUCH AND GO|CIRCLING"
-
--- flap detents for this aircraft
--- ng_flaps_pos 	= {[1] =   0, [2] = 0.125, [3] = 0.25, [4] = 0.375, [5] = 0.5, [6] = 0.625, [7] = 0.75, [8] = 0.875, [9] = 1}
--- ng_flaps_spd 	= {[1] = 230, [2] =   200, [3] =  180, [4] =   160, [5] = 155, [6] =   155, [7] =  150, [8] =   150, [9] = 150}
--- ng_flaps_name 	= {[1] = "UP",[2] =   "1", [3] =  "2", [4] =   "5", [5] = "10",[6] = "15",  [7] =  "25", [8] = "30", [9] = "40"}
--- ng_flaps_idx 	= {      "UP",        "1",        "2",         "5",       "10",      "15",         "25",       "30",       "40"}
-
--- ng_start_seq	= { [1] = {"2", "1"}, [2] = {"1", "2"} }
+-- ---------------------- Weight related settings
+local weights 				= preferenceGroup:new("weights","WEIGHTS")
+weights:add(preference:new("canloadpld",	false,ng_type_flag,"Can load payload?|Yes|No"))		-- weights:canloadfuel
+weights:add(preference:new("maxramp",		-1,ng_type_int,"Max Ramp Weight|0"))				-- weights:maxramp
+weights:add(preference:new("dow",			-1,ng_type_int,"Dry Operating Weight|0"))			-- weights:dow	
+weights:add(preference:new("maxzfw",		-1,ng_type_int,"Max ZFW|0"))						-- weights:maxzfw
+weights:add(preference:new("maxtow",		-1,ng_type_int,"Max TOW|0"))						-- weights:maxtow
+weights:add(preference:new("maxldw",		-1,ng_type_int,"Max LDW|0"))						-- weights:maxldw
+weights:add(preference:new("maxpayload",	-1,ng_type_int,"Max Payload|0"))					-- weights:maxpayload
+weights:add(preference:new("maxfuel",		-1,ng_type_int,"Max Fuel|0"))						-- weights:maxfuel	
+-- --------------------------------------------------------------------------------------------
+-- ---------------------- Weight related settings
+local radios 				= preferenceGroup:new("radios","RADIOS")
+radios:add(preference:new("hasxpdrtara", 	false,ng_type_flag,"XPDR has TARA|Yes|No"))			-- radios:xpdrtara
 
 aircraftPrefSet:addGroup(addon)
 aircraftPrefSet:addGroup(general)
@@ -237,12 +211,13 @@ aircraftPrefSet:addGroup(efis)
 aircraftPrefSet:addGroup(fuel)
 aircraftPrefSet:addGroup(hydraulic)
 aircraftPrefSet:addGroup(lights)
+aircraftPrefSet:addGroup(radios)
 aircraftPrefSet:addGroup(weights)
 
+--- optional custom steps on loading the set
 local function custom_load()
-	-- ng_getAcfPrefs():find("general:abrkmodes"):setTitle("A/BRK|"..ng_getAcfPrefs():get("general:abrkmodelblt"))
+	
 end
-
 aircraftPrefSet:setCustomLoad(custom_load)
 
 --- return the active aircraft preference set
@@ -357,7 +332,7 @@ end
 
 --- Get current gross weight
 function ng_get_gross_weight()
-	if ng_getAcfPrefs():get("general:weightunit") then
+	if ng_getAcfPrefs():get("general:weightunit") ~= 1 then
 		return get("sim/flightmodel/weight/m_total")
 	else
 		return get("sim/flightmodel/weight/m_total")*2.20462262

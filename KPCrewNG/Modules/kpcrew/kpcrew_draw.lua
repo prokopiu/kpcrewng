@@ -16,10 +16,11 @@ require "kpcrew.acft_select"
 local SOP = require("kpcrew.Addon.SOP.SOP")
 
 ng_imgui_current_main_tab = 0
-ng_imgui_main_wnd_width = 950
+ng_imgui_main_wnd_width = 960
 ng_imgui_main_wnd_height = 950
 ng_weightunit = "KGS"
 ng_kgslbs = 1
+ng_settings_icao = ng_acft_select(2)
 ng_editor_system_icao = ng_acft_select(2)
 ng_editor_system_json = nil
 ng_editor_sop_icao = ng_acft_select(1)
@@ -33,12 +34,18 @@ ng_editor_sop_expcol3 = 0
 ng_editor_sop_newflow = ""
 ng_editor_sop_newitem = ""
 ng_editor_sop_newelement = ""
+ng_editor_sop_flowcopy = nil
+ng_editor_sop_flowcopyname = ""
+ng_editor_sop_itemcopy = nil
+ng_editor_sop_itemcopyname = ""
 ng_editor_system_newsystem = ""
 ng_editor_system_newelement = ""
+ng_editor_system_newelement2 = {}
 
 -- -----------------------------------------------------------------------------------------
--- Main window rendering
+-- Main window rendering #mainwindow
 -- -----------------------------------------------------------------------------------------
+
 -- Draw the Briefing main window
 function ng_draw_main_window()
 
@@ -52,8 +59,8 @@ function ng_draw_main_window()
 	end
 	
 -- -----------------------------------------------------------------------------------------
--- Draw the Status block on top of briefing window
-	local function render_status_block()
+-- Draw the Status block on top of briefing window #statusblock
+	local function render_main_status()
 
 		-- Load latest simbrief flight plan
 		ng_imgui_in_button("SIMBRIEF", "SIMBRIEF", 70, 20, 
@@ -66,6 +73,12 @@ function ng_draw_main_window()
 		imgui.SameLine()
 		ng_imgui_in_button("savebrief","SAVE", 70, 20,
 			function () ng_getBriefPrefs():save() end)
+			
+		imgui.SameLine()
+		ng_imgui_out_text(color_red, "Simbrief date/time generated: ", color_yellow, ng_getBriefPrefs():get("general:simbriefgentime"))
+
+		imgui.SameLine()
+		ng_imgui_out_text(color_white, "Current date/time: ", color_yellow, string.upper(os.date("%d.%m.%Y - %H:%M")))
 
 		imgui.Separator()
 		
@@ -184,7 +197,7 @@ function ng_draw_main_window()
 		-- --------------------------------------------------------------------------------------
 		ng_imgui_out_text(color_white,"Cruise altitude (level):")
 		imgui.SameLine()
-		ng_imgui_in_intfield("calt", 45, color_white, 0, ng_getBriefPrefs():get("general:cruisealtitude"), 
+		ng_imgui_in_intfield("calt", 45, 0xFF1b9af8, 0, ng_getBriefPrefs():get("general:cruisealtitude"), 
 			function (textout) ng_getBriefPrefs():set("general:cruisealtitude",textout) end)
 		imgui.SameLine()
 		ng_imgui_out_text(color_green, "(FL" .. ng_getBriefPrefs():get("general:cruisealtitude")/100 .. ")" )
@@ -245,10 +258,15 @@ function ng_draw_main_window()
 		imgui.Separator()
 
 	end
+-- -----------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------
+-- Flight modules display blocks #flightmodules
+-- -----------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------
 -- Draw the Planning section FUEL
-	local function render_fuel_block()
+	local function render_flight_fuel()
 
 -- --------------------------------------------
 -- FUEL				<WUNIT>			HHMM
@@ -277,49 +295,49 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"TRIP FUEL")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("fuel:enroute")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("fuel:enroute")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:enroute")))
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:estenroute")))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"ALTERNATE")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("fuel:alternate")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("fuel:alternate")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, "")
+			ng_imgui_out_text(color_grey, "")
 			
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"FINAL RESERVE")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("fuel:alternate")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("fuel:alternate")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:reserve")))
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:reserve")))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"TAXI FUEL")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("fuel:taxi")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("fuel:taxi")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:taxi_out")))
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:taxiout")))
 			
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"MINIMUM BLOCK")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("fuel:mintakeoff")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("fuel:mintakeoff")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:endurance")))
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:endurance")))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"EXTRA FUEL")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("fuel:extra")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("fuel:extra")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:extrafuel")))
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:extrafuel")))
 
 			imgui.Separator()
 
@@ -327,9 +345,9 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"PLAN BLOCK")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("fuel:plantakeoff")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("fuel:plantakeoff")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:schedblock")))
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:endurance")))
 			
 			imgui.Separator()
 			imgui.Separator()
@@ -337,10 +355,11 @@ function ng_draw_main_window()
 		imgui.EndTable()	
 	
 	end
+-- -----------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------
 -- Draw the Planning section Weights
-	local function render_weights_block()
+	local function render_flight_weights()
 	
 -- --------------------------------------------
 -- WEIGHTS			<WUNIT>			MAX/ACF
@@ -375,74 +394,74 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"EST ZFW")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("weights:estzfw")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("weights:estzfw")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxzfw")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxzfw")*ng_kgslbs))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"EST TOW")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("weights:esttow")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("weights:esttow")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxtow")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxtow")*ng_kgslbs))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"EST LDW")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("weights:estldw")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("weights:estldw")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxldw")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxldw")*ng_kgslbs))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"EST LAND FUEL")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("fuel:planlanding")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("fuel:planlanding")*ng_kgslbs))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"CARGO WEIGHT")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("weights:cargo")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("weights:cargo")*ng_kgslbs))
 						
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"PAYLOAD")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("weights:payload")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("weights:payload")*ng_kgslbs))
 			imgui.TableNextColumn()
-			local pcolor = (ng_getBriefPrefs():get("weights:payload")*ng_kgslbs > ng_get_MaxPayload() and color_red or color_green) 
+			local pcolor = (ng_getBriefPrefs():get("weights:payload")*ng_kgslbs > ng_get_MaxPayload() and color_red or color_grey) 
 			ng_imgui_out_text(pcolor, string.format("%6.0f MAX",ng_get_MaxPayload()))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"FREIGHT ADDED")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("weights:freightadded")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("weights:freightadded")*ng_kgslbs))
 						
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"PAX WGT/CNT")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f / %3.0f", ng_getBriefPrefs():get("weights:paxweight")*ng_kgslbs, 
+			ng_imgui_out_text(color_grey, string.format("%6.0f / %3.0f", ng_getBriefPrefs():get("weights:paxweight")*ng_kgslbs, 
 				ng_getBriefPrefs():get("weights:paxcount")))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"BAG WGT/CNT")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f / %3.0f",ng_getBriefPrefs():get("weights:bagweight")*ng_kgslbs, 
+			ng_imgui_out_text(color_grey, string.format("%6.0f / %3.0f",ng_getBriefPrefs():get("weights:bagweight")*ng_kgslbs, 
 				ng_getBriefPrefs():get("weights:bagcount")))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"DOW")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_getBriefPrefs():get("weights:oew")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("weights:oew")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_get_DOW()))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_get_DOW()))
 			
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
@@ -451,23 +470,23 @@ function ng_draw_main_window()
 			ng_imgui_in_intfield("*BLOCK FUEL:", 50, color_white, 0, ng_getBriefPrefs():get("fuel:planramp")*ng_kgslbs, 
 			function (textout) ng_getBriefPrefs():set("fuel:planramp",textout) end )
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f MAX",ng_getBriefPrefs():get("fuel:maxtanks")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f MAX",ng_getBriefPrefs():get("fuel:maxtanks")*ng_kgslbs))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"ACT ZFW")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_get_zfw()))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_get_zfw()))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxzfw")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxzfw")*ng_kgslbs))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"ACT WEIGHT")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f",ng_get_gross_weight()))
+			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_get_gross_weight()))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxtow")*ng_kgslbs))
+			ng_imgui_out_text(color_grey, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxtow")*ng_kgslbs))
 			
 			imgui.Separator()
 
@@ -475,7 +494,7 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"MAC CG")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, string.format("%6.2f",21.2)) --ng_getBriefPrefs():get("weights:paxweight")))
+			ng_imgui_out_text(color_grey, string.format("%6.2f",21.2)) --ng_getBriefPrefs():get("weights:paxweight")))
 			
 			imgui.Separator()
 			imgui.Separator()
@@ -483,10 +502,11 @@ function ng_draw_main_window()
 		imgui.EndTable()
 	
 	end
+-- -----------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------
 -- Draw the Planning section Times
-	local function render_times_block()
+	local function render_flight_times()
 	
 -- --------------------------------------------
 -- TIMES			EST HHMM		SCED HHMM
@@ -519,109 +539,96 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"TRIP TIME")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:estenroute")).." h")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:estenroute")).." h")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:schedenroute")).." h")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:schedenroute")).." h")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"OUT TIME")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:estout")).."Z")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:estout")).."Z")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:schedout")).."Z")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:schedout")).."Z")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"OFF TIME")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:estoff")).."Z")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:estoff")).."Z")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:schedoff")).."Z")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:schedoff")).."Z")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"ON TIME")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:eston")).."Z")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:eston")).."Z")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:schedon")).."Z")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:schedon")).."Z")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"IN TIME")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:estin")).."Z")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:estin")).."Z")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:schedin")).."Z")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:schedin")).."Z")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"BLOCK TIME")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:estblock")).." h")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:estblock")).." h")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:schedblock")).." h")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:schedblock")).." h")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"TAXI OUT TIME")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:taxiout")).." h")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:taxiout")).." h")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"TAXI IN TIME")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:taxiin")).." h")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:taxiin")).." h")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"RESERVE TIME")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:reserve")).." h")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:reserve")).." h")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"ENDURANCE")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:endurance")).." h")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:endurance")).." h")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"CONTINGENCY")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:contfuel")).." h")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:contfuel")).." h")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"EXTRA TIME")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, os.date("!%H%M",ng_getBriefPrefs():get("times:extrafuel")).." h")
+			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:extrafuel")).." h")
 
 		imgui.EndTable()
 				
 		imgui.Separator()
 		imgui.Separator()
 	end
+-- -----------------------------------------------------------------------------------------
 	
 -- -----------------------------------------------------------------------------------------
--- Draw Flight tab preflight planning
-	local function render_preflight_planning()
-		
-		-- block with fuel information
-		render_fuel_block()
-
-		-- render block with weights
-		render_weights_block()
-		
-		-- render times block
-		render_times_block()
-	end
-
--- -----------------------------------------------------------------------------------------
 -- Draw the Origin Airport information block
-	local function render_origin_arpt_info()
+	local function render_flight_origin_info()
 
 -- --------------------------------------------
 -- ORIGIN					ICAO/NAME OF ARPT
@@ -630,8 +637,6 @@ function ng_draw_main_window()
 -- TRANSITION ALT/LVL		99999 / FL99
 -- METAR					METAR text....
 -- [LD]
--- PARKING POSITION			[xxxx]
--- STAND TYPE				[type of stand v]
 -- PUSH DIRECTION			[direction push v]
 -- TAKEOFF RWY				[runway id v]
 -- LENGTH / TORA			99999 ft / 99999 ft
@@ -657,21 +662,53 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"AIRPORT ELEVATION")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, ng_getBriefPrefs():get("origin:elevation").." ft")
+			ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("origin:elevation").." ft")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"TRANSITION ALT/LVL")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, ng_getBriefPrefs():get("origin:transalt").." / FL"..ng_getBriefPrefs():get("origin:translvl")/100)
+			ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("origin:transalt").." / FL"..ng_getBriefPrefs():get("origin:translvl")/100)
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"METAR")  
 			ng_imgui_in_button("ldoriginmetar", "LD", 20, 20, 
-				function () ng_getBriefPrefs():set("origin:metar",ng_get_xp_metar(ng_getBriefPrefs():get("origin:icao"))) end)
+				function () 
+					ng_getBriefPrefs():set("origin:metar",ng_get_xp_metar(ng_getBriefPrefs():get("origin:icao"))) 
+					local qaltim = string.match(ng_getBriefPrefs():get("origin:metar"),"Q%d%d%d%d")
+					local aaltim = string.match(ng_getBriefPrefs():get("origin:metar"),"A%d%d%d%d")
+					if qaltim ~= nil then 
+						ng_getBriefPrefs():set("takeoff:qaltimeter", string.sub(qaltim,2)) 
+						ng_getBriefPrefs():set("takeoff:altimeter",(ng_getBriefPrefs():get("takeoff:qaltimeter") / 33.8639))
+					end
+					if aaltim ~= nil then 
+						ng_getBriefPrefs():set("takeoff:altimeter", string.sub(aaltim,2,3).."."..string.sub(aaltim,4,5)) 
+						ng_getBriefPrefs():set("takeoff:qaltimeter",(ng_getBriefPrefs():get("takeoff:altimeter") * 33.8639))
+					end
+					local wind = string.match(ng_getBriefPrefs():get("origin:metar"),"%d%d%d%d%dKT")
+					if wind ~= nil then
+						ng_getBriefPrefs():set("takeoff:windhdg", 0+string.sub(wind,1,3))
+						ng_getBriefPrefs():set("takeoff:windspd", 0+string.sub(wind,4,5))
+					end
+					local temps = string.match(ng_getBriefPrefs():get("origin:metar"),"M%d%d/")
+					if temps ~= nil then
+						ng_getBriefPrefs():set("takeoff:temperature", 0-string.sub(temps,2,3))
+					else
+						local temps = string.match(ng_getBriefPrefs():get("origin:metar"),"%d%d/%d%d")
+						if temps ~= nil then
+							ng_getBriefPrefs():set("takeoff:temperature", 0+string.sub(temps,1,2))
+						else
+							local temps = string.match(ng_getBriefPrefs():get("origin:metar"),"%d%d/M")
+							if temps ~= nil then
+								ng_getBriefPrefs():set("takeoff:temperature", 0+string.sub(temps,1,2))
+							end
+						end
+					end
+					
+				end)
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, ng_getBriefPrefs():get("origin:metar"))
+			ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("origin:metar"))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
@@ -701,28 +738,56 @@ function ng_draw_main_window()
 			ng_imgui_out_text(color_white,"TAKEOFF RWY")
 			imgui.TableNextColumn()
 			if #ng_briefing_to_rwys > 0 then
+				-- build takeoff runway list
 				local torwys = {""} for _, torwy in pairs(ng_briefing_to_rwys) do table.insert(torwys,torwy.identifier) end
+				
+				-- drop-down of runways with output function to change all runway related settings
 				ng_imgui_in_combolist("orwys", torwys, ng_getBriefPrefs():get("origin:selectedrwy"), 
-					function 
-						(textin) ng_getBriefPrefs():set("origin:selectedrwy",textin) 
+					function (textin) 
+						-- change the takeoff runway related settings to the new runway
+						ng_getBriefPrefs():set("origin:selectedrwy",textin) -- selectedrunway index to new index
 						ng_getBriefPrefs():set("origin:planrwy",torwys[textin+1])
-						ng_getBriefPrefs():set("takeoff:selectedflaps",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].flap_setting)
-						local splitTitle = ng_split(ng_getAcfPrefs():find("engines:tothrust"):getTitle(),"|") 
-						ng_getBriefPrefs():set("takeoff:selectedthrust",ng_indexOf(splitTitle,ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].thrust_setting)-1) 
-						local splitTitle = ng_split(ng_getAcfPrefs():find("air:takeoffbleeds"):getTitle(),"|")
-						ng_getBriefPrefs():set("takeoff:selectedbleed",ng_indexOf(splitTitle,ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].bleed_setting)-1) 
-						local splitTitle = ng_split(ng_getAcfPrefs():find("aice:takeoffaice"):getTitle(),"|")
-						ng_getBriefPrefs():set("takeoff:selectedaice",ng_indexOf(splitTitle,ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].anti_ice_setting)-1)
-						ng_getBriefPrefs():set("takeoff:rwyflextemp",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].flex_temperature)
-						ng_getBriefPrefs():set("takeoff:rwyv1",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].speeds_v1) 						
-						ng_getBriefPrefs():set("takeoff:rwyvr",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].speeds_vr) 						
-						ng_getBriefPrefs():set("takeoff:rwyv2",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].speeds_v2) 						
-						ng_getBriefPrefs():set("takeoff:inithdg",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].magnetic_course)				
-					end, ddwidth)
+						
+						-- takeoff flaps
+						local splitTitle = ng_split(ng_getAcfPrefs():get("controls:toflapslbl"),"|")
+						ng_getBriefPrefs():set("takeoff:selectedflaps",ng_indexOf(splitTitle,ng_briefing_to_rwys[textin].flap_setting)-1)
+
+						-- takeoff thrust settings and flex temp
+						if ng_getAcfPrefs():get("air:hastothrust") then
+							local splitTitle = ng_split(ng_getAcfPrefs():get("engines:tothrust"),"|") 
+							ng_getBriefPrefs():set("takeoff:selectedthrust",ng_indexOf(splitTitle,ng_briefing_to_rwys[textin].thrust_setting)-1) 
+							ng_getBriefPrefs():set("takeoff:rwyflextemp",ng_briefing_to_rwys[textin].flex_temperature)
+						end
+						
+						-- has engine bleeds
+						if ng_getAcfPrefs():get("air:hasenginebleeds") then
+							local splitTitle = ng_split(ng_getAcfPrefs():get("air:takeoffbleeds"),"|")
+							ng_getBriefPrefs():set("takeoff:selectedbleed",ng_indexOf(splitTitle,ng_briefing_to_rwys[textin].bleed_setting)-1) 
+						end 
+						
+						-- anti-ice settings
+						local splitTitle = ng_split(ng_getAcfPrefs():get("aice:takeoffaice"),"|")
+						if ng_briefing_to_rwys[textin].anti_ice_setting == "N/A" or ng_briefing_to_rwys[textin].anti_ice_setting == nil then 
+							ng_briefing_to_rwys[textin].anti_ice_setting = "OFF"
+						end
+						ng_getBriefPrefs():set("takeoff:selectedaice",ng_indexOf(splitTitle,ng_briefing_to_rwys[textin].anti_ice_setting)-1)
+						
+						-- vspeeds
+						ng_getBriefPrefs():set("takeoff:rwyv1",ng_briefing_to_rwys[textin].speeds_v1) 						
+						ng_getBriefPrefs():set("takeoff:rwyvr",ng_briefing_to_rwys[textin].speeds_vr) 						
+						ng_getBriefPrefs():set("takeoff:rwyv2",ng_briefing_to_rwys[textin].speeds_v2) 			
+						
+						-- initial heading runway
+						ng_getBriefPrefs():set("takeoff:inithdg",ng_briefing_to_rwys[textin].magnetic_course)
+						
+					end, 
+				ddwidth)
 			else
+				-- alternatively show planned runway as text field
 				ng_imgui_in_tfield("orwy", ddwidth, color_white, 10, ng_getBriefPrefs():get("origin:planrwy"), 
 					function (textout) ng_getBriefPrefs():set("origin:planrwy",textout) end )				
 			end
+-- -----------------------------------------------------------------------------------------
 			
 -- only show if TLR takeoff section is available
 			if #ng_briefing_to_rwys > 0 then
@@ -733,41 +798,48 @@ function ng_draw_main_window()
 				imgui.TableNextColumn()
 				ng_getBriefPrefs():set("takeoff:rwylength",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].length)
 				ng_getBriefPrefs():set("takeoff:rwytora",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].length_tora)
-				ng_imgui_out_text(color_green, ng_getBriefPrefs():get("takeoff:rwylength").." ft / "..ng_getBriefPrefs():get("takeoff:rwytora").." ft")
+				ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("takeoff:rwylength").." ft / "..ng_getBriefPrefs():get("takeoff:rwytora").." ft")
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"RWY ELEVATION")
 				imgui.TableNextColumn()
 				ng_getBriefPrefs():set("takeoff:rwyelevation",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].elevation)
-				ng_imgui_out_text(color_green, ng_getBriefPrefs():get("takeoff:rwyelevation").." ft")
+				ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("takeoff:rwyelevation").." ft")
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"MAGNETIC COURSE")
 				imgui.TableNextColumn()
 				ng_getBriefPrefs():set("takeoff:rwycourse",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].magnetic_course)
-				ng_imgui_out_text(color_green, ng_getBriefPrefs():get("takeoff:rwycourse"))
+				ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("takeoff:rwycourse"))
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"HEAD / CROSS WIND")
 				imgui.TableNextColumn()
-				ng_getBriefPrefs():set("takeoff:rwyheadwind",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].headwind_component)
-				ng_getBriefPrefs():set("takeoff:rwycrosswind",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].crosswind_component)
-				ng_imgui_out_text(color_green, ng_getBriefPrefs():get("takeoff:rwyheadwind").." kts / "..ng_getBriefPrefs():get("takeoff:rwycrosswind").." kts")
+				-- ng_getBriefPrefs():set("takeoff:rwyheadwind",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].headwind_component)
+				-- ng_getBriefPrefs():set("takeoff:rwycrosswind",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].crosswind_component)
+				-- ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("takeoff:rwyheadwind").." kts / "..ng_getBriefPrefs():get("takeoff:rwycrosswind").." kts")
+				ng_getBriefPrefs():set("takeoff:rwyheadwind",ng_calc_headwind_spd(ng_getBriefPrefs():get("takeoff:windhdg"),ng_getBriefPrefs():get("takeoff:windspd"),ng_getBriefPrefs():get("takeoff:rwycourse")))
+				ng_getBriefPrefs():set("takeoff:rwycrosswind",ng_calc_crosswind_spd(ng_getBriefPrefs():get("takeoff:windhdg"),ng_getBriefPrefs():get("takeoff:windspd"),ng_getBriefPrefs():get("takeoff:rwycourse")))
+				ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("takeoff:rwyheadwind").." kts / "..ng_getBriefPrefs():get("takeoff:rwycrosswind").." kts")
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"WIND | TEMP")
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_green, string.format("%03.0f",ng_getBriefPrefs():get("takeoff:windhdg")).."/"..string.format("%03.0f",ng_getBriefPrefs():get("takeoff:windspd")).." | "..ng_getBriefPrefs():get("takeoff:temperature").." C")
+				ng_imgui_out_text(color_grey, string.format("%03.0f",ng_getBriefPrefs():get("takeoff:windhdg")).."/"..string.format("%02.0f",ng_getBriefPrefs():get("takeoff:windspd")).." | "..ng_getBriefPrefs():get("takeoff:temperature").." C")
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"SURFACE CONDITION")
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_green, string.upper(ng_getBriefPrefs():get("takeoff:surfacecond")))
+				local splitTitle = ng_split("|dry|wet","|")
+				ng_imgui_in_combolist("osurfcond", splitTitle, ng_indexOf(splitTitle,ng_getBriefPrefs():get("takeoff:surfacecond"))-1, 
+					function (textin) 
+						ng_getBriefPrefs():set("takeoff:surfacecond",splitTitle[textin+1]) 
+					end, ddwidth)
 
 			end
 
@@ -775,10 +847,11 @@ function ng_draw_main_window()
 		imgui.Separator()
 	
 	end
+-- -----------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------
 -- Draw the Departure block
-	local function render_departure_info()
+	local function render_flight_dep_info()
 
 -- --------------------------------------------
 -- DEPARTURE				[depearturename]
@@ -811,7 +884,7 @@ function ng_draw_main_window()
 			ng_imgui_out_text(color_white,"DEPARTURE TYPE")
 			imgui.TableNextColumn()
 			local splitTitle = ng_split(ng_getBriefPrefs():find("origin:deptype"):getTitle(),"|")
-			ng_imgui_in_combolist("odeptype", splitTitle, ng_getBriefPrefs():get("origin:deptype"), 
+			ng_imgui_in_combolist("Odeptype", splitTitle, ng_getBriefPrefs():get("origin:deptype"), 
 				function (textin) ng_getBriefPrefs():set("origin:deptype",textin) end, ddwidth)
 
 			imgui.TableNextRow()
@@ -833,25 +906,49 @@ function ng_draw_main_window()
 			ng_imgui_out_text(color_white,"TAKEOFF FLAPS")
 			imgui.TableNextColumn()
 			local splitTitle = ng_split(ng_getAcfPrefs():get("controls:toflapslbl"),"|")
-			-- ng_imgui_in_combolist("oflaps", splitTitle, ng_getBriefPrefs():get("takeoff:selectedflaps"), 
-				-- function (textin) ng_getBriefPrefs():set("takeoff:selectedflaps",textin) end, ddwidth)
+			ng_imgui_in_combolist("oflaps", splitTitle, ng_getBriefPrefs():get("takeoff:selectedflaps"), 
+				function (textin) ng_getBriefPrefs():set("takeoff:selectedflaps",textin) end, ddwidth)
 
-			imgui.TableNextRow()
-			imgui.TableNextColumn()
-			ng_imgui_out_text(color_white,"TAKEOFF THRUST")
-			imgui.TableNextColumn()
-			local splitTitle = ng_split(ng_getAcfPrefs():find("engines:tothrust"):getTitle(),"|")
-			ng_imgui_in_combolist("othrust", splitTitle, ng_getBriefPrefs():get("takeoff:selectedthrust"), 
-				function (textin) ng_getBriefPrefs():set("takeoff:selectedthrust",textin) end, ddwidth)
+			if ng_getAcfPrefs():get("air:hastothrust") then
+				imgui.TableNextRow()
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"TAKEOFF THRUST")
+				imgui.TableNextColumn()
+				local splitTitle = ng_split(ng_getAcfPrefs():get("engines:tothrust"),"|")
+				ng_imgui_in_combolist("othrust", splitTitle, ng_getBriefPrefs():get("takeoff:selectedthrust"), 
+					function (textin) ng_getBriefPrefs():set("takeoff:selectedthrust",textin) end, ddwidth)
+			end 
 
-			imgui.TableNextRow()
-			imgui.TableNextColumn()
-			ng_imgui_out_text(color_white,"TAKEOFF BLEEDS")
-			imgui.TableNextColumn()
-			local splitTitle = ng_split(ng_getAcfPrefs():find("air:takeoffbleeds"):getTitle(),"|")
-			ng_imgui_in_combolist("obleeds", splitTitle, ng_getBriefPrefs():get("takeoff:selectedbleed"), 
-				function (textin) ng_getBriefPrefs():set("takeoff:selectedbleed",textin) end, ddwidth)
+			if ng_getAcfPrefs():get("engines:hasflextemp") then 
+				imgui.TableNextRow()
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"TAKEOFF FLEX TEMP")
+				imgui.TableNextColumn()
+				ng_imgui_in_intfield("oflex", 30, color_white, 0, ng_getBriefPrefs():get("takeoff:rwyflextemp"), 
+					function (textout) ng_getBriefPrefs():set("takeoff:rwyflextemp",textout) end )
+			end		
 				
+			if ng_getAcfPrefs():get("air:hasenginebleeds") then
+				imgui.TableNextRow()
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"TAKEOFF BLEEDS")
+				imgui.TableNextColumn()
+				local splitTitle = ng_split(ng_getAcfPrefs():get("air:takeoffpacks"),"|")
+				if ng_getBriefPrefs():get("takeoff:selectedpacks") == nil then ng_getBriefPrefs():set("takeoff:selectedpacks",1) end
+				ng_imgui_in_combolist("opacks", splitTitle, ng_getBriefPrefs():get("takeoff:selectedpacks"), 
+					function (textin) ng_getBriefPrefs():set("takeoff:selectedpacks",textin) end, ddwidth)
+			end
+			
+			if ng_getAcfPrefs():get("air:haspacks") then
+				imgui.TableNextRow()
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"TAKEOFF PACKS")
+				imgui.TableNextColumn()
+				local splitTitle = ng_split(ng_getAcfPrefs():get("air:takeoffbleeds"),"|")
+				ng_imgui_in_combolist("obleeds", splitTitle, ng_getBriefPrefs():get("takeoff:selectedbleed"), 
+					function (textin) ng_getBriefPrefs():set("takeoff:selectedbleed",textin) end, ddwidth)
+			end
+			
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"TAKEOFF ANTI-ICE")
@@ -867,13 +964,6 @@ function ng_draw_main_window()
 			ng_imgui_in_floatfield("pitchtrim", ddwidth, color_white, 0, "%5.1f", ng_getBriefPrefs():get("takeoff:pitchtrim"), 
 				function (textout) ng_getBriefPrefs():set("takeoff:pitchtrim",textout) end )
 
-			imgui.TableNextRow()
-			imgui.TableNextColumn()
-			ng_imgui_out_text(color_white,"TAKEOFF FLEX TEMP")
-			imgui.TableNextColumn()
-			-- ng_imgui_in_intfield("otemp", ddwidth, color_white, 0, ng_getBriefPrefs():get("takeoff:rwyflextemp"), 
-				-- function (textout) ng_getBriefPrefs():set("takeoff:rwyflextemp",textout) end )
-					
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"TAKEOFF V1,VR,V2")
@@ -910,19 +1000,11 @@ function ng_draw_main_window()
 		imgui.EndTable()
 		imgui.Separator()
 	end
-	
 -- -----------------------------------------------------------------------------------------
--- Draw the Flight tab origin 
-	local function render_preflight_origin()
-	
-		render_origin_arpt_info()
-		render_departure_info()
-
-	end
 
 -- -----------------------------------------------------------------------------------------
 -- Draw the Origin Airport information block
-	local function render_destination_arpt_info()
+	local function render_flight_destination_info()
 
 -- --------------------------------------------
 -- DESTINATION				ICAO/NAME OF ARPT
@@ -932,7 +1014,7 @@ function ng_draw_main_window()
 -- METAR					METAR text....
 -- [LD]
 -- LANDING RWY				[runway id v]
--- LENGTH / LDA			99999 ft / 99999 ft
+-- LENGTH / LDA				99999 ft / 99999 ft
 -- RWY ELEVATION			99999 ft
 -- MAGNETIC COURSE			999
 -- HEAD / CROSS WIND		999 kts / 9999 kts
@@ -955,45 +1037,69 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"AIRPORT ELEVATION")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, ng_getBriefPrefs():get("destination:elevation").." ft")
+			ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("destination:elevation").." ft")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"TRANSITION ALT/LVL")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, ng_getBriefPrefs():get("destination:transalt").." / FL"..ng_getBriefPrefs():get("destination:translvl")/100)
+			ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("destination:transalt").." / FL"..ng_getBriefPrefs():get("destination:translvl")/100)
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"METAR")
 			ng_imgui_in_button("lddestmetar", "LD", 20, 20, 
-				function () ng_getBriefPrefs():set("destination:metar",ng_get_xp_metar(ng_getBriefPrefs():get("destination:icao"))) end)
+				function () 
+					ng_getBriefPrefs():set("destination:metar",ng_get_xp_metar(ng_getBriefPrefs():get("destination:icao"))) 
+					local qaltim = string.match(ng_getBriefPrefs():get("destination:metar"),"Q%d%d%d%d")
+					local aaltim = string.match(ng_getBriefPrefs():get("destination:metar"),"A%d%d%d%d")
+					if qaltim ~= nil then 
+						ng_getBriefPrefs():set("landing:qaltimeter", string.sub(qaltim,2)) 
+						ng_getBriefPrefs():set("landing:altimeter",(ng_getBriefPrefs():get("landing:qaltimeter") / 33.8639))
+					end
+					if aaltim ~= nil then 
+						ng_getBriefPrefs():set("landing:altimeter", string.sub(aaltim,2,3).."."..string.sub(aaltim,4,5)) 
+						ng_getBriefPrefs():set("landing:qaltimeter",(ng_getBriefPrefs():get("landing:altimeter") * 33.8639))
+					end
+					local wind = string.match(ng_getBriefPrefs():get("destination:metar"),"%d%d%d%d%dKT")
+					if wind ~= nil then
+						ng_getBriefPrefs():set("landing:windhdg", 0+string.sub(wind,1,3))
+						ng_getBriefPrefs():set("landing:windspd", 0+string.sub(wind,4,5))
+					end
+					local temps = string.match(ng_getBriefPrefs():get("destination:metar"),"M%d%d/")
+					if temps ~= nil then
+						ng_getBriefPrefs():set("landing:temperature", 0-string.sub(temps,2,3))
+					else
+						local temps = string.match(ng_getBriefPrefs():get("destination:metar"),"%d%d/%d%d")
+						if temps ~= nil then
+							ng_getBriefPrefs():set("landing:temperature", 0+string.sub(temps,1,2))
+						else
+							local temps = string.match(ng_getBriefPrefs():get("destination:metar"),"%d%d/M")
+							if temps ~= nil then
+								ng_getBriefPrefs():set("landing:temperature", 0+string.sub(temps,1,2))
+							end
+						end
+					end
+				end)
 			
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_green, ng_getBriefPrefs():get("destination:metar"))
+			ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("destination:metar"))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"LANDING RWY")
 			imgui.TableNextColumn()
-			if #ng_briefing_ld_rwys > 0 then -- takeoff runways exist in sim
+			if #ng_briefing_ld_rwys > 0 then -- landing runways exist in sim
+				
 				local ldrwys = {""} for _, ldrwy in pairs(ng_briefing_ld_rwys) do table.insert(ldrwys,ldrwy.identifier) end
 				ng_imgui_in_combolist("drwys", ldrwys, ng_getBriefPrefs():get("destination:selectedrwy"), 
 					function 
-						(textin) ng_getBriefPrefs():set("origin:selectedrwy",textin) 
-						ng_getBriefPrefs():set("origin:planrwy",torwys[textin+1])
-						ng_getBriefPrefs():set("takeoff:selectedflaps",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].flap_setting)
-						local splitTitle = ng_split(ng_getAcfPrefs():find("engines:tothrust"):getTitle(),"|") 
-						ng_getBriefPrefs():set("takeoff:selectedthrust",ng_indexOf(splitTitle,ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].thrust_setting)-1) 
-						local splitTitle = ng_split(ng_getAcfPrefs():find("air:takeoffbleeds"):getTitle(),"|")
-						ng_getBriefPrefs():set("takeoff:selectedbleed",ng_indexOf(splitTitle,ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].bleed_setting)-1) 
-						local splitTitle = ng_split(ng_getAcfPrefs():find("aice:takeoffaice"):getTitle(),"|")
-						ng_getBriefPrefs():set("takeoff:selectedaice",ng_indexOf(splitTitle,ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].anti_ice_setting)-1)
-						ng_getBriefPrefs():set("takeoff:rwyflextemp",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].flex_temperature)
-						ng_getBriefPrefs():set("takeoff:rwyv1",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].speeds_v1) 						
-						ng_getBriefPrefs():set("takeoff:rwyvr",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].speeds_vr) 						
-						ng_getBriefPrefs():set("takeoff:rwyv2",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].speeds_v2) 						
-						ng_getBriefPrefs():set("takeoff:inithdg",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].magnetic_course)
+						(textin) 
+						ng_getBriefPrefs():set("destination:selectedrwy",textin) 
+						ng_getBriefPrefs():set("destination:planrwy",ldrwys[textin+1])
+						
+						-- ng_getBriefPrefs():set("takeoff:rwyv2",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].speeds_v2) 						
+
 					end, ddwidth)
 			else
 				ng_imgui_in_tfield("drwy", ddwidth, color_white, 10, ng_getBriefPrefs():get("destination:planrwy"), 
@@ -1008,67 +1114,83 @@ function ng_draw_main_window()
 				imgui.TableNextColumn()
 				ng_getBriefPrefs():set("landing:rwylength",ng_briefing_ld_rwys[ng_getBriefPrefs():get("destination:selectedrwy")].length)
 				ng_getBriefPrefs():set("landing:rwylda",ng_briefing_ld_rwys[ng_getBriefPrefs():get("destination:selectedrwy")].length_lda)
-				ng_imgui_out_text(color_green, ng_getBriefPrefs():get("landing:rwylength").." ft / "..ng_getBriefPrefs():get("landing:rwylda").." ft")
+				ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("landing:rwylength").." ft / "..ng_getBriefPrefs():get("landing:rwylda").." ft")
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"RWY ELEVATION")
 				imgui.TableNextColumn()
 				ng_getBriefPrefs():set("landing:rwyelevation",ng_briefing_ld_rwys[ng_getBriefPrefs():get("destination:selectedrwy")].elevation)
-				ng_imgui_out_text(color_green, ng_getBriefPrefs():get("landing:rwyelevation").." ft")
+				ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("landing:rwyelevation").." ft")
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"MAGNETIC COURSE")
 				imgui.TableNextColumn()
 				ng_getBriefPrefs():set("landing:rwycourse",ng_briefing_ld_rwys[ng_getBriefPrefs():get("destination:selectedrwy")].magnetic_course)
-				ng_imgui_out_text(color_green, ng_getBriefPrefs():get("landing:rwycourse"))
+				ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("landing:rwycourse"))
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"HEAD / CROSS WIND")
 				imgui.TableNextColumn()
-				ng_getBriefPrefs():set("landing:rwyheadwind",ng_briefing_ld_rwys[ng_getBriefPrefs():get("destination:selectedrwy")].headwind_component)
-				ng_getBriefPrefs():set("landing:rwycrosswind",ng_briefing_ld_rwys[ng_getBriefPrefs():get("destination:selectedrwy")].crosswind_component)
-				ng_imgui_out_text(color_green, ng_getBriefPrefs():get("landing:rwyheadwind").." kts / "..ng_getBriefPrefs():get("landing:rwycrosswind").." kts")
+				ng_getBriefPrefs():set("landing:rwyheadwind",ng_calc_headwind_spd(ng_getBriefPrefs():get("landing:windhdg"),ng_getBriefPrefs():get("landing:windspd"),ng_getBriefPrefs():get("landing:rwycourse")))
+				ng_getBriefPrefs():set("landing:rwycrosswind",ng_calc_crosswind_spd(ng_getBriefPrefs():get("landing:windhdg"),ng_getBriefPrefs():get("landing:windspd"),ng_getBriefPrefs():get("landing:rwycourse")))
+				ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("landing:rwyheadwind").." kts / "..ng_getBriefPrefs():get("landing:rwycrosswind").." kts")
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"WIND | TEMP")
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_green, string.format("%03.0f",ng_getBriefPrefs():get("landing:windhdg")).."/"..string.format("%03.0f",ng_getBriefPrefs():get("landing:windspd")).." | "..ng_getBriefPrefs():get("landing:temperature").." C")
+				ng_imgui_out_text(color_grey, string.format("%03.0f",ng_getBriefPrefs():get("landing:windhdg")).."/"..string.format("%02.0f",ng_getBriefPrefs():get("landing:windspd")).." | "..ng_getBriefPrefs():get("landing:temperature").." C")
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"SURFACE CONDITION")
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_green, string.upper(ng_getBriefPrefs():get("landing:surfacecond")))
+				local splitTitle = ng_split("|dry|wet","|")
+				ng_imgui_in_combolist("osurfcond", splitTitle, ng_indexOf(splitTitle,ng_getBriefPrefs():get("landing:surfacecond"))-1, 
+					function (textin) 
+						ng_getBriefPrefs():set("landing:surfacecond",splitTitle[textin+1]) 
+						
+						local splitTitle = ng_split(ng_getAcfPrefs():get("controls:ldflapslbl"),"|")
+						if ng_getBriefPrefs():get("landing:surfacecond") == "dry" then
+							ng_getBriefPrefs():set("landing:selectedflaps",ng_indexOf(splitTitle,ng_getBriefPrefs():get("landing:dryflaps"))-1)
+						else
+							ng_getBriefPrefs():set("landing:selectedflaps",ng_indexOf(splitTitle,ng_getBriefPrefs():get("landing:wetflaps"))-1)
+						end
+
+						if ng_getAcfPrefs():get("general:hasautobrk") then 
+							if ng_getBriefPrefs():get("landing:surfacecond") == "dry" then
+								ng_getBriefPrefs():set("landing:selectedabrk",ng_indexOf(splitTitle,ng_getBriefPrefs():get("landing:drybrakes"))-1)
+							else
+								ng_getBriefPrefs():set("landing:selectedabrk",ng_indexOf(splitTitle,ng_getBriefPrefs():get("landing:wetbrakes"))-1)
+							end
+						end
+
+						if ng_getBriefPrefs():get("landing:surfacecond") == "dry" then
+							ng_getBriefPrefs():set("landing:rwyvref",ng_getBriefPrefs():get("landing:dryvref"))
+							ng_getBriefPrefs():set("landing:rwyvapp",ng_getBriefPrefs():get("landing:dryvref")+5)
+						else
+							ng_getBriefPrefs():set("landing:rwyvref",ng_getBriefPrefs():get("landing:wetvref"))
+							ng_getBriefPrefs():set("landing:rwyvapp",ng_getBriefPrefs():get("landing:wetvref")+5)
+						end
+						
+					end, ddwidth)
+
+				-- ng_imgui_out_text(color_grey, string.upper(ng_getBriefPrefs():get("landing:surfacecond")))
 
 			end
-
-			imgui.TableNextRow()
-			imgui.TableNextColumn()
-			ng_imgui_out_text(color_white,"PARKING POSITION")
-			imgui.TableNextColumn()
-			ng_imgui_in_tfield("DPARKPOS", ddwidth, color_white, 10, ng_getBriefPrefs():get("destination:stand"), 
-				function (textout) ng_getBriefPrefs():set("destination:stand",textout) end )
-
-			imgui.TableNextRow()
-			imgui.TableNextColumn()
-			ng_imgui_out_text(color_white,"STAND TYPE")
-			imgui.TableNextColumn()
-			local splitTitle = ng_split(ng_getBriefPrefs():find("destination:standtype"):getTitle(),"|")
-			ng_imgui_in_combolist("dparktype", splitTitle, ng_getBriefPrefs():get("destination:standtype"),
-				function (textin) ng_getBriefPrefs():set("destination:standtype",textin) end, ddwidth)
 
 		imgui.EndTable()
 		imgui.Separator()
 	
 	end
+-- -----------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------
 -- draw the Flight tab destination		
-	local function render_arrival_info() 
+	local function render_flight_arr_info() 
 
 -- ----------------------------------------------
 -- ARRIVAL					[depearturename]
@@ -1086,6 +1208,8 @@ function ng_draw_main_window()
 -- LANDING ANTI-ICE			[aice_setting v]
 -- SPEEDS VREF, VAPP		[999] [999]
 -- *BARO Q/A				[9999] [>][<][99.99]		
+-- PARKING POSITION			[xxxx]
+-- STAND TYPE				[type of stand v]
 -- ----------------------------------------------
 
 		imgui.BeginTable("arrivalinfo",2)
@@ -1117,17 +1241,19 @@ function ng_draw_main_window()
 			ng_imgui_out_text(color_white,"LANDING FLAPS")
 			imgui.TableNextColumn()
 			local splitTitle = ng_split(ng_getAcfPrefs():get("controls:ldflapslbl"),"|")
-			-- ng_imgui_in_combolist("dflaps", splitTitle, ng_getBriefPrefs():get("landing:selectedflaps"), 
-				-- function (textin) ng_getBriefPrefs():set("landing:selectedflaps",textin) end, ddwidth)
+			ng_imgui_in_combolist("dflaps", splitTitle, ng_getBriefPrefs():get("landing:selectedflaps"), 
+				function (textin) ng_getBriefPrefs():set("landing:selectedflaps",textin) end, ddwidth)
 
-			imgui.TableNextRow()
-			imgui.TableNextColumn()
-			ng_imgui_out_text(color_white,"LANDING BLEEDS")
-			imgui.TableNextColumn()
-			local splitTitle = ng_split(ng_getAcfPrefs():find("air:landingbleeds"):getTitle(),"|")
-			ng_imgui_in_combolist("dbleeds", splitTitle, ng_getBriefPrefs():get("landing:selectedbleed"), 
-				function (textin) ng_getBriefPrefs():set("landing:selectedbleed",textin) end, ddwidth)
-				
+			if ng_getAcfPrefs():get("general:hasenginebleeds") then
+				imgui.TableNextRow()
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"LANDING BLEEDS")
+				imgui.TableNextColumn()
+				local splitTitle = ng_split(ng_getAcfPrefs():get("air:landingbleeds"),"|")
+				ng_imgui_in_combolist("dbleeds", splitTitle, ng_getBriefPrefs():get("landing:selectedbleed"), 
+					function (textin) ng_getBriefPrefs():set("landing:selectedbleed",textin) end, ddwidth)
+			end
+			
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"LANDING ANTI-ICE")
@@ -1154,55 +1280,542 @@ function ng_draw_main_window()
 				ng_imgui_in_combolist("abrkset", splitTitle, ng_getBriefPrefs():get("landing:selectedabrk"), 
 					function (textin) ng_getBriefPrefs():set("landing:selectedabrk",textin) end, ddwidth)
 			end
+
+			imgui.TableNextRow()
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_white,"DECISION HEIGHT/ALT")
+			imgui.TableNextColumn()
+			ng_imgui_in_intfield("ddh", 30, color_white, 0, ng_getBriefPrefs():get("landing:decisionheight"), 
+				function (textout) ng_getBriefPrefs():set("landing:decisionheight",textout) end ) imgui.SameLine()
+			ng_imgui_in_intfield("dda", 40, color_white, 0, ng_getBriefPrefs():get("landing:decisionalt"), 
+				function (textout) ng_getBriefPrefs():set("landing:decisionalt",textout) end ) 
+			
+			imgui.TableNextRow()
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_white,"GO-AROUND HDG/ALT")
+			imgui.TableNextColumn()
+			ng_imgui_in_intfield("dgahdg", 30, color_white, 0, ng_getBriefPrefs():get("landing:gaheading"), 
+				function (textout) ng_getBriefPrefs():set("landing:gaheading",textout) end ) imgui.SameLine()
+			ng_imgui_in_intfield("dgaalt", 40, color_white, 0, ng_getBriefPrefs():get("landing:gaaltitude"), 
+				function (textout) ng_getBriefPrefs():set("landing:gaaltitude",textout) end ) 
+
+			imgui.TableNextRow()
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_white,"PARKING POSITION")
+			imgui.TableNextColumn()
+			ng_imgui_in_tfield("DPARKPOS", ddwidth, color_white, 10, ng_getBriefPrefs():get("destination:stand"), 
+				function (textout) ng_getBriefPrefs():set("destination:stand",textout) end )
+
+			imgui.TableNextRow()
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_white,"STAND TYPE")
+			imgui.TableNextColumn()
+			local splitTitle = ng_split(ng_getBriefPrefs():find("destination:standtype"):getTitle(),"|")
+			ng_imgui_in_combolist("dparktype", splitTitle, ng_getBriefPrefs():get("destination:standtype"),
+				function (textin) ng_getBriefPrefs():set("destination:standtype",textin) end, ddwidth)
 			
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"*BARO Q/A")
 			imgui.TableNextColumn()
-			ng_imgui_in_floatfield("baroq", 40, color_white, 0, "%04.0f",ng_getBriefPrefs():get("landing:qaltimeter"), 
+			ng_imgui_in_floatfield("lbaroq", 40, color_white, 0, "%04.0f",ng_getBriefPrefs():get("landing:qaltimeter"), 
 				function (textout) ng_getBriefPrefs():set("landing:qaltimeter",textout) end ) imgui.SameLine()
-			ng_imgui_in_button("convbaro", "<", 15, 20, 
+			ng_imgui_in_button("lconvbaro", "<", 15, 20, 
 				function () ng_getBriefPrefs():set("landing:qaltimeter",(ng_getBriefPrefs():get("landing:altimeter") * 33.8639)) end ) imgui.SameLine()
-			ng_imgui_in_button("convbaro", ">", 15, 20, 
+			ng_imgui_in_button("lconvbaro", ">", 15, 20, 
 				function () ng_getBriefPrefs():set("landing:altimeter",(ng_getBriefPrefs():get("landing:qaltimeter") / 33.8639)) end ) imgui.SameLine()
-			ng_imgui_in_floatfield("baroa", 40, color_white, 0, "%05.2f", ng_getBriefPrefs():get("landing:altimeter"), 
+			ng_imgui_in_floatfield("lbaroa", 40, color_white, 0, "%05.2f", ng_getBriefPrefs():get("landing:altimeter"), 
 				function (textout) ng_getBriefPrefs():set("landing:altimeter",textout) end ) 
+
 			
 		imgui.EndTable()
 		imgui.Separator()
 	
 	end
+-- -----------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------
--- draw the Flight tab destination		
-	local function render_preflight_destination() -- destination
-	
-		imgui.BeginTable("destination",2)
+-- Draw the Alternate Airport information block
+	local function render_flight_alt_info()
 
-			render_destination_arpt_info()
-			render_arrival_info()
+-- --------------------------------------------
+-- ALTERNATE				ICAO/NAME OF ARPT
+-- --------------------------------------------
+-- AIRPORT ELEVATION		9999 ft
+-- TRANSITION ALT/LVL		99999 / FL99
+-- METAR					METAR text....
+-- [LD]
+-- LANDING RWY				[runway id v]
+-- LENGTH / LDA			99999 ft / 99999 ft
+-- RWY ELEVATION			99999 ft
+-- MAGNETIC COURSE			999
+-- HEAD / CROSS WIND		999 kts / 9999 kts
+-- WIND | TEMP				999/999 | 999 C
+-- BARO Q/A					Q9999 / A99.99
+-- SURFACE CONDITION		<condition>
+-- --------------------------------------------
+
+		imgui.BeginTable("alternateinfo",2)
+		
+			local ddwidth=146
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_yellow,"ALTERNATE")
+			imgui.Separator()
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_yellow, ng_getBriefPrefs():get("alternate:icao").." / "..ng_getBriefPrefs():get("alternate:name"))		
+			imgui.Separator()
 			
+			imgui.TableNextRow()
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_white,"AIRPORT ELEVATION")
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("alternate:elevation").." ft")
+
+			imgui.TableNextRow()
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_white,"TRANSITION ALT/LVL")
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("alternate:transalt").." / FL"..ng_getBriefPrefs():get("alternate:translvl")/100)
+
+			imgui.TableNextRow()
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_white,"METAR")
+			ng_imgui_in_button("ldaltnmetar", "LD", 20, 20, 
+				function () 
+					ng_getBriefPrefs():set("alternate:metar",ng_get_xp_metar(ng_getBriefPrefs():get("alternate:icao"))) 
+					local qaltim = string.match(ng_getBriefPrefs():get("alternate:metar"),"Q%d%d%d%d")
+					local aaltim = string.match(ng_getBriefPrefs():get("alternate:metar"),"A%d%d%d%d")
+					if qaltim ~= nil then 
+						ng_getBriefPrefs():set("alternate:qaltimeter", string.sub(qaltim,2)) 
+						ng_getBriefPrefs():set("alternate:altimeter",(ng_getBriefPrefs():get("alternate:qaltimeter") / 33.8639))
+					end
+					if aaltim ~= nil then 
+						ng_getBriefPrefs():set("alternate:altimeter", string.sub(aaltim,2,3).."."..string.sub(aaltim,4,5)) 
+						ng_getBriefPrefs():set("alternate:qaltimeter",(ng_getBriefPrefs():get("alternate:altimeter") * 33.8639))
+					end
+					local wind = string.match(ng_getBriefPrefs():get("alternate:metar"),"%d%d%d%d%dKT")
+					if wind ~= nil then
+						ng_getBriefPrefs():set("alternate:windhdg", 0+string.sub(wind,1,3))
+						ng_getBriefPrefs():set("alternate:windspd", 0+string.sub(wind,4,5))
+					end
+					local temps = string.match(ng_getBriefPrefs():get("alternate:metar"),"M%d%d/")
+					if temps ~= nil then
+						ng_getBriefPrefs():set("alternate:temperature", 0-string.sub(temps,2,3))
+					else
+						local temps = string.match(ng_getBriefPrefs():get("alternate:metar"),"%d%d/%d%d")
+						if temps ~= nil then
+							ng_getBriefPrefs():set("alternate:temperature", 0+string.sub(temps,1,2))
+						else
+							local temps = string.match(ng_getBriefPrefs():get("alternate:metar"),"%d%d/M")
+							if temps ~= nil then
+								ng_getBriefPrefs():set("alternate:temperature", 0+string.sub(temps,1,2))
+							end
+						end
+					end
+				end)
+			
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("alternate:metar"))
+
+			imgui.TableNextRow()
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_white,"RUNWAY")
+			imgui.TableNextColumn()
+			ng_imgui_in_tfield("arwy", ddwidth, color_white, 10, ng_getBriefPrefs():get("alternate:planrwy"), 
+				function (textout) ng_getBriefPrefs():set("alternate:planrwy",textout) end )				
+
+			imgui.TableNextRow()
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_white,"WIND | TEMP")
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_grey, string.format("%03.0f",ng_getBriefPrefs():get("alternate:windhdg")).."/"..string.format("%02.0f",ng_getBriefPrefs():get("alternate:windspd")).." | "..ng_getBriefPrefs():get("alternate:temperature").." C")
+
+			imgui.TableNextRow()
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_white,"HEAD / CROSS WIND")
+			imgui.TableNextColumn()
+			local rwyapphdg = 0
+			if ng_getBriefPrefs():get("alternate:planrwy") ~= nil and string.len(ng_getBriefPrefs():get("alternate:planrwy")) >= 2 then
+				rwyapphdg = string.match(ng_getBriefPrefs():get("alternate:planrwy"),"%d%d")+0*10
+			end
+			ng_getBriefPrefs():set("alternate:rwyheadwind",ng_calc_headwind_spd(ng_getBriefPrefs():get("alternate:windhdg"),ng_getBriefPrefs():get("alternate:windspd"),rwyapphdg))
+			ng_getBriefPrefs():set("alternate:rwycrosswind",ng_calc_crosswind_spd(ng_getBriefPrefs():get("alternate:windhdg"),ng_getBriefPrefs():get("alternate:windspd"),rwyapphdg))
+			ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("alternate:rwyheadwind").." kts / "..ng_getBriefPrefs():get("alternate:rwycrosswind").." kts")
+
+			imgui.TableNextRow()
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_white,"SURFACE CONDITION")
+			imgui.TableNextColumn()
+			local splitTitle = ng_split("|dry|wet","|")
+			ng_imgui_in_combolist("asurfcond", splitTitle, ng_indexOf(splitTitle,ng_getBriefPrefs():get("alternate:surfacecond"))-1, 
+					function (textin) ng_getBriefPrefs():set("alternate:surfacecond",splitTitle[textin+1]) end, ddwidth)
+
+			imgui.TableNextRow()
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_white,"*BARO Q/A")
+			imgui.TableNextColumn()
+			ng_imgui_in_floatfield("abaroq", 40, color_white, 0, "%04.0f",ng_getBriefPrefs():get("alternate:qaltimeter"), 
+				function (textout) ng_getBriefPrefs():set("alternate:qaltimeter",textout) end ) imgui.SameLine()
+			ng_imgui_in_button("aconvbaro", "<", 15, 20, 
+				function () ng_getBriefPrefs():set("alternate:qaltimeter",(ng_getBriefPrefs():get("alternate:altimeter") * 33.8639)) end ) imgui.SameLine()
+			ng_imgui_in_button("aconvbaro", ">", 15, 20, 
+				function () ng_getBriefPrefs():set("alternate:altimeter",(ng_getBriefPrefs():get("alternate:qaltimeter") / 33.8639)) end ) imgui.SameLine()
+			ng_imgui_in_floatfield("abaroa", 40, color_white, 0, "%05.2f", ng_getBriefPrefs():get("alternate:altimeter"), 
+				function (textout) ng_getBriefPrefs():set("alternate:altimeter",textout) end ) 
+
+		imgui.EndTable()
+		imgui.Separator()
+	
 	end
-			
+-- -----------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------
+-- draw the threat based briefing tab
+	local function render_briefing_departure() 
+
+			ng_imgui_out_text(color_yellow,"DEPARTURE BRIEFING")
+			imgui.Separator()
+			ng_imgui_out_text(color_white,"[T]hreats (PM, PF)")
+			ng_imgui_out_text(color_white,"[P]lan")
+			ng_imgui_out_text(color_white,"  - Taxi, Departure Runway")
+			ng_imgui_out_text(color_white,"  - Route (Clrnce, Flightplan, FMS XCHECK)")
+			ng_imgui_out_text(color_white,"  - Return (Emergency, T/O alt)")
+			ng_imgui_out_text(color_white,"  - Takeoff perf valid, perf/config issues")
+			ng_imgui_out_text(color_white,"[C]onsiderations")
+			imgui.Separator()
+			imgui.BeginTable("departurebrief",3)
+				imgui.TableNextColumn()
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"THREATS")
+				imgui.TableNextColumn()
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"Airport/RWY")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"ATC")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"Aircraft")
+				
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Contamination")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Clnc/Re-Route")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Systems")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Construction")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Arr/Dep amend")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"MELs")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Hotspots")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"RWY Change")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Automation")
+
+				imgui.TableNextColumn()
+				imgui.TableNextColumn()
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Performance")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"Adverse WX")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"OPS/Dispatch")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"Ground/Ramp")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Visibility")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Sched Press")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Handling")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Deicing")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Delays")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Congestion")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Winds")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Paperwork")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Logbook")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Precipitation")
+				imgui.TableNextColumn()
+				imgui.TableNextColumn()
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"Environment")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"Physiology")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"Cabin")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Terrain")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Fatigue")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Passengers")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Night")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Stress")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Interruptions")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Traffic")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Hydration")
+				imgui.TableNextColumn()
+
+				imgui.TableNextColumn()
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Nutrition")
+				imgui.TableNextColumn()
+
+			imgui.EndTable()
+		imgui.Separator()
+	end
+-- -----------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------
+-- draw the threat based briefing tab
+	local function render_briefing_arrival() 
+
+		imgui.Separator()
+
+			ng_imgui_out_text(color_yellow,"ARRIVAL BRIEFING")
+			imgui.Separator()
+			ng_imgui_out_text(color_white,"[T]hreats (PM, PF)")
+			ng_imgui_out_text(color_white,"[P]lan")
+			ng_imgui_out_text(color_white,"  - Route (STAR, Approach, M/A, Alt Fuel")
+			ng_imgui_out_text(color_white,"  - Lnd RWY, Assessment, LTP, Exit, Taxi")
+			ng_imgui_out_text(color_white,"  - Autobrakes, Reverse (if applicable)")
+			ng_imgui_out_text(color_white,"  - Flaps, VREF, Target Speed")
+			ng_imgui_out_text(color_white,"[C]onsiderations")
+			imgui.Separator()
+			imgui.BeginTable("arrivalbrief",3)
+				imgui.TableNextColumn()
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"THREATS")
+				imgui.TableNextColumn()
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"Airport/RWY")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"ATC")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"Aircraft")
+				
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Contamination")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Clnc/Re-Route")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Systems")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Construction")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Arr/Dep amend")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"MELs")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Hotspots")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"RWY Change")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Automation")
+
+				imgui.TableNextColumn()
+				imgui.TableNextColumn()
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Performance")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"Adverse WX")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"OPS/Dispatch")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"Ground/Ramp")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Visibility")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Sched Press")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Handling")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Deicing")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Delays")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Congestion")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Winds")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Paperwork")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Logbook")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Precipitation")
+				imgui.TableNextColumn()
+				imgui.TableNextColumn()
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"Environment")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"Physiology")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,"Cabin")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Terrain")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Fatigue")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Passengers")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Night")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Stress")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Interruptions")
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Traffic")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Hydration")
+				imgui.TableNextColumn()
+
+				imgui.TableNextColumn()
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"Nutrition")
+				imgui.TableNextColumn()
+
+			imgui.EndTable()
+		imgui.Separator()
+	end
+-- -----------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------
+-- draw the threat based briefing tab
+	local function render_briefing_flightstate() 
+-- ----------------------------------------------
+-- TIME OUT	HH:MM 	TIME OFF	HH:MM
+-- TIME IN	HH:MM	TIME ON		HH:MM
+-- -----
+-- ACT ZFW	999999	ACT GROSS	999999
+-- ACT FUEL	999999  -- FF/H
+-------
+-- AMB WIND	777/777	AMB TEMP	999
+-- CURR ALT	999999  CURR SPEED	999 kts
+
+			ng_imgui_out_text(color_yellow,"FLIGHT STATUS")
+			imgui.Separator()
+			imgui.BeginTable("flightstate",4)
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"TIME OUT")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_grey, ng_getBckVars():get("general:timeout"))
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"TIME OFF")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_grey, ng_getBckVars():get("general:timeoff"))
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"TIME IN")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_grey, ng_getBckVars():get("general:timein"))
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"TIME ON")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_grey, ng_getBckVars():get("general:timeon"))
+			imgui.Separator()
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"ACT ZFW")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow, string.format("%6.0f KG",get("sim/flightmodel/weight/m_total")-get("sim/flightmodel/weight/m_fuel_total")))
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"ACT GROSS")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow, string.format("%6.0f KG",get("sim/flightmodel/weight/m_total")))
+				
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"ACT FUEL")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow, string.format("%6.0f KG",get("sim/flightmodel/weight/m_fuel_total")))
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"FF KGS/H")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,  string.format("%6.0f",get("sim/cockpit2/engine/indicators/fuel_flow_kg_sec",0)*3600))
+			imgui.Separator()
+
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"AMB WIND")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow, string.format("%03.0f/%02.0f",get("sim/weather/wind_direction_degt"),get("sim/weather/wind_speed_kt")))
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"AMB TEMP")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow,  string.format("%4.1f C",get("sim/weather/temperature_ambient_c")))
+			imgui.Separator()
+				
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"CURR ALT")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow, string.format("%6.0f",get("sim/flightmodel2/position/pressure_altitude")))
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_white,"GRND SPD")
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_yellow, string.format("%3.0f KTS",get("sim/flightmodel2/position/groundspeed")))
+				
+
+			imgui.EndTable()
+		imgui.Separator()
+	end
+-- -----------------------------------------------------------------------------------------
+	
 -- -----------------------------------------------------------------------------------------
 -- draw the Flight tab
 	local function render_main_tab_flight()
-	
 		imgui.BeginChild("#tabmain")
 
 			local fstate = ng_getBckVars():get("general:flightstate")
-			render_status_block()
+			render_main_status()
 
 			imgui.Columns(3,"preflightcols",true)
 				imgui.BeginChild("preflightcol1")
 					
 					-- change context depending on flight phase
 					if fstate < 7 then
-						render_preflight_planning()
-					elseif fstate >= 7 and fstate <= 12 then
-						render_preflight_origin()
-					elseif fstate > 12 then
-						render_preflight_destination()
+						render_flight_times()
+						render_flight_fuel() 
+						render_flight_weights() 
+					elseif fstate >= 7 and fstate < 12 then
+						render_flight_origin_info()
+						render_flight_dep_info()
+					elseif fstate >= 12 then
+						render_flight_destination_info()
+						render_flight_arr_info()
 					end
 				imgui.EndChild()
 				
@@ -1212,10 +1825,16 @@ function ng_draw_main_window()
 					
 					-- change context depending on flight phase
 					if fstate < 7 then
-						render_preflight_origin()
-					elseif fstate >= 7 and fstate <= 12 then
-						render_preflight_destination()
-					elseif fstate > 12 then
+						render_flight_origin_info()
+						render_flight_dep_info()
+					elseif fstate >= 7 and fstate < 12 then
+						render_flight_times()
+						render_flight_fuel() 
+						render_briefing_flightstate()
+					elseif fstate >= 12 then
+						render_flight_times()
+						render_flight_fuel() 
+						render_briefing_flightstate()
 					end
 					
 				imgui.EndChild()
@@ -1226,16 +1845,24 @@ function ng_draw_main_window()
 				
 					-- change context depending on flight phase
 					if fstate < 7 then
-						render_preflight_destination()
-					elseif fstate >= 7 and fstate <= 12 then
-					elseif fstate > 12 then
+						render_flight_destination_info()
+						render_briefing_departure()
+					elseif fstate >= 7 and fstate < 12 then
+						render_flight_destination_info()
+						render_flight_alt_info()
+					elseif fstate >= 12 then
+						render_flight_alt_info()
+						render_briefing_arrival()
 					end
 					
 				imgui.EndChild()
 			imgui.Columns()
 		imgui.EndChild()		
 	end
+-- -----------------------------------------------------------------------------------------
 
+-- -----------------------------------------------------------------------------------------
+-- SOP / Systems Editor rendering
 -- -----------------------------------------------------------------------------------------
 -- draw the Full SOP tab
 	local function render_main_tab_sop()
@@ -1245,6 +1872,7 @@ function ng_draw_main_window()
 		imgui.EndChild()		
 		
 	end
+-- -----------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------
 -- SOP / Systems Editor rendering
@@ -1259,7 +1887,7 @@ function ng_draw_main_window()
 
 -- -----------------------------------------------------------------------------------------
 -- load system json with definitions of all systems
-		local function loadsystem()
+		local function systems_load()
 			local path = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_system_icao.."_systems.json"
 			if ng_file_exists(path) then
 				local json = require "kpcrew.json"
@@ -1270,10 +1898,11 @@ function ng_draw_main_window()
 				ng_editor_system_json = json.parse(jsonstr)
 			end
 		end
+-- -----------------------------------------------------------------------------------------
 		
 -- -----------------------------------------------------------------------------------------
 -- save the edited system json 
-		local function savesystem()
+		local function systems_save()
 			local path = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_system_icao.."_systems.json"
 			local prettyprint = require ("kpcrew.json_pretty_print")
 			local jsonout = prettyprint:pretty_print(ng_editor_system_json,nil,true)
@@ -1281,6 +1910,7 @@ function ng_draw_main_window()
 			filesystem:write(jsonout)
 			filesystem:close()
 		end
+-- -----------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------
 -- render lowest level in systems hierarchy - individual elements
@@ -1288,7 +1918,7 @@ function ng_draw_main_window()
 -- @param int ielement index of element node on parent systems table
 -- @param tablenode nsystem parent system node for this element 
 -- @param string category name
-		local function renderelements(nelement, ielement, nsystem, category)
+		local function systems_rnd_element(nelement, ielement, nsystem, category)
 
 -- common part for all types
 -- --------------------------------------------------------
@@ -1350,8 +1980,8 @@ function ng_draw_main_window()
 -- indx		| [                                      ][-][+]
 				ng_imgui_out_text(color_white, "indx") imgui.NextColumn()
 				if nelement.indx ~= nil then
-					ng_imgui_in_intfield(ename.."indx", 300, color_white, 1, 
-					nelement.indx, function (textout) nelement.indx = textout end) imgui.NextColumn()
+					ng_imgui_in_intfield(ename.."indx", 300, color_white, 0, 
+					nelement.indx, function (textout) if textout == -1 then nelement.indx = nil else nelement.indx = textout end end) imgui.NextColumn()
 				else
 					ng_imgui_in_button(ename.."addindx", "+", 15, 20, 
 						function () nelement.indx = 0 end) imgui.NextColumn()
@@ -1383,11 +2013,22 @@ function ng_draw_main_window()
 -- sth like return get(\"dataref/key\") == 1" for example
 				ng_imgui_out_text(color_white, "check()") imgui.NextColumn()
 				if nelement.fcheck ~= nil then
-					ng_imgui_in_tfield(ename.."fcheck", 300, color_white, 255, 
+					ng_imgui_in_tfield(ename.."funccheck", 300, color_white, 255, 
 					nelement.fcheck, function (textout) nelement.fcheck = textout end) imgui.NextColumn()
 				else
 					ng_imgui_in_button(ename.."addfcheck", "+", 15, 20, 
-						function () nelement.fcheck = "" end) imgui.NextColumn()
+						function () nelement.fcheck = "return true" end) imgui.NextColumn()
+				end
+
+-- trans()	| [<code that returns true/false>             ]
+-- transform the dataref to allow for special cases (e.g. math.ceil() by values)
+				ng_imgui_out_text(color_white, "trans()") imgui.NextColumn()
+				if nelement.functrans ~= nil then
+					ng_imgui_in_tfield(ename.."functrans", 300, color_white, 255, 
+					nelement.functrans, function (textout) nelement.functrans = textout end) imgui.NextColumn()
+				else
+					ng_imgui_in_button(ename.."addftrans", "+", 15, 20, 
+						function () nelement.functrans = "return true" end) imgui.NextColumn()
 				end
 
 -- ========== type specific fields to be added to common part
@@ -1533,7 +2174,7 @@ function ng_draw_main_window()
 					
 				end
 
-				if string.lower(category) == "custom" then
+				-- if string.lower(category) == "custom" then
 					
 					imgui.NextColumn()
 					imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
@@ -1541,19 +2182,20 @@ function ng_draw_main_window()
 							function () table.remove(nsystem.elements, ielement) end) 
 					imgui.PopStyleColor()
 
-				end 				
+				-- end 				
 				
 				imgui.Separator()
 				
 			imgui.EndGroup()
 		end
+-- -----------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------
 -- render the system level of systems
 -- @param tablenode nsystem system with elements to render
 -- @param int ielement index of system in parent table
 -- @param tablenode ncategory parent category
-		local function rendersystems(nsystem, isystem, ncategory)
+		local function systems_rnd_system(nsystem, isystem, ncategory)
 					
 			local newelement = { name="" }
 			
@@ -1564,7 +2206,7 @@ function ng_draw_main_window()
 				-- imgui.Separator()
 				
 				-- only show for custom category (others are fixed)
-				if string.lower(ncategory.name) == "custom" then
+				-- if string.lower(ncategory.name) == "custom" then
 					
 					imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
 					ng_imgui_in_button(sname.."del", "REMOVE SYSTEM "..sname, 367, 20, 
@@ -1577,7 +2219,7 @@ function ng_draw_main_window()
 					imgui.SameLine() ng_imgui_in_tfield(sname.."name", 250, color_white, 255, 
 						ng_editor_system_newelement, function (textout) ng_editor_system_newelement = textout end)
 						
-				end
+				-- end
 				
 				-- render elements of this system
 				if nsystem.elements ~= nil then
@@ -1587,52 +2229,60 @@ function ng_draw_main_window()
 						imgui.Columns(2, nsystem.name, true)					
 							imgui.SetColumnWidth(0, 65)
 							imgui.SetColumnWidth(1, 400)
-							renderelements(nelement,ielement,nsystem,ncategory.name)				
+							systems_rnd_element(nelement,ielement,nsystem,ncategory.name)				
 						imgui.Columns(1)
 					end
 
 				end
 			imgui.TreePop() end
 		end
+-- -----------------------------------------------------------------------------------------
 
-		local function rendercategory(ncategory)
+-- -----------------------------------------------------------------------------------------
+-- render the system category
+-- @param tablenode ncategory
+		local function systems_rnd_category(ncategory)
 		
 			-- Append system
 			local newsystem = { name="", elements={} }
 
 			if imgui.TreeNode(ncategory.name) then
 
-				if string.lower(ncategory.name) == "custom" then
+				-- if string.lower(ncategory.name) == "custom" then
 					
 					ng_imgui_in_button(ncategory.name.."append", "Append System", 180, 20, 
 						function () if ng_editor_system_newsystem ~= "" then newsystem.name=ng_editor_system_newsystem
 							table.insert (ncategory.systems, newsystem) ng_editor_system_newsystem = "" end end) 
 					imgui.SameLine() ng_imgui_in_tfield(ncategory.name.."name", 200, color_white, 255, 
 						ng_editor_system_newsystem, function (textout) ng_editor_system_newsystem = textout end)
-				end
+				-- end
 				for isystems,nsystems in ipairs(ncategory.systems) do
-					rendersystems(nsystems,isystems,ncategory)
+					systems_rnd_system(nsystems,isystems,ncategory)
 				end
 				
 			imgui.TreePop() end
 		end
+-- -----------------------------------------------------------------------------------------
 		
-		-- draw
-		local function rendersystem()
+-- -----------------------------------------------------------------------------------------
+-- draw the systems editor
+		local function render_systems_editor()
 			if ng_editor_system_json ~= nil then
 				imgui.SetNextItemOpen(true)
 				if imgui.TreeNode(ng_editor_system_json.title) then
 					for nidx,ncategory in pairs(ng_editor_system_json.addonsystems.categories) do
-						rendercategory(ncategory)
+						systems_rnd_category(ncategory)
 					end
 				imgui.TreePop() end
 			end
 		end
+-- -----------------------------------------------------------------------------------------
 
 -- -------------------------------------- SOP Editor 	
 
-		-- load sop json
-		local function loadsop()
+-- -----------------------------------------------------------------------------------------
+--- load SOP json with definitions of all flows
+		local function sop_load()
 			local path = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_sop_icao.."_sop.json"
 			if ng_file_exists(path) then
 				local json = require "kpcrew.json"
@@ -1641,12 +2291,13 @@ function ng_draw_main_window()
 				for line in file:lines() do jsonstr = jsonstr .. line end
 				file:close()
 				ng_editor_sop_json = json.parse(jsonstr)
-				print(ng_editor_sop_json.title)
 			end
 		end
+-- -----------------------------------------------------------------------------------------
 		
-		-- load system json
-		local function savesop()
+-- -----------------------------------------------------------------------------------------
+--- save edited SOP
+		local function sop_save()
 			local path = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_sop_icao.."_sop.json"
 			local prettyprint = require ("kpcrew.json_pretty_print")
 			local jsonout = prettyprint:pretty_print(ng_editor_sop_json,nil,true)
@@ -1654,9 +2305,14 @@ function ng_draw_main_window()
 			filesystem:write(jsonout)
 			filesystem:close()
 		end
+-- -----------------------------------------------------------------------------------------
 
-		-- render flow item
-		local function renderitem(nitem, nidx, nflow)
+-- -----------------------------------------------------------------------------------------
+--- render a flow item (step)
+-- @param tablenode item node
+-- @param int itemnode index
+-- @param tablenode parent flow
+		local function sop_rnd_flowitem(nitem, nidx, nflow)
 
 			local itemclasses = { "", "ProcedureItem", "ChecklistItem" }
 			local roles = { "", "ng_firole_PF", "ng_firole_PNF", "ng_firole_PM", "ng_firole_BOTH", 
@@ -1664,7 +2320,7 @@ function ng_draw_main_window()
 				"ng_firole_CM1", "ng_firole_CM2", "ng_firole_CM3", "ng_firole_ALL", "ng_firole_SYS" }
 			local actions = { "", "on", "off", "set", "toggle", "up", "dn", "function", " "}
 		
-			local nlabel = nitem.challenge
+			local nlabel = nflow.title..nitem.challenge..nidx
 
 			imgui.BeginGroup()
 				
@@ -1672,71 +2328,84 @@ function ng_draw_main_window()
 				
 					if imgui.TreeNode(nitem.challenge) then
 
-						ng_imgui_in_button(nlabel.."up", "UP", 20, 20, 
+						-- move flow item up and down in flow
+						ng_imgui_in_button(nlabel.."up", "UP", 23, 20, 
 							function () if nidx > 1 then table.insert(nflow.flowitem, nidx-1, table.remove(nflow.flowitem,nidx)) end end) 
-						imgui.SameLine() ng_imgui_in_button(nlabel.."dn", "DN", 20, 20, 
+						imgui.SameLine() ng_imgui_in_button(nlabel.."dn", "DN", 23, 20, 
 							function () if nidx < #nflow.flowitem then table.insert(nflow.flowitem, nidx+1, table.remove(nflow.flowitem,nidx)) end end) 
+						
+						-- put item in the copy buffer to paste in any flow
+						imgui.SameLine() ng_imgui_in_button(nlabel.."copy", "COPY", 50, 20, 
+							function () ng_editor_sop_itemcopy = nitem ng_editor_sop_itemcopyname = "" end) 
 
+						-- delete the item
 						imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
-							imgui.SameLine() ng_imgui_in_button(nlabel.."del", "REMOVE ITEM!", 90, 20, 
+							imgui.SameLine() ng_imgui_in_button(nlabel.."del", "REMOVE ITEM "..nitem.challenge, 260, 20, 
 								function () table.remove(nflow.flowitem, nidx) end) 
 						imgui.PopStyleColor()
 
--- --------------------------------------						
+						-- Class of item (Procedure or Checklist item)
 						ng_imgui_out_text(color_white, "Class:") imgui.SameLine()
 						if nitem.classname ~= nil then
 							ng_imgui_in_combolist(nlabel.."class", itemclasses, ng_indexOf(itemclasses,nitem.classname)-1, 
-								function (textin) nitem.classname=itemclasses[textin+1] end,320)
+								function (textin) nitem.classname=itemclasses[textin+1] end,323)
 						else
 							ng_imgui_in_button(nlabel.."addclass", "+", 15, 20, 
 								function () nitem.classname = "" end) 
 						end
-				
+						
+						-- Response text
 						ng_imgui_out_text(color_white, "Response:") imgui.SameLine()
 						if nitem.response ~= nil then
-							ng_imgui_in_tfield(nlabel.."response", 350, color_white, 255, 
+							ng_imgui_in_tfield(nlabel.."response", 305, color_white, 255, 
 							nitem.response, function (textout) nitem.response = string.upper(textout) end)
 						else
 							ng_imgui_in_button(nlabel.."addresp", "+", 15, 20, 
 								function () nitem.response = "" end) 
 						end
 						
+						-- Role for this item
 						ng_imgui_out_text(color_white, "Role:") imgui.SameLine()
 						if nitem.role ~= nil then
 							ng_imgui_in_combolist(nlabel.."role", roles, ng_indexOf(roles,nitem.role)-1, 
-								function (textin) nitem.role=roles[textin+1] end,320)
+								function (textin) nitem.role=roles[textin+1] end,330)
 						else
 							ng_imgui_in_button(nlabel.."addrole", "+", 15, 20, 
 								function () nitem.role = "" end) 
 						end
 						
+						-- Condition contains a "return <condition resulting in true/false>"
+						-- if you want to override then set to "return true"
 						ng_imgui_out_text(color_white, "Condition:") imgui.SameLine()
 						if nitem.condition ~= nil then
-							ng_imgui_in_tfield(nlabel.."condition", 500, color_white, 255, 
-								nitem.condition, function (textout) nitem.condition = textout end)
+							ng_imgui_in_tfield(nlabel.."condition", 298, color_white, 255, 
+								nitem.condition, function (textout) if textout == "--" then nitem.condition = nil else nitem.condition = textout end end)
 						else
 							ng_imgui_in_button(nlabel.."addcond", "+", 15, 20, 
-								function () nitem.condition = "" end) 
+								function () nitem.condition = "return true" end) 
 						end
 						
+						-- if nocheck is set and 1 the item will not be checked during execution
 						ng_imgui_out_text(color_white, "No check:") imgui.SameLine()
 						if nitem.nocheck ~= nil then
-							ng_imgui_in_intfield(nlabel.."nchk", 320, color_white, 0,   
-								nitem.nocheck, function (textout) nitem.nocheck = textout end) 
+							ng_imgui_in_intfield(nlabel.."nchk", 305, color_white, 0,   
+								nitem.nocheck, function (textout) if textout == "--" then nitem.nocheck = nil else nitem.nocheck = textout end end) 
 						else
 							ng_imgui_in_button(nlabel.."addncheck", "+", 15, 20, 
 								function () nitem.nocheck = 1 end) 
 						end
 
+						-- values > 0 will wait n seconds before the next step
 						ng_imgui_out_text(color_white, "delay:") imgui.SameLine()
 						if nitem.delay ~= nil then
-							ng_imgui_in_intfield(nlabel.."delay", 500, color_white, 1, 
+							ng_imgui_in_intfield(nlabel.."delay", 325, color_white, 1, 
 							nitem.delay, function (textout) nitem.delay = textout end)
 						else
 							ng_imgui_in_button(nlabel.."adddelay", "+", 15, 20, 
 								function () nitem.delay = 0 end) 
 						end
-								
+						
+						-- now list used systems and system elements
 						ng_imgui_out_text(color_white, "Systems used:") 
 
 						-- Append item
@@ -1745,90 +2414,131 @@ function ng_draw_main_window()
 						ng_imgui_in_button(nlabel.."append", "Append Element", 105, 20, 
 							function () if ng_editor_sop_newelement ~= "" then newelement.element=ng_editor_sop_newelement table.insert (nitem.setelements, newelement) ng_editor_sop_newelement= "" end end) 
 
-						imgui.SameLine() ng_imgui_in_tfield(nlabel.."name", 200, color_white, 255, 
-							ng_editor_sop_newelement, function (textout) ng_editor_sop_newelement = textout end)
+						-- prefill drop down beginning with element groups (#xxxx) and then individual elements
+						local categnames = {""} -- load a list of category names
 						
+						for k,n in pairs(ng_get_active_sys().categories) do 
+							for l,m in pairs(n.systems) do 
+								table.insert(categnames, "#"..m.name) 
+								for i,o in pairs(m.elements) do 
+									table.insert(categnames, o.name) 
+								end
+							end
+						end
+						table.sort(categnames) -- sort alphabetically
+						local catindx = ng_indexOf(categnames,ng_editor_sop_newelement)
+						if catindx == nil then catindx = 1 end
+	
+						imgui.SameLine() ng_imgui_in_combolist(nlabel.."categs", categnames, catindx-1,
+							function (textin) 
+								catindx = textin+1
+								ng_editor_sop_newelement = categnames[catindx]
+							end,262)
+
+						-- render added systems or system elements
 						if nitem.setelements ~= nil then 
 							
 							for eidx,nelement in ipairs(nitem.setelements) do
 
-								imgui.Separator()
-								if ng_editor_sop_expcol3 > 0 then imgui.SetNextItemOpen(ng_editor_sop_expand3) end
-
-								ng_imgui_in_button(nelement.element.."up", "UP", 20, 20, 
-									function () if eidx > 1 then table.insert(nitem.setelements, eidx-1, table.remove(nitem.setelements,eidx)) end end) 
-								imgui.SameLine() ng_imgui_in_button(nelement.element.."dn", "DN", 20, 20, 
-									function () if eidx < #nitem.setelements then table.insert(nitem.setelements, eidx+1, table.remove(nitem.setelements,eidx)) end end) 
-								imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
-									imgui.SameLine() ng_imgui_in_button(nelement.element.."del", "REMOVE ELEMENT!", 110, 20, 
-										function () table.remove(nitem.setelements, eidx) end) 
-								imgui.PopStyleColor()
-								
-								ng_imgui_out_text(color_white, "Name:") imgui.SameLine()
 								if nelement.element ~= nil then
-									ng_imgui_in_tfield(nlabel..nelement.element, 320, color_white, 255, 
-									nelement.element, function (textout) nelement.element = textout end)
-								else
-									ng_imgui_in_button(nlabel..nelement.element.."addnname", "+", 15, 20, 
-										function () nelement.element = "" end) 
-								end
-								
-								ng_imgui_out_text(color_white, "Action:") imgui.SameLine()
-								if nelement.action ~= nil then
-									ng_imgui_in_combolist(nlabel..nelement.element.."act", actions, ng_indexOf(actions,nelement.action)-1, 
-										function (textin) nelement.action=actions[textin+1] end,320)
-									-- ng_imgui_in_tfield(nlabel..nelement.element.."act", 320, color_white, 255, 
-										-- nelement.action, function (textout) nelement.action = textout end)
-								else
-									ng_imgui_in_button(nlabel..nelement.element.."addact", "+", 15, 20, 
-										function () nelement.action = "" end) 
-								end
-								
-								ng_imgui_out_text(color_white, "Value:") imgui.SameLine()
-								if nelement.value ~= nil then
-									ng_imgui_in_floatfield(nlabel..nelement.element.."val", 320, color_white, 0, "%7.2f",  
-										nelement.value, function (textout) nelement.value = textout end) 
-								else
-									ng_imgui_in_button(nlabel..nelement.element.."addval", "+", 15, 20, 
-										function () nelement.value = 0 end) 
-								end
-								
-								ng_imgui_out_text(color_white, "Condition:") imgui.SameLine()
-								if nelement.condition ~= nil then
-									ng_imgui_in_tfield(nlabel..nelement.element.."cond", 500, color_white, 255, 
-									nelement.condition, function (textout) nelement.condition = textout end)
-								else
-									ng_imgui_in_button(nlabel..nelement.element.."addcond", "+", 15, 20, 
-										function () nelement.condition = "" end) 
-								end
-																						
-								ng_imgui_out_text(color_white, "No check:") imgui.SameLine()
-								if nelement.nocheck ~= nil then
-									ng_imgui_in_intfield(nlabel..nelement.element.."nchk", 500, color_white, 0,   
-										nelement.nocheck, function (textout) nelement.nocheck = textout end) 
-								else
-									ng_imgui_in_button(nlabel..nelement.element.."addnchk", "+", 15, 20, 
-										function () nelement.nocheck = 1 end) 
-								end
-								
-								ng_imgui_out_text(color_white, "set():") imgui.SameLine()
-								if nelement.fset ~= nil then
-									ng_imgui_in_tfield(nlabel..nelement.element.."fset", 500, color_white, 255, 
-									nelement.fset, function (textout) nelement.fset = textout end)
-								else
-									ng_imgui_in_button(nlabel..nelement.element.."addfset", "+", 15, 20, 
-										function () nelement.fset = "" end) 
-								end
-								
-								ng_imgui_out_text(color_white, "check():") imgui.SameLine()
-								if nelement.fcheck ~= nil then
-									ng_imgui_in_tfield(nlabel..nelement.element.."fcheck", 500, color_white, 255, 
-									nelement.fcheck, function (textout) nelement.fcheck = textout end)
-								else
-									ng_imgui_in_button(nlabel..nelement.element.."addfcheck", "+", 15, 20, 
-										function () nelement.fcheck = "" end) 
-								end
+									if imgui.TreeNode(nelement.element) then
 
+										if ng_editor_sop_expcol3 > 0 then imgui.SetNextItemOpen(ng_editor_sop_expand3) end
+
+										-- move element up or down
+										ng_imgui_in_button(nelement.element.."up", "UP", 23, 20, 
+											function () if eidx > 1 then table.insert(nitem.setelements, eidx-1, table.remove(nitem.setelements,eidx)) end end) 
+										imgui.SameLine() ng_imgui_in_button(nelement.element.."dn", "DN", 23, 20, 
+											function () if eidx < #nitem.setelements then table.insert(nitem.setelements, eidx+1, table.remove(nitem.setelements,eidx)) end end) 
+										-- remove the system/element from flowitem
+										imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
+											imgui.SameLine() ng_imgui_in_button(nelement.element.."del", "REMOVE ELEMENT "..nelement.element, 295, 20, 
+												function () table.remove(nitem.setelements, eidx) end) 
+										imgui.PopStyleColor()
+									
+										-- Name of the system/element - is key, when changed will redraw the tree
+										ng_imgui_out_text(color_white, "Name:") imgui.SameLine()
+										if nelement.element ~= nil then
+											ng_imgui_in_tfield(nlabel..nelement.element, 315, color_white, 255, 
+											nelement.element, function (textout) nelement.element = textout end)
+										else
+											ng_imgui_in_button(nlabel..nelement.element.."addnname", "+", 15, 20, 
+												function () nelement.element = "" end) 
+										end
+										
+										-- Selected action
+										ng_imgui_out_text(color_white, "Action:") imgui.SameLine()
+										if nelement.action ~= nil then
+											ng_imgui_in_combolist(nlabel..nelement.element.."act", actions, ng_indexOf(actions,nelement.action)-1, 
+												function (textin) nelement.action=actions[textin+1] end, 297)
+										else
+											ng_imgui_in_button(nlabel..nelement.element.."addact", "+", 15, 20, 
+												function () nelement.action = "" end) 
+										end
+										
+										-- direct value to set (no logic)
+										ng_imgui_out_text(color_white, "Value:") imgui.SameLine()
+										if nelement.value ~= nil then
+											ng_imgui_in_floatfield(nlabel..nelement.element.."val", 310, color_white, 0, "%7.2f",  
+												nelement.value, function (textout) nelement.value = textout end) 
+										else
+											ng_imgui_in_button(nlabel..nelement.element.."addval", "+", 15, 20, 
+												function () nelement.value = 0 end) 
+										end
+										
+										-- fvalue code to set the value with lua statetement "return <a resulting value>"
+										-- will be used for actioning the step or check system/elements of the step
+										ng_imgui_out_text(color_white, "value():") imgui.SameLine()
+										if nelement.fvalue ~= nil then
+											ng_imgui_in_tfield(nlabel..nelement.element.."fvalue", 310, color_white, 255, 
+											nelement.fvalue, function (textout) if textout == "--" then nelement.fvalue = nil else nelement.fvalue = textout end end)
+										else
+											ng_imgui_in_button(nlabel..nelement.element.."addfvalue", "+", 15, 20, 
+												function () nelement.fvalue = "return \"\"" end) 
+										end
+												
+										-- fset code to set the value with lua statetement "<code to do complex logic>"
+										ng_imgui_out_text(color_white, "set():") imgui.SameLine()
+										if nelement.fset ~= nil then
+											ng_imgui_in_tfield(nlabel..nelement.element.."fset", 310, color_white, 255, 
+											nelement.fset, function (textout) if textout == "--" then nelement.fset = nil else nelement.fset = textout end end)
+										else
+											ng_imgui_in_button(nlabel..nelement.element.."addfset", "+", 15, 20, 
+												function () nelement.fset = "return \"\"" end) 
+										end
+												
+										-- Condition to enable or disable the system/element.
+										ng_imgui_out_text(color_white, "Condition:") imgui.SameLine()
+										if nelement.condition ~= nil then
+											ng_imgui_in_tfield(nlabel..nelement.element.."cond", 285, color_white, 255, 
+											nelement.condition, function (textout) if textout == "--" then nelement.condition = nil else nelement.condition = textout end end)							
+
+										else
+											ng_imgui_in_button(nlabel..nelement.element.."addcond", "+", 15, 20, 
+												function () nelement.condition = "return true" end) 
+										end
+																								
+										-- no check, when 1 then ignore the system/element during checks. Set 0 to enable checks again
+										ng_imgui_out_text(color_white, "No check:") imgui.SameLine()
+										if nelement.nocheck ~= nil then
+											ng_imgui_in_intfield(nlabel..nelement.element.."nchk", 288, color_white, 0,   
+												nelement.nocheck, function (textout) if textout == "--" then nelement.nocheck = nil else nelement.nocheck = textout end end)
+										else
+											ng_imgui_in_button(nlabel..nelement.element.."addnchk", "+", 15, 20, 
+												function () nelement.nocheck = 1 end) 
+										end
+										
+										-- fcheck code to check the element with code "return <true/false logic>"
+										ng_imgui_out_text(color_white, "check():") imgui.SameLine()
+										if nelement.fcheck ~= nil then
+											ng_imgui_in_tfield(nlabel..nelement.element.."fcheck", 295, color_white, 255, 
+											nelement.fcheck, function (textout) if textout == "--" then nelement.fcheck = nil else nelement.fcheck = textout end end)
+										else
+											ng_imgui_in_button(nlabel..nelement.element.."addfcheck", "+", 15, 20, 
+												function () nelement.fcheck = "return true" end) 
+										end
+									imgui.TreePop() end
+								end
 								imgui.Separator()
 														
 							end
@@ -1840,8 +2550,14 @@ function ng_draw_main_window()
 				
 			imgui.EndGroup()
 		end
+-- -----------------------------------------------------------------------------------------
 		
-		local function renderflow(nflow, nidx, numflows)
+-- -----------------------------------------------------------------------------------------
+--- render a flow in the editor
+-- @param tablenode flow
+-- @param int index of flow 
+-- @param int numflows number of flows in sop
+		local function sop_rnd_flow(nflow, nidx, numflows)
 
 			local phases = { "", "ng_phase_flight_planning", "ng_phase_colddark", "ng_phase_prel_preflight", 
 				"ng_phase_preflight", "ng_phase_before_start", "ng_phase_after_start", "ng_phase_taxi_rwy", 
@@ -1851,80 +2567,131 @@ function ng_draw_main_window()
 
 			local flowclasses = { "", "ProcedureFlow", "ChecklistFlow", "BackgroundFlow" }
 
-			local ntitle = nflow.title
+			local ntitle = nidx..nflow.title
 			
-			if imgui.TreeNode(ntitle) then
+			if imgui.TreeNode(nflow.title) then
 				imgui.Separator()
 
-				ng_imgui_in_button(ntitle.."expand", "Expand", 60, 20, 
+				ng_imgui_in_button(ntitle.."expand", "++", 23, 20, 
 					function () ng_editor_sop_expcol2 = 3 ng_editor_sop_expand2 = true end) 
 
-				imgui.SameLine() ng_imgui_in_button(ntitle.."compress", "Compress", 60, 20, 
+				imgui.SameLine() ng_imgui_in_button(ntitle.."compress", "--", 23, 20, 
 					function () ng_editor_sop_expcol2 = 3 ng_editor_sop_expand2 = false end) 
 
-				imgui.SameLine()ng_imgui_in_button(ntitle.."up", "UP", 20, 20, 
+				imgui.SameLine()ng_imgui_in_button(ntitle.."up", "UP", 23, 20, 
 					function () if nidx > 1 then table.insert(ng_editor_sop_json.sop.flow, nidx-1, table.remove(ng_editor_sop_json.sop.flow,nidx)) end end) 
-				imgui.SameLine() ng_imgui_in_button(ntitle.."dn", "DN", 20, 20, 
+				imgui.SameLine() ng_imgui_in_button(ntitle.."dn", "DN", 23, 20, 
 					function () if nidx < numflows then table.insert(ng_editor_sop_json.sop.flow, nidx+1, table.remove(ng_editor_sop_json.sop.flow,nidx)) end end) 
 
+				imgui.SameLine() ng_imgui_in_button(ntitle.."copy", "COPY", 50, 20, 
+					function () ng_editor_sop_flowcopy = nflow ng_editor_sop_flowcopyname = "" end) 
+
 				imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
-					imgui.SameLine() ng_imgui_in_button(ntitle.."del", "REMOVE FLOW!", 90, 20, 
+					imgui.SameLine() ng_imgui_in_button(ntitle.."del", "REMOVE FLOW "..nflow.title, 225, 20, 
 						function () table.remove(ng_editor_sop_json.sop.flow, nidx) end) 
 				imgui.PopStyleColor()
 
 				ng_imgui_out_text(color_white, "Phase:") imgui.SameLine()
 				ng_imgui_in_combolist(ntitle.."phase", phases, ng_indexOf(phases,nflow.phase)-1, 
-					function (textin) nflow.phase=phases[textin+1] end,320)
+					function (textin) nflow.phase=phases[textin+1] end, 345)
 
 				ng_imgui_out_text(color_white, "Class:") imgui.SameLine()
 				ng_imgui_in_combolist(ntitle.."class", flowclasses, ng_indexOf(flowclasses,nflow.classname)-1, 
-					function (textin) nflow.classname=flowclasses[textin+1] end,320)
+					function (textin) nflow.classname=flowclasses[textin+1] end, 345)
 
 				-- Append item
 				local newitem = {challenge="", setelements = {  } }
 
+				if ng_editor_sop_itemcopy ~= nil then
+					ng_imgui_in_button(ntitle.."paste", "PASTE", 50, 20, 
+					function () 
+						if ng_editor_sop_itemcopyname ~= "" then 
+							local copy = ng_deep_copy(ng_editor_sop_itemcopy)
+							copy.challenge=string.upper(ng_editor_sop_itemcopyname) 
+							table.insert (nflow.flowitem, copy) 
+							ng_editor_sop_itemcopyname = ""
+							ng_editor_sop_itemcopy = nil
+						end
+					end)
+					
+					imgui.SameLine() 
+					imgui.SameLine() ng_imgui_in_tfield(ntitle.."pastename", 280, color_white, 255, 
+						ng_editor_sop_itemcopyname,
+						function (textout) 
+							if textout == "--" then
+								ng_editor_sop_itemcopy = nil
+								ng_editor_sop_itemcopyname = "" 
+							else
+								ng_editor_sop_itemcopyname = textout 
+							end
+						end)
+				end 
+
 				ng_imgui_in_button(ntitle.."append", "Append Item", 90, 20, 
 					function () if ng_editor_sop_newitem ~= "" then newitem.challenge=string.upper(ng_editor_sop_newitem) table.insert (nflow.flowitem, newitem) ng_editor_sop_newitem = "" end end) 
 
-				imgui.SameLine() ng_imgui_in_tfield(ntitle.."name", 200, color_white, 255, 
+				imgui.SameLine() ng_imgui_in_tfield(ntitle.."name", 300, color_white, 255, 
 					ng_editor_sop_newitem, function (textout) ng_editor_sop_newitem = textout end)
+
+				imgui.Separator()
 
 				for nitemidx,nitem in ipairs(nflow.flowitem) do
 					if ng_editor_sop_expcol2 > 0 then imgui.SetNextItemOpen(ng_editor_sop_expand2) end
-					renderitem(nitem,nitemidx,nflow)
+					sop_rnd_flowitem(nitem,nitemidx,nflow)
 				end
 				imgui.Separator()
 			imgui.TreePop() end
 		end
-		
-		-- draw
-		local function rendersop()
+-- -----------------------------------------------------------------------------------------
+	
+-- -----------------------------------------------------------------------------------------
+--- render the SOP editor
+		local function render_sop_editor()
 			if ng_editor_sop_json ~= nil then
 				
 				imgui.Separator()
 				
-				ng_imgui_in_button(ng_editor_sop_json.sop.title.."expand", "Expand", 60, 20, 
-					function () ng_editor_sop_expcol1 = 3 ng_editor_sop_expand1 = true end) 
-
-				imgui.SameLine() ng_imgui_in_button(ng_editor_sop_json.sop.title.."compress", "Compress", 60, 20, 
-					function () ng_editor_sop_expcol1 = 3 ng_editor_sop_expand1 = false end) 
-
-				-- Append flow
-				local newflow = {title="", phase="ng_phase_colddark", classname="ProcedureFlow", flowitem={  } }
-
-				imgui.SameLine() ng_imgui_in_button(ng_editor_sop_json.sop.title.."append", "Append Flow", 90, 20, 
-					function () if ng_editor_sop_newflow ~= "" then newflow.title=string.upper(ng_editor_sop_newflow) table.insert (ng_editor_sop_json.sop.flow, newflow) ng_editor_sop_newflow = "" end end) 
-
-				imgui.SameLine() ng_imgui_in_tfield(ng_editor_sop_json.sop.title.."name", 200, color_white, 255, 
-					ng_editor_sop_newflow, function (textout) ng_editor_sop_newflow = textout end)
-
-
 				-- Loop through all flows
-				if ng_editor_sop_expcol1 > 0 then imgui.SetNextItemOpen(ng_editor_sop_expand1) end
 				if imgui.TreeNode(ng_editor_sop_json.sop.title) then
+					
+					-- Append flow
+					local newflow = {title="", phase="ng_phase_colddark", classname="ProcedureFlow", flowitem={  } }
+
+					if ng_editor_sop_flowcopy ~= nil then
+						ng_imgui_in_button(ng_editor_sop_json.sop.title.."paste", "PASTE", 50, 20, 
+						function () 
+							if ng_editor_sop_flowcopyname ~= "" then 
+								local copy = ng_deep_copy(ng_editor_sop_flowcopy)
+								copy.title=string.upper(ng_editor_sop_flowcopyname) 
+								table.insert (ng_editor_sop_json.sop.flow, copy) 
+								ng_editor_sop_flowcopyname = ""
+								ng_editor_sop_flowcopy = nil
+							end
+						end)
+						imgui.SameLine() 
+
+						imgui.SameLine() ng_imgui_in_tfield(ng_editor_sop_json.sop.title.."pastename", 280, color_white, 255, 
+							ng_editor_sop_flowcopyname, 
+							function (textout) 
+								if textout == "--" then
+									ng_editor_sop_flowcopy = nil
+									ng_editor_sop_flowcopyname = "" 
+								else
+									ng_editor_sop_flowcopyname = textout 
+								end
+							end)
+					end 
+
+					ng_imgui_in_button(ng_editor_sop_json.sop.title.."append", "Append Flow", 90, 20, 
+						function () if ng_editor_sop_newflow ~= "" then newflow.title=string.upper(ng_editor_sop_newflow) table.insert (ng_editor_sop_json.sop.flow, newflow) ng_editor_sop_newflow = "" end end) 
+
+					imgui.SameLine() ng_imgui_in_tfield(ng_editor_sop_json.sop.title.."name", 280, color_white, 255, 
+						ng_editor_sop_newflow, function (textout) ng_editor_sop_newflow = textout end)
+
 					for nidx,nflow in ipairs(ng_editor_sop_json.sop.flow) do
-						renderflow(nflow,nidx,#ng_editor_sop_json.sop.flow)
+						sop_rnd_flow(nflow,nidx,#ng_editor_sop_json.sop.flow)
 					end
+
 				imgui.TreePop() end
 			end
 		end
@@ -1935,23 +2702,23 @@ function ng_draw_main_window()
 			imgui.Columns(2,"editor",true)
 				imgui.BeginChild("editcol1")
 				
-					ng_imgui_out_text(color_yellow,"====================== AIRCRAFT SYSTEMS ======================")
+					ng_imgui_out_text(color_yellow,"=================== AIRCRAFT SYSTEMS EDITOR ==================")
 				
 					-- ICAO for systems
 					ng_imgui_in_tfield("Systems for", 50, color_white, 10, ng_editor_system_icao, 
-						function (textout) ng_editor_system_icao = textout end)
+						function (textout) ng_editor_system_icao = string.upper(textout) end)
 
 					-- load and save button to save after changes or load again
 					imgui.SameLine()
 					ng_imgui_in_button("loadsys", "LOAD", 70, 20, 
-						function () loadsystem() end)
+						function () systems_load() end)
 
 					imgui.SameLine()
 					ng_imgui_in_button("savesys","SAVE", 70, 20,
-						function () savesystem() end)
+						function () systems_save() end)
 					
 					imgui.SetNextItemOpen(true)
-					rendersystem()
+					render_systems_editor()
 					
 				imgui.EndChild()
 				
@@ -1964,18 +2731,18 @@ function ng_draw_main_window()
 
 					-- ICAO for systems
 					ng_imgui_in_tfield("SOP for", 50, color_white, 10, ng_editor_sop_icao, 
-						function (textout) ng_editor_sop_icao = textout end)
+						function (textout) ng_editor_sop_icao = string.upper(textout) end)
 
 					-- load and save button to save after changes or load again
 					imgui.SameLine()
 					ng_imgui_in_button("loadbrief", "LOAD", 70, 20, 
-						function () loadsop() end)
+						function () sop_load() end)
 	
 					imgui.SameLine()
 					ng_imgui_in_button("savebrief","SAVE", 70, 20,
-						function () savesop() end)
+						function () sop_save() end)
 	
-					rendersop()
+					render_sop_editor()
 					if ng_editor_sop_expcol1 > 0 then ng_editor_sop_expcol1 = ng_editor_sop_expcol1 - 1 end
 					if ng_editor_sop_expcol2 > 0 then ng_editor_sop_expcol2 = ng_editor_sop_expcol2 - 1 end
 					if ng_editor_sop_expcol3 > 0 then ng_editor_sop_expcol3 = ng_editor_sop_expcol3 - 1 end
@@ -1986,6 +2753,7 @@ function ng_draw_main_window()
 		imgui.EndChild()		
 		
 	end
+-- -----------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------
 -- draw the Settings tab
@@ -2016,7 +2784,15 @@ function ng_draw_main_window()
 				-- right tab with aircraft preferences
 				imgui.BeginChild("prefcol2")
 				
+					-- ICAO for preferences
+					ng_imgui_in_tfield("Settings for", 50, color_white, 10, ng_settings_icao, 
+						function (textout) 
+							ng_settings_icao = string.upper(textout) 
+							ng_getAcfPrefs():setFilePath(SCRIPT_DIRECTORY .."../Modules/kpcrew_prefs/"..ng_settings_icao..".preferences")
+						end)
+
 					-- load and save button to save after changes or load again
+					imgui.SameLine()
 					ng_imgui_in_button("loadbrief", "LOAD", 70, 20, 
 						function () ng_getAcfPrefs():load() end)
 	
@@ -2048,7 +2824,7 @@ function ng_draw_main_window()
 		imgui.SetNextWindowSize({ng_imgui_main_wnd_width,ng_imgui_main_wnd_height})
 	end
 	
-	if FLYWITHLUA == false then imgui.Begin("KPCrewNG " .. ng_VERSION) end
+	if FLYWITHLUA == false then imgui.Begin("KPCrewNG " .. ng_version) end
 
 	local tabsDef = {[0]="Flight", [1]="Full SOP", [2]="Settings", [3]="Editor"}
 	local tabsNumber = (#tabsDef+1)
@@ -2071,6 +2847,9 @@ function ng_draw_main_window()
 end
 
 -- -----------------------------------------------------------------------------------------
+-- SOP window rendering #sopwindow
+-- -----------------------------------------------------------------------------------------
+-- -----------------------------------------------------------------------------------------
 -- drawing function for SOP window
 function ng_draw_sop_window()
 	
@@ -2078,7 +2857,7 @@ function ng_draw_sop_window()
 		-- imgui.SetNextWindowSize(460,(15 + 2 ) * 23 + 12 + 27)
 		imgui.SetNextWindowPos(ng_scrn_width-455,ng_scrn_height-((15 + 2 ) * 23 + 12 + 77))
 	else
-		imgui.SetNextWindowSize({490,ng_get_active_sop():getNumberFlows()*24})
+		imgui.SetNextWindowSize({490,ng_get_active_sop():getNumberFlows()*25})
 		imgui.SetNextWindowPos({ng_scrn_width-497, (60/17)*ng_get_active_sop():getNumberFlows()})
 	end
 
@@ -2170,10 +2949,12 @@ function ng_draw_ctrl_window()
 	end		
 		 
 	-- display line 
-	imgui.PushStyleColor(imgui.constant.Col.Button, color_black)
-		imgui.PushStyleColor(imgui.constant.Col.Text, outcolor)
-			ng_imgui_in_button("outtext",outtext, 420, 20, function () end)
-		imgui.PopStyleColor()
+	imgui.PushStyleColor(imgui.constant.Col.ButtonHovered, color_black)
+		imgui.PushStyleColor(imgui.constant.Col.Button, color_black)
+			imgui.PushStyleColor(imgui.constant.Col.Text, outcolor)
+				ng_imgui_in_button("outtext",outtext, 420, 20, function () end)
+			imgui.PopStyleColor()
+		imgui.PopStyleColor()	
 	imgui.PopStyleColor()	
 	
 	imgui.SameLine()

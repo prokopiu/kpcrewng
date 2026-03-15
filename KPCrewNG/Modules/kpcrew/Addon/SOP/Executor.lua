@@ -4,12 +4,10 @@ ng_stateindex = 0
 -- execute all actions for a Flow step(item)
 -- @param FlowItem procstep - procedure step
 function ng_execute_step_actions(procstep)
-print(procstep)
 	if procstep ~= nil then -- ignore if step failed
-print("ng_execute_step_actions: "..procstep:getChallenge())
+dprint("ng_execute_step_actions: "..procstep:getChallenge())
 		-- check role and if simuser (cpt) then check automation flag and skip
 		if procstep:isSimUser() and ng_getAppPrefs():get("general:assistance") == false then 
-print("skipped")
 			return 
 		end
 			
@@ -21,9 +19,9 @@ print("skipped")
 				
 				-- # means it is a system not a system element
 				if string.find(step.element,"#") ~= nil then
-					ng_action_system(string.sub(step.element,2),step.action, step.value, step.condition, step.fset, step.fcheck)
+					ng_action_system(string.sub(step.element,2),step.action, step.value, step.condition, step.fset, step.fcheck, step.fvalue)
 				else
-					ng_action_element(step.element, step.action, step.value, step.condition, step.fset, step.fcheck)
+					ng_action_element(step.element, step.action, step.value, step.condition, step.fset, step.fcheck, step.fvalue)
 				end
 				
 			end
@@ -39,12 +37,15 @@ end
 -- @param string systemname - name of system to execute (lowercase)
 -- @param string action - standardized action name (lowercase)
 -- @param value - value to use when non-standard
-function ng_action_system(systemname, action, value, condition, fset, fcheck)
-	local system = ng_get_active_systems():findSystem(string.lower(systemname))
+-- @param bool condition - step level condition
+-- @param function fset - step level set value function
+-- @param function fcheck - step level check function
+function ng_action_system(systemname, action, value, condition, fset, fcheck, fvalue)
+	local system = ng_get_active_sys():findSystem(string.lower(systemname))
 	if system ~= nil then
 		for _,element in pairs(system.elements) do
-print("ng_action_system: "..element.name)
-			ng_action_element(element.name, string.lower(action), value, condition, fset, fcheck)
+dprint("ng_action_system: "..element.name)
+			ng_action_element(element.name, string.lower(action), value, condition, fset, fcheck, fvalue)
 		end
 	end
 end
@@ -54,20 +55,24 @@ end
 -- @param string elementname - name of element to execute (lowercase)
 -- @param string action - standardized action name (lowercase)
 -- @param value - value to use when non-standard
-function ng_action_element(elementname, action, value, condition, fset, fcheck)
+-- @param bool condition - step level condition
+-- @param function fset - step level set value function
+-- @param function fcheck - step level check function
+function ng_action_element(elementname, action, value, condition, fset, fcheck, fvalue)
 	
-	if ng_get_active_systems():find(elementname) ~= nil then
-		local element = ng_get_active_systems():find(elementname):getElementNode()
-print("ng_action_element: "..element.title)
+	if ng_get_active_sys():find(elementname) ~= nil then
+		local element = ng_get_active_sys():find(elementname):getElementNode()
+dprint("ng_action_element: "..element.title)
 		local dref = element.dref
 		local idx = element.indx
 		local etype = string.lower(element.type)
 		local getdref = function () if idx ~= nil then return get(dref,idx) else return get(dref) end end
 		local setdref = function (invalue) if idx ~= nil then set_array(dref,idx,invalue) else set(dref,invalue) end end
+		
 		local function getvalue()
 			local result = nil
-			if fset ~= nil then
-				result = loadstring(fset)()
+			if fvalue ~= nil then
+				result = loadstring(fvalue)()
 			else
 				result = value
 			end
@@ -82,7 +87,7 @@ print("ng_action_element: "..element.title)
 		end
 		-- ======= dataref driven elements
 		if etype == "dataref" then
-			
+		
 			local found = 0
 			-- check if action is allowed for the element
 			for _,defaction in pairs(element.acts) do
@@ -109,9 +114,12 @@ print("ng_action_element: "..element.title)
 					
 				elseif action == "toggle" then -- toggle always 0 and 1
 					if get(element.dref) == 0 then setdref(1) else setdref(0) end
+					
+				elseif action == "function" then
+					if fset ~= nil then loadstring(fset)() end
 				end
 			else
-				print("Action not allowed: "..action)
+				print("Action not allowed: "..action.." in "..elementname)
 			end
 			
 		-- ======= toggle only switch with 1 dref and 1 command
@@ -136,7 +144,7 @@ print("ng_action_element: "..element.title)
 					command_once(element.cmdtgl)
 				end
 			else
-				print("Action not allowed: "..action)
+				print("Action not allowed: "..action.." in "..elementname)
 			end
 			
 		-- ======= ON/OFF switch
@@ -184,7 +192,7 @@ print("ng_action_element: "..element.title)
 					if element.functgl ~= nil then loadstring(element.functgl)() end
 				end
 			else
-				print("Action not allowed: "..action)
+				print("Action not allowed: "..action.." in "..elementname)
 			end
 			
 		-- ======= Multistate switch
@@ -228,7 +236,7 @@ print("ng_action_element: "..element.title)
 					if get(element.dref) == 0 then setvalue(1) else setvalue(0) end
 				end
 			else
-				print("Action not allowed: "..action)
+				print("Action not allowed: "..action.." in "..elementname)
 			end
 			
 		-- ======= Dial switch
@@ -264,10 +272,10 @@ print("ng_action_element: "..element.title)
 				elseif action == "dn" then
 					command_once(element.cmddn)
 				elseif action == "function" then
-					loadstring(fset)()
+					if fset ~= nil then loadstring(fset)() end
 				end
 			else
-				print("Action not allowed: "..action)
+				print("Action not allowed: "..action.." in "..elementname)
 			end
 
 		else
@@ -284,22 +292,24 @@ end
 -- @param string systemname - name of system to execute (lowercase)
 -- @param string action - standardized action name (lowercase)
 -- @param value - value to use when non-standard
+-- @param function fset step level set value function
+-- @param function fcheck step level check function
 -- @return combined true/false - all true means system checks out
-function ng_check_system(systemname, action, value, fset, fcheck)
+function ng_check_system(systemname, action, value, fset, fcheck, fvalue)
 	
-	local system = ng_get_active_systems():findSystem(systemname)
+	local system = ng_get_active_sys():findSystem(systemname)
 	
 	if system ~= nil then
 		local nelements = #system.elements
-		local cnt = 0
+		local accresult = true
+		local currresult = false
 		
 		-- count the trues and if less trues then elements then return false
 		for _,element in pairs(system.elements) do
-			if ng_check_element(element.name, action, value, fset, fcheck) then 
-				cnt = cnt +1
-			end
+			currresult = ng_check_element(element.name, action, value, fset, fcheck, fvalue) 
+			accresult = accresult and currresult
 		end
-		return cnt == nelements
+		return accresult
 		
 	else
 		
@@ -313,33 +323,45 @@ end
 -- @param string elementname - name of system to execute (lowercase)
 -- @param string action - standardized action name (lowercase)
 -- @param value - value to use when non-standard
--- @param string fset function code frm procstep
+-- @param function fset step level set value function
+-- @param function fcheck step level check function
 -- @return boolean true/false
-function ng_check_element(elementname, action, value, fset, fcheck)
+function ng_check_element(elementname, action, value, fset, fcheck, fvalue)
+
+	if ng_get_active_sys():find(elementname) ~= nil then
 	
-	if ng_get_active_systems():find(elementname) ~= nil then
-		local element = ng_get_active_systems():find(elementname):getElementNode()
+		local element = ng_get_active_sys():find(elementname):getElementNode()
 		local dref = element.dref
 		local idx = element.indx
 		local etype = string.lower(element.type)
-		local setdref = function (invalue) if idx ~= nil then set_array(element.dref,idx,invalue) else set(element.dref,invalue) end end
 
+		-- pull from the dataref either single value or array value with indx
 		local function getdref() 
 			local result = nil
-			-- if fcheck in element then use function else read dataref
-			if fcheck ~= nil then -- fcheck from function
-				result = loadstring(fcheck)()
-			elseif element.fcheck ~= nil then
-				result = loadstring(element.fcheck)()
-			else
+			if dref ~= nil then 
 				if idx ~= nil then result = get(element.dref,idx) else result = get(element.dref) end
+				if element.functrans ~= nil then 
+					local func = loadstring(element.functrans)()
+					result = func(result)
+				end
+			end
+			return result
+		end
+		
+		-- get either the value directly from the SOP step, fset() or fcheck()
+		local function getvalue()
+			local result = nil
+			if fvalue ~= nil then
+				result = loadstring(fvalue)()
+			else
+				result = value
 			end
 			return result
 		end
 		
 		-- ======= dataref driven elements
 		if etype == "dataref" then
-			print("dataref")
+
 			local found = 0
 			-- check if action is allowed for the element
 			for _,defaction in pairs(element.acts) do
@@ -350,7 +372,6 @@ function ng_check_element(elementname, action, value, fset, fcheck)
 			if found == 1 then
 
 				if action == "on" then
-				print("on")
 					if value == nil then value = 1 end 
 					return getdref() == value
 					
@@ -359,18 +380,23 @@ function ng_check_element(elementname, action, value, fset, fcheck)
 					return getdref() == value
 
 				elseif action == "set" then
-					if value == nil then 
-						print("Value missing for set action")
+					if getvalue() == nil then 
+						print("Value missing for set action in ".. elementname)
 					else
-						return getdref() == value
+						return getdref() == getvalue()
 					end
+					
+				elseif action == "function" then
+					if element.fcheck ~= nil then return loadstring(element.fcheck)() end
+					
 				else
-					print("Action not allowed: "..action)
+					print("Action not allowed: "..action.." in "..elementname)
 				end
 			end
 			
 		-- ======= function check
 		elseif etype == "function" then
+		
 			if fcheck ~= nil then 
 				return loadstring(fcheck)()
 			elseif element.fcheck ~= nil then 
@@ -381,7 +407,7 @@ function ng_check_element(elementname, action, value, fset, fcheck)
 				
 		-- ======= onoff switch	
 		elseif etype == "onoff" then
-			print("onoff")
+		
 			local found = 0
 			-- check if action is allowed for the element
 			for _,defaction in pairs(element.acts) do
@@ -400,13 +426,16 @@ function ng_check_element(elementname, action, value, fset, fcheck)
 					return getdref() == value
 					
 				elseif action == "set" then
-					if value == nil then 
-						print("Value missing for set action")
+					if getvalue() == nil then 
+						print("Value missing for set action in ".. elementname)
 					else
-						return getdref() == value
+						return getdref() == getvalue()
 					end
+				elseif action == "function" then
+					if element.fcheck ~= nil then return loadstring(element.fcheck)() end
 				else
-					print("Action not allowed: "..action)
+					print("Action not allowed: "..action.." in "..elementname)
+					return true
 				end
 			end
 			
@@ -427,18 +456,20 @@ function ng_check_element(elementname, action, value, fset, fcheck)
 					return getdref() == value
 					
 				elseif action == "off" then
-					print(getdref())
 					if value == nil then value = 0 end 
 					return getdref() == value
 					
 				elseif action == "set" then
-					if value == nil then 
-						print("Value missing for set action")
+					if getvalue() == nil then 
+						print("Value missing for set action in ".. elementname)
 					else
-						return getdref() == value
+						return getdref() == getvalue()
 					end
+				elseif action == "function" then
+					if element.fcheck ~= nil then return loadstring(element.fcheck)() end
 				else
-					print("Action not allowed: "..action)
+					print("Action not allowed: "..action.." in "..elementname)
+					return true
 				end
 			end
 				
@@ -455,13 +486,13 @@ function ng_check_element(elementname, action, value, fset, fcheck)
 			if found == 1 then
 
 				if action == "set" then
-					if value == nil then 
-						print("Value missing for set action")
+					if getvalue() == nil then 
+						print("Value missing for set action in ".. elementname)
 					else
-						return getdref() == value
+						return getdref() == getvalue()
 					end
 				else
-					print("Action not allowed: "..action)
+					print("Action not allowed: "..action.." in "..elementname)
 				end
 			end
 				
@@ -474,56 +505,44 @@ function ng_check_element(elementname, action, value, fset, fcheck)
 				if (defaction == action) then found = 1 end
 			end
 			
-			local function getvalue()
-				local result = nil
-				if fcheck ~= nil then
-					result = loadstring(fcheck)()
-				elseif fset ~= nil then
-					result = loadstring(fset)()
-				else
-					result = value
-				end
-				return result
-			end
-
 			-- if allowed because found then continue, otherwise skip
 			if found == 1 then
 
 				if action == "up" then
 					if getvalue() == nil then 
-						print("Value missing for set action")
+						print("Value missing for up action in ".. elementname)
 					else
 						return getdref() == getvalue()
 					end					
 				elseif action == "dn" then
 					if getvalue() == nil then 
-						print("Value missing for set action")
+						print("Value missing for dn action in ".. elementname)
 					else
 						return getdref() == getvalue()
 					end
 				elseif action == "set" then
 					if getvalue() == nil then 
-						print("Value missing for set action")
+						print("Value missing for set action in ".. elementname)
 					else
 						return getdref() == getvalue()
 					end
 				elseif action == "function" then
 						return getdref() == getvalue()
 				else
-					print("Action not allowed: "..action)
+					print("Action not allowed: "..action.." in "..elementname)
 				end
 			end
 			
 		else
-			print("unknown type")
+			print("unknown type for "..elementname)
 		end
 	else
-		print("!! Undefined system element")
+		print("!! Undefined system element "..elementname)
 	end
 end	
 
 -- -----------------------------------------------------------------------------------------
--- Perform checks on a flow steo
+-- Perform checks on a flow step
 -- @param FlowItem procstep - procedure step
 function ng_check_step(procstep)
 
@@ -536,21 +555,48 @@ function ng_check_step(procstep)
 			-- extract the step elements/systems to check if available
 			if procstep:getItemNode().setelements ~= nil then
 				
-				local accresult = false
-				for _,step in pairs(procstep:getItemNode().setelements) do
-					-- check if the element is on nocheck and skip
-					if step.nocheck == nil then 
-						-- # means it is a system not a system element
-						if string.find(step.element,"#") ~= nil then
-							accresult = ng_check_system(string.sub(step.element,2),step.action,step.value, step.fset, step.fcheck)
-						else
-							accresult = ng_check_element(step.element, step.action, step.value, step.fset, step.fcheck)
+				local nractiveelem = 0
+
+				for _,selement in pairs(procstep:getItemNode().setelements) do
+					if selement.condition ~= nil then 
+						if loadstring(selement.condition)() and selement.nocheck == nil then
+							nractiveelem = nractiveelem + 1
 						end
 					else
-						accresult = true
+						if selement.nocheck == nil then nractiveelem = nractiveelem + 1 end
 					end
 				end
-				return accresult
+
+				local nrchecked = 0
+				for _,selement in pairs(procstep:getItemNode().setelements) do
+
+					-- if filtered by condition skip the element
+					local bdocheck = false
+
+					if selement.condition ~= nil then 
+						if loadstring(selement.condition)() and selement.nocheck == nil then
+							bdocheck = true
+						end
+					else
+						if selement.nocheck == nil then bdocheck = true end
+					end
+
+					-- check if the element is on nocheck and skip
+					if bdocheck then
+						-- # means it is a system not a system element
+						if string.find(selement.element,"#") ~= nil then
+							if ng_check_system(string.sub(selement.element,2), selement.action, selement.value, selement.fset, selement.fcheck, selement.fvalue) then
+								nrchecked = nrchecked + 1
+							end
+						else
+							if ng_check_element(selement.element, selement.action, selement.value, selement.fset, selement.fcheck, selement.fvalue) then
+								nrchecked = nrchecked + 1
+							end
+						end
+					end
+
+				end
+				return nractiveelem == nrchecked
 			end
 			
 		else
@@ -609,6 +655,7 @@ end
 -- -----------------------------------------------------------------------------------------
 -- master action
 function ng_master_action()
+
 	local sop = ng_get_active_sop()
 	
 	-- look at active flow
@@ -780,7 +827,7 @@ function ng_flow_executor()
 		astep:setState(ng_fistate_act)
 		astepstate = ng_fistate_act
 		ng_stateindex = 7
-		print("State ["..ng_stateindex.."]")
+		dprint("State ["..ng_stateindex.."]")
 	end
 
 	if ng_stateindex == 7 then -- if a delay is defined for step set delay and go to waiting loop

@@ -1,6 +1,6 @@
 general:assistance=true
 general:jumpflow=true
-general:simbriefuser=""
+general:simbriefuser="prokopiu"
 general:xpdrmode=1
 general:weightunit=1
 general:barounit=1

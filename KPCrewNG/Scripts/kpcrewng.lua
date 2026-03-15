@@ -4,6 +4,16 @@
 	Kosta Prokopiu, 2026
 --]]
 
+-- ======== Flags and definitions for development outside XP12 
+FLYWITHLUA 			= true -- if true it runs in XP12, false dev env based on löve lua
+DEBUGMODE 			= false -- if true adds debugging output (dprint) 
+
+-- ======== only needed for dev env Löve
+if FLYWITHLUA == false then
+	imgui =	require "cimgui" -- imgui implementation needed outside XP12
+	require "teststubs" 	 -- all functionality of XP12 & FWL outside the sim
+end
+
 require "kpcrew.Addon.SOP.Executor" -- executing the flows
 require "kpcrew.acft_select" -- get the running aircraft addon icao
 require "kpcrew.nggenutils" -- many utilities needed
@@ -31,16 +41,6 @@ ng_ctrl_wnd 		= nil
 ng_scrn_width 		= get("sim/graphics/view/window_width") -- get screen width from X-Plane
 ng_scrn_height 		= get("sim/graphics/view/window_height")-- get screen height from X-Plane
 ng_simversion 		= get("sim/version/xplane_internal_version") -- XP version
-
--- ======== Flags and definitions for development outside XP12 
-FLYWITHLUA 			= true 	-- if true it runs in XP12, false dev env based on löve lua
-DEBUGMODE 			= false -- if true adds debugging output (dprint) 
-
--- ======== only needed for dev env Löve
-if FLYWITHLUA == false then
-	imgui =	require "cimgui" -- imgui implementation needed outside XP12
-	require "teststubs" 	 -- all functionality of XP12 & FWL outside the sim
-end
 
 logMsg ( "FWL: ** Starting KPCrew version " .. ng_version .. " on XP " .. ng_simversion .. " **" )
 

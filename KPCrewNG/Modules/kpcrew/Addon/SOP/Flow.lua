@@ -97,37 +97,47 @@ function ngFlow:getNumberItems(filter)
 	return cnt
 end
 
+--- get table of flow items
+-- @return table of flow items
 function ngFlow:getItems() return self.items end
 
+--- get the index of the active flow item
+-- @return int index of active flow item
 function ngFlow:getActiveItemIdx() return self.activeItem end
 
+--- make flow item at index active
+-- @param int index of flow item to activate
 function ngFlow:setActiveItemIdx(idx) if idx <= #self.items then self.activeItem = idx end end
 
+--- is this flow the selcted flow
+-- @return bool true/false
 function ngFlow:isSelected() return self.selected end
 
+--- Set the selected flag of this flow
+-- @param bool true/false
 function ngFlow:setSelected(flag) self.selected = flag end
 
+--- get the complete active flow item
+-- @return table - active flow item or nil if none
 function ngFlow:getActiveItem()
-		if self.activeItem > 0 then 
-			return self.items[self.activeItem] 
-	end
+	if self.activeItem > 0 then return self.items[self.activeItem] end
 	return nil
 end
 
+--- reset this flow by resetting all flow items
 function ngFlow:reset() 
 	if self.state ~= ng_flowstate_new then
-		for k, item in ipairs(self.items) do
-			item:setState(ng_flowstate_new)
-		end
+		for k, item in ipairs(self.items) do item:setState(ng_flowstate_new) end
 		self.state = ng_flowstate_new
 		self.activeItem = 0
-		-- self.selected = false
 		ng_stateindex = 0
 	end
 end
 
 -- Output and render functions
 
+--- render the items of this flow
+-- @param char "f"=SOP View 2 columns, "i"=SOP window view 
 function ngFlow:render(type)
 	if type == "f" then
 		imgui.BeginTable(self:getTitle(),2,color_white)

@@ -58,6 +58,10 @@ function ngSystemCategory:getSystem(index) return self.systems[index] end
 
 function ngSystemCategory:getSystems() return self.systems end
 
+function ngSystemCategory:getSystemNames() 
+	return self.systems:getName()
+end
+
 function ngSystemCategory:render()
 	if self ~= nil then
 		if imgui.TreeNode(self.name) then

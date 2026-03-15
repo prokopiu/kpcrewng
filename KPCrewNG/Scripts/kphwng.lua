@@ -190,9 +190,9 @@ create_command("kp/xsp/lights/dome_switch_tgl",		"Cockpit Lights Toggle",	"ng_ex
 
 ---------------- General Systems ---------------------
 
-create_command("kp/xsp/systems/parking_brake_on",	"Parking Brake On",			"ng_execute_actions('#parkbrake','on',nil)",			"","")
-create_command("kp/xsp/systems/parking_brake_off",	"Parking Brake Off",		"ng_execute_actions('#parkbrake','off',nil)",		"","")
-create_command("kp/xsp/systems/parking_brake_tgl",	"Parking Brake Toggle",		"ng_execute_actions('#parkbrake','toggle',nil)",		"","")
+create_command("kp/xsp/systems/parking_brake_on",	"Parking Brake On",			"ng_execute_actions('parkbrake','on',nil)",			"","")
+create_command("kp/xsp/systems/parking_brake_off",	"Parking Brake Off",		"ng_execute_actions('parkbrake','off',nil)",		"","")
+create_command("kp/xsp/systems/parking_brake_tgl",	"Parking Brake Toggle",		"ng_execute_actions('parkbrake','toggle',nil)",		"","")
 
 create_command("kp/xsp/systems/gears_up",			"Gears Up",					"ng_execute_actions('#gearhandle','on',nil)",			"","")
 create_command("kp/xsp/systems/gears_down",			"Gears Down",				"ng_execute_actions('#gearhandle','off',nil)",			"","")
@@ -228,26 +228,26 @@ create_command("kp/xsp/systems/door_ca_toggle",		"Toggle door AFT CARGO",	"ng_ex
 ----------------- Flight Controls --------------------
 
 -- create_command("kp/xsp/controls/flaps_up",			"Flaps 1 Up","sysControls.flapsSwitch:actuate(sysControls.flapsUp)","","")
--- create_command("kp/xsp/controls/flaps_down",		"Flaps 1 Down","sysControls.flapsSwitch:actuate(sysControls.flapsDown)","","")
+-- create_command("kp/xsp/controls/flaps_down",			"Flaps 1 Down","sysControls.flapsSwitch:actuate(sysControls.flapsDown)","","")
 
 -- create_command("kp/xsp/controls/pitch_trim_up",		"Pitch Trim Up","sysControls.pitchTrimSwitch:actuate(sysControls.trimUp)","","")
 -- create_command("kp/xsp/controls/pitch_trim_down",	"Pitch Trim Down","sysControls.pitchTrimSwitch:actuate(sysControls.trimDown)","","")
 -- create_command("kp/xsp/controls/pitch_trim_up_run",	"Pitch Trim Up Run","sysControls.pitchTrimUpRepeat:actuate(1)","","")
--- create_command("kp/xsp/controls/pitch_trim_up_stop","Pitch Trim Up Stop","sysControls.pitchTrimUpRepeat:actuate(0)","","")
+-- create_command("kp/xsp/controls/pitch_trim_up_stop",	"Pitch Trim Up Stop","sysControls.pitchTrimUpRepeat:actuate(0)","","")
 -- create_command("kp/xsp/controls/pitch_trim_dn_run",	"Pitch Trim Down Run","sysControls.pitchTrimDownRepeat:actuate(1)","","")
--- create_command("kp/xsp/controls/pitch_trim_dn_stop","Pitch Trim Down Stop","sysControls.pitchTrimDownRepeat:actuate(0)","","")
+-- create_command("kp/xsp/controls/pitch_trim_dn_stop",	"Pitch Trim Down Stop","sysControls.pitchTrimDownRepeat:actuate(0)","","")
 
 -- create_command("kp/xsp/controls/rudder_trim_left",	"Rudder Trim Left","sysControls.rudderTrimSwitch:actuate(sysControls.trimLeft)", "sysControls.rudderTrimSwitch:actuate(sysControls.trimLeft)", "")
 -- create_command("kp/xsp/controls/rudder_trim_right",	"Rudder Trim Right","sysControls.rudderTrimSwitch:actuate(sysControls.trimRight)", "sysControls.rudderTrimSwitch:actuate(sysControls.trimRight)", "")
--- create_command("kp/xsp/controls/rudder_trim_center","Rudder Trim Center","sysControls.rudderReset:actuate(sysControls.trimCenter)", "", "")
+-- create_command("kp/xsp/controls/rudder_trim_center",	"Rudder Trim Center","sysControls.rudderReset:actuate(sysControls.trimCenter)", "", "")
 
 -- create_command("kp/xsp/controls/aileron_trim_left",	"Aileron Trim Left","sysControls.aileronTrimSwitch:actuate(sysControls.trimLeft)", "sysControls.rudderTrimSwitch:actuate(sysControls.trimRight)", "")
--- create_command("kp/xsp/controls/aileron_trim_right","Aileron Trim Right","sysControls.aileronTrimSwitch:actuate(sysControls.trimRight)", "sysControls.aileronTrimSwitch:actuate(sysControls.trimRight)", "")
+-- create_command("kp/xsp/controls/aileron_trim_right",	"Aileron Trim Right","sysControls.aileronTrimSwitch:actuate(sysControls.trimRight)", "sysControls.aileronTrimSwitch:actuate(sysControls.trimRight)", "")
 -- create_command("kp/xsp/controls/aileron_trim_center","Aileron Trim Center","sysControls.aileronReset:actuate(sysControls.trimCenter)", "", "")
 
 -- --------------- Engines
 -- create_command("kp/xsp/engines/reverse_all_on",		"Reverse Thrust 1 On", "sysEngines.reverserGroup:actuate(modeOn)", "", "")
--- create_command("kp/xsp/engines/reverse_all_off",	"Reverse Thrust 1 Off", "sysEngines.reverserGroup:actuate(modeOff)", "", "")
+-- create_command("kp/xsp/engines/reverse_all_off",		"Reverse Thrust 1 Off", "sysEngines.reverserGroup:actuate(modeOff)", "", "")
 
 -- create_command("kp/xsp/engines/magnetos_off",		"Magnetos Off", "sysEngines.magnetoOff:actuate(1)", "", "")
 -- create_command("kp/xsp/engines/magnetos_l",			"Magnetos Left", "sysEngines.magnetoL:actuate(1)", "", "")
@@ -279,16 +279,6 @@ create_command("kp/xsp/autopilot/toga_press",		"Press Left TOGA", "ng_execute_ac
 create_command("kp/xsp/autopilot/at_tgl",			"A/T Tgl", "ng_execute_actions('autothrottle','toggle',nil)","","")
 create_command("kp/xsp/autopilot/at_arm",			"A/T Arm", "ng_execute_actions('autothrottle','on',nil)","","")
 create_command("kp/xsp/autopilot/at_off",			"A/T OFF", "ng_execute_actions('autothrottle','off',nil)","","")
-
--- N1 Boeing
--- create_command("kp/xsp/autopilot/n1_tgl",			"Toggle N1", "sysMCP.n1Switch:actuate(modeToggle)","","")
-
--- LVL CHG Boeing
--- create_command("kp/xsp/autopilot/lvlchg_tgl",		"Toggle Level Change", "sysMCP.lvlchgSwitch:actuate(modeToggle)","","")
-
--- LNAV VNAV Boeing
--- create_command("kp/xsp/autopilot/vnav_tgl",			"Toggle VNAV", "sysMCP.vnavSwitch:actuate(modeToggle)","","")
--- create_command("kp/xsp/autopilot/lnav_tgl",			"Toggle LNAV", "sysMCP.lnavSwitch:actuate(modeToggle)","","")
 
 create_command("kp/xsp/autopilot/crs1_dn",			"CRS 1 decrease", "ng_execute_actions('crs1','dn',nil)","","")
 create_command("kp/xsp/autopilot/crs1_up",			"CRS 1 increase", "ng_execute_actions('crs1','up',nil)","","")

@@ -94,8 +94,12 @@ function ngSOP:getNumberFlows(filter)
 	return cnt
 end
 
+--- get all flows of the SOP as table
+-- @return table of flows
 function ngSOP:getFlows() return self.flows end
 
+--- get the active flow
+-- @return table flow object
 function ngSOP:getActiveFlow() 
 	if self.activeFlow > 0 then 
 		return self.flows[self.activeFlow] 
@@ -103,11 +107,21 @@ function ngSOP:getActiveFlow()
 	return nil
 end
 
+--- Get the index of the active flow in SOP
+-- @return int index of active flow
 function ngSOP:getActiveFlowIdx() return self.activeFlow end
 
+--- set flow with index to active
+-- @param int idx - inex of flow to set active
 function ngSOP:setActiveFlowIdx(idx) self.activeFlow = idx end
 
-local function setFlowColor(flow)
+-- Output and rendering functions
+
+--- Get the flow color for rendering
+-- @param table flow - reference to flow to determine color colors
+-- @return int color code based on flow state
+local function getFlowColor(flow)
+
 	local mycolor = color_white
 
 	-- basic color of flows
@@ -121,11 +135,13 @@ local function setFlowColor(flow)
 	if flow:getState() == ng_flowstate_pause then mycolor = color_flow_pause end
 	if flow:getState() == ng_flowstate_end then mycolor = color_flow_end end
 	if flow:getState() == ng_flowstate_err then mycolor = color_flow_err end
-
 	
 	return mycolor
 end
 
+--- activate a flow and all its flow items
+-- @param table self - SOP - this SOP
+-- @param int idx - index of flow to activate
 local function activateFlow(self,idx)
 	if self.activeFlow > 0 then
 		if self.flows[self.activeFlow] ~= ng_flowstate_run then
@@ -139,11 +155,12 @@ local function activateFlow(self,idx)
 	end
 end
 
+--- reset the whole SOP and all flows / flow items below
 function ngSOP:reset() 
 	for k, flow in ipairs(self.flows) do
-		flow:setState(ng_flowstate_new)
 		flow:reset()
 	end
+	-- reset to 1st flow and state new
 	activateFlow(self,1)
 	ng_stateindex = 1
 end
@@ -167,8 +184,7 @@ function ngSOP:load()
 		    local flow = Flow:new(string.upper(flownode.title), loadstring("return "..flownode.phase)(), flownode.classname)
 			local flowItems = flownode.flowitem
 		    for _,itemnode in pairs(flownode.flowitem) do
-		        local item = FlowItem:new(itemnode) --string.upper(itemnode.challenge), string.upper(itemnode.response), loadstring("return "..itemnode.role)(),
-					-- itemnode.classname, itemnode.setelements, itemnode.checkelements)
+		        local item = FlowItem:new(itemnode) 
 		        flow:appendFlowItem(item)
 		    end
 		    self:appendFlow(flow)
@@ -178,7 +194,7 @@ function ngSOP:load()
 end
 
 --- Output and render functions
--- @param type string - t=pure text, f=full display, i=for SOP window
+-- @param type string - f=full display, i=for SOP window
 function ngSOP:render(type)
 	
 	if type == "f" then 
@@ -187,7 +203,7 @@ function ngSOP:render(type)
 			if flow:getFlightPhase() ~= nil and flow:getFlightPhase() >= 0 then
 				if flow:getClassName() ~= "StateFlow" and flow:getClassName() ~= "BackgroundFlow" then 
 					imgui.SetCursorPosY(imgui.GetCursorPosY() + 1)
-					imgui.PushStyleColor(imgui.constant.Col.Button, setFlowColor(flow))
+					imgui.PushStyleColor(imgui.constant.Col.Button, getFlowColor(flow))
 						imgui.PushStyleColor(imgui.constant.Col.ButtonActive, color_flow_active)
 							imgui.PushStyleColor(imgui.constant.Col.ButtonHovered, color_flow_hovered)
 								ng_imgui_in_button(flow:getClassName()..flow:getTitle(), 
@@ -202,27 +218,12 @@ function ngSOP:render(type)
 		end
 	end		
 	if type == "i" then 
-		-- for k, flow in ipairs(self.flows) do
-			-- if flow:getClassName() == "StateFlow" then -- states
-				-- imgui.SetCursorPosY(imgui.GetCursorPosY() + 1)
-				-- local color = color_flow_state
-				-- imgui.PushStyleColor(imgui.constant.Col.Button, color)
-					-- imgui.PushStyleColor(imgui.constant.Col.ButtonActive, color_flow_active)
-						-- imgui.PushStyleColor(imgui.constant.Col.ButtonHovered, color_flow_hovered)
-							-- ng_imgui_in_button(flow:getClassName()..flow:getTitle(), 
-							-- flow:getTitle(), 445, 18, function() end)
-						-- imgui.PopStyleColor()
-					-- imgui.PopStyleColor()
-				-- imgui.PopStyleColor()
-				-- imgui.Separator()
-			-- end
-		-- end
 		for k, flow in ipairs(self.flows) do
 			if flowVisible[k] == nil then flowVisible[k] = false end 
 			if flow:getFlightPhase() ~= nil and flow:getFlightPhase() >= 0 then
 				if flow:getClassName() ~= "StateFlow" and flow:getClassName() ~= "BackgroundFlow" then 
 					imgui.SetCursorPosY(imgui.GetCursorPosY() + 1)
-					local color = setFlowColor(flow)
+					local color = getFlowColor(flow)
 					ng_imgui_in_button(flow:getTitle().."toggle",flowVisible[k] and "-" or "+",15, 18, 
 					function() flowVisible[k]= not flowVisible[k] end) imgui.SameLine()
 					imgui.PushStyleColor(imgui.constant.Col.Button, color_red)

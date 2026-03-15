@@ -15,11 +15,6 @@ general:add(preference:new("weightunit",1,ng_type_list,"Weight Unit|kgs|lbs"))
 general:add(preference:new("barounit",1,ng_type_list,"Baro Unit|mb|inhg"))
 general:add(preference:new("deftransalt",5000,ng_type_int,"Default Transalt|0"))
 general:add(preference:new("deftranslvl",6000,ng_type_int,"Default Translvl|0"))
-general:add(preference:new("mcpdefspd",100,ng_type_int,"MCP Initial Speed|0"))
-general:add(preference:new("mcpdefhdg",1,ng_type_int,"MCP Initial Heading|0"))
-general:add(preference:new("mcpdefalt",4900,ng_type_int,"MCP Initial Altitude|0"))
-general:add(preference:new("startupapu",false,ng_type_flag,"APU @ start|On|Off"))
-general:add(preference:new("startupgpu",true,ng_type_flag,"GPU @ start|On|Off"))
 
 applicationPrefSet:addGroup(general)
 

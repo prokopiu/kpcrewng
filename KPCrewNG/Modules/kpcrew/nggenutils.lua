@@ -210,6 +210,30 @@ function ng_hasValue (array, value)
     return false
 end
 
+--- make a shallow copy of a table
+-- @param table t to copy
+function ng_shallow_copy (t)
+  local t2 = {}
+  for k,v in pairs(t) do
+    t2[k] = v
+  end
+  return t2
+end	
+
+--- make a deep copy of a table
+-- @param table t to copy
+function ng_deep_copy(t)
+  local tblRes={}
+  if type(t)=="table" then
+    for k,v in pairs(t) do 
+      tblRes[ng_deep_copy(k)] = ng_deep_copy(v) 
+    end
+  else
+    tblRes=t
+  end
+  return tblRes
+end
+
 -------------- string related functions ------------------
 
 --- parse string for function macros and replace for spoken text
@@ -319,7 +343,7 @@ function ng_get_latest_filename(folder)
 	if SYSTEM == "IBM" then
     	command = 'dir /a-d /o-n /tc /b "'.. folder ..'" 2>nul:'
 	else
-		command = "ls -Art ".. folder .. " | tail -n 1 "
+		command = "ls -Art \"".. folder .. "\" | grep \"metar\" | tail -n 1 "
 	end
     local pipe = io.popen(command)
     local filename = pipe:read()
@@ -340,20 +364,19 @@ function ng_get_xp_metar(icao)
 	
 	if ng_simversion > 120000 then
 		if SYSTEM == "LIN" then
-			latestwxfile = ng_get_latest_filename(SYSTEM_DIRECTORY .. "Output/real\\ weather/metar*")
+			latestwxfile = ng_get_latest_filename(SYSTEM_DIRECTORY .. "Output/real weather")
 		else
 			latestwxfile = ng_get_latest_filename(SYSTEM_DIRECTORY .. "Output\\real weather\\metar*")
 		end
 		if latestwxfile == nil then return "-- NO FILES --" end
 		if SYSTEM == "LIN" then
-			metarpath = SYSTEM_DIRECTORY .. "Output/real\\ weather/" .. latestwxfile
+			metarpath = SYSTEM_DIRECTORY .. "Output/real weather/" .. latestwxfile
 		else
 			metarpath = SYSTEM_DIRECTORY .. "Output\\real weather\\" .. latestwxfile
 		end
 	else
 		metarpath = SYSTEM_DIRECTORY .. "METAR.rwx"
 	end
-
     if not ng_file_exists(metarpath) then return "-- NO FILE --" end
 
     local words = {}
@@ -368,8 +391,19 @@ function ng_get_xp_metar(icao)
                 end
             end 
         end 
-        if wx == nil then return "-- NO DATA -- " end
+        if wx == nil then return "-- NO DATA -- " end		
 		return wx
     else return "-- NO ICAO --" end
 end 
 
+function ng_calc_headwind_spd(windhdg, windspd, tohdg)
+	local alpha = tohdg - windhdg
+	local result = windspd * math.cos(math.rad(alpha))
+	return math.ceil(result)
+end
+
+function ng_calc_crosswind_spd(windhdg, windspd, tohdg)
+	local alpha = windhdg - tohdg
+	local result = windspd * math.sin(math.rad(alpha))
+	return math.abs(math.ceil(result))
+end
