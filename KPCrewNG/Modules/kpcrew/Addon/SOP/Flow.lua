@@ -150,7 +150,7 @@ function ngFlow:render(type)
 		end
 		for _, item in pairs(self.items) do
 			if item:getItemNode().condition ~= nil then
-				if loadstring(item:getItemNode().condition)() then 
+				if loadstring("return "..item:getItemNode().condition)() then 
 					item:render("f")
 				end
 			else
@@ -162,7 +162,7 @@ function ngFlow:render(type)
 	if type == "i" then
 		for _, item in pairs(self.items) do
 			if item:getItemNode().condition ~= nil then
-				if loadstring(item:getItemNode().condition)() then 
+				if loadstring("return "..item:getItemNode().condition)() then 
 					item:render("i")
 				end
 			else

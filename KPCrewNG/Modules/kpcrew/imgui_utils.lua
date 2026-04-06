@@ -286,3 +286,40 @@ function ng_imgui_in_combolist(push_id, options, input, output, width)
 		end				
 	imgui.PopID()
 end
+
+--- Input: Searcheable Combo list / drop-down
+-- @param string push_id - unique ID for element
+-- @param string options list of options
+-- @param int input - current selection
+-- @param function() output - code to return the new selection
+-- @param int width - width of drop-down
+function ng_imgui_in_combosearch(push_id, options, input, output, width, filter)
+	
+	imgui.PushID(push_id)
+	
+		if width then imgui.SetNextItemWidth(width) end
+		
+		if imgui.BeginCombo("", options[input + 1]) then
+			
+			for i,option in ipairs(options) do
+				
+				if input + 1 == i then
+					is_selected = true
+				else
+					is_selected = false
+				end
+				
+				if string.find(option:lower(), filter:lower()) then
+					
+					if imgui.Selectable(option, input + 1 == i) then
+						output(i - 1)
+					end
+					
+				end				
+			end
+
+		imgui.EndCombo() end		
+		
+	imgui.PopID()
+end
+

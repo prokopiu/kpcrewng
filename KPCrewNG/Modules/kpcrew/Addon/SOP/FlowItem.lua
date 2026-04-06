@@ -96,7 +96,7 @@ function ngFlowItem:setDelay(delay) self.delay = delay end
 -- @return true skip during execution
 function ngFlowItem:isToSkip() 
 	if self.item.condition ~= nil then
-		return loadstring(self.item.condition)() == false
+		return loadstring("return "..self.item.condition)() == false
 	else
 		return false
 	end

@@ -14,6 +14,7 @@ require "kpcrew.imgui_utils"
 require "kpcrew.acft_select"
 
 local SOP = require("kpcrew.Addon.SOP.SOP")
+local Systems 	= require("kpcrew.Addon.Systems.AddonSystems")
 
 ng_imgui_current_main_tab = 0
 ng_imgui_main_wnd_width = 960
@@ -21,8 +22,29 @@ ng_imgui_main_wnd_height = 950
 ng_weightunit = "KGS"
 ng_kgslbs = 1
 ng_settings_icao = ng_acft_select(2)
+
+ng_editor_system_title = ""
 ng_editor_system_icao = ng_acft_select(2)
 ng_editor_system_json = nil
+ng_editor_system_newsystem = ""
+ng_editor_system_newelement = ""
+ng_editor_system_newelement2 = {}
+ng_editor_system_error = ""
+ng_editor_system_filter = ""
+ng_editor_remove_element = false
+ng_editor_remove_system = false
+ng_editor_actions = { 
+	undefined = { "", "chk", " "},
+	dataref = { "", "on", "off", "tgl", "set", "chk", " "},
+	onofftgl = { "", "on", "off", "tgl", "chk", " "},
+	dialdref = { "", "up", "dn", "set", "chk", " "},
+	dialcmd = { "", "up", "dn", "set", "chk", " "},
+	custom = { "", "on", "off", "tgl", "set", "chk", " "}
+
+}
+ng_editor_types = { "", "dataref", "onofftgl", "dialdref", "dialcmd", "custom", "undefined", " " }
+
+ng_editor_sop_title = ""
 ng_editor_sop_icao = ng_acft_select(1)
 ng_editor_sop_json = nil
 ng_editor_sop_expand1 = false
@@ -38,13 +60,18 @@ ng_editor_sop_flowcopy = nil
 ng_editor_sop_flowcopyname = ""
 ng_editor_sop_itemcopy = nil
 ng_editor_sop_itemcopyname = ""
-ng_editor_system_newsystem = ""
-ng_editor_system_newelement = ""
-ng_editor_system_newelement2 = {}
+ng_editor_sop_error = ""
+ng_editor_sop_filter = ""
+ng_editor_sop_remove_flow = false
+ng_editor_sop_remove_item = false
+ng_editor_sop_remove_element = false
 
--- -----------------------------------------------------------------------------------------
+ng_preferences_error = ""
+
+-- =========================================================================================
 -- Main window rendering #mainwindow
--- -----------------------------------------------------------------------------------------
+-- =========================================================================================
+
 
 -- Draw the Briefing main window
 function ng_draw_main_window()
@@ -92,7 +119,7 @@ function ng_draw_main_window()
 
 	    imgui.SameLine()
 		ng_imgui_out_text(color_green, "Aircraft Type:", color_white, 
-			ng_get_active_addon():getTitle() .. " - " .. ng_acf_icao .. " [XP ICAO: " .. PLANE_ICAO .. "]")
+			ng_get_active_addon():getTitle() .. " - " .. ng_acf_icao .. " [XP ICAO: " .. PLANE_ICAO .. "] [SB ICAO: " .. ng_getBriefPrefs():get("general:acficao") .. "]")
 
 		imgui.SameLine()
 		ng_imgui_out_text(color_green, "SB Wgt Unit:", color_white, 
@@ -1881,14 +1908,57 @@ function ng_draw_main_window()
 
 	local function render_main_tab_editor()
 	
--- -----------------------------------------------------------------------------------------
+-- =========================================================================================
 -- System Editor	
+-- =========================================================================================
+
+-- -----------------------------------------------------------------------------------------
+-- render macros for system editor to reduce repeated code
+-- -----------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------
+--- draw a up/down buttons group
+		local function sop_remove_buttons(label, what, item, nidx, width, flag)
+			
+			if flag == false then 
+				imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
+					imgui.PushStyleColor(imgui.constant.Col.Text, color_black)
+						ng_imgui_in_button(label.."del", "REMOVE "..what.." "..label, width, 20, 
+							function () flag = true end) 
+					imgui.PopStyleColor()
+				imgui.PopStyleColor()
+			else 
+				imgui.PushStyleColor(imgui.constant.Col.Button, color_green)
+					imgui.PushStyleColor(imgui.constant.Col.Text, color_black)
+						ng_imgui_in_button(label.."yes", "YES ", width/2-2, 20, 
+							function () table.remove(item, nidx) flag = false end) 
+					imgui.PopStyleColor()
+				imgui.PopStyleColor()
+				imgui.SameLine()
+				imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
+					imgui.PushStyleColor(imgui.constant.Col.Text, color_black)
+						ng_imgui_in_button(label.."no", "NO ", width/2-2, 20, 
+							function () flag = false end) 
+					imgui.PopStyleColor()
+				imgui.PopStyleColor()
+			end
+			return flag
+		end
+-- -----------------------------------------------------------------------------------------
+
+
+-- -----------------------------------------------------------------------------------------
+-- save & load & add new related logic
 -- -----------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------
 -- load system json with definitions of all systems
 		local function systems_load()
 			local path = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_system_icao.."_systems.json"
+			if ng_editor_system_icao == "DFLT" then
+				ng_editor_system_error = "DFLT not allowed - XXXX"
+				-- return 
+			end 
 			if ng_file_exists(path) then
 				local json = require "kpcrew.json"
 				local file = io.open(path, "r")
@@ -1896,6 +1966,9 @@ function ng_draw_main_window()
 				for line in file:lines() do jsonstr = jsonstr .. line end
 				file:close()
 				ng_editor_system_json = json.parse(jsonstr)
+				ng_editor_system_error = ""
+			else
+				ng_editor_system_error = "No file!"
 			end
 		end
 -- -----------------------------------------------------------------------------------------
@@ -1904,11 +1977,53 @@ function ng_draw_main_window()
 -- save the edited system json 
 		local function systems_save()
 			local path = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_system_icao.."_systems.json"
+			if ng_editor_system_icao == "DFLT" then 
+				ng_editor_system_error = "DFLT not allowed - XXXX"
+				-- return 
+			end 
 			local prettyprint = require ("kpcrew.json_pretty_print")
 			local jsonout = prettyprint:pretty_print(ng_editor_system_json,nil,true)
 			local filesystem = io.open(path, "w+")
 			filesystem:write(jsonout)
 			filesystem:close()
+			ng_editor_system_error = ""
+		end
+-- -----------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------
+-- add new system json based on DFLT
+		local function systems_add(newicao)
+			local newjson = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..newicao.."_systems.json"
+			local dfltjson = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/DFLT_systems.json"
+			-- ignore when already file exists
+			if newicao == "DFLT" or ng_file_exists(newjson) then 
+				ng_editor_system_error = "Exists!"
+				return 
+			end 
+		
+			-- read source DFLT
+			local jsonin = require "kpcrew.json"
+			local filein = io.open(dfltjson, "r")
+			local jsonstrin = ""
+			for line in filein:lines() do jsonstrin = jsonstrin .. line end
+			filein:close()
+
+			-- write to new
+			local fileout = io.open(newjson, "w+")
+			fileout:write(jsonstrin)
+			fileout:close()
+			ng_editor_system_error = ""
+		end
+-- -----------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------
+-- appy current state to be active
+		local function systems_apply()
+			systems_save()
+			local systems = Systems:new("Aircraft Systems",SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_system_icao.."_systems.json")
+			systems:load()
+			ng_set_active_sys(systems)
+			ng_editor_system_error = "Applied"
 		end
 -- -----------------------------------------------------------------------------------------
 
@@ -1926,20 +2041,15 @@ function ng_draw_main_window()
 -- type		| [<type list drop down>                     V]
 -- title	| [                                           ]
 -- dref		| [                                           ]
--- indx		| [+] <-- if not set + creates it
 -- indx		| [                                     ][-][+]
 -- acts		| [<act1 V][<act2 V][<act3 V][<act4 V][<act5 V]
 -- check()	| [<code that returns true/false>             ]
+-- trans()	| [<code that returns transformed value>      ]
 
 			imgui.BeginGroup()
 	
 				imgui.Separator()
 				
-				-- available types for elements
-				local elementtypes = { "", "dataref", "function", "onoff", "toggle", "multistate", "dial" }
-				-- available actions for elements
-				local actions = { "", "on", "off", "set", "toggle", "up", "dn", "function", " "}
-
 				local ename = nelement.name -- base name to use for imgui id 
 
 -- name		| [                                           ]
@@ -1950,123 +2060,174 @@ function ng_draw_main_window()
 -- type		| [<type list drop down>                     V]
 				ng_imgui_out_text(color_white, "type") imgui.NextColumn()
 				if nelement.type ~= nil then
-					ng_imgui_in_combolist(ename.."etype", elementtypes, ng_indexOf(elementtypes,nelement.type)-1, 
-						function (textin) nelement.type=elementtypes[textin+1] end,300) imgui.NextColumn()
+					ng_imgui_in_combolist(ename.."etype", ng_editor_types, ng_indexOf(ng_editor_types,nelement.type)-1, 
+						function (textin) 
+							nelement.type=ng_editor_types[textin+1]
+							nelement.acts = nil
+						end,
+					300) imgui.NextColumn()
 				else -- if empty draw the plus button
-					ng_imgui_in_button(ename.."addtype", "+", 15, 20, 
-						function () nelement.type = "dataref" end) imgui.NextColumn()
+					nelement.type = "dataref" imgui.NextColumn()
 				end
 					
 -- title	| [                                           ]				
 				ng_imgui_out_text(color_white, "title") imgui.NextColumn()
 				if nelement.title ~= nil then
-					ng_imgui_in_tfield(ename.."title", 300, color_white, 255,  
-						nelement.title, function (textout) nelement.title = textout end) imgui.NextColumn()
-				else
-					ng_imgui_in_button(ename.."addtitle", "+", 15, 20, 
-						function () nelement.title = "" end) imgui.NextColumn()
-				end
-					
--- dref		| [                                           ]
-				ng_imgui_out_text(color_white, "dref") imgui.NextColumn()
-				if nelement.dref ~= nil then
-					ng_imgui_in_tfield(ename.."dref", 300, color_white, 255,  
-					nelement.dref, function (textout) nelement.dref = textout end) imgui.NextColumn()
-				else
-					ng_imgui_in_button(ename.."adddref", "+", 15, 20, 
-						function () nelement.dref = "" end) imgui.NextColumn()
-				end
-				
--- indx		| [                                      ][-][+]
-				ng_imgui_out_text(color_white, "indx") imgui.NextColumn()
-				if nelement.indx ~= nil then
-					ng_imgui_in_intfield(ename.."indx", 300, color_white, 0, 
-					nelement.indx, function (textout) if textout == -1 then nelement.indx = nil else nelement.indx = textout end end) imgui.NextColumn()
-				else
-					ng_imgui_in_button(ename.."addindx", "+", 15, 20, 
-						function () nelement.indx = 0 end) imgui.NextColumn()
-				end
-
--- acts		| [<act1 V][<act2 V][<act3 V][<act4 V][<act5 V]
--- up to 5 allowed actions for this element, blank action does nothing
-				ng_imgui_out_text(color_white, "acts") imgui.NextColumn() 
-				if nelement.acts ~= nil and #nelement.acts > 0 then
-
-					for nidx,nacts in pairs(nelement.acts) do 
-						ng_imgui_in_combolist(ename.."acts"..nidx, actions, ng_indexOf(actions,nacts)-1, 
-							function (textin) nelement.acts[nidx] = (actions[textin+1] == " " and nil or actions[textin+1]) end,55)
-						if nidx < #nelement.acts then imgui.SameLine() end
+					-- ng_imgui_in_button(ename.."niltitle", "-", 15, 20, 
+						-- function () nelement.title = nil end) imgui.SameLine()
+					if nelement.title ~= nil then
+						ng_imgui_in_tfield(ename.."title", 300, color_white, 255,  
+							nelement.title, function (textout) nelement.title = textout end) 
 					end
-					for i=#nelement.acts+1,5,1 do
-						imgui.SameLine()
-						ng_imgui_in_combolist(ename.."nacts"..i, actions, ng_indexOf(actions," ")-1, 
-							function (textin) nelement.acts[i] = actions[textin] end,55)
-					end
-					
 					imgui.NextColumn()
 				else
-					ng_imgui_in_button(ename.."addacts", "+", 15, 20, 
-						function () nelement.acts={"on","","","",""} end) imgui.NextColumn()					
+					nelement.title = "<title>"
 				end
+				
+				if nelement.type ~= "undefined" then					
+-- dref		| [                                           ]
+					ng_imgui_out_text(color_white, "dref") imgui.NextColumn()
+					if nelement.dref ~= nil then
+						ng_imgui_in_button(ename.."nildref", "-", 15, 20, 
+							function () nelement.dref = nil end) imgui.SameLine()
+						if nelement.dref ~= nil then
+							ng_imgui_in_tfield(ename.."dref", 278, color_white, 255,  
+							nelement.dref, function (textout) nelement.dref = textout end) imgui.NextColumn()
+						end
+					else
+						ng_imgui_in_button(ename.."adddref", "+", 15, 20, 
+							function () nelement.dref = "" end) imgui.NextColumn()
+					end
+					
+	-- indx		| [                                      ][-][+]
+					ng_imgui_out_text(color_white, "indx") imgui.NextColumn()
+					if nelement.indx ~= nil then
+						ng_imgui_in_button(ename.."nilindx", "-", 15, 20, 
+							function () nelement.indx = nil end) imgui.SameLine()
+						if nelement.indx ~= nil then
+							ng_imgui_in_intfield(ename.."indx", 278, color_white, 0, 
+							nelement.indx, function (textout) if textout == -1 then 
+								nelement.indx = nil else nelement.indx = textout end end) 
+						end 
+						imgui.NextColumn()
+					else
+						ng_imgui_in_button(ename.."addindx", "+", 15, 20, 
+							function () nelement.indx = 0 end) imgui.NextColumn()
+					end
 
--- check()	| [<code that returns true/false>             ]
--- sth like return get(\"dataref/key\") == 1" for example
-				ng_imgui_out_text(color_white, "check()") imgui.NextColumn()
-				if nelement.fcheck ~= nil then
-					ng_imgui_in_tfield(ename.."funccheck", 300, color_white, 255, 
-					nelement.fcheck, function (textout) nelement.fcheck = textout end) imgui.NextColumn()
-				else
-					ng_imgui_in_button(ename.."addfcheck", "+", 15, 20, 
-						function () nelement.fcheck = "return true" end) imgui.NextColumn()
+	-- acts		| [<act1 V][<act2 V][<act3 V][<act4 V][<act5 V]
+	-- up to 5 allowed actions for this element, blank action does nothing
+					ng_imgui_out_text(color_white, "acts") imgui.NextColumn()
+					
+					if nelement.acts ~= nil then
+						if #nelement.acts == 0 then for i=1,5 do nelement.acts[i] = " " end end
+						if #nelement.acts > 0 then
+							local lactions = ng_editor_actions[nelement.type]
+							for nidx,nacts in pairs(nelement.acts) do 
+								ng_imgui_in_combolist(ename.."acts"..nidx, lactions, ng_indexOf(lactions,nacts)-1, 
+									function (textin) nelement.acts[nidx] = (lactions[textin+1] == " " and nil or lactions[textin+1]) end,54)
+								if nidx < #nelement.acts then imgui.SameLine() end
+							end
+							for i=#nelement.acts+1,5,1 do
+								imgui.SameLine()
+								ng_imgui_in_combolist(ename.."nacts"..i, lactions, ng_indexOf(lactions," ")-1, 
+									function (textin) nelement.acts[i] = lactions[textin] end,54)
+							end
+						
+							imgui.NextColumn()
+						end
+					else
+						ng_imgui_in_button(ename.."addacts", "+", 15, 20, 
+							function () --", "dialdref", "dialcmd", "custom"
+								if nelement.type == "dataref" then nelement.acts={"on","off","tgl","set","chk"} 
+								elseif nelement.type == "onofftgl" then nelement.acts={"on","off","tgl","chk",""} 
+								elseif nelement.type == "dialdref" then nelement.acts={"up","dn","set","chk",""} 
+								elseif nelement.type == "dialcmd" then nelement.acts={"up","dn","chk","",""} 
+								elseif nelement.type == "custom" then nelement.acts={"on","off","tgl","chk",""} 
+								end
+						end) imgui.NextColumn()					
+					end
+
+	-- check()	| [<code that returns true/false>             ]
+	-- sth like return get(\"dataref/key\") == 1" for example
+					ng_imgui_out_text(color_white, "check()") imgui.NextColumn()
+					if nelement.fcheck ~= nil then
+						ng_imgui_in_button(ename.."nilfcheck", "-", 15, 20, 
+							function () nelement.fcheck = nil end) imgui.SameLine()
+						if nelement.fcheck ~= nil then
+							ng_imgui_in_tfield(ename.."funccheck", 281, color_white, 255, 
+							nelement.fcheck, function (textout) nelement.fcheck = textout end) 
+						end
+						imgui.NextColumn()
+					else
+						ng_imgui_in_button(ename.."addfcheck", "+", 15, 20, 
+							function () nelement.fcheck = "function (a) return true end" end) imgui.NextColumn()
+					end
+
+	-- trans()	| [<code that returns a transformed value>             ]
+	-- transform the dataref to allow for special cases (e.g. math.ceil() by values)
+					ng_imgui_out_text(color_white, "trans()") imgui.NextColumn()
+					if nelement.ftrans ~= nil then
+						ng_imgui_in_button(ename.."niltrans", "-", 15, 20, 
+							function () nelement.ftrans = nil end) imgui.SameLine()
+						if nelement.ftrans ~= nil then
+							ng_imgui_in_tfield(ename.."ftrans", 281, color_white, 255, 
+							nelement.ftrans, function (textout) nelement.ftrans = textout end) 
+						end
+						imgui.NextColumn()
+					else
+						ng_imgui_in_button(ename.."addftrans", "+", 15, 20, 
+							function () nelement.ftrans = "function (a) a=x end" end) imgui.NextColumn()
+					end
 				end
-
--- trans()	| [<code that returns true/false>             ]
--- transform the dataref to allow for special cases (e.g. math.ceil() by values)
-				ng_imgui_out_text(color_white, "trans()") imgui.NextColumn()
-				if nelement.functrans ~= nil then
-					ng_imgui_in_tfield(ename.."functrans", 300, color_white, 255, 
-					nelement.functrans, function (textout) nelement.functrans = textout end) imgui.NextColumn()
-				else
-					ng_imgui_in_button(ename.."addftrans", "+", 15, 20, 
-						function () nelement.functrans = "return true" end) imgui.NextColumn()
-				end
-
+				
 -- ========== type specific fields to be added to common part
 -- toggle and onoff elements
-				if nelement.type == "toggle" or nelement.type == "onoff" then
+				if nelement.type == "onofftgl" then
 				
-					if nelement.type == "onoff" then -- on off have the off and on cmd + toggle
-					
 -- cmdoff	| [                                           ]
 -- x-plane command id string to execute with command_once() to turn sth OFF
-						ng_imgui_out_text(color_white, "cmdoff") imgui.NextColumn()
+					ng_imgui_out_text(color_white, "cmdoff") imgui.NextColumn()
+					if nelement.cmdoff ~= nil then
+						ng_imgui_in_button(ename.."nilcmdoff", "-", 15, 20, 
+							function () nelement.cmdoff = nil end) imgui.SameLine()
 						if nelement.cmdoff ~= nil then
-							ng_imgui_in_tfield(ename.."cmdoff", 300, color_white, 255,  
-							nelement.cmdoff, function (textout) nelement.cmdoff = textout end) imgui.NextColumn()
-						else
-							ng_imgui_in_button(ename.."addcmdoff", "+", 15, 20, 
-								function () nelement.cmdoff = "" end) imgui.NextColumn()
-						end
+							ng_imgui_in_tfield(ename.."cmdoff", 281, color_white, 255,  
+							nelement.cmdoff, function (textout) nelement.cmdoff = textout end) 
+						end 
+						imgui.NextColumn()
+					else
+						ng_imgui_in_button(ename.."addcmdoff", "+", 15, 20, 
+							function () nelement.cmdoff = "" end) imgui.NextColumn()
+					end
 						
 -- cmdon	| [                                           ]
 -- x-plane command id string to execute with command_once() to turn sth ON
-						ng_imgui_out_text(color_white, "cmdon") imgui.NextColumn()
+					ng_imgui_out_text(color_white, "cmdon") imgui.NextColumn()
+					if nelement.cmdon ~= nil then
+						ng_imgui_in_button(ename.."nilcmdon", "-", 15, 20, 
+							function () nelement.cmdon = nil end) imgui.SameLine()
 						if nelement.cmdon ~= nil then
-							ng_imgui_in_tfield(ename.."cmdon", 300, color_white, 255,  
-							nelement.cmdon, function (textout) nelement.cmdon = textout end) imgui.NextColumn()
-						else
-							ng_imgui_in_button(ename.."addcmdon", "+", 15, 20, 
-								function () nelement.cmdon = "" end) imgui.NextColumn()
+							ng_imgui_in_tfield(ename.."cmdon", 281, color_white, 255,  
+							nelement.cmdon, function (textout) nelement.cmdon = textout end) 
 						end
-						
+						imgui.NextColumn()
+					else
+						ng_imgui_in_button(ename.."addcmdon", "+", 15, 20, 
+							function () nelement.cmdon = "" end) imgui.NextColumn()
 					end
 						
 -- cmdtgl	| [                                           ]
 -- x-plane command id string to execute with command_once() to toggle the switch
 					ng_imgui_out_text(color_white, "cmdtgl") imgui.NextColumn()
 					if nelement.cmdtgl ~= nil then
-						ng_imgui_in_tfield(ename.."cmdtgl", 300, color_white, 255,  
-						nelement.cmdtgl, function (textout) nelement.cmdtgl = textout end) imgui.NextColumn()
+						ng_imgui_in_button(ename.."nilcmdtgl", "-", 15, 20, 
+							function () nelement.cmdtgl = nil end) imgui.SameLine()
+						if nelement.cmdtgl ~= nil then
+							ng_imgui_in_tfield(ename.."cmdtgl", 281, color_white, 255,  
+							nelement.cmdtgl, function (textout) nelement.cmdtgl = textout end) 
+						end
+						imgui.NextColumn()
 					else
 						ng_imgui_in_button(ename.."addcmdtgl", "+", 15, 20, 
 							function () nelement.cmdtgl = "" end) imgui.NextColumn()
@@ -2074,113 +2235,166 @@ function ng_draw_main_window()
 
 				end
 
--- function element - special elements with lua code for on/off/tgl and check
-				if nelement.type == "function" then
-
--- on()		| [                                           ]
--- function triggering actions to set a switch which is not simple 1/0 or commands
-					ng_imgui_out_text(color_white, "on()") imgui.NextColumn()
-					if nelement.funcon ~= nil then
-						ng_imgui_in_tfield(ename.."funcon", 300, color_white, 255, 
-						nelement.funcon, function (textout) nelement.funcon = textout end) imgui.NextColumn()
-					else
-						ng_imgui_in_button(ename.."addfuncon", "+", 15, 20, 
-							function () nelement.funcon = "" end) imgui.NextColumn()
-					end
-					
--- off()	| [                                           ]
--- function triggering actions to set a switch which is not simple 1/0 or commands
-					ng_imgui_out_text(color_white, "off()") imgui.NextColumn()
-					if nelement.funcoff ~= nil then
-						ng_imgui_in_tfield(ename.."funcoff", 300, color_white, 255,  
-						nelement.funcoff, function (textout) nelement.funcoff = textout end) imgui.NextColumn()
-					else
-						ng_imgui_in_button(ename.."addfuncoff", "+", 15, 20, 
-							function () nelement.funcoff = "" end) imgui.NextColumn()
-					end
-					
--- tgl()	| [                                           ]
--- function triggering actions to set a switch which is not simple 1/0 or commands
-					ng_imgui_out_text(color_white, "tgl()") imgui.NextColumn()
-					if nelement.functgl ~= nil then
-						ng_imgui_in_tfield(ename.."functgl", 300, color_white, 255, 
-						nelement.functgl, function (textout) nelement.functgl = textout end) imgui.NextColumn()
-					else
-						ng_imgui_in_button(ename.."addfunctgl", "+", 15, 20, 
-							function () nelement.functgl = "" end) imgui.NextColumn()
-					end
-					
-				end
-
--- dial or multistate are for elements which dial up or down or have n options to set				
-				if nelement.type == "dial" or nelement.type == "multistate" then
+				-- dial elements
+				if nelement.type == "dialdref" or nelement.type == "dialcmd" then
 
 -- min		| [                                      ][-][+]
 -- minimal value to dial/set
 					ng_imgui_out_text(color_white, "min") imgui.NextColumn()
 					if nelement.min ~= nil then
-						ng_imgui_in_intfield(ename.."min", 300, color_white, 1,
-						nelement.min, function (textout) nelement.min = textout end) imgui.NextColumn()
+						ng_imgui_in_button(ename.."nilmin", "-", 15, 20, 
+							function () nelement.min = nil end) imgui.SameLine()
+						if nelement.min ~= nil then
+							ng_imgui_in_intfield(ename.."min", 281, color_white, 1,
+							nelement.min, function (textout) nelement.min = textout end) 
+						end
+						imgui.NextColumn()
 					else
-						ng_imgui_in_button(ename.."addmin", "+", 15, 20, 
-							function () nelement.min = 0 end) imgui.NextColumn()
+						nelement.min = 0 imgui.NextColumn()
 					end
 					
 -- max		| [                                      ][-][+]
 -- maximal value to dial/set
 					ng_imgui_out_text(color_white, "max") imgui.NextColumn()
 					if nelement.max ~= nil then
-						ng_imgui_in_intfield(ename.."max", 300, color_white, 1, 
-						nelement.max, function (textout) nelement.max = textout end) imgui.NextColumn()
+						ng_imgui_in_button(ename.."nilmax", "-", 15, 20, 
+							function () nelement.max = nil end) imgui.SameLine()
+						if nelement.max ~= nil then
+							ng_imgui_in_intfield(ename.."max", 281, color_white, 1, 
+							nelement.max, function (textout) nelement.max = textout end) 
+						end
+						imgui.NextColumn()
 					else
-						ng_imgui_in_button(ename.."addmax", "+", 15, 20, 
-							function () nelement.max = 0 end) imgui.NextColumn()
+						nelement.max = 999 imgui.NextColumn()
 					end
 					
+					-- only for dialdref
+					if nelement.type == "dialdref" then
+
 -- incr		| [                                      ][-][+]
 -- increment for each step up/down
-					if nelement.type == "dial" then
 						ng_imgui_out_text(color_white, "incr") imgui.NextColumn()
 						if nelement.incr ~= nil then
-							ng_imgui_in_intfield(ename.."incr", 300, color_white, 1, 
-							nelement.incr, function (textout) nelement.incr = textout end) imgui.NextColumn()
+							ng_imgui_in_button(ename.."nilincr", "-", 15, 20, 
+								function () nelement.incr = nil end) imgui.SameLine()
+							if nelement.incr ~= nil then
+								ng_imgui_in_intfield(ename.."incr", 300, color_white, 1, 
+								nelement.incr, function (textout) nelement.incr = textout end) 
+							end
+							imgui.NextColumn()
 						else
-							ng_imgui_in_button(ename.."addincr", "+", 15, 20, 
-								function () nelement.incr = 1 end) imgui.NextColumn()
+							nelement.incr = 1 imgui.NextColumn()
 						end
+						
 					end 
-					
+
+					-- only for dialcmd
+					if nelement.type == "dialcmd" then
+
 -- cmddn	| [                                           ]
 -- x-plane command id string to execute with command_once() decrease the value
-					ng_imgui_out_text(color_white, "cmddn") imgui.NextColumn()
-					if nelement.cmddn ~= nil then
-						ng_imgui_in_tfield(ename.."cmddn", 300, color_white, 255,  
-						nelement.cmddn, function (textout) nelement.cmddn = textout end) imgui.NextColumn()
-					else
-						ng_imgui_in_button(ename.."addcmddn", "+", 15, 20, 
-							function () nelement.cmddn = "" end) imgui.NextColumn()
-					end
+						ng_imgui_out_text(color_white, "cmddn") imgui.NextColumn()
+						if nelement.cmddn ~= nil then
+							ng_imgui_in_button(ename.."nilcmddn", "-", 15, 20, 
+								function () nelement.cmddn = nil end) imgui.SameLine()
+							if nelement.cmddn ~= nil then
+								ng_imgui_in_tfield(ename.."cmddn", 300, color_white, 255,  
+								nelement.cmddn, function (textout) nelement.cmddn = textout end) 
+							end
+							imgui.NextColumn()
+						else
+							ng_imgui_in_button(ename.."addcmddn", "+", 15, 20, 
+								function () nelement.cmddn = "" end) imgui.NextColumn()
+						end
 					
 -- cmdup	| [                                           ]
 -- x-plane command id string to execute with command_once() increase the value
-					ng_imgui_out_text(color_white, "cmdup") imgui.NextColumn()
-					if nelement.cmdup ~= nil then
-						ng_imgui_in_tfield(ename.."cmdup", 300, color_white, 255,  
-						nelement.cmdup, function (textout) nelement.cmdup = textout end) imgui.NextColumn()
+						ng_imgui_out_text(color_white, "cmdup") imgui.NextColumn()
+						if nelement.cmdup ~= nil then
+							ng_imgui_in_button(ename.."nilcmdup", "-", 15, 20, 
+								function () nelement.cmdup = nil end) imgui.SameLine()
+							if nelement.cmdup ~= nil then
+								ng_imgui_in_tfield(ename.."cmdup", 300, color_white, 255,  
+								nelement.cmdup, function (textout) nelement.cmdup = textout end) 
+							end
+							imgui.NextColumn()
+						else
+							ng_imgui_in_button(ename.."addcmdup", "+", 15, 20, 
+								function () nelement.cmdup = "" end) imgui.NextColumn()
+						end
+
+					end
+				end
+
+-- custom elements
+				if nelement.type == "custom" then
+
+-- on()		| [                                           ]
+-- function triggering actions to set a switch which is not simple 1/0 or commands
+					ng_imgui_out_text(color_white, "on()") imgui.NextColumn()
+					if nelement.fon ~= nil then
+						ng_imgui_in_button(ename.."nilfuncon", "-", 15, 20, 
+							function () nelement.fon = nil end) imgui.SameLine()
+						if nelement.fon ~= nil then
+							ng_imgui_in_tfield(ename.."funcon", 281, color_white, 255, 
+							nelement.fon, function (textout) nelement.fon = textout end) 
+						end
+						imgui.NextColumn()
 					else
-						ng_imgui_in_button(ename.."addcmdup", "+", 15, 20, 
-							function () nelement.cmdup = "" end) imgui.NextColumn()
+						ng_imgui_in_button(ename.."addfuncon", "+", 15, 20, 
+							function () nelement.fon = "function (a) return xx end" end) imgui.NextColumn()
+					end
+-- off()	| [                                           ]
+-- function triggering actions to set a switch which is not simple 1/0 or commands
+					ng_imgui_out_text(color_white, "off()") imgui.NextColumn()
+					if nelement.foff ~= nil then
+						ng_imgui_in_button(ename.."nilfuncoff", "-", 15, 20, 
+							function () nelement.foff = nil end) imgui.SameLine()
+						if nelement.foff ~= nil then
+							ng_imgui_in_tfield(ename.."funcoff", 281, color_white, 255,  
+							nelement.foff, function (textout) nelement.foff = textout end) 
+						end
+						imgui.NextColumn()
+					else
+						ng_imgui_in_button(ename.."addfuncoff", "+", 15, 20, 
+							function () nelement.foff = "function (a) return xx end" end) imgui.NextColumn()
+					end
+
+-- tgl()	| [                                           ]
+-- function triggering actions to set a switch which is not simple 1/0 or commands
+					ng_imgui_out_text(color_white, "tgl()") imgui.NextColumn()
+					if nelement.ftgl ~= nil then
+						ng_imgui_in_button(ename.."nilfunctgl", "-", 15, 20, 
+							function () nelement.ftgl = nil end) imgui.SameLine()
+						if nelement.ftgl ~= nil then
+							ng_imgui_in_tfield(ename.."ftgl", 281, color_white, 255, 
+							nelement.ftgl, function (textout) nelement.ftgl = textout end) 
+						end
+						imgui.NextColumn()
+					else
+						ng_imgui_in_button(ename.."addfunctgl", "+", 15, 20, 
+							function () nelement.ftgl = "function (a) return xx end" end) imgui.NextColumn()
+					end
+-- set()	| [                                           ]
+-- function triggering actions to set a switch which is not simple 1/0 or commands
+					ng_imgui_out_text(color_white, "set()") imgui.NextColumn()
+					if nelement.fset ~= nil then
+						ng_imgui_in_button(ename.."nilfset", "-", 15, 20, 
+							function () nelement.fset = nil end) imgui.SameLine()
+						if nelement.fset ~= nil then
+							ng_imgui_in_tfield(ename.."fset", 281, color_white, 255, 
+							nelement.fset, function (textout) nelement.fset = textout end) 
+						end
+						imgui.NextColumn()
+					else
+						ng_imgui_in_button(ename.."addfset", "+", 15, 20, 
+							function () nelement.fset = "function (a) return xx end" end) imgui.NextColumn()
 					end
 					
 				end
-
-				-- if string.lower(category) == "custom" then
 					
-					imgui.NextColumn()
-					imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
-						ng_imgui_in_button(ename.."del", "REMOVE ELEMENT "..ename, 300, 20, 
-							function () table.remove(nsystem.elements, ielement) end) 
-					imgui.PopStyleColor()
+					imgui.NextColumn() imgui.NextColumn() imgui.NextColumn()
+					ng_editor_remove_element = sop_remove_buttons(ename, "ELEMENT", nsystem.elements, ielement, 300, ng_editor_remove_element)
 
 				-- end 				
 				
@@ -2208,24 +2422,26 @@ function ng_draw_main_window()
 				-- only show for custom category (others are fixed)
 				-- if string.lower(ncategory.name) == "custom" then
 					
-					imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
-					ng_imgui_in_button(sname.."del", "REMOVE SYSTEM "..sname, 367, 20, 
-						function () table.remove(ncategory.systems, isystems) end) 
-					imgui.PopStyleColor()
+					ng_editor_remove_system = sop_remove_buttons(sname, "SYSTEM", ncategory.systems, isystem, 375, ng_editor_remove_system)
 
-					ng_imgui_in_button(sname.."append", "Append Element", 109, 20, 
+					ng_imgui_in_button(sname.."append", "Append Element", 115, 20, 
 						function () if ng_editor_system_newelement ~= "" then newelement.name=ng_editor_system_newelement
 							table.insert (nsystem.elements, newelement) ng_editor_system_newelement = "" end end) 
-					imgui.SameLine() ng_imgui_in_tfield(sname.."name", 250, color_white, 255, 
+					imgui.SameLine() ng_imgui_in_tfield(sname.."name", 250, color_white, 285, 
 						ng_editor_system_newelement, function (textout) ng_editor_system_newelement = textout end)
 						
 				-- end
+
+				local function compareNames(a, b)
+					return a.name < b.name
+				end
+
+				table.sort(nsystem.elements, compareNames)												
 				
 				-- render elements of this system
 				if nsystem.elements ~= nil then
 					
 					for ielement,nelement in ipairs(nsystem.elements) do
-												
 						imgui.Columns(2, nsystem.name, true)					
 							imgui.SetColumnWidth(0, 65)
 							imgui.SetColumnWidth(1, 400)
@@ -2250,12 +2466,19 @@ function ng_draw_main_window()
 
 				-- if string.lower(ncategory.name) == "custom" then
 					
-					ng_imgui_in_button(ncategory.name.."append", "Append System", 180, 20, 
+					ng_imgui_in_button(ncategory.name.."append", "Append System", 190, 20, 
 						function () if ng_editor_system_newsystem ~= "" then newsystem.name=ng_editor_system_newsystem
 							table.insert (ncategory.systems, newsystem) ng_editor_system_newsystem = "" end end) 
-					imgui.SameLine() ng_imgui_in_tfield(ncategory.name.."name", 200, color_white, 255, 
+					imgui.SameLine() ng_imgui_in_tfield(ncategory.name.."name", 200, color_white, 270, 
 						ng_editor_system_newsystem, function (textout) ng_editor_system_newsystem = textout end)
+						
 				-- end
+
+				local function compareNames(a, b)
+					return a.name < b.name
+				end
+
+				table.sort(ncategory.systems, compareNames)
 				for isystems,nsystems in ipairs(ncategory.systems) do
 					systems_rnd_system(nsystems,isystems,ncategory)
 				end
@@ -2268,22 +2491,44 @@ function ng_draw_main_window()
 -- draw the systems editor
 		local function render_systems_editor()
 			if ng_editor_system_json ~= nil then
+				
 				imgui.SetNextItemOpen(true)
+				
+				local function compareNames(a, b)
+					return a.name < b.name
+				end
+				table.sort(ng_editor_system_json.addonsystems.categories, compareNames)
+
 				if imgui.TreeNode(ng_editor_system_json.title) then
 					for nidx,ncategory in pairs(ng_editor_system_json.addonsystems.categories) do
 						systems_rnd_category(ncategory)
 					end
 				imgui.TreePop() end
+				
 			end
 		end
 -- -----------------------------------------------------------------------------------------
 
--- -------------------------------------- SOP Editor 	
+-- =========================================================================================
+-- SOP Editor 	
+-- =========================================================================================
+
+-- -----------------------------------------------------------------------------------------
+-- render macros for SOP editor to reduce repeated code
+-- -----------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------
+-- save & load & add new related logic
+-- -----------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------
 --- load SOP json with definitions of all flows
 		local function sop_load()
 			local path = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_sop_icao.."_sop.json"
+			if ng_editor_sop_icao == "DFLT" then 
+				ng_editor_sop_error = "DFLT not allowed - XXXX"
+				-- return 
+			end 
 			if ng_file_exists(path) then
 				local json = require "kpcrew.json"
 				local file = io.open(path, "r")
@@ -2291,6 +2536,9 @@ function ng_draw_main_window()
 				for line in file:lines() do jsonstr = jsonstr .. line end
 				file:close()
 				ng_editor_sop_json = json.parse(jsonstr)
+				ng_editor_sop_error = ""
+			else
+				ng_editor_sop_error = "No file!"
 			end
 		end
 -- -----------------------------------------------------------------------------------------
@@ -2299,14 +2547,143 @@ function ng_draw_main_window()
 --- save edited SOP
 		local function sop_save()
 			local path = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_sop_icao.."_sop.json"
+			if ng_editor_sop_icao == "DFLT" then 
+				ng_editor_sop_error = "DFLT not allowed - XXXX"
+				-- return 
+			end 
 			local prettyprint = require ("kpcrew.json_pretty_print")
 			local jsonout = prettyprint:pretty_print(ng_editor_sop_json,nil,true)
 			local filesystem = io.open(path, "w+")
 			filesystem:write(jsonout)
 			filesystem:close()
+			ng_editor_sop_error = ""
 		end
 -- -----------------------------------------------------------------------------------------
 
+-- -----------------------------------------------------------------------------------------
+-- add new sop json based on DFLT
+		local function sop_add(newicao)
+			local newjson = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..newicao.."_sop.json"
+			local dfltjson = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/DFLT_sop.json"
+			-- ignore when already file exists
+			if newicao == "DFLT" or ng_file_exists(newjson) then 
+				ng_editor_sop_error = "Exists!"
+				return 
+			end 
+		
+			-- read source DFLT
+			local jsonin = require "kpcrew.json"
+			local filein = io.open(dfltjson, "r")
+			local jsonstrin = ""
+			for line in filein:lines() do jsonstrin = jsonstrin .. line end
+			filein:close()
+
+			-- write to new
+			local fileout = io.open(newjson, "w+")
+			fileout:write(jsonstrin)
+			fileout:close()
+			ng_editor_sop_error = ""
+
+		end
+-- -----------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------
+--- apply edited SOP
+		local function sop_apply()
+			sop_save()
+			local sop = SOP:new("SOP Default Aircraft",SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_sop_icao.."_sop.json")
+			sop:load()
+			ng_set_active_sop(sop)
+			ng_editor_sop_error = "Applied"
+		end
+-- -----------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------
+--- draw a group to add a system element
+		local function sop_add_system_element(label, nitem )
+			
+			-- Append item
+			local newelement = {element="" }
+
+			-- -----------------------------------------------------------
+			-- [Add Element] [<all elements sorted> V] [<filter for list>]
+			-- -----------------------------------------------------------
+			ng_imgui_in_button(label.."append", "Add Element", 90, 20, 
+				function () if ng_editor_sop_newelement ~= "" then newelement.element=ng_editor_sop_newelement table.insert (nitem.setelements, newelement) ng_editor_sop_newelement= "" end end) 
+
+			-- prefill drop down beginning with element groups (#xxxx) followed by annunciators (_xxxx) 
+			-- and then individual elements alphanumerically sorted
+			local categnames = {""} -- load a list of category names
+			
+			for k,n in pairs(ng_get_active_sys().categories) do 
+				for l,m in pairs(n.systems) do 
+					table.insert(categnames, "#"..m.name) 
+					for i,o in pairs(m.elements) do 
+						table.insert(categnames, o.name) 
+					end
+				end
+			end
+			table.sort(categnames) -- sort alphabetically
+			local catindx = ng_indexOf(categnames,ng_editor_sop_newelement)
+			if catindx == nil then catindx = 1 end
+
+			imgui.SameLine() ng_imgui_in_combosearch(label.."categs", categnames, catindx-1,
+				function (textin) 
+					catindx = textin+1
+					ng_editor_sop_newelement = categnames[catindx]
+					ng_editor_sop_filter = ""
+				end,130,ng_editor_sop_filter)
+
+			imgui.SameLine() ng_imgui_in_tfield(label.."filter", 140, color_white, 100, 
+				ng_editor_sop_filter, function (textout) ng_editor_sop_filter = textout end)
+	end
+-- -----------------------------------------------------------------------------------------
+	
+-- -----------------------------------------------------------------------------------------
+--- draw a expand/compress buttons group
+		local function sop_compress_expand(label, colvar, expvar)
+			
+			-- [--][++]
+	
+			ng_imgui_in_button(label.."expand", "++", 23, 20, 
+				function () colvar = 3 expvar = true end) 
+
+			imgui.SameLine() ng_imgui_in_button(label.."compress", "--", 23, 20, 
+				function () colvar = 3 expvar = false end) 
+				
+			return colvar, expvar
+				
+		end
+-- -----------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------
+--- COPY button for copy/paste mecganism
+		local function sop_copy_button(label, item, copyvar, namevar)
+			
+			-- [COPY]
+			imgui.SameLine() ng_imgui_in_button(label.."copy", "COPY", 40, 20, 
+				function () copyvar = item namevar = "" end) 
+	
+			return copyvar, namevar
+				
+		end
+-- -----------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------
+--- draw a up/down buttons group
+		local function sop_up_down(label, item, nidx)
+			
+			-- [UP][DN]
+			ng_imgui_in_button(label.."up", "UP", 23, 20, 
+				function () if nidx > 1 then 
+					table.insert(item, nidx-1, table.remove(item, nidx)) end end) 
+
+			imgui.SameLine() ng_imgui_in_button(label.."dn", "DN", 23, 20, 
+				function () if nidx < #item then table.insert(item, nidx+1, table.remove(item, nidx)) end end) 
+				
+		end
+-- -----------------------------------------------------------------------------------------
+		
 -- -----------------------------------------------------------------------------------------
 --- render a flow item (step)
 -- @param tablenode item node
@@ -2318,7 +2695,7 @@ function ng_draw_main_window()
 			local roles = { "", "ng_firole_PF", "ng_firole_PNF", "ng_firole_PM", "ng_firole_BOTH", 
 				"ng_firole_FO", "ng_firole_CPT", "ng_firole_LHS", "ng_firole_RHS", "ng_firole_FE", 
 				"ng_firole_CM1", "ng_firole_CM2", "ng_firole_CM3", "ng_firole_ALL", "ng_firole_SYS" }
-			local actions = { "", "on", "off", "set", "toggle", "up", "dn", "function", " "}
+			local actions = { "", "on", "off", "set", "tgl", "up", "dn", "funct", "chk", " "}
 		
 			local nlabel = nflow.title..nitem.challenge..nidx
 
@@ -2326,80 +2703,83 @@ function ng_draw_main_window()
 				
 				-- imgui.Separator()
 				
-					if imgui.TreeNode(nitem.challenge) then
+					if imgui.TreeNode(nidx.." "..nitem.challenge) then
 
-						-- move flow item up and down in flow
-						ng_imgui_in_button(nlabel.."up", "UP", 23, 20, 
-							function () if nidx > 1 then table.insert(nflow.flowitem, nidx-1, table.remove(nflow.flowitem,nidx)) end end) 
-						imgui.SameLine() ng_imgui_in_button(nlabel.."dn", "DN", 23, 20, 
-							function () if nidx < #nflow.flowitem then table.insert(nflow.flowitem, nidx+1, table.remove(nflow.flowitem,nidx)) end end) 
+						sop_up_down(nlabel, nflow.flowitem, nidx)
 						
 						-- put item in the copy buffer to paste in any flow
-						imgui.SameLine() ng_imgui_in_button(nlabel.."copy", "COPY", 50, 20, 
-							function () ng_editor_sop_itemcopy = nitem ng_editor_sop_itemcopyname = "" end) 
+						imgui.SameLine() ng_editor_sop_itemcopy, ng_editor_sop_itemcopyname = 
+							sop_copy_button(nlabel, nitem, ng_editor_sop_itemcopy, ng_editor_sop_itemcopyname)
 
 						-- delete the item
-						imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
-							imgui.SameLine() ng_imgui_in_button(nlabel.."del", "REMOVE ITEM "..nitem.challenge, 260, 20, 
-								function () table.remove(nflow.flowitem, nidx) end) 
-						imgui.PopStyleColor()
+						imgui.SameLine()
+						ng_editor_sop_remove_item = sop_remove_buttons(nlabel, "ITEM", nflow.flowitem, nidx, 265, ng_editor_sop_remove_item)
 
 						-- Class of item (Procedure or Checklist item)
-						ng_imgui_out_text(color_white, "Class:") imgui.SameLine()
+						ng_imgui_out_text(color_white, "Class    :") imgui.SameLine()
 						if nitem.classname ~= nil then
 							ng_imgui_in_combolist(nlabel.."class", itemclasses, ng_indexOf(itemclasses,nitem.classname)-1, 
-								function (textin) nitem.classname=itemclasses[textin+1] end,323)
+								function (textin) nitem.classname=itemclasses[textin+1] end,295)
 						else
-							ng_imgui_in_button(nlabel.."addclass", "+", 15, 20, 
-								function () nitem.classname = "" end) 
+							nitem.classname = "ProcedureItem"
 						end
 						
 						-- Response text
-						ng_imgui_out_text(color_white, "Response:") imgui.SameLine()
+						ng_imgui_out_text(color_white, "Response :") imgui.SameLine()
 						if nitem.response ~= nil then
-							ng_imgui_in_tfield(nlabel.."response", 305, color_white, 255, 
+							ng_imgui_in_tfield(nlabel.."response", 295, color_white, 255, 
 							nitem.response, function (textout) nitem.response = string.upper(textout) end)
 						else
-							ng_imgui_in_button(nlabel.."addresp", "+", 15, 20, 
-								function () nitem.response = "" end) 
+							nitem.response = " " 
 						end
 						
 						-- Role for this item
-						ng_imgui_out_text(color_white, "Role:") imgui.SameLine()
+						ng_imgui_out_text(color_white, "Role     :") imgui.SameLine()
 						if nitem.role ~= nil then
 							ng_imgui_in_combolist(nlabel.."role", roles, ng_indexOf(roles,nitem.role)-1, 
-								function (textin) nitem.role=roles[textin+1] end,330)
+								function (textin) nitem.role=roles[textin+1] end,295)
 						else
-							ng_imgui_in_button(nlabel.."addrole", "+", 15, 20, 
-								function () nitem.role = "" end) 
+							nitem.role = "ng_firole_FO"
 						end
 						
 						-- Condition contains a "return <condition resulting in true/false>"
 						-- if you want to override then set to "return true"
 						ng_imgui_out_text(color_white, "Condition:") imgui.SameLine()
 						if nitem.condition ~= nil then
-							ng_imgui_in_tfield(nlabel.."condition", 298, color_white, 255, 
-								nitem.condition, function (textout) if textout == "--" then nitem.condition = nil else nitem.condition = textout end end)
+							ng_imgui_in_button(nlabel.."removecond", "-", 15, 20, 
+								function () nitem.condition = nil end) imgui.SameLine()
+							if nitem.condition ~= nil then
+								ng_imgui_in_tfield(nlabel.."condition", 273, color_white, 255, 
+									nitem.condition, function (textout) nitem.condition = textout end)
+							end
 						else
 							ng_imgui_in_button(nlabel.."addcond", "+", 15, 20, 
-								function () nitem.condition = "return true" end) 
+								function () nitem.condition = "true" end) 
 						end
 						
 						-- if nocheck is set and 1 the item will not be checked during execution
-						ng_imgui_out_text(color_white, "No check:") imgui.SameLine()
+						ng_imgui_out_text(color_white, "No check :") imgui.SameLine()
 						if nitem.nocheck ~= nil then
-							ng_imgui_in_intfield(nlabel.."nchk", 305, color_white, 0,   
-								nitem.nocheck, function (textout) if textout == "--" then nitem.nocheck = nil else nitem.nocheck = textout end end) 
+							ng_imgui_in_button(nlabel.."removenchk", "-", 15, 20, 
+								function () nitem.nocheck = nil end) imgui.SameLine()
+							if nitem.nocheck ~= nil then
+								ng_imgui_in_intfield(nlabel.."nchk", 273, color_white, 0,   
+									nitem.nocheck, function (textout) if textout == "--" then nitem.nocheck = nil else nitem.nocheck = textout end end) 
+							end
 						else
 							ng_imgui_in_button(nlabel.."addncheck", "+", 15, 20, 
 								function () nitem.nocheck = 1 end) 
 						end
 
 						-- values > 0 will wait n seconds before the next step
-						ng_imgui_out_text(color_white, "delay:") imgui.SameLine()
+						ng_imgui_out_text(color_white, "Delay    :") imgui.SameLine()
 						if nitem.delay ~= nil then
-							ng_imgui_in_intfield(nlabel.."delay", 325, color_white, 1, 
-							nitem.delay, function (textout) nitem.delay = textout end)
+							ng_imgui_in_button(nlabel.."removedelay", "-", 15, 20, 
+								function () nitem.delay = nil end) imgui.SameLine()
+							if nitem.delay ~= nil then
+								ng_imgui_in_intfield(nlabel.."delay", 273, color_white, 1, 
+								nitem.delay, function (textout) nitem.delay = textout end)
+							end
 						else
 							ng_imgui_in_button(nlabel.."adddelay", "+", 15, 20, 
 								function () nitem.delay = 0 end) 
@@ -2408,32 +2788,11 @@ function ng_draw_main_window()
 						-- now list used systems and system elements
 						ng_imgui_out_text(color_white, "Systems used:") 
 
-						-- Append item
-						local newelement = {element="" }
+-- -----------------------------------------------------------
+-- [Add Element] [<all elements sorted> V] [<filter for list>]
+-- -----------------------------------------------------------
 
-						ng_imgui_in_button(nlabel.."append", "Append Element", 105, 20, 
-							function () if ng_editor_sop_newelement ~= "" then newelement.element=ng_editor_sop_newelement table.insert (nitem.setelements, newelement) ng_editor_sop_newelement= "" end end) 
-
-						-- prefill drop down beginning with element groups (#xxxx) and then individual elements
-						local categnames = {""} -- load a list of category names
-						
-						for k,n in pairs(ng_get_active_sys().categories) do 
-							for l,m in pairs(n.systems) do 
-								table.insert(categnames, "#"..m.name) 
-								for i,o in pairs(m.elements) do 
-									table.insert(categnames, o.name) 
-								end
-							end
-						end
-						table.sort(categnames) -- sort alphabetically
-						local catindx = ng_indexOf(categnames,ng_editor_sop_newelement)
-						if catindx == nil then catindx = 1 end
-	
-						imgui.SameLine() ng_imgui_in_combolist(nlabel.."categs", categnames, catindx-1,
-							function (textin) 
-								catindx = textin+1
-								ng_editor_sop_newelement = categnames[catindx]
-							end,262)
+						sop_add_system_element(nlabel, nitem)
 
 						-- render added systems or system elements
 						if nitem.setelements ~= nil then 
@@ -2441,46 +2800,34 @@ function ng_draw_main_window()
 							for eidx,nelement in ipairs(nitem.setelements) do
 
 								if nelement.element ~= nil then
-									if imgui.TreeNode(nelement.element) then
+									if imgui.TreeNode(eidx.." "..nelement.element) then
 
 										if ng_editor_sop_expcol3 > 0 then imgui.SetNextItemOpen(ng_editor_sop_expand3) end
 
-										-- move element up or down
-										ng_imgui_in_button(nelement.element.."up", "UP", 23, 20, 
-											function () if eidx > 1 then table.insert(nitem.setelements, eidx-1, table.remove(nitem.setelements,eidx)) end end) 
-										imgui.SameLine() ng_imgui_in_button(nelement.element.."dn", "DN", 23, 20, 
-											function () if eidx < #nitem.setelements then table.insert(nitem.setelements, eidx+1, table.remove(nitem.setelements,eidx)) end end) 
+										sop_up_down(nelement.element, nitem.setelements, eidx)
+										
 										-- remove the system/element from flowitem
-										imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
-											imgui.SameLine() ng_imgui_in_button(nelement.element.."del", "REMOVE ELEMENT "..nelement.element, 295, 20, 
-												function () table.remove(nitem.setelements, eidx) end) 
-										imgui.PopStyleColor()
-									
-										-- Name of the system/element - is key, when changed will redraw the tree
-										ng_imgui_out_text(color_white, "Name:") imgui.SameLine()
-										if nelement.element ~= nil then
-											ng_imgui_in_tfield(nlabel..nelement.element, 315, color_white, 255, 
-											nelement.element, function (textout) nelement.element = textout end)
-										else
-											ng_imgui_in_button(nlabel..nelement.element.."addnname", "+", 15, 20, 
-												function () nelement.element = "" end) 
-										end
+										imgui.SameLine()
+										ng_editor_sop_remove_element = sop_remove_buttons(nelement.element, "ELEMENT", nitem.setelements, eidx, 295, ng_editor_sop_remove_element)
 										
 										-- Selected action
-										ng_imgui_out_text(color_white, "Action:") imgui.SameLine()
+										ng_imgui_out_text(color_white, "Action   :") imgui.SameLine()
 										if nelement.action ~= nil then
 											ng_imgui_in_combolist(nlabel..nelement.element.."act", actions, ng_indexOf(actions,nelement.action)-1, 
-												function (textin) nelement.action=actions[textin+1] end, 297)
+												function (textin) nelement.action=actions[textin+1] end, 280)
 										else
-											ng_imgui_in_button(nlabel..nelement.element.."addact", "+", 15, 20, 
-												function () nelement.action = "" end) 
+											nelement.action = "chk"
 										end
 										
 										-- direct value to set (no logic)
-										ng_imgui_out_text(color_white, "Value:") imgui.SameLine()
+										ng_imgui_out_text(color_white, "Value    :") imgui.SameLine()
 										if nelement.value ~= nil then
-											ng_imgui_in_floatfield(nlabel..nelement.element.."val", 310, color_white, 0, "%7.2f",  
-												nelement.value, function (textout) nelement.value = textout end) 
+											ng_imgui_in_button(nlabel..nelement.element.."removeval", "-", 15, 20, 
+												function () nelement.value = nil end) imgui.SameLine()
+											if nelement.value ~= nil then
+												ng_imgui_in_floatfield(nlabel..nelement.element.."val", 258, color_white, 0, "%7.2f",  
+													nelement.value, function (textout) nelement.value = textout end) 
+											end
 										else
 											ng_imgui_in_button(nlabel..nelement.element.."addval", "+", 15, 20, 
 												function () nelement.value = 0 end) 
@@ -2488,20 +2835,28 @@ function ng_draw_main_window()
 										
 										-- fvalue code to set the value with lua statetement "return <a resulting value>"
 										-- will be used for actioning the step or check system/elements of the step
-										ng_imgui_out_text(color_white, "value():") imgui.SameLine()
+										ng_imgui_out_text(color_white, "value()  :") imgui.SameLine()
 										if nelement.fvalue ~= nil then
-											ng_imgui_in_tfield(nlabel..nelement.element.."fvalue", 310, color_white, 255, 
-											nelement.fvalue, function (textout) if textout == "--" then nelement.fvalue = nil else nelement.fvalue = textout end end)
+											ng_imgui_in_button(nlabel..nelement.element.."removefvalue", "-", 15, 20, 
+												function () nelement.fvalue = nil end) imgui.SameLine()
+											if nelement.fvalue ~= nil then
+												ng_imgui_in_tfield(nlabel..nelement.element.."fvalue", 258, color_white, 255, 
+												nelement.fvalue, function (textout) nelement.fvalue = textout end)
+											end
 										else
 											ng_imgui_in_button(nlabel..nelement.element.."addfvalue", "+", 15, 20, 
 												function () nelement.fvalue = "return \"\"" end) 
 										end
 												
 										-- fset code to set the value with lua statetement "<code to do complex logic>"
-										ng_imgui_out_text(color_white, "set():") imgui.SameLine()
+										ng_imgui_out_text(color_white, "set()    :") imgui.SameLine()
 										if nelement.fset ~= nil then
-											ng_imgui_in_tfield(nlabel..nelement.element.."fset", 310, color_white, 255, 
-											nelement.fset, function (textout) if textout == "--" then nelement.fset = nil else nelement.fset = textout end end)
+											ng_imgui_in_button(nlabel..nelement.element.."removefset", "-", 15, 20, 
+												function () nelement.fset = nil end) imgui.SameLine()
+											if nelement.fset ~= nil then
+												ng_imgui_in_tfield(nlabel..nelement.element.."fset", 258, color_white, 255, 
+												nelement.fset, function (textout) nelement.fset = textout end)
+											end
 										else
 											ng_imgui_in_button(nlabel..nelement.element.."addfset", "+", 15, 20, 
 												function () nelement.fset = "return \"\"" end) 
@@ -2510,32 +2865,43 @@ function ng_draw_main_window()
 										-- Condition to enable or disable the system/element.
 										ng_imgui_out_text(color_white, "Condition:") imgui.SameLine()
 										if nelement.condition ~= nil then
-											ng_imgui_in_tfield(nlabel..nelement.element.."cond", 285, color_white, 255, 
-											nelement.condition, function (textout) if textout == "--" then nelement.condition = nil else nelement.condition = textout end end)							
-
+											ng_imgui_in_button(nlabel..nelement.element.."removecond", "-", 15, 20, 
+												function () nelement.condition = nil end) imgui.SameLine()
+											if nelement.condition ~= nil then
+												ng_imgui_in_tfield(nlabel..nelement.element.."cond", 258, color_white, 255, 
+												nelement.condition, function (textout) nelement.condition = textout end)							
+											end
 										else
 											ng_imgui_in_button(nlabel..nelement.element.."addcond", "+", 15, 20, 
-												function () nelement.condition = "return true" end) 
+												function () nelement.condition = "true" end) 
 										end
 																								
 										-- no check, when 1 then ignore the system/element during checks. Set 0 to enable checks again
-										ng_imgui_out_text(color_white, "No check:") imgui.SameLine()
+										ng_imgui_out_text(color_white, "No check :") imgui.SameLine()
 										if nelement.nocheck ~= nil then
-											ng_imgui_in_intfield(nlabel..nelement.element.."nchk", 288, color_white, 0,   
-												nelement.nocheck, function (textout) if textout == "--" then nelement.nocheck = nil else nelement.nocheck = textout end end)
+											ng_imgui_in_button(nlabel..nelement.element.."removenchk", "-", 15, 20, 
+												function () nelement.nocheck = nil end) imgui.SameLine()
+											if nelement.nocheck ~= nil then
+												ng_imgui_in_intfield(nlabel..nelement.element.."nchk", 258, color_white, 0,   
+													nelement.nocheck, function (textout) nelement.nocheck = textout end)
+											end
 										else
 											ng_imgui_in_button(nlabel..nelement.element.."addnchk", "+", 15, 20, 
 												function () nelement.nocheck = 1 end) 
 										end
 										
 										-- fcheck code to check the element with code "return <true/false logic>"
-										ng_imgui_out_text(color_white, "check():") imgui.SameLine()
+										ng_imgui_out_text(color_white, "check()  :") imgui.SameLine()
 										if nelement.fcheck ~= nil then
-											ng_imgui_in_tfield(nlabel..nelement.element.."fcheck", 295, color_white, 255, 
-											nelement.fcheck, function (textout) if textout == "--" then nelement.fcheck = nil else nelement.fcheck = textout end end)
+											ng_imgui_in_button(nlabel..nelement.element.."removefcheck", "-", 15, 20, 
+												function () nelement.fcheck = nil end) imgui.SameLine()
+											if nelement.fcheck ~= nil then
+												ng_imgui_in_tfield(nlabel..nelement.element.."fcheck", 258, color_white, 255, 
+												nelement.fcheck, function (textout) nelement.fcheck = textout end)
+											end
 										else
 											ng_imgui_in_button(nlabel..nelement.element.."addfcheck", "+", 15, 20, 
-												function () nelement.fcheck = "return true" end) 
+												function () nelement.fcheck = "function (a) return true end" end) 
 										end
 									imgui.TreePop() end
 								end
@@ -2567,29 +2933,23 @@ function ng_draw_main_window()
 
 			local flowclasses = { "", "ProcedureFlow", "ChecklistFlow", "BackgroundFlow" }
 
-			local ntitle = nidx..nflow.title
+			local ntitle = nidx.." "..nflow.title
 			
-			if imgui.TreeNode(nflow.title) then
+			if imgui.TreeNode(nidx.." "..nflow.title) then
+				
 				imgui.Separator()
 
-				ng_imgui_in_button(ntitle.."expand", "++", 23, 20, 
-					function () ng_editor_sop_expcol2 = 3 ng_editor_sop_expand2 = true end) 
+				ng_editor_sop_expcol2, ng_editor_sop_expand2 = sop_compress_expand(ntitle, ng_editor_sop_expcol2, ng_editor_sop_expand2)
+				
+				imgui.SameLine() sop_up_down(ntitle, ng_editor_sop_json.sop.flow, nidx)
+				
+				imgui.SameLine() ng_editor_sop_flowcopy, ng_editor_sop_flowcopyname = 
+					sop_copy_button(ntitle, nflow, ng_editor_sop_flowcopy, ng_editor_sop_flowcopyname)
 
-				imgui.SameLine() ng_imgui_in_button(ntitle.."compress", "--", 23, 20, 
-					function () ng_editor_sop_expcol2 = 3 ng_editor_sop_expand2 = false end) 
-
-				imgui.SameLine()ng_imgui_in_button(ntitle.."up", "UP", 23, 20, 
-					function () if nidx > 1 then table.insert(ng_editor_sop_json.sop.flow, nidx-1, table.remove(ng_editor_sop_json.sop.flow,nidx)) end end) 
-				imgui.SameLine() ng_imgui_in_button(ntitle.."dn", "DN", 23, 20, 
-					function () if nidx < numflows then table.insert(ng_editor_sop_json.sop.flow, nidx+1, table.remove(ng_editor_sop_json.sop.flow,nidx)) end end) 
-
-				imgui.SameLine() ng_imgui_in_button(ntitle.."copy", "COPY", 50, 20, 
-					function () ng_editor_sop_flowcopy = nflow ng_editor_sop_flowcopyname = "" end) 
-
-				imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
-					imgui.SameLine() ng_imgui_in_button(ntitle.."del", "REMOVE FLOW "..nflow.title, 225, 20, 
-						function () table.remove(ng_editor_sop_json.sop.flow, nidx) end) 
-				imgui.PopStyleColor()
+				
+				-- remove a flow
+				imgui.SameLine()
+				ng_editor_sop_remove_flow = sop_remove_buttons(ntitle, "FLOW", ng_editor_sop_json.sop.flow, nidx, 225, ng_editor_sop_remove_flow)
 
 				ng_imgui_out_text(color_white, "Phase:") imgui.SameLine()
 				ng_imgui_in_combolist(ntitle.."phase", phases, ng_indexOf(phases,nflow.phase)-1, 
@@ -2614,8 +2974,8 @@ function ng_draw_main_window()
 						end
 					end)
 					
-					imgui.SameLine() 
-					imgui.SameLine() ng_imgui_in_tfield(ntitle.."pastename", 280, color_white, 255, 
+					imgui.SameLine() ng_imgui_out_text(color_white,"Title:")
+					imgui.SameLine() ng_imgui_in_tfield(ntitle.."pastename", 290, color_white, 255, 
 						ng_editor_sop_itemcopyname,
 						function (textout) 
 							if textout == "--" then
@@ -2649,8 +3009,6 @@ function ng_draw_main_window()
 		local function render_sop_editor()
 			if ng_editor_sop_json ~= nil then
 				
-				imgui.Separator()
-				
 				-- Loop through all flows
 				if imgui.TreeNode(ng_editor_sop_json.sop.title) then
 					
@@ -2668,7 +3026,8 @@ function ng_draw_main_window()
 								ng_editor_sop_flowcopy = nil
 							end
 						end)
-						imgui.SameLine() 
+						
+						imgui.SameLine() ng_imgui_out_text(color_white,"Title:")
 
 						imgui.SameLine() ng_imgui_in_tfield(ng_editor_sop_json.sop.title.."pastename", 280, color_white, 255, 
 							ng_editor_sop_flowcopyname, 
@@ -2695,28 +3054,99 @@ function ng_draw_main_window()
 				imgui.TreePop() end
 			end
 		end
+-- -----------------------------------------------------------------------------------------
 	
 		imgui.BeginChild("#tab4")
 
 			-- editor columns
-			imgui.Columns(2,"editor",true)
-				imgui.BeginChild("editcol1")
+			imgui.Columns(2,"editorh",true)
+			
+				if FLYWITHLUA then imgui.BeginChild("editcolh1",0,70) else imgui.BeginChild("editcolh1",{0,70}) end
 				
 					ng_imgui_out_text(color_yellow,"=================== AIRCRAFT SYSTEMS EDITOR ==================")
 				
 					-- ICAO for systems
-					ng_imgui_in_tfield("Systems for", 50, color_white, 10, ng_editor_system_icao, 
+					ng_imgui_in_tfield("Systems for", 40, color_white, 10, ng_editor_system_icao, 
 						function (textout) ng_editor_system_icao = string.upper(textout) end)
 
 					-- load and save button to save after changes or load again
 					imgui.SameLine()
-					ng_imgui_in_button("loadsys", "LOAD", 70, 20, 
-						function () systems_load() end)
+					ng_imgui_in_button("loadsys", "LOAD", 43, 20, 
+						function () 
+							systems_load()
+							ng_editor_system_title = ng_editor_system_json.title
+						end)
 
 					imgui.SameLine()
-					ng_imgui_in_button("savesys","SAVE", 70, 20,
+					ng_imgui_in_button("savesys","SAVE", 43, 20,
 						function () systems_save() end)
 					
+					imgui.SameLine()
+					ng_imgui_in_button("addsys","ADD", 43, 20,
+						function () systems_add(ng_editor_system_icao) end)
+
+					imgui.SameLine()
+					ng_imgui_in_button("applysys","APPLY", 43, 20,
+						function () systems_apply() end)
+
+					imgui.SameLine()
+					ng_imgui_out_text(color_red,ng_editor_system_error)
+					
+					ng_imgui_in_button("setsysname","SET", 43, 20,
+					function () ng_editor_system_json.title = ng_editor_system_title end)
+					imgui.SameLine() 
+					ng_imgui_in_tfield("sysedittitle", 250, color_white, 100, 
+						ng_editor_system_title, function (textout) ng_editor_system_title = textout end)
+
+					imgui.Separator()
+
+				imgui.EndChild()
+				
+			imgui.NextColumn()
+			
+				-- right tab with aircraft preferences
+				if FLYWITHLUA then imgui.BeginChild("editcolh2",0,70) else imgui.BeginChild("editcolh2",{0,70}) end
+				
+					ng_imgui_out_text(color_yellow,"========================== SOP EDITOR ========================")
+
+					-- ICAO for systems
+					ng_imgui_in_tfield("SOP for", 40, color_white, 10, ng_editor_sop_icao, 
+						function (textout) ng_editor_sop_icao = string.upper(textout) end)
+
+					-- load and save button to save after changes or load again
+					imgui.SameLine()
+					ng_imgui_in_button("loadsop", "LOAD", 50, 20, 
+						function () sop_load() ng_editor_sop_title = ng_editor_sop_json.sop.title end)
+	
+					imgui.SameLine()
+					ng_imgui_in_button("savesop","SAVE", 50, 20,
+						function () sop_save() end)
+
+					imgui.SameLine()
+					ng_imgui_in_button("addsop","ADD", 50, 20,
+						function () sop_add(ng_editor_sop_icao) end)
+
+					imgui.SameLine()
+					ng_imgui_in_button("applysop","APPLY", 50, 20,
+						function () sop_apply() end)
+
+					imgui.SameLine()
+					ng_imgui_out_text(color_red,ng_editor_sop_error)
+
+					ng_imgui_in_button("setsopname","SET", 43, 20,
+						function () ng_editor_sop_json.sop.title = ng_editor_sop_title end)
+					imgui.SameLine() 
+					ng_imgui_in_tfield("sopedittitle", 250, color_white, 100, 
+						ng_editor_sop_title, function (textout) ng_editor_sop_title = textout end)
+
+					imgui.Separator()
+						
+				imgui.EndChild()
+			imgui.Columns()
+
+			imgui.Columns(2,"editorc",true)
+				imgui.BeginChild("editcolc1")
+				
 					imgui.SetNextItemOpen(true)
 					render_systems_editor()
 					
@@ -2725,23 +3155,8 @@ function ng_draw_main_window()
 			imgui.NextColumn()
 			
 				-- right tab with aircraft preferences
-				imgui.BeginChild("editcol2")
-				
-					ng_imgui_out_text(color_yellow,"========================== SOP EDITOR ========================")
-
-					-- ICAO for systems
-					ng_imgui_in_tfield("SOP for", 50, color_white, 10, ng_editor_sop_icao, 
-						function (textout) ng_editor_sop_icao = string.upper(textout) end)
-
-					-- load and save button to save after changes or load again
-					imgui.SameLine()
-					ng_imgui_in_button("loadbrief", "LOAD", 70, 20, 
-						function () sop_load() end)
-	
-					imgui.SameLine()
-					ng_imgui_in_button("savebrief","SAVE", 70, 20,
-						function () sop_save() end)
-	
+				imgui.BeginChild("editcolc2")
+										
 					render_sop_editor()
 					if ng_editor_sop_expcol1 > 0 then ng_editor_sop_expcol1 = ng_editor_sop_expcol1 - 1 end
 					if ng_editor_sop_expcol2 > 0 then ng_editor_sop_expcol2 = ng_editor_sop_expcol2 - 1 end
@@ -2756,14 +3171,43 @@ function ng_draw_main_window()
 -- -----------------------------------------------------------------------------------------
 
 -- -----------------------------------------------------------------------------------------
+-- add new preference based on DFLT
+		local function prefs_add(newicao)
+		
+			local newprefs = SCRIPT_DIRECTORY.."../Modules/kpcrew_prefs/"..newicao..".preferences"
+			local dfltprefs = SCRIPT_DIRECTORY.."../Modules/kpcrew_prefs/DFLT.preferences"
+			-- ignore when already file exists
+			if newicao == "DFLT" or ng_file_exists(newprefs) then 
+				ng_preferences_error = "Exists!"
+				return 
+			end 
+		
+			-- read source DFLT
+			local filein = io.open(dfltprefs, "r")
+			local prefsin = ""
+			for line in filein:lines() do prefsin = prefsin .. line .. "\n" end
+			filein:close()
+
+			-- write to new
+			local fileout = io.open(newprefs, "w+")
+			fileout:write(prefsin)
+			fileout:close()
+			ng_editor_system_error = ""
+		end
+-- -----------------------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------------------
 -- draw the Settings tab
 	local function render_main_tab_settings()
 	
 		imgui.BeginChild("#tab3")
+		
+			imgui.Columns(2,"settingsh",true)
 			
-			-- left tab with app preferences
-			imgui.Columns(2,"settings",true)
-				imgui.BeginChild("prefcol1")
+				-- left tab with app preferences			
+				if FLYWITHLUA then imgui.BeginChild("prefscolh1",0,50) else imgui.BeginChild("prefscolh1",{0,50}) end
+				
+					ng_imgui_out_text(color_yellow,"===================== APPLICATION SETTINGS ===================")
 				
 					-- load and save button to save after changes or load again
 					ng_imgui_in_button("loadapp", "LOAD", 70, 20, 
@@ -2773,42 +3217,71 @@ function ng_draw_main_window()
 					ng_imgui_in_button("savebapp","SAVE", 70, 20,
 						function () ng_getAppPrefs():save() end)
 					
+					imgui.Separator()
+
+				imgui.EndChild() -- prefscolh1
+				
+			imgui.NextColumn() -- settingsh
+
+				if ng_getAppPrefs():get("general:developer") then
+					-- right tab with aircraft preferences
+					if FLYWITHLUA then imgui.BeginChild("prefscolh2",0,50) else imgui.BeginChild("prefscolh2",{0,50}) end
+						
+						ng_imgui_out_text(color_yellow,"====================== AIRCRAFT SETTINGS =====================")
+					
+						-- ICAO for preferences
+						ng_imgui_in_tfield("Settings for", 50, color_white, 10, ng_settings_icao, 
+							function (textout) 
+								ng_settings_icao = string.upper(textout) 
+								ng_getAcfPrefs():setFilePath(SCRIPT_DIRECTORY .."../Modules/kpcrew_prefs/"..ng_settings_icao..".preferences")
+							end)
+
+						-- load and save button to save after changes or load again
+						imgui.SameLine()
+						ng_imgui_in_button("loadprefs", "LOAD", 70, 20, 
+							function () ng_getAcfPrefs():load() end)
+		
+						imgui.SameLine()
+						ng_imgui_in_button("saveprefs","SAVE", 70, 20,
+							function () ng_getAcfPrefs():save() end)
+
+						imgui.SameLine()
+						ng_imgui_in_button("addprefs","ADD", 70, 20,
+							function () prefs_add(ng_settings_icao) end)
+
+						imgui.SameLine()
+						ng_imgui_out_text(color_red,ng_preferences_error)
+								
+						imgui.Separator()
+							
+					imgui.EndChild() -- prefscolh2
+				end
+			imgui.Columns() -- settingsh
+			
+			imgui.Columns(2,"settingsc",true)
+				imgui.BeginChild("settingscolc1")
+				
 					-- render preferences tree
 					imgui.SetNextItemOpen(true)
-					ng_getAppPrefs():render("tree")
+					ng_getAppPrefs():render("tree")	
 					
 				imgui.EndChild()
 				
 			imgui.NextColumn()
 			
-				-- right tab with aircraft preferences
-				imgui.BeginChild("prefcol2")
-				
-					-- ICAO for preferences
-					ng_imgui_in_tfield("Settings for", 50, color_white, 10, ng_settings_icao, 
-						function (textout) 
-							ng_settings_icao = string.upper(textout) 
-							ng_getAcfPrefs():setFilePath(SCRIPT_DIRECTORY .."../Modules/kpcrew_prefs/"..ng_settings_icao..".preferences")
-						end)
+				if ng_getAppPrefs():get("general:developer") then
+					imgui.BeginChild("settingscolc2")
+											
+						-- render aircraft preferences tree
+						imgui.SetNextItemOpen(true)
+						ng_getAcfPrefs():render("tree")
 
-					-- load and save button to save after changes or load again
-					imgui.SameLine()
-					ng_imgui_in_button("loadbrief", "LOAD", 70, 20, 
-						function () ng_getAcfPrefs():load() end)
-	
-					imgui.SameLine()
-					ng_imgui_in_button("savebrief","SAVE", 70, 20,
-						function () ng_getAcfPrefs():save() end)
-	
-					-- render preferences tree
-					imgui.SetNextItemOpen(true)
-					ng_getAcfPrefs():render("tree")
-					
-				imgui.EndChild()
+					imgui.EndChild()
+				end
 			imgui.Columns()
-			
-		imgui.EndChild()		
-		
+								
+		imgui.EndChild() -- #tab3	
+
 	end
 	
 -- -----------------------------------------------------------------------------------------
@@ -2826,7 +3299,13 @@ function ng_draw_main_window()
 	
 	if FLYWITHLUA == false then imgui.Begin("KPCrewNG " .. ng_version) end
 
-	local tabsDef = {[0]="Flight", [1]="Full SOP", [2]="Settings", [3]="Editor"}
+	local tabsDef = {}
+	if ng_getAppPrefs():get("general:developer") then
+		tabsDef = {[0]="Flight", [1]="Full SOP", [2]="Settings", [3]="Editor"}
+	else
+		tabsDef = {[0]="Flight", [1]="Full SOP", [2]="Settings"}
+	end
+	
 	local tabsNumber = (#tabsDef+1)
 	local tabsSize = kb_wnd_width / tabsNumber - 4
 	
@@ -2838,7 +3317,7 @@ function ng_draw_main_window()
 	if     ng_imgui_current_main_tab == 0 then render_main_tab_flight()
 	elseif ng_imgui_current_main_tab == 1 then render_main_tab_sop() 
 	elseif ng_imgui_current_main_tab == 2 then render_main_tab_settings()
-	elseif ng_imgui_current_main_tab == 3 then render_main_tab_editor()
+	elseif ng_imgui_current_main_tab == 3 and ng_getAppPrefs():get("general:developer") then render_main_tab_editor()
 	end
 	imgui.EndGroup()
 	
@@ -2846,9 +3325,10 @@ function ng_draw_main_window()
 		
 end
 
--- -----------------------------------------------------------------------------------------
+-- =========================================================================================
 -- SOP window rendering #sopwindow
--- -----------------------------------------------------------------------------------------
+-- =========================================================================================
+
 -- -----------------------------------------------------------------------------------------
 -- drawing function for SOP window
 function ng_draw_sop_window()
@@ -2866,6 +3346,10 @@ function ng_draw_sop_window()
 	if FLYWITHLUA == false then imgui.End() end
 	
 end
+
+-- =========================================================================================
+-- Main window rendering
+-- =========================================================================================
 
 -- -----------------------------------------------------------------------------------------
 --- Set up main window tabs with buttons
@@ -2896,6 +3380,10 @@ function ng_imgui_draw_add_main_tab(index, tabsize, text)
 	imgui.PopStyleVar()
 	imgui.PopStyleColor(3)
 end
+
+-- =========================================================================================
+-- Control window rendering
+-- =========================================================================================
 
 -- -----------------------------------------------------------------------------------------
 -- drawing function for ctrl window

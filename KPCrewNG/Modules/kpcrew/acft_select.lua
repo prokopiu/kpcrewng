@@ -78,7 +78,7 @@ function ng_acft_select(component)
 	-- XP12 A330-300 Laminar
 	elseif PLANE_ICAO == "A333" then
 		icao = "A33L"
-		sopicao = "DFLT"
+		sopicao = "A33L"
 		
 	-- X-Works A330-200 (Laminar A330 until found otherwise)
 	elseif PLANE_ICAO == "A332" or PLANE_ICAO == "A332F" then
@@ -172,10 +172,10 @@ function ng_acft_select(component)
 	-- Free 195       190/195
 	elseif PLANE_ICAO == "E170" and PLANE_TAILNUMBER == "E175" then
 		icao = "E1FF"
-		sopicao = "DFLT"
+		sopicao = "E1FF"
 	elseif PLANE_ICAO == "E190" and PLANE_TAILNUMBER == "E195" then
 		icao = "E1FF"
-		sopicao = "DFLT"
+		sopicao = "E1FF"
 
 	-- FPS E-JETS
 	-- 175 - not sure - do not have that aircraft
@@ -283,6 +283,9 @@ function ng_acft_select(component)
 	elseif PLANE_ICAO == "CL60" then
 		icao = "CL60"
 		sopicao = "DFLT"
+	else
+		icao = "DFLT"
+		sopicao = "DFLT"		
 	end
 
 	if component == 1 then -- return only sop icao

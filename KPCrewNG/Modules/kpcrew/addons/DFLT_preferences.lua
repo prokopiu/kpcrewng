@@ -7,7 +7,7 @@
 require "kpcrew.Addon.Preferences.PreferenceDataType"
 local preferenceSet 		= require( "kpcrew.Addon.Preferences.PreferenceSet" )
 local preferenceGroup 		= require( "kpcrew.Addon.Preferences.PreferenceGroup" )
-local preference 			= require("kpcrew.Addon.Preferences.PreferenceItem")
+local preference 			= require( "kpcrew.Addon.Preferences.PreferenceItem")
 
 -- ===== initialize the preference set for aircraft
 local aircraftPrefSet 		= preferenceSet:new("DFLT","DEFAULT AIRCRAFT",SCRIPT_DIRECTORY .. "../Modules/kpcrew_prefs/DFLT.preferences")
@@ -16,16 +16,20 @@ local aircraftPrefSet 		= preferenceSet:new("DFLT","DEFAULT AIRCRAFT",SCRIPT_DIR
 local addon 				= preferenceGroup:new("addon","ADDON PREFERENCES")
 addon:add(preference:new("icao",			"DFLT",ng_type_text,"Aircraft ICAO in use|")) 		-- addon:icao
 addon:add(preference:new("aircraftname",	"AIRCRAFT",ng_type_text,"Aircraft name|")) 	-- addon:aircraftname
-addon:add(preference:new("filepath",SCRIPT_DIRECTORY.."../Modules/kpcrew_prefs/DFLT.preferences",
-	ng_type_text,"Preference filepath|")) 														-- addon:filepath
+-- addon:add(preference:new("filepath",SCRIPT_DIRECTORY.."../Modules/kpcrew_prefs/DFLT.preferences",
+	-- ng_type_text,"Preference filepath|")) 														-- addon:filepath
 -- --------------------------------------------------------------------------------------------
 
 -- --------------------------- General settings not associated with a preference group
 local general 				= preferenceGroup:new("general","GENERAL PREFERENCES")
+general:add(preference:new("isairbus",		false,ng_type_flag,	"Is Airbus?|Yes|No"))			-- general:isairbus
+general:add(preference:new("isboeing",		false,ng_type_flag,	"Is Boeing?|Yes|No"))			-- general:isboeing
 general:add(preference:new("iscargo",		false,ng_type_flag,	"Is Cargo Aircraft?|Yes|No"))	-- general:iscargo
 general:add(preference:new("hasgroundobj",	false,ng_type_flag,	"Has Ground Objects?|Yes|No"))	-- general:hasgroundobj
 general:add(preference:new("haschocks",		false,ng_type_flag,	"Has Chocks?|Yes|No",
 nil,"return ng_getAcfPrefs():get(\"general:hasgroundobj\")"))										-- general:haschocks
+general:add(preference:new("hasstairs",		false,ng_type_flag,	"Has Stairs?|Yes|No",
+nil,"return ng_getAcfPrefs():get(\"general:hasgroundobj\")"))										-- general:hasstairs
 general:add(preference:new("haswipers",		false,ng_type_flag,	"Has Wipers?|Yes|No"))			-- general:haswipers
 general:add(preference:new("hasseatbelts",	false,ng_type_flag,	"Has Seatbelt Signs?|Yes|No"))	-- general:hasseatbelts
 general:add(preference:new("hasnosmoking",	false,ng_type_flag,	"Has No Smoking Signs?|Yes|No"))-- general:hasnosmoking
@@ -44,6 +48,7 @@ general:add(preference:new("hasautobrk",	false,ng_type_flag,	"Has Autobrake?|Yes
 general:add(preference:new("mcpdefspd",100,	ng_type_int,"MCP Initial Speed|0"))					-- general:mcpdefspd
 general:add(preference:new("mcpdefhdg",1,	ng_type_int,"MCP Initial Heading|0"))				-- general:mcpdefhdg
 general:add(preference:new("mcpdefalt",4900,ng_type_int,"MCP Initial Altitude|0"))				-- general:mcpdefalt
+general:add(preference:new("hasantiskid",	false,ng_type_flag,	"Has Anti-Skid?|Yes|No"))		-- general:hasantiskid
 
 -- --------------------------------------------------------------------------------------------
 
@@ -78,7 +83,8 @@ air:add(preference:new("hasenginebleeds",	false,ng_type_flag,"Has Engine Bleeds|
 		nil,"return ng_getAcfPrefs():get(\"air:hasenginebleeds\")"))								-- air:landingbleeds
 air:add(preference:new("hasoxygen",			false,ng_type_flag,"Has Oxygen Supply|Yes|No"))		-- air:hasoxygen
 air:add(preference:new("haspresspnl",		false,ng_type_flag,"Has Pressure Panel|Yes|No"))	-- air:haspresspnl
-air:add(preference:new("hasequipcool",	false,ng_type_flag,"Has Equip Cooling|Yes|No"))		-- air:hasequipcooling
+air:add(preference:new("hasequipcool",		false,ng_type_flag,"Has Equip Cooling|Yes|No"))		-- air:hasequipcooling
+air:add(preference:new("hascargoheat",		false,ng_type_flag,"Has Cargo Heat|Yes|No"))		-- air:hascargoheat
 -- --------------------------------------------------------------------------------------------
 
 -- --------------------------- Autopilot related settings 
@@ -138,6 +144,8 @@ electric:add(preference:new("hascabinpwr",	false,ng_type_flag,"Has Cabin Power?|
 electric:add(preference:new("hasifepwr",	false,ng_type_flag,"Has IFE Power?|Yes|No"))		-- electric:hasifepwr
 electric:add(preference:new("hasbusties",	false,ng_type_flag,"Has Bus Ties?|Yes|No"))			-- electric:hasbusties
 electric:add(preference:new("hasenggens",	true,ng_type_flag,"Has Engine Generators?|Yes|No")) -- electric:hasenggens
+electric:add(preference:new("hasessbus",	false,ng_type_flag,"Has Essential Bus?|Yes|No")) 	-- electric:hasessbus
+electric:add(preference:new("hastrus",		false,ng_type_flag,"Has TRUs?|Yes|No")) 			-- electric:hastrus
 -- --------------------------------------------------------------------------------------------
 
 -- ------------------------- Engines related settings 

@@ -439,11 +439,17 @@ function ng_load_simbrief()
 
 			if ng_getAcfPrefs():get("general:hasautobrk") then 
 				local splitTitle = ng_split(ng_getAcfPrefs():get("general:abrkmodelblt"),"|")
-				if ng_getBriefPrefs():get("landing:surfacecond") == "dry" and ng_getBriefPrefs():get("landing:drybrakes") ~= nil 
-				and ng_getBriefPrefs():get("landing:wetbrakes") ~= nil then
-					ng_getBriefPrefs():set("landing:selectedabrk",ng_indexOf(splitTitle,ng_getBriefPrefs():get("landing:drybrakes"))-1)
-				else
-					ng_getBriefPrefs():set("landing:selectedabrk",ng_indexOf(splitTitle,ng_getBriefPrefs():get("landing:wetbrakes"))-1)
+				if ng_getBriefPrefs():get("landing:surfacecond") == "dry" then
+					if ng_getBriefPrefs():get("landing:drybrakes") ~= nil then
+						if ng_getBriefPrefs():get("landing:drybrakes") == "MAX MAN" then ng_getBriefPrefs():set("landing:drybrakes","OFF") end
+						ng_getBriefPrefs():set("landing:selectedabrk",ng_indexOf(splitTitle,ng_getBriefPrefs():get("landing:drybrakes"))-1)
+					end
+				end
+				if ng_getBriefPrefs():get("landing:surfacecond") == "dry" then
+					if ng_getBriefPrefs():get("landing:wetbrakes") ~= nil then
+						if ng_getBriefPrefs():get("landing:wetbrakes") == "MAX MAN" then ng_getBriefPrefs():set("landing:wetbrakes","OFF") end
+						ng_getBriefPrefs():set("landing:selectedabrk",ng_indexOf(splitTitle,ng_getBriefPrefs():get("landing:wetbrakes"))-1)
+					end
 				end
 			end
 

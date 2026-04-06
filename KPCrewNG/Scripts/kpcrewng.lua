@@ -31,7 +31,7 @@ ng_version 		= "NG-dev V0.1"
 ng_acf_icao 	= "DFLT" -- ICAO code to control what aircraft to load
 
 -- ======== UI related global settings
-kb_wnd_width		= 950
+kb_wnd_width		= 960
 kb_wnd_height		= 950
 kb_wnd_pos_left		= 20
 kb_wnd_pos_right	= 40
@@ -74,6 +74,7 @@ local Systems 	= require("kpcrew.Addon.Systems.AddonSystems")
 local activeSOP = SOP:new("SOP Default Aircraft",SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_acf_icao.."_sop.json")
 activeSOP:load()
 function ng_get_active_sop() return activeSOP end -- global function to be used everywhere
+function ng_set_active_sop(newSOP) activeSOP = newSOP end -- global function to replace SOP
 
 -- ====== Get aircraft specific preferences - first load DFLT preference set then overwrite with specific - then load prefs
 local acfPreferences = ng_getAcfPrefs()
@@ -97,6 +98,7 @@ local acfSystems = Systems:new("Aircraft Systems",SCRIPT_DIRECTORY.."../Modules/
 acfSystems:load()
 ng_init_acf_prefs() -- initialize and make custom settings if available
 function ng_get_active_sys() return acfSystems end -- global function to be used everywhere
+function ng_set_active_sys(newsystems) acfSystems = newsystems end
 
 -- ====== Initialize Addon
 local activeAddon = Addon:new(ng_acf_icao,"Addon")
@@ -173,7 +175,7 @@ if FLYWITHLUA then
 		
 	-- ======== Initialize Briefing Window (position and size)	
 	function ng_init_brief_window()
-		ng_brief_wnd = float_wnd_create(kb_wnd_width, kb_wnd_height, 1, true)
+		ng_brief_wnd = float_wnd_create(970, 950, 1, true)
 		float_wnd_set_position(ng_brief_wnd, kb_wnd_pos_left, kb_wnd_pos_right) 
 		float_wnd_set_title(ng_brief_wnd, "KPCrewNG " .. ng_version)
 		float_wnd_set_imgui_builder(ng_brief_wnd, "ng_brief_builder")
@@ -189,6 +191,8 @@ if FLYWITHLUA then
 	create_command("kp/crewng/sopwindow", 	"KPCrewNG Toggle SOP Window",	"if ng_sop_wnd == nil then ng_init_sop_window() else ng_hide_sop_wnd() end","","")
 	create_command("kp/crewng/flowwindow", 	"KPCrewNG Toggle Brief Window",	"if ng_brief_wnd == nil then ng_init_brief_window() else ng_hide_brief_wnd() end","","")
 	create_command("kp/crewng/openmaster", 	"KPCrewNG Open Control Window",	"if ng_ctrl_wnd == nil then ng_init_ctrl_window() else ng_hide_ctrl_wnd() end","","")
+	add_macro("KPCrew Toggle Main Window", 	"if ng_brief_wnd == nil then ng_init_brief_window() else ng_hide_brief_wnd() end")
+
 	
 else
 
@@ -255,8 +259,18 @@ else
 	love.keypressed = function(key, ...)
 	    imgui.KeyPressed(key)
 	    if not imgui.GetWantCaptureKeyboard() then
-	        -- your code here 
-	    end
+    local ctrl = love.keyboard.isDown("lctrl") or love.keyboard.isDown("rctrl")
+
+    if ctrl and key == 'v' then
+        -- Paste: Get text from clipboard and add to your input
+        local contents = love.system.getClipboardText()
+        -- Add 'contents' to your string buffer here
+    elseif ctrl and key == 'c' then
+        -- Copy: Send text to clipboard
+        local textToCopy = "Text to copy"
+        love.system.setClipboardText(textToCopy)
+    end
+	end
 	end
 	
 	love.keyreleased = function(key, ...)

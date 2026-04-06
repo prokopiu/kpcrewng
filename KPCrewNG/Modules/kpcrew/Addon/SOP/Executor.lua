@@ -61,32 +61,69 @@ end
 function ng_action_element(elementname, action, value, condition, fset, fcheck, fvalue)
 	
 	if ng_get_active_sys():find(elementname) ~= nil then
+		
 		local element = ng_get_active_sys():find(elementname):getElementNode()
 dprint("ng_action_element: "..element.title)
-		local dref = element.dref
-		local idx = element.indx
+
+		local dref 	= element.dref
+		local idx 	= element.indx
 		local etype = string.lower(element.type)
-		local getdref = function () if idx ~= nil then return get(dref,idx) else return get(dref) end end
-		local setdref = function (invalue) if idx ~= nil then set_array(dref,idx,invalue) else set(dref,invalue) end end
+		local incr  = element.incr
+		if incr == nil then incr = 1 end
+		local maxval = element.max
+		if maxval == nil then maxval = 999 end
+		local minval = element.min
+		if minval == nil then minval = 1 end
+		local cmddn = element.cmddn
+		if cmddn == nil then cmddn = "" end
+		local cmdup = element.cmdup
+		if cmdup == nil then cmdup = "" end
 		
+		-- get dataref from array or single value
+		-- local getdref = function () if idx ~= nil then return get(dref,idx) else return get(dref) end end
+		local function getdref() 
+			local result = nil
+			if dref ~= nil then 
+				if idx ~= nil then result = get(element.dref,idx) else result = get(element.dref) end
+				if element.ftrans ~= nil then 
+					local func = loadstring("return "..element.ftrans)()
+					result = func(result)
+				end
+			end
+			return result
+		end
+
+		-- set dataref either single value or indexed
+		local setdref = function (invalue) if idx ~= nil then set_array(dref,idx,invalue) else set(dref,invalue) end end
+
+		-- get the value to action
 		local function getvalue()
 			local result = nil
+			-- either use the SOP value directly or the fvalue code
 			if fvalue ~= nil then
-				result = loadstring(fvalue)()
+				result = loadstring("return "..fvalue)()
 			else
 				result = value
 			end
 			return result
 		end
 
-		-- check if there is a condition and skip element
+		-- check if there is a condition and skip this element's actions
 		if condition ~= nil then
-			if loadstring(condition)() == false then 
+			if loadstring("return "..condition)() == false then 
 				return
 			end
 		end
+
+		-- ======= undefined element just skip
+		if etype == "undefined" then
+			print("Action: "..elementname.." is of type undefined")
+		
+		-- ======= annunciator without action
+		elseif etype == "annunciator" then
+		
 		-- ======= dataref driven elements
-		if etype == "dataref" then
+		elseif etype == "dataref" then
 		
 			local found = 0
 			-- check if action is allowed for the element
@@ -97,83 +134,139 @@ dprint("ng_action_element: "..element.title)
 			-- if allowed because found then continue, otherwise skip
 			if found == 1 then
 				
-				if action == "on" then
+				if action == "on" then -- fixed value 1
 					if value == nil then value = 1 end 
 					setdref(value)
 						
-				elseif action == "off" then
+				elseif action == "off" then -- fixed value 0
 					if value == nil then value = 0 end 
 					setdref(value)
 						
-				elseif action == "set" then
+				elseif action == "tgl" then -- toggle always 0 and 1
+					if getdref() == 0 then setdref(1) else setdref(0) end
+									
+				elseif action == "set" then -- set dref with value
 					if getvalue() == nil then 
-						print("Value missing for set action")
+						print("Value missing for set action in "..elementname)
 					else
 						setdref(getvalue())
 					end
 					
-				elseif action == "toggle" then -- toggle always 0 and 1
-					if get(element.dref) == 0 then setdref(1) else setdref(0) end
-					
-				elseif action == "function" then
-					if fset ~= nil then loadstring(fset)() end
+				elseif action == "chk" then 
+					-- don't action, just check
 				end
+				
 			else
 				print("Action not allowed: "..action.." in "..elementname)
 			end
 			
-		-- ======= toggle only switch with 1 dref and 1 command
-		elseif etype == "toggle" then
-			
+		-- ======= on/off/toggle switch 
+		elseif etype == "onofftgl" then
+
 			local found = 0
 			-- check if action is allowed for the element
 			for _,defaction in pairs(element.acts) do
 				if (defaction == action) then found = 1 end
 			end
-			
+								
 			-- if allowed because found then continue, otherwise skip
 			if found == 1 then
 				
-				if action == "on" then
-					if getdref() == 0 then command_once(element.cmdtgl) end
+				if action == "on" then 
+					if element.cmdon == nil then
+						if getdref() == 0 then command_once(element.cmdtgl) end
+					else
+						command_once(element.cmdon)
+					end
 					
-				elseif action == "off" then
-					if getdref()  == 1 then command_once(element.cmdtgl) end
+				elseif action == "off" then 
+					if element.cmdoff == nil then
+						if getdref() == 1 then command_once(element.cmdtgl) end
+					else
+						command_once(element.cmdoff)
+					end
 					
-				elseif action == "toggle" then -- toggle always 0 and 1
-					command_once(element.cmdtgl)
+				elseif action == "tgl" then command_once(element.cmdtgl) 
+					
 				end
-			else
-				print("Action not allowed: "..action.." in "..elementname)
-			end
-			
-		-- ======= ON/OFF switch
-		elseif etype == "onoff" then
-			
-			local found = 0
-			-- check if action is allowed for the element
-			for _,defaction in pairs(element.acts) do
-				if (defaction == action) then found = 1 end
-			end
-			
-			-- if allowed because found then continue, otherwise skip
-			if found == 1 then
 				
-				if action == "on" then
-					command_once(element.cmdon)
-					
-				elseif action == "off" then
-					command_once(element.cmdoff)
-					
-				elseif action == "toggle" then 
-					command_once(element.cmdtgl)
-				end
 			else
 				print("Action not allowed: "..action)
 			end
 			
+		-- ======= Dial dataref switch
+		elseif etype == "dialdref" then
+			
+			local found = 0
+			-- check if action is allowed for the element
+			for _,defaction in pairs(element.acts) do
+				if (defaction == action) then found = 1 end
+			end
+			
+			-- if allowed because found then continue, otherwise skip
+			if found == 1 then
+				if action == "up" then
+					if getdref() < maxval then setdref(getdref() + incr) end
+
+				elseif action == "dn" then
+					if getdref() > minval then setdref(getdref() - incr) end
+
+				elseif action == "set" then -- set dref with value
+					if getvalue() == nil then 
+						print("Value missing for set action in "..elementname)
+					else
+						setdref(getvalue())
+					end
+					
+				end
+			else
+				print("Action not allowed: "..action.." in "..elementname)
+			end
+			
+		-- ======= Dial cmd switch
+		elseif etype == "dialcmd" then
+
+			local function setvalue(lvalue)
+				if lvalue ~= nil then
+					if lvalue >= minval and lvalue <= maxval and lvalue ~= getdref() then
+						if lvalue > getdref() then
+							for i = getdref(), lvalue-1, 1 do
+								command_once(cmdup)
+							end
+						elseif lvalue < getdref() then
+							for i = getdref(), lvalue+1, -1 do
+								command_once(cmddn)
+							end
+						end
+					end
+				end
+			end 
+			
+			local found = 0
+			-- check if action is allowed for the element
+			for _,defaction in pairs(element.acts) do
+				if (defaction == action) then found = 1 end
+			end
+			
+			-- if allowed because found then continue, otherwise skip
+			if found == 1 then
+
+				if action == "up" then
+					if getdref() < maxval then command_once(cmdup) end
+
+				elseif action == "dn" then
+					if getdref() > minval then command_once(cmddn) end
+
+				elseif action == "set" then
+					setvalue(getvalue())
+					
+				end
+			else
+				print("Action not allowed: "..action.." in "..elementname)
+			end
+			
 		-- ======= function switch
-		elseif etype == "function" then
+		elseif etype == "custom" then
 			
 			local found = 0
 			-- check if action is allowed for the element
@@ -185,105 +278,36 @@ dprint("ng_action_element: "..element.title)
 			if found == 1 then
 				
 				if action == "on" then
-					if element.funcon ~= nil then loadstring(element.funcon)() end
+					if element.fon ~= nil then 
+						local funcon = loadstring("return "..element.fon)() 
+						funcon(getdref())
+					end
 				elseif action == "off" then
-					if element.funcoff ~= nil then loadstring(element.funcoff)() end					
-				elseif action == "toggle" then 
-					if element.functgl ~= nil then loadstring(element.functgl)() end
-				end
-			else
-				print("Action not allowed: "..action.." in "..elementname)
-			end
-			
-		-- ======= Multistate switch
-		elseif etype == "multistate" then
-
-			local function setvalue(value)
-				if value ~= nil then
-					if value >= element.min and value <= element.max and value ~= getdref() then
-						if value > getdref() then
-							for i = getdref(), value-1, 1 do
-								command_once(element.cmdup)
-							end
-						elseif value < getdref() then
-							for i = getdref(), value+1, -1 do
-								command_once(element.cmddn)
-							end
-						end
+					if element.foff ~= nil then 
+						local funcoff = loadstring("return "..element.foff)() 
+						funcoff(getdref())
+					end
+				elseif action == "tgl" then 
+					if element.ftgl ~= nil then 
+						local functgl = loadstring("return "..element.ftgl)() 
+						functgl(getdref())
+					end
+				elseif action == "set" then 
+					if element.fset ~= nil then 
+						local funcset = loadstring("return "..element.fset)() 
+						funcset(getdref())
 					end
 				end
-			end 
-			
-			local found = 0
-			-- check if action is allowed for the element
-			for _,defaction in pairs(element.acts) do
-				if (defaction == action) then found = 1 end
-			end
-			
-			-- if allowed because found then continue, otherwise skip
-			if found == 1 then
-				if action == "set" then
-					setvalue(getvalue())
-				elseif action == "on" then
-					local value = getvalue()
-					if value == nil then value = 1 end 
-					setvalue(value)
-				elseif action == "off" then
-					local value = getvalue()
-					if value == nil then value = 0 end 
-					setvalue(value)
-				elseif action == "toggle" then
-					if get(element.dref) == 0 then setvalue(1) else setvalue(0) end
-				end
 			else
 				print("Action not allowed: "..action.." in "..elementname)
 			end
 			
-		-- ======= Dial switch
-		elseif etype == "dial" then
-			local function setvalue(value)
-				if value ~= nil then
-					if value >= element.min and value <= element.max and value ~= getdref() then
-						if value > getdref() then
-							for i = getdref(), value-element.incr, element.incr do
-								command_once(element.cmdup)
-							end
-						elseif value < getdref() then
-							for i = getdref(), value+element.incr, -element.incr do
-								command_once(element.cmddn)
-							end
-						end
-					end
-				end
-			end 
-			
-			local found = 0
-			-- check if action is allowed for the element
-			for _,defaction in pairs(element.acts) do
-				if (defaction == action) then found = 1 end
-			end
-			
-			-- if allowed because found then continue, otherwise skip
-			if found == 1 then
-				if action == "set" then
-					setvalue(getvalue())
-				elseif action == "up" then
-					command_once(element.cmdup)
-				elseif action == "dn" then
-					command_once(element.cmddn)
-				elseif action == "function" then
-					if fset ~= nil then loadstring(fset)() end
-				end
-			else
-				print("Action not allowed: "..action.." in "..elementname)
-			end
-
 		else
-			print("Unkown element type: "..etype)
+			print("Unknown element type: "..etype.." in "..elementname)
 		end
 		
 	else
-		print("!! Undefined system element: " .. elementname)
+		-- print("!! Undefined system element: " .. elementname)
 	end
 end	
 
@@ -334,14 +358,15 @@ function ng_check_element(elementname, action, value, fset, fcheck, fvalue)
 		local dref = element.dref
 		local idx = element.indx
 		local etype = string.lower(element.type)
+		local efcheck = element.fcheck
 
 		-- pull from the dataref either single value or array value with indx
 		local function getdref() 
 			local result = nil
 			if dref ~= nil then 
 				if idx ~= nil then result = get(element.dref,idx) else result = get(element.dref) end
-				if element.functrans ~= nil then 
-					local func = loadstring(element.functrans)()
+				if element.ftrans ~= nil then 
+					local func = loadstring("return "..element.ftrans)()
 					result = func(result)
 				end
 			end
@@ -352,15 +377,20 @@ function ng_check_element(elementname, action, value, fset, fcheck, fvalue)
 		local function getvalue()
 			local result = nil
 			if fvalue ~= nil then
-				result = loadstring(fvalue)()
+				result = loadstring("return "..fvalue)()
 			else
 				result = value
 			end
 			return result
 		end
+
+		-- ======= undefine skip
+		if etype == "undefined" then
+			print("Check: "..elementname.." is of type undefined")
+			return false
 		
 		-- ======= dataref driven elements
-		if etype == "dataref" then
+		elseif etype == "dataref" then
 
 			local found = 0
 			-- check if action is allowed for the element
@@ -379,34 +409,29 @@ function ng_check_element(elementname, action, value, fset, fcheck, fvalue)
 					if value == nil then value = 0 end 
 					return getdref() == value
 
-				elseif action == "set" then
-					if getvalue() == nil then 
-						print("Value missing for set action in ".. elementname)
-					else
-						return getdref() == getvalue()
+				elseif action == "set" or action == "chk" then
+					if efcheck ~= nil then
+						local func = loadstring("return "..efcheck)()
+						return func(getdref())
+					elseif fcheck ~= nil then
+						local func = loadstring("return "..fcheck)()
+						return func(getdref())
+					else	
+						if getvalue() == nil then 
+							print("Value missing for set action in ".. elementname)
+						else
+							return getdref() == getvalue()
+						end
 					end
 					
-				elseif action == "function" then
-					if element.fcheck ~= nil then return loadstring(element.fcheck)() end
-					
 				else
-					print("Action not allowed: "..action.." in "..elementname)
+					print("Check: Action not allowed: "..action.." in "..elementname)
 				end
 			end
 			
-		-- ======= function check
-		elseif etype == "function" then
-		
-			if fcheck ~= nil then 
-				return loadstring(fcheck)()
-			elseif element.fcheck ~= nil then 
-				return loadstring(element.fcheck)() 
-			else
-				return true
-			end
 				
 		-- ======= onoff switch	
-		elseif etype == "onoff" then
+		elseif etype == "onofftgl" then
 		
 			local found = 0
 			-- check if action is allowed for the element
@@ -425,79 +450,32 @@ function ng_check_element(elementname, action, value, fset, fcheck, fvalue)
 					if value == nil then value = 0 end 
 					return getdref() == value
 					
-				elseif action == "set" then
-					if getvalue() == nil then 
-						print("Value missing for set action in ".. elementname)
-					else
-						return getdref() == getvalue()
+				elseif action == "tgl" then -- cannot be checked -> true
+					return true
+					
+				elseif action == "chk" then
+					if efcheck ~= nil then
+						local func = loadstring("return "..efcheck)()
+						return func(getdref())
+					elseif fcheck ~= nil then
+						local func = loadstring("return "..fcheck)()
+						return func(getdref())
+					else	
+						if getvalue() == nil then 
+							print("Value missing for chk action in ".. elementname)
+						else
+							return getdref() == getvalue()
+						end
 					end
-				elseif action == "function" then
-					if element.fcheck ~= nil then return loadstring(element.fcheck)() end
+
 				else
-					print("Action not allowed: "..action.." in "..elementname)
+					print("Check: Action not allowed: "..action.." in "..elementname)
 					return true
 				end
 			end
-			
-		-- ======= toggle switch	
-		elseif element.type == "toggle" then
-		
-			local found = 0
-			-- check if action is allowed for the element
-			for _,defaction in pairs(element.acts) do
-				if (defaction == action) then found = 1 end
-			end
-			
-			-- if allowed because found then continue, otherwise skip
-			if found == 1 then
 
-				if action == "on" then
-					if value == nil then value = 1 end 
-					return getdref() == value
-					
-				elseif action == "off" then
-					if value == nil then value = 0 end 
-					return getdref() == value
-					
-				elseif action == "set" then
-					if getvalue() == nil then 
-						print("Value missing for set action in ".. elementname)
-					else
-						return getdref() == getvalue()
-					end
-				elseif action == "function" then
-					if element.fcheck ~= nil then return loadstring(element.fcheck)() end
-				else
-					print("Action not allowed: "..action.." in "..elementname)
-					return true
-				end
-			end
-				
-		-- ======= multistate switch	
-		elseif element.type == "multistate" then
-			
-			local found = 0
-			-- check if action is allowed for the element
-			for _,defaction in pairs(element.acts) do
-				if (defaction == action) then found = 1 end
-			end
-			
-			-- if allowed because found then continue, otherwise skip
-			if found == 1 then
-
-				if action == "set" then
-					if getvalue() == nil then 
-						print("Value missing for set action in ".. elementname)
-					else
-						return getdref() == getvalue()
-					end
-				else
-					print("Action not allowed: "..action.." in "..elementname)
-				end
-			end
-				
-		-- ======= dial
-		elseif element.type == "dial" then
+		-- ======= dial dataref
+		elseif element.type == "dialdref" then
 			
 			local found = 0
 			-- check if action is allowed for the element
@@ -509,35 +487,115 @@ function ng_check_element(elementname, action, value, fset, fcheck, fvalue)
 			if found == 1 then
 
 				if action == "up" then
-					if getvalue() == nil then 
-						print("Value missing for up action in ".. elementname)
-					else
-						return getdref() == getvalue()
-					end					
+					return true
+
 				elseif action == "dn" then
-					if getvalue() == nil then 
-						print("Value missing for dn action in ".. elementname)
-					else
-						return getdref() == getvalue()
+					return true
+
+				elseif action == "set" or action == "chk" then
+					
+					if efcheck ~= nil then
+						local func = loadstring("return "..efcheck)()
+						return func(getdref())
+					elseif fcheck ~= nil then
+						local func = loadstring("return "..fcheck)()
+						return func(getdref())
+					else	
+						if getvalue() == nil then 
+							print("Value missing for set action in ".. elementname)
+						else
+							return getdref() == getvalue()
+						end
 					end
-				elseif action == "set" then
-					if getvalue() == nil then 
-						print("Value missing for set action in ".. elementname)
-					else
-						return getdref() == getvalue()
-					end
-				elseif action == "function" then
-						return getdref() == getvalue()
+					
 				else
-					print("Action not allowed: "..action.." in "..elementname)
+					print("Check: Action not allowed: "..action.." in "..elementname)
 				end
 			end
+
+		-- ======= dial cmd
+		elseif element.type == "dialcmd" then
 			
+			local found = 0
+			-- check if action is allowed for the element
+			for _,defaction in pairs(element.acts) do
+				if (defaction == action) then found = 1 end
+			end
+			
+			-- if allowed because found then continue, otherwise skip
+			if found == 1 then
+
+				if action == "up" then
+					return true
+
+				elseif action == "dn" then
+					return true
+
+				elseif action == "set" or action == "chk" then
+					
+					if efcheck ~= nil then
+						local func = loadstring("return "..efcheck)()
+						return func(getdref())
+					elseif fcheck ~= nil then
+						local func = loadstring("return "..fcheck)()
+						return func(getdref())
+					else	
+						if getvalue() == nil then 
+							print("Value missing for set action in ".. elementname)
+						else
+							return getdref() == getvalue()
+						end
+					end
+					
+				else
+					print("Check: Action not allowed: "..action.." in "..elementname)
+				end
+			end
+
+		-- ======= custom check
+		elseif etype == "custom" then
+			local found = 0
+			-- check if action is allowed for the element
+			for _,defaction in pairs(element.acts) do
+				if (defaction == action) then found = 1 end
+			end
+			-- if allowed because found then continue, otherwise skip
+			if found == 1 then
+
+				if action == "on" then
+					if value == nil then value = 1 end 
+					return getdref() == value
+					
+				elseif action == "off" then
+					if value == nil then value = 0 end 
+					return getdref() == value
+
+				elseif action == "set" or action == "chk" then
+					if efcheck ~= nil then
+						local func = loadstring("return "..efcheck)()
+						return func(getdref())
+					elseif fcheck ~= nil then
+						local func = loadstring("return "..fcheck)()
+						return func(getdref())
+					else	
+						if getvalue() == nil then 
+							print("Value missing for chk action in ".. elementname)
+						else
+							return getdref() == getvalue()
+						end
+					end
+					
+				else
+					print("Check: Action not allowed: "..action.." in "..elementname)
+				end
+			end			
+							
 		else
-			print("unknown type for "..elementname)
+			
+			print("Check: Unknown type ".. element.type .." in "..elementname)
 		end
 	else
-		print("!! Undefined system element "..elementname)
+		-- print("Check: !! Undefined system element "..elementname)
 	end
 end	
 
@@ -559,7 +617,7 @@ function ng_check_step(procstep)
 
 				for _,selement in pairs(procstep:getItemNode().setelements) do
 					if selement.condition ~= nil then 
-						if loadstring(selement.condition)() and selement.nocheck == nil then
+						if loadstring("return "..selement.condition)() and selement.nocheck == nil then
 							nractiveelem = nractiveelem + 1
 						end
 					else
@@ -574,7 +632,7 @@ function ng_check_step(procstep)
 					local bdocheck = false
 
 					if selement.condition ~= nil then 
-						if loadstring(selement.condition)() and selement.nocheck == nil then
+						if loadstring("return "..selement.condition)() and selement.nocheck == nil then
 							bdocheck = true
 						end
 					else
@@ -752,7 +810,7 @@ function ng_flow_executor()
 		indxastep = 1
 		astep = aflow:getActiveItem()
 		if astep:getItemNode().condition ~= nil then
-			if loadstring(astep:getItemNode().condition)() == false then
+			if loadstring("return "..astep:getItemNode().condition)() == false then
 				indxastep = 2
 				aflow:setActiveItemIdx(2)
 				astep = aflow:getActiveItem()
