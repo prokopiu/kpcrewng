@@ -13,6 +13,7 @@ general:add(preference:new("timeout", "--:--", ng_type_text, "Times OUT|"))
 general:add(preference:new("timeoff", "--:--", ng_type_text, "Times OFF|"))
 general:add(preference:new("timeon", "--:--", ng_type_text, "Times ON|"))
 general:add(preference:new("timein", "--:--", ng_type_text, "Times IN|"))
+general:add(preference:new("auxvar1", "", ng_type_text, "AUX Var 1|"))
 
 backgroundVarsSet:addGroup(general)
 

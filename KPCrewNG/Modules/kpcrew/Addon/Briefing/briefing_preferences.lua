@@ -136,8 +136,8 @@ takeoff:add(preference:new("rwyheadwind",	0,ng_type_int,                        
 	"Takeoff Runway Headwind|10","tlr.takeoff.runway[ng_briefing_to_rwyidx].headwind_component"))                       
 takeoff:add(preference:new("rwycrosswind",	0,ng_type_int,                                                              -- takeoff:rwycrosswind",	
 	"Takeoff Runway Crosswind|10","tlr.takeoff.runway[ng_briefing_to_rwyidx].crosswind_component"))                     
-takeoff:add(preference:new("rwyilsfreq",	"",ng_type_text,                                                            -- takeoff:rwyilsfreq",	
-	"Takeoff Runway ILS Freq|","tlr.takeoff.runway[ng_briefing_to_rwyidx].ils_frequency"))                              
+-- takeoff:add(preference:new("rwyilsfreq",	"",ng_type_text,                                                            -- takeoff:rwyilsfreq",	
+	-- "Takeoff Runway ILS Freq|","tlr.takeoff.runway[ng_briefing_to_rwyidx].ils_frequency"))                              
 takeoff:add(preference:new("rwyflaps",		"",ng_type_text,                                                            -- takeoff:rwyflaps",		
 	"Takeoff Flaps|","tlr.takeoff.runway[ng_briefing_to_rwyidx].flap_setting"))                                         
 takeoff:add(preference:new("selectedflaps",	1,ng_type_int,"Selected Flaps|"))                                           -- takeoff:selectedflaps",	
@@ -218,8 +218,8 @@ landing:add(preference:new("rwyheadwind",	0,ng_type_int,                        
 	"Landing Runway Headwind|10","tlr.landing.runway[ng_briefing_ld_rwyidx].headwind_component"))                        
 landing:add(preference:new("rwycrosswind",	0,ng_type_int,                                                               -- landing:rwycrosswind
 	"Landing Runway Crosswind|10","tlr.landing.runway[ng_briefing_ld_rwyidx].crosswind_component"))                      
-landing:add(preference:new("rwyilsfreq",	"",ng_type_text,                                                             -- landing:rwyilsfreq
-	"Landing Runway ILS Freq|","tlr.landing.runway[ng_briefing_ld_rwyidx].ils_frequency"))                               
+-- landing:add(preference:new("rwyilsfreq",	"",ng_type_text,                                                             -- landing:rwyilsfreq
+	-- "Landing Runway ILS Freq|","tlr.landing.runway[ng_briefing_ld_rwyidx].ils_frequency"))                               
 landing:add(preference:new("rwylda",		0,ng_type_int,                                                               -- landing:rwylda
 	"Landing Runway LDA|10","tlr.landing.runway[ng_briefing_ld_rwyidx].length_lda"))                                     
 -- --------------------------------------------------------------------------------------------

@@ -87,7 +87,7 @@ dprint("ng_action_element: "..element.title)
 				if idx ~= nil then result = get(element.dref,idx) else result = get(element.dref) end
 				if element.ftrans ~= nil then 
 					local func = loadstring("return "..element.ftrans)()
-					result = func(result)
+					if func ~= nil then result = func(result) end
 				end
 			end
 			return result
@@ -117,7 +117,7 @@ dprint("ng_action_element: "..element.title)
 
 		-- ======= undefined element just skip
 		if etype == "undefined" then
-			print("Action: "..elementname.." is of type undefined")
+			-- print("Action: "..elementname.." is of type undefined")
 		
 		-- ======= annunciator without action
 		elseif etype == "annunciator" then
@@ -186,8 +186,16 @@ dprint("ng_action_element: "..element.title)
 						command_once(element.cmdoff)
 					end
 					
-				elseif action == "tgl" then command_once(element.cmdtgl) 
-					
+				elseif action == "tgl" then 
+					if element.cmdtgl ~= nil then
+						command_once(element.cmdtgl) 
+					else
+						if getdref() == 0 then 
+							command_once(element.cmdon)
+						else
+							command_once(element.cmdoff)
+						end
+					end
 				end
 				
 			else
@@ -279,23 +287,23 @@ dprint("ng_action_element: "..element.title)
 				
 				if action == "on" then
 					if element.fon ~= nil then 
-						local funcon = loadstring("return "..element.fon)() 
-						funcon(getdref())
+						local func = loadstring("return "..element.fon)() 
+						if func ~= nil then func(getdref()) end
 					end
 				elseif action == "off" then
 					if element.foff ~= nil then 
-						local funcoff = loadstring("return "..element.foff)() 
-						funcoff(getdref())
+						local func = loadstring("return "..element.foff)() 
+						if func ~= nil then func(getdref()) end
 					end
 				elseif action == "tgl" then 
 					if element.ftgl ~= nil then 
-						local functgl = loadstring("return "..element.ftgl)() 
-						functgl(getdref())
+						local func = loadstring("return "..element.ftgl)() 
+						if func ~= nil then func(getdref()) end
 					end
 				elseif action == "set" then 
 					if element.fset ~= nil then 
-						local funcset = loadstring("return "..element.fset)() 
-						funcset(getdref())
+						local func = loadstring("return "..element.fset)() 
+						if func ~= nil then func(getdref()) end
 					end
 				end
 			else
@@ -367,7 +375,7 @@ function ng_check_element(elementname, action, value, fset, fcheck, fvalue)
 				if idx ~= nil then result = get(element.dref,idx) else result = get(element.dref) end
 				if element.ftrans ~= nil then 
 					local func = loadstring("return "..element.ftrans)()
-					result = func(result)
+					if func ~= nil then result = func(result) end
 				end
 			end
 			return result
@@ -386,7 +394,7 @@ function ng_check_element(elementname, action, value, fset, fcheck, fvalue)
 
 		-- ======= undefine skip
 		if etype == "undefined" then
-			print("Check: "..elementname.." is of type undefined")
+			-- print("Check: "..elementname.." is of type undefined")
 			return false
 		
 		-- ======= dataref driven elements
@@ -410,12 +418,13 @@ function ng_check_element(elementname, action, value, fset, fcheck, fvalue)
 					return getdref() == value
 
 				elseif action == "set" or action == "chk" then
+				-- print(element.name)
 					if efcheck ~= nil then
 						local func = loadstring("return "..efcheck)()
-						return func(getdref())
+						if func ~= nil then return func(getdref()) else return false end
 					elseif fcheck ~= nil then
 						local func = loadstring("return "..fcheck)()
-						return func(getdref())
+						if func ~= nil then return func(getdref()) else return false end
 					else	
 						if getvalue() == nil then 
 							print("Value missing for set action in ".. elementname)
@@ -456,10 +465,10 @@ function ng_check_element(elementname, action, value, fset, fcheck, fvalue)
 				elseif action == "chk" then
 					if efcheck ~= nil then
 						local func = loadstring("return "..efcheck)()
-						return func(getdref())
+						if func ~= nil then return func(getdref()) end
 					elseif fcheck ~= nil then
 						local func = loadstring("return "..fcheck)()
-						return func(getdref())
+						if func ~= nil then return func(getdref()) end
 					else	
 						if getvalue() == nil then 
 							print("Value missing for chk action in ".. elementname)
@@ -496,10 +505,10 @@ function ng_check_element(elementname, action, value, fset, fcheck, fvalue)
 					
 					if efcheck ~= nil then
 						local func = loadstring("return "..efcheck)()
-						return func(getdref())
+						if func ~= nil then return func(getdref()) end
 					elseif fcheck ~= nil then
 						local func = loadstring("return "..fcheck)()
-						return func(getdref())
+						if func ~= nil then return func(getdref()) end
 					else	
 						if getvalue() == nil then 
 							print("Value missing for set action in ".. elementname)
@@ -535,10 +544,10 @@ function ng_check_element(elementname, action, value, fset, fcheck, fvalue)
 					
 					if efcheck ~= nil then
 						local func = loadstring("return "..efcheck)()
-						return func(getdref())
+						if func ~= nil then return func(getdref()) end
 					elseif fcheck ~= nil then
 						local func = loadstring("return "..fcheck)()
-						return func(getdref())
+						if func ~= nil then return func(getdref()) end
 					else	
 						if getvalue() == nil then 
 							print("Value missing for set action in ".. elementname)
@@ -573,10 +582,10 @@ function ng_check_element(elementname, action, value, fset, fcheck, fvalue)
 				elseif action == "set" or action == "chk" then
 					if efcheck ~= nil then
 						local func = loadstring("return "..efcheck)()
-						return func(getdref())
+						if func ~= nil then return func(getdref()) end
 					elseif fcheck ~= nil then
 						local func = loadstring("return "..fcheck)()
-						return func(getdref())
+						if func ~= nil then return func(getdref()) end
 					else	
 						if getvalue() == nil then 
 							print("Value missing for chk action in ".. elementname)
