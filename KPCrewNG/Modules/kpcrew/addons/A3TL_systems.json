@@ -1,0 +1,4131 @@
+{
+  "addonsystems": {
+    "categories": [
+      {
+        "name": "aice",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdoff": "toliss_airbus/antiicecommands/ENG1Off",
+                "cmdon": "toliss_airbus/antiicecommands/ENG1On",
+                "cmdtgl": "toliss_airbus/antiicecommands/ENG1Toggle",
+                "dref": "AirbusFBW/ATA30SwitchAnims",
+                "indx": 2,
+                "name": "engaice1",
+                "title": "Engine Antiice 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdoff": "toliss_airbus/antiicecommands/ENG2Off",
+                "cmdon": "toliss_airbus/antiicecommands/ENG2On",
+                "cmdtgl": "toliss_airbus/antiicecommands/ENG2Toggle",
+                "dref": "AirbusFBW/ATA30SwitchAnims",
+                "indx": 3,
+                "name": "engaice2",
+                "title": "Engine Antiice 2",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "engaice"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/ProbeHeatSwitch",
+                "name": "probeheat1",
+                "title": "Probe Heat 1",
+                "type": "dataref"
+              }
+            ],
+            "name": "probeheat"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/ProbeHeatSwitch",
+                "name": "windowheat1",
+                "title": "Window Heat 1",
+                "type": "undefined"
+              }
+            ],
+            "name": "windowheat"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdoff": "toliss_airbus/antiicecommands/WingOff",
+                "cmdon": "toliss_airbus/antiicecommands/WingOn",
+                "cmdtgl": "toliss_airbus/antiicecommands/WingToggle",
+                "dref": "AirbusFBW/ProbeHeatSwitch",
+                "indx": 1,
+                "name": "wingaice1",
+                "title": "Wing Anti Ice 1",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "wingaice"
+          }
+        ]
+      },
+      {
+        "name": "air",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdoff": "toliss_airbus/apucommands/BleedOff",
+                "cmdon": "toliss_airbus/apucommands/BleedOn",
+                "dref": "AirbusFBW/APUBleedSwitch",
+                "name": "apubleed",
+                "title": "APU Bleed",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "dref": "AirbusFBW/ENG1BleedSwitch",
+                "name": "bleed1",
+                "title": "Engine Bleed 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "dref": "AirbusFBW/ENG2BleedSwitch",
+                "name": "bleed2",
+                "title": "Engine Bleed 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "bleeds"
+          },
+          {
+            "elements": [
+              {
+                "name": "cargoheat1",
+                "title": "Cargo heat Switch 1",
+                "type": "undefined"
+              },
+              {
+                "name": "cargoheat2",
+                "title": "Cargo heat Switch 2",
+                "type": "undefined"
+              },
+              {
+                "name": "cargoheat3",
+                "title": "Cargo heat Switch 3",
+                "type": "undefined"
+              }
+            ],
+            "name": "cargoheat"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                "fcheck": "true",
+                "name": "equipcool1",
+                "title": "Equipment Cooling switch",
+                "type": "undefined"
+              }
+            ],
+            "name": "equipcooling"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                "name": "gasperfan1",
+                "title": "Gasper Fan 1",
+                "type": "undefined"
+              }
+            ],
+            "name": "gasperfans"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/BulkIsolValve",
+                "name": "isovalve1",
+                "title": "Isolation Valve 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/AftIsolValve",
+                "name": "isovalve2",
+                "title": "Isolation Valve 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "isovalves"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/CrewOxySwitch",
+                "name": "oxygen1",
+                "title": "Oxygen Master 1",
+                "type": "dataref"
+              }
+            ],
+            "name": "oxygen"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/Pack1Switch",
+                "name": "pack1",
+                "title": "Pack 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/Pack2Switch",
+                "name": "pack2",
+                "title": "Pack 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "packs"
+          },
+          {
+            "elements": [
+              {
+                "acts": {},
+                "name": "flightalt",
+                "title": "Flight Altitude",
+                "type": "undefined"
+              },
+              {
+                "acts": {},
+                "name": "landalt",
+                "title": "Landing Altitude",
+                "type": "undefined"
+              }
+            ],
+            "name": "pressurization"
+          },
+          {
+            "elements": [
+              {
+                "acts": {},
+                "name": "recircfan1",
+                "title": "Recirc Fan 1",
+                "type": "undefined"
+              },
+              {
+                "acts": {},
+                "name": "recircfan2",
+                "title": "Recirc Fan 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "recircfans"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/FwdCabinTemp",
+                "name": "tempcontrol1",
+                "title": "Temp Control Cabin fwd",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/AftCabinTemp",
+                "name": "tempcontrol2",
+                "title": "Temp Control Cabin aft",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/CockpitTemp",
+                "name": "tempcontrol3",
+                "title": "Temp Control Cockpit",
+                "type": "dataref"
+              }
+            ],
+            "name": "tempcontrols"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "dref": "AirbusFBW/RamAirSwitch",
+                "name": "trimair1",
+                "title": "RAM Air Switch",
+                "type": "dataref"
+              }
+            ],
+            "name": "trimair"
+          }
+        ]
+      },
+      {
+        "name": "autopilot",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "set",
+                  " "
+                ],
+                "dref": "AirbusFBW/ADIRUSwitchArray",
+                "indx": 0,
+                "name": "adiru1",
+                "title": "IRS Unit 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "set",
+                  " "
+                ],
+                "dref": "AirbusFBW/ADIRUSwitchArray",
+                "indx": 1,
+                "name": "adiru2",
+                "title": "IRS Unit 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "set",
+                  " "
+                ],
+                "dref": "AirbusFBW/ADIRUSwitchArray",
+                "indx": 2,
+                "name": "adiru3",
+                "title": "IRS Unit 3",
+                "type": "dataref"
+              }
+            ],
+            "name": "adirus"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/AP1Engage",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_ap1state",
+                "title": "AP1 state",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/AP2Engage",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_ap2state",
+                "title": "AP2 state",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/AP1Engage",
+                "name": "ap1",
+                "title": "AP 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/AP2Engage",
+                "name": "ap2",
+                "title": "AP 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "sim/autopilot/disconnect",
+                "dref": "toliss_airbus/ap_disc_left_stick",
+                "name": "yokedisc",
+                "title": "Yoke disc",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "autopilots"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "AirbusFBW/ATHRbutton",
+                "dref": "AirbusFBW/ATHRmode",
+                "name": "autothrottle",
+                "title": "Autothrottle",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "autothrust"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "toliss_airbus/fd1_push",
+                "dref": "AirbusFBW/FD1Engage",
+                "name": "flightdir1",
+                "title": "FD 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "toliss_airbus/fd2_push",
+                "dref": "AirbusFBW/FD2Engage",
+                "name": "flightdir2",
+                "title": "FD 2",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "flightdirs"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/altitude_hold_status",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_alt",
+                "title": "ALT mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/APPRilluminated",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_appr",
+                "title": "APPR annunciator",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/HDGdashed",
+                "fcheck": "function (a) return a==0 end",
+                "name": "_hdg",
+                "title": "HDG mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/SPDdashed",
+                "fcheck": "function (a) return a==0 end",
+                "name": "_ias",
+                "title": "IAS mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/HDGdashed",
+                "fcheck": "function (a) return a==1 end",
+                "name": "_lnav",
+                "title": "LNAV mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/LOConCapt",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_loc",
+                "title": "LOC mode annunciator",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/vnav_speed_window_open",
+                "fcheck": "function (a) return a==1 end",
+                "name": "_n1",
+                "title": "N1 mode",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/SPDdashed",
+                "fcheck": "function (a) return a==1 end",
+                "name": "_vnav",
+                "title": "VNAV mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/VSdashed",
+                "fcheck": "function (a) return a==0 end",
+                "name": "_vsp",
+                "title": "VSP mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "tgl",
+                  "set",
+                  "chk",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/ALTmanaged",
+                "fset": "function (a) if a == 1 then command_once(\"AirbusFBW/PullAltitude\") else command_once(\"AirbusFBW/PushAltitude\") end end",
+                "ftgl": "function (a) if a == 1 then command_once(\"AirbusFBW/PullAltitude\") else command_once(\"AirbusFBW/PushAltitude\") end end",
+                "name": "althold",
+                "title": "Altitude Hold",
+                "type": "custom"
+              },
+              {
+                "name": "apdisengage",
+                "title": "A/P Disengage",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "AirbusFBW/APPRbutton",
+                "dref": "AirbusFBW/APPRilluminated",
+                "name": "approach",
+                "title": "Approach mode",
+                "type": "onofftgl"
+              },
+              {
+                "name": "bankanglesel",
+                "title": "Bank Angle Selector",
+                "type": "undefined"
+              },
+              {
+                "name": "flch",
+                "title": "Level Change",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "set",
+                  "tgl",
+                  "chk",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/HDGmanaged",
+                "fset": "function (a) if a == 0 then command_once(\"AirbusFBW/PullHDGSel\") else command_once(\"AirbusFBW/PushHDGSel\") end end",
+                "ftgl": "function (a) if a == 0 then command_once(\"AirbusFBW/PullHDGSel\") else command_once(\"AirbusFBW/PushHDGSel\") end end",
+                "name": "hdghold",
+                "title": "Heading Hold",
+                "type": "custom"
+              },
+              {
+                "name": "hdgtrk",
+                "title": "HDG Track Switch",
+                "type": "undefined"
+              },
+              {
+                "name": "iasmach",
+                "title": "IAR Mach Switch",
+                "type": "undefined"
+              },
+              {
+                "name": "lnav",
+                "title": "LNAV",
+                "type": "undefined"
+              },
+              {
+                "name": "lnavmode",
+                "title": "VNAV",
+                "type": "undefined"
+              },
+              {
+                "name": "n1mode",
+                "title": "VNAV",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "AirbusFBW/LOCbutton",
+                "dref": "AirbusFBW/LOConCapt",
+                "fcheck": "function (a) return a>0 end",
+                "name": "navhold",
+                "title": "Nav Hold",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "set",
+                  "tgl",
+                  "chk",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/SPDdashed",
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) if a == 0 then command_once(\"AirbusFBW/PullSPDSel\") else command_once(\"AirbusFBW/PushSPDSel\") end end",
+                "ftgl": "function (a) if a == 0 then command_once(\"AirbusFBW/PullSPDSel\") else command_once(\"AirbusFBW/PushSPDSel\") end end",
+                "name": "spdmode",
+                "title": "SPD mode",
+                "type": "custom"
+              },
+              {
+                "name": "toga",
+                "title": "TOGA Btn",
+                "type": "undefined"
+              },
+              {
+                "name": "vnavmode",
+                "title": "VNAV",
+                "type": "undefined"
+              },
+              {
+                "name": "vsfpa",
+                "title": "VS FPA Switch",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "tgl",
+                  "set",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/VSdashed",
+                "fset": "function (a) if a == 0 then command_once(\"AirbusFBW/PullVSSel\") else command_once(\"AirbusFBW/PushVSSel\") end end",
+                "ftgl": "function (a) if a == 0 then command_once(\"AirbusFBW/PullVSSel\") else command_once(\"AirbusFBW/PushVSSel\") end end",
+                "name": "vspmode",
+                "title": "Vertical Speed mode",
+                "type": "custom"
+              }
+            ],
+            "name": "modes"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/autopilot/altitude_down",
+                "cmdup": "sim/autopilot/altitude_up",
+                "dref": "sim/cockpit2/autopilot/altitude_dial_ft",
+                "incr": 100,
+                "max": 99999,
+                "min": 0,
+                "name": "altsel",
+                "title": "A/P Altitude",
+                "type": "dialdref"
+              },
+              {
+                "name": "crs1",
+                "title": "Course 1",
+                "type": "undefined"
+              },
+              {
+                "name": "crs2",
+                "title": "Course 2",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "cmddn": "sim/autopilot/heading_down",
+                "cmdup": "sim/autopilot/heading_up",
+                "dref": "sim/cockpit2/autopilot/heading_dial_deg_mag_pilot",
+                "incr": 1,
+                "max": 359,
+                "min": 0,
+                "name": "hdgsel",
+                "title": "A/P Heading",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/autopilot/airspeed_down",
+                "cmdup": "sim/autopilot/airspeed_up",
+                "dref": "sim/cockpit2/autopilot/airspeed_dial_kts",
+                "incr": 1,
+                "max": 999,
+                "min": 0,
+                "name": "speedsel",
+                "title": "A/P Speed",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "cmddn": "sim/autopilot/vertical_speed_down",
+                "cmdup": "sim/autopilot/vertical_speed_up",
+                "dref": "sim/cockpit2/autopilot/vvi_dial_fpm",
+                "incr": 100,
+                "max": 7900,
+                "min": -7900,
+                "name": "vspsel",
+                "title": "A/P VSP",
+                "type": "dialdref"
+              }
+            ],
+            "name": "selectors"
+          }
+        ]
+      },
+      {
+        "name": "controls",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/FlapLeverRatio",
+                "name": "_flapsposition",
+                "title": "Flaps position",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/FlapLeverRatio",
+                "fcheck": "function (a) return a==0.25 end",
+                "fset": "function (a) set(\"AirbusFBW/FlapLeverRatio\",0.25) end",
+                "name": "flaplever1",
+                "title": "Flap Lever 1",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/FlapLeverRatio",
+                "fcheck": "function (a) return a==0.5 end",
+                "fset": "function (a) set(\"AirbusFBW/FlapLeverRatio\",0.5) end",
+                "name": "flaplever2",
+                "title": "Flap Lever 2",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/FlapLeverRatio",
+                "fcheck": "function (a) return a==0.75 end",
+                "fset": "function (a) set(\"AirbusFBW/FlapLeverRatio\",0.75) end",
+                "name": "flaplever3",
+                "title": "Flap Lever 3",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/FlapLeverRatio",
+                "fcheck": "function (a) return a==1 end",
+                "fset": "function (a) set(\"AirbusFBW/FlapLeverRatio\",1) end",
+                "name": "flaplever4",
+                "title": "Flap Lever 4",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/FlapLeverRatio",
+                "fcheck": "function (a) return a==0 end",
+                "fon": "",
+                "fset": "function (a) set(\"AirbusFBW/FlapLeverRatio\",0) end",
+                "name": "flapleverUP",
+                "title": "Flap Lever 0",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/FlapLeverRatio",
+                "fcheck": "function (a) return a==1 end",
+                "fset": "function (a) set(\"AirbusFBW/FlapLeverRatio\",1) end",
+                "name": "flapleverfull",
+                "title": "Flap Lever 4",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/FlapLeverRatio",
+                "name": "flapset",
+                "title": "Set flap directly",
+                "type": "dataref"
+              }
+            ],
+            "name": "flaps"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/controls/speedbrake_ratio",
+                "name": "speedbrake",
+                "title": "Speedbrake Lever",
+                "type": "dataref"
+              }
+            ],
+            "name": "speedbrake"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/controls/aileron_trim",
+                "name": "ailerontrim",
+                "title": "Aileron Trim",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/PitchTrimPosition",
+                "fcheck": "function (a) return -1 + ((2/17) * ng_getBriefPrefs():get(\"takeoff:pitchtrim\")) end",
+                "name": "pitchtrim",
+                "title": "Pitch Trim",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set"
+                ],
+                "dref": "sim/cockpit2/controls/rudder_trim",
+                "name": "ruddertrim",
+                "title": "Rudder Trim",
+                "type": "dataref"
+              }
+            ],
+            "name": "trims"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/yaw_damper_on",
+                "name": "yawdamper",
+                "title": "Yaw Damper",
+                "type": "undefined"
+              }
+            ],
+            "name": "yawdamper"
+          }
+        ]
+      },
+      {
+        "name": "datarefs",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/gauges/indicators/altitude_ft_pilot",
+                "fcheck": "function (a) return a > 10000 end",
+                "name": "_above10k",
+                "title": "above 10.000 ft",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/gauges/indicators/altitude_ft_pilot",
+                "fcheck": "function (a) return a > ng_getBriefPrefs():get(\"origin:transalt\") end",
+                "name": "_abovetalt",
+                "title": "above transition altitude",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/gauges/indicators/altitude_ft_pilot",
+                "fcheck": "function (a) return a < 10000 end",
+                "name": "_below10k",
+                "title": "below 10.000 ft",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/gauges/indicators/altitude_ft_pilot",
+                "fcheck": "function (a) return a < ng_getBriefPrefs():get(\"destination:translvl\") end",
+                "name": "_belowtlvl",
+                "title": "below transition level",
+                "type": "dataref"
+              }
+            ],
+            "name": "_altitudechecks"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "AirbusFBW/AP1Engage",
+                "fcheck": "function (a) return a == 1 end",
+                "name": "_autopilot1on",
+                "title": "Autopilot 1 ON",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "AirbusFBW/AP1Engage",
+                "fcheck": "function (a) return a == 1 end",
+                "name": "_autopilot2on",
+                "title": "Autopilot 2 ON",
+                "type": "dataref"
+              }
+            ],
+            "name": "_autopilot"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/controls/left_brake_ratio",
+                "fcheck": "function (a) return get(\"sim/cockpit2/controls/left_brake_ratio\") + get(\"sim/cockpit2/controls/right_brake_ratio\") > 1.5 end",
+                "name": "_brakecheck",
+                "title": "true if both wheelbrake 1",
+                "type": "dataref"
+              }
+            ],
+            "name": "_brakeaction"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N1_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N1_percent\",0) > get(\"sim/weather/aircraft/temperature_ambient_deg_c\") end",
+                "indx": 0,
+                "name": "_eng1n1gtoat",
+                "title": "Engine 1 N1 value > OAT",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N1_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N1_percent\",1) > get(\"sim/weather/aircraft/temperature_ambient_deg_c\") end",
+                "indx": 1,
+                "name": "_eng2n1gtoat",
+                "title": "Engine 2 N1 value > OAT",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N1_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N1_percent\",2) > get(\"sim/weather/aircraft/temperature_ambient_deg_c\") end",
+                "indx": 2,
+                "name": "_eng3n1gtoat",
+                "title": "Engine 3 N1 value > OAT",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N1_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N1_percent\",3) > get(\"sim/weather/aircraft/temperature_ambient_deg_c\") end",
+                "indx": 3,
+                "name": "_eng4n1gtoat",
+                "title": "Engine 4 N1 value > OAT",
+                "type": "dataref"
+              }
+            ],
+            "name": "_enginen1"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N2_percent\",0) > 0 end",
+                "indx": 0,
+                "name": "_eng1n2gt0",
+                "title": "Engine 1 N2 value > 0",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return (get(\"sim/cockpit2/engine/indicators/N2_percent\",0) > ng_getAcfPrefs():get(\"engines:n2afterstart\")) end",
+                "indx": 0,
+                "name": "_eng1n2start",
+                "title": "Engine 1 N2 value > x",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N2_percent\",1) > 0 end",
+                "indx": 1,
+                "name": "_eng2n2gt0",
+                "title": "Engine 2 N2 value > 0",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return (get(\"sim/cockpit2/engine/indicators/N2_percent\",1) > ng_getAcfPrefs():get(\"engines:n2afterstart\")) end",
+                "indx": 1,
+                "name": "_eng2n2start",
+                "title": "Engine 2 N2 value > n",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N2_percent\",2) > 0 end",
+                "indx": 2,
+                "name": "_eng3n2gt0",
+                "title": "Engine 3 N2 value > 0",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return (get(\"sim/cockpit2/engine/indicators/N2_percent\",2) > ng_getAcfPrefs():get(\"engines:n2afterstart\")) end",
+                "indx": 2,
+                "name": "_eng3n2start",
+                "title": "Engine 3 N2 value > n",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N2_percent\",3) > 0 end",
+                "indx": 3,
+                "name": "_eng4n2gt0",
+                "title": "Engine 4 N2 value > 0",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return (get(\"sim/cockpit2/engine/indicators/N2_percent\",3) > ng_getAcfPrefs():get(\"engines:n2afterstart\")) end",
+                "indx": 3,
+                "name": "_eng4n2start",
+                "title": "Engine 4 N2 value > n",
+                "type": "dataref"
+              }
+            ],
+            "name": "_enginen2"
+          }
+        ]
+      },
+      {
+        "name": "efis",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": {},
+                "fcheck": "function (a) return true end",
+                "name": "baromode1",
+                "title": "Baro Mode left",
+                "type": "undefined"
+              },
+              {
+                "acts": {},
+                "fcheck": "function (a) return true end",
+                "name": "baromode2",
+                "title": "Baro mode right",
+                "type": "undefined"
+              },
+              {
+                "acts": {},
+                "fcheck": "function (a) return true end",
+                "name": "baromode3",
+                "title": "Baro mode standby",
+                "type": "undefined"
+              }
+            ],
+            "name": "baromodes"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "tgl",
+                  ""
+                ],
+                "dref": "AirbusFBW/BaroStdCapt",
+                "name": "barostd1",
+                "title": "Baro STD left",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "tgl",
+                  ""
+                ],
+                "dref": "AirbusFBW/BaroStdFO",
+                "name": "barostd2",
+                "title": "Baro STD right",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "tgl",
+                  ""
+                ],
+                "dref": "AirbusFBW/ISIBaroStd",
+                "name": "barostd3",
+                "title": "Baro STD ISIS",
+                "type": "dataref"
+              }
+            ],
+            "name": "barostdbtns"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/instruments/barometer_down",
+                "cmdup": "sim/instruments/barometer_up",
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
+                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
+                "incr": 0.01,
+                "max": 32,
+                "min": 22,
+                "name": "barovalue1",
+                "title": "Baro Mode left",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/instruments/barometer_copilot_down",
+                "cmdup": "sim/instruments/barometer_copilot_up",
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot",
+                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
+                "incr": 0.01,
+                "max": 32,
+                "min": 22,
+                "name": "barovalue2",
+                "title": "Baro mode right",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/instruments/barometer_stby_down",
+                "cmdup": "sim/instruments/barometer_stby__up",
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_stby",
+                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
+                "incr": 0.01,
+                "max": 32,
+                "min": 22,
+                "name": "barovalue3",
+                "title": "Baro mode standby",
+                "type": "dialdref"
+              }
+            ],
+            "name": "barovalues"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  ""
+                ],
+                "dref": "sim/cockpit2/gauges/actuators/baro_altimeter_bug_ft_pilot",
+                "name": "da",
+                "title": "Decision altitude",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "set",
+                  ""
+                ],
+                "dref": "sim/cockpit/misc/radio_altimeter_minimum",
+                "name": "dh",
+                "title": "Decision Height",
+                "type": "undefined"
+              }
+            ],
+            "name": "dhda"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "toliss_airbus/dispcommands/CaptArptPushButton",
+                "dref": "AirbusFBW/NDShowARPTCapt",
+                "name": "arptmode",
+                "title": "Airport Mode",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "toliss_airbus/dispcommands/CaptNdbPushButton",
+                "dref": "AirbusFBW/NDShowNDBCapt",
+                "name": "datamode",
+                "title": "DATA mode Boeing, NDB Airbus",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "toliss_airbus/dispcommands/CaptVorDPushButton",
+                "dref": "AirbusFBW/NDShowVORDCapt",
+                "name": "posmode",
+                "title": "POS Mode Boeing NAV Airbus",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "toliss_airbus/dispcommands/CaptCstrPushButton",
+                "dref": "AirbusFBW/NDShowCSTRCapt",
+                "name": "stamode",
+                "title": "STA Mode Boeing, CSTR Airbus",
+                "type": "onofftgl"
+              },
+              {
+                "name": "terrainmode",
+                "title": "Terrain mode",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "toliss_airbus/dispcommands/CaptWptPushButton",
+                "dref": "AirbusFBW/NDShowWPTCapt",
+                "name": "wptmode",
+                "title": "WPT Mode",
+                "type": "onofftgl"
+              },
+              {
+                "name": "wxrmode",
+                "title": "Weather Radar mode",
+                "type": "undefined"
+              }
+            ],
+            "name": "modes"
+          },
+          {
+            "elements": [
+              {
+                "name": "mapmode",
+                "title": "ND Mode",
+                "type": "undefined"
+              },
+              {
+                "name": "maprange",
+                "title": "ND Zoom",
+                "type": "undefined"
+              }
+            ],
+            "name": "nd"
+          },
+          {
+            "elements": {},
+            "name": "pfd"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/TerrainSelectedND1",
+                "name": "terronnd",
+                "title": "Terrain",
+                "type": "dataref"
+              }
+            ],
+            "name": "terrain"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/WXSwitchPWS",
+                "name": "wxpws",
+                "title": "PWS",
+                "type": "dataref"
+              },
+              {
+                "name": "wxradarmap",
+                "title": "Weather radar MAP",
+                "type": "undefined"
+              },
+              {
+                "name": "wxradarmode",
+                "title": "Weather radar mode pilot",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/WXPowerSwitch",
+                "name": "wxradarstate",
+                "title": "Weather radar on/off",
+                "type": "dataref"
+              },
+              {
+                "name": "wxradarstby",
+                "title": "Weather radar STBY",
+                "type": "undefined"
+              },
+              {
+                "name": "wxradartest",
+                "title": "Weather radar TEST",
+                "type": "undefined"
+              },
+              {
+                "name": "wxradarturb",
+                "title": "Weather radar TURB",
+                "type": "undefined"
+              },
+              {
+                "name": "wxradarwx",
+                "title": "Weather radar WX",
+                "type": "undefined"
+              },
+              {
+                "name": "wxradarwxt",
+                "title": "Weather radar WX+T",
+                "type": "undefined"
+              }
+            ],
+            "name": "wxradar"
+          }
+        ]
+      },
+      {
+        "name": "electric",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "AirbusFBW/APUN",
+                "fcheck": "function (a) return a<2 end",
+                "name": "_apuoff",
+                "title": "APU off",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "AirbusFBW/APUN",
+                "fcheck": "function (a) return a>98 end",
+                "name": "_apuon",
+                "title": "APU ON",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/FireAgentSwitchAnim",
+                "indx": 14,
+                "name": "apufiretest",
+                "title": "APU Fire test",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/ElecOHPArray",
+                "indx": 0,
+                "name": "apugen1",
+                "title": "APU Generator 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  ""
+                ],
+                "name": "apugen2",
+                "title": "APU Generator 2",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "toliss_airbus/apucommands/MasterOff",
+                "cmdon": "toliss_airbus/apucommands/MasterOn",
+                "cmdtgl": "toliss_airbus/apucommands/MasterToggle",
+                "dref": "AirbusFBW/APUMaster",
+                "name": "apumaster",
+                "title": "APU Master in Airbus",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdon": "toliss_airbus/apucommands/StarterOn",
+                "dref": "AirbusFBW/APUStarter",
+                "name": "apustart",
+                "title": "APU starter",
+                "type": "dataref"
+              }
+            ],
+            "name": "apu"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/ElecOHPArray",
+                "fcheck": "function (a) return a==1 end",
+                "indx": 16,
+                "name": "APU Battery",
+                "title": "apubattery",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdoff": "toliss_airbus/eleccommands/Bat1Off",
+                "cmdon": "toliss_airbus/eleccommands/Bat1On",
+                "cmdtgl": "toliss_airbus/eleccommands/Bat1Tgl",
+                "dref": "AirbusFBW/ElecOHPArray",
+                "fcheck": "function (a) return a==1 end",
+                "indx": 5,
+                "name": "battery1",
+                "title": "Battery 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdoff": "toliss_airbus/eleccommands/Bat2Off",
+                "cmdon": "toliss_airbus/eleccommands/Bat2On",
+                "cmdtgl": "toliss_airbus/eleccommands/Bat2Tgl",
+                "dref": "AirbusFBW/ElecOHPArray",
+                "fcheck": "function (a) return a==1 end",
+                "indx": 6,
+                "name": "battery2",
+                "title": "Battery 2",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "batteries"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/ElecOHPArray",
+                "indx": 4,
+                "name": "acbustie1",
+                "title": "AC Bus Tie 1",
+                "type": "dataref"
+              },
+              {
+                "name": "acbustie2",
+                "title": "AC Bus Tie 2",
+                "type": "undefined"
+              },
+              {
+                "name": "acbustie3",
+                "title": "AC Bus Tie 3",
+                "type": "undefined"
+              },
+              {
+                "name": "acbustie4",
+                "title": "AC Bus Tie 4",
+                "type": "undefined"
+              },
+              {
+                "name": "dcbustie1",
+                "title": "DC Bus Tie 1",
+                "type": "undefined"
+              },
+              {
+                "name": "dcbustie2",
+                "title": "DC Bus Tie 2",
+                "type": "undefined"
+              },
+              {
+                "name": "dcbustie3",
+                "title": "DC Bus Tie 2",
+                "type": "undefined"
+              },
+              {
+                "name": "dcbustie4",
+                "title": "DC Bus Tie 2",
+                "type": "undefined"
+              },
+              {
+                "name": "essentialbus1",
+                "title": "Essential Bus 1",
+                "type": "undefined"
+              },
+              {
+                "name": "essentialbus2",
+                "title": "Essential Bus 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "busties"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/ElecOHPArray",
+                "indx": 9,
+                "name": "cabinpower",
+                "title": "Cabin power",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/ElecOHPArray",
+                "indx": 8,
+                "name": "ifepower",
+                "title": "Inflight Entertainment",
+                "type": "dataref"
+              }
+            ],
+            "name": "consumers"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/ElecOHPArray",
+                "indx": 0,
+                "name": "generator1",
+                "title": "Engine Generator 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/ElecOHPArray",
+                "indx": 1,
+                "name": "generator2",
+                "title": "Engine Generator 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "generators"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/EnableExternalPower",
+                "name": "gpuconnect",
+                "title": "GPU Connect",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/EnableExternalPowerB",
+                "name": "gpuconnectb",
+                "title": "Second external power",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/ElecOHPArray",
+                "fcheck": "function (a) return a==1 end",
+                "indx": 15,
+                "name": "gpugen1",
+                "title": "GPU Generator 1",
+                "type": "dataref"
+              }
+            ],
+            "name": "gpu"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/ElecOHPArray",
+                "indx": 7,
+                "name": "inverter1",
+                "title": "Inverter 1",
+                "type": "dataref"
+              },
+              {
+                "name": "inverter2",
+                "title": "Inverter 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "inverter"
+          },
+          {
+            "elements": [
+              {
+                "name": "extendrat",
+                "title": "Extend RAT",
+                "type": "undefined"
+              },
+              {
+                "name": "ramairturbine",
+                "title": "RAT",
+                "type": "undefined"
+              },
+              {
+                "name": "stbypower1",
+                "title": "Standby Power",
+                "type": "undefined"
+              }
+            ],
+            "name": "standby"
+          },
+          {
+            "elements": [
+              {
+                "name": "tru1",
+                "title": "Transformer Rectifier 1",
+                "type": "undefined"
+              },
+              {
+                "name": "tru2",
+                "title": "Transformer Rectifier 2",
+                "type": "undefined"
+              },
+              {
+                "name": "tru3",
+                "title": "TRU3 Essential",
+                "type": "undefined"
+              }
+            ],
+            "name": "trus"
+          }
+        ]
+      },
+      {
+        "name": "engines",
+        "systems": [
+          {
+            "elements": [
+              {
+                "name": "eec1",
+                "title": "EEC Mode 1",
+                "type": "undefined"
+              },
+              {
+                "name": "eec2",
+                "title": "EEC Mode 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "eec"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/FireTestAPU",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_apufire",
+                "title": "APU Fire",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/FireTestENG1",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_eng1fire",
+                "title": "ENG1 Fire",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/FireTestENG2",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_eng2fire",
+                "title": "ENG2 Fire",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/FireAgentSwitchAnim",
+                "indx": 15,
+                "name": "engfiretest",
+                "title": "Engine fire test",
+                "type": "dataref"
+              }
+            ],
+            "name": "enginefire"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "indx": 0,
+                "name": "_eng1n2",
+                "title": "Engine 1 N2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "indx": 1,
+                "name": "_eng2n2",
+                "title": "Engine 2 N2",
+                "type": "dataref"
+              }
+            ],
+            "name": "enginen2"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "cmdoff": "toliss_airbus/engcommands/EngineModeSwitchToNorm",
+                "cmdon": "toliss_airbus/engcommands/EngineModeSwitchToStart",
+                "dref": "AirbusFBW/ENGModeSwitch",
+                "name": "engstartsel1",
+                "title": "Engine Start Selector 1",
+                "type": "dataref"
+              }
+            ],
+            "name": "engstartsel"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/ENG1MasterSwitch",
+                "name": "engstrtlvr1",
+                "title": "Engine Start lever 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/ENG2MasterSwitch",
+                "name": "engstrtlvr2",
+                "title": "Engine Start lever 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "engstrtlvrs"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/engine/actuators/throttle_ratio",
+                "indx": 0,
+                "name": "thrustlever1",
+                "title": "Thrust lever 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/engine/actuators/throttle_ratio",
+                "indx": 1,
+                "name": "thrustlever2",
+                "title": "Thrust lever 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/actuators/throttle_ratio_all",
+                "name": "thrustleverall",
+                "title": "Thrust lever all",
+                "type": "dataref"
+              }
+            ],
+            "name": "thrustlevers"
+          }
+        ]
+      },
+      {
+        "name": "fuel",
+        "systems": [
+          {
+            "elements": [
+              {
+                "name": "fuelctrlsw1",
+                "title": "Fuel control switch 1",
+                "type": "undefined"
+              },
+              {
+                "name": "fuelctrlsw2",
+                "title": "Fuel control switch 2",
+                "type": "undefined"
+              },
+              {
+                "name": "fuelctrlsw3",
+                "title": "Fuel control switch 3",
+                "type": "undefined"
+              },
+              {
+                "name": "fuelctrlsw4",
+                "title": "Fuel control switch 4",
+                "type": "undefined"
+              }
+            ],
+            "name": "fuelcontrolsws"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 0,
+                "name": "fuelpump1",
+                "title": "Fuel pump left 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 1,
+                "name": "fuelpump2",
+                "title": "Fuel pump left 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 2,
+                "name": "fuelpump3",
+                "title": "Fuel pump right 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 3,
+                "name": "fuelpump4",
+                "title": "Fuel pump right 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 4,
+                "name": "fuelpump5",
+                "title": "Fuel Pump 5",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 5,
+                "name": "fuelpump6",
+                "title": "Fuel Pump 6",
+                "type": "dataref"
+              }
+            ],
+            "name": "fuelpumps"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 7,
+                "name": "fuelxfeed1",
+                "title": "Fuel Crossfeed 1",
+                "type": "dataref"
+              },
+              {
+                "name": "fuelxfeed2",
+                "title": "Fuel Crossfeed 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "fuelxfeeds"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  ""
+                ],
+                "dref": "sim/cockpit/engine/fuel_tank_selector",
+                "name": "tankselector",
+                "title": "Fuel Tank Selector",
+                "type": "dataref"
+              }
+            ],
+            "name": "tankselector"
+          }
+        ]
+      },
+      {
+        "name": "general",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/NWSnAntiSkid",
+                "name": "antiskid",
+                "title": "Anti-skid Switch",
+                "type": "dataref"
+              }
+            ],
+            "name": "antiskid"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "AirbusFBW/AbrkLo",
+                "dref": "AirbusFBW/AutoBrkLo",
+                "name": "autobrake1",
+                "title": "Autobrake LO",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "AirbusFBW/AbrkMed",
+                "dref": "AirbusFBW/AutoBrkMed",
+                "name": "autobrake2",
+                "title": "Autobrake MED",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "sim/cockpit2/switches/auto_brake_level",
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) command_once(\"toliss_airbus/abrk/pos_disarm\") end",
+                "name": "autobrakeoff",
+                "title": "Autobrake OFF",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "AirbusFBW/AbrkMax",
+                "dref": "AirbusFBW/AutoBrkMax",
+                "name": "autobrakerto",
+                "title": "Autobrake RTO",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "autobrake"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "cmdon": "AirbusFBW/CaptChronoButton",
+                "dref": "AirbusFBW/ChronoTimeND1",
+                "fcheck": "function (a) return true end",
+                "name": "chronobutton1",
+                "title": "Chrono Button Left",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "cmdon": "AirbusFBW/CoChronoButton",
+                "dref": "AirbusFBW/ChronoTimeND2",
+                "fcheck": "function (a) return true end",
+                "name": "chronobutton2",
+                "title": "Chrono Button Right",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/ClockChronoValue",
+                "fcheck": "function (a) return true end",
+                "foff": "function (a) command_once(\"toliss_airbus/chrono/ChronoResetPush\") end",
+                "fon": "function (a) command_once(\"toliss_airbus/chrono/ChronoStartStopPush\") end",
+                "name": "chronometer",
+                "title": "Chronometer 1",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/ClockShowsET",
+                "fcheck": "function (a) return true end",
+                "foff": "function (a) set(\"AirbusFBW/ClockETSwitch\",1) end",
+                "fon": "function (a) set(\"AirbusFBW/ClockETSwitch\",0) end",
+                "ftgl": "function (a) set(\"AirbusFBW/ClockETSwitch\",2) end",
+                "name": "ettimer",
+                "title": "ET Timer",
+                "type": "custom"
+              }
+            ],
+            "name": "clocks"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/Chocks",
+                "name": "chocks",
+                "title": "Chocks",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "cmdtgl": "openSAM/toggle_jwy",
+                "dref": "opensam/jetway/status",
+                "fcheck": "function (a) return a==2 end",
+                "fon": "function (a) if a~= 2 then command_once(\"openSAM/toggle_jwy\") end end",
+                "name": "samjetwaydock",
+                "title": "Dock openSAM jetway",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "cmdtgl": "openSAM/toggle_jwy",
+                "dref": "opensam/jetway/status",
+                "fcheck": "function (a) return a==1 end",
+                "fon": "function (a) if a == 2 then command_once(\"openSAM/toggle_jwy\") end end",
+                "name": "samjetwayundock",
+                "title": "Undock openSAM jetway",
+                "type": "custom"
+              }
+            ],
+            "name": "external"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "dref": "AirbusFBW/CargoDoorModeArray",
+                "fcheck": "function (a) return a>0 end",
+                "foff": "function (a) set_array(\"AirbusFBW/CargoDoorModeArray\",1,0) end",
+                "fon": "function (a) set_array(\"AirbusFBW/CargoDoorModeArray\",1,2) end",
+                "indx": 1,
+                "name": "dooracargo",
+                "title": "Aft Cargo",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "dref": "AirbusFBW/CargoDoorModeArray",
+                "fcheck": "function (a) return true end",
+                "foff": "function (a) set_array(\"AirbusFBW/CargoDoorModeArray\",0,0) end",
+                "fon": "function (a) set_array(\"AirbusFBW/CargoDoorModeArray\",0,2) end",
+                "indx": 0,
+                "name": "doorfcargo",
+                "title": "Forward Cargo",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "dref": "AirbusFBW/PaxDoorModeArray",
+                "fcheck": "function (a) return a>0 end",
+                "foff": "function (a) set_array(\"AirbusFBW/PaxDoorModeArray\",0,0) end",
+                "fon": "function (a) set_array(\"AirbusFBW/PaxDoorModeArray\",0,2) end",
+                "indx": 0,
+                "name": "doorl1",
+                "title": "Door Forward Left",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "dref": "AirbusFBW/PaxDoorModeArray",
+                "fcheck": "function (a) return a>0 end",
+                "foff": "function (a) set_array(\"AirbusFBW/PaxDoorModeArray\",2,0) end",
+                "fon": "function (a) set_array(\"AirbusFBW/PaxDoorModeArray\",2,2) end",
+                "indx": 2,
+                "name": "doorl2",
+                "title": "Door Aft Left",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "dref": "AirbusFBW/PaxDoorModeArray",
+                "fcheck": "function (a) return a>0 end",
+                "foff": "function (a) set_array(\"AirbusFBW/PaxDoorModeArray\",1,0) end",
+                "fon": "function (a) set_array(\"AirbusFBW/PaxDoorModeArray\",1,2) end",
+                "indx": 1,
+                "name": "doorr1",
+                "title": "Door Fwd Right",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "dref": "AirbusFBW/PaxDoorModeArray",
+                "fcheck": "function (a) return a>0 end",
+                "foff": "function (a) set_array(\"AirbusFBW/PaxDoorModeArray\",3,0) end",
+                "fon": "function (a) set_array(\"AirbusFBW/PaxDoorModeArray\",3,2) end",
+                "indx": 3,
+                "name": "doorr2",
+                "title": "Door Aft Right",
+                "type": "custom"
+              }
+            ],
+            "name": "externaldoors"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/CockpitDoorAngle",
+                "name": "cockpitdoor",
+                "title": "Cockpit Door",
+                "type": "dataref"
+              },
+              {
+                "name": "doorlock",
+                "title": "Door Lock",
+                "type": "undefined"
+              }
+            ],
+            "name": "internaldoors"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdoff": "toliss_airbus/park_brake_release",
+                "cmdon": "toliss_airbus/park_brake_set",
+                "cmdtgl": "toliss_airbus/park_brake_toggle",
+                "dref": "AirbusFBW/ParkBrake",
+                "name": "parkbrake",
+                "title": "Parkingbrake",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "parkbrake"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/OHPLightSwitches",
+                "indx": 12,
+                "name": "nosmoking",
+                "title": "No Smoking",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/OHPLightSwitches",
+                "indx": 11,
+                "name": "seatbelts",
+                "title": "Seatbelt Signs",
+                "type": "dataref"
+              }
+            ],
+            "name": "paxsigns"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return false end",
+                "name": "wait",
+                "title": "wait for interaction",
+                "type": "custom"
+              }
+            ],
+            "name": "simulator"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) ng_getBckVars():set(\"general:timein\",ng_dispTimeHHMM(get(\"sim/time/zulu_time_sec\"))) end",
+                "name": "intimer",
+                "title": "in timer",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) ng_getBckVars():set(\"general:timeoff\",ng_dispTimeHHMM(get(\"sim/time/zulu_time_sec\"))) end",
+                "name": "offtimer",
+                "title": "Off Timer",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) ng_getBckVars():set(\"general:timeon\",ng_dispTimeHHMM(get(\"sim/time/zulu_time_sec\"))) end",
+                "name": "ontimer",
+                "title": "on timer",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) ng_getBckVars():set(\"general:timeout\",ng_dispTimeHHMM(get(\"sim/time/zulu_time_sec\"))) end",
+                "name": "outtimer",
+                "title": "Out Timer",
+                "type": "custom"
+              }
+            ],
+            "name": "timers"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/ATA31ECPAnimations",
+                "fcheck": "function (a) return a>0 end",
+                "indx": 25,
+                "name": "toconfig",
+                "title": "*T.O Config",
+                "type": "dataref"
+              }
+            ],
+            "name": "toconfig"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/MasterCaut",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_mastercaution",
+                "title": "Master Caution",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/MasterWarn",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_masterwarn",
+                "title": "Master Warning",
+                "type": "dataref"
+              }
+            ],
+            "name": "warncaution"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/LeftWiperSwitch",
+                "name": "wiper1",
+                "title": "Left Windshield Wiper",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/RightWiperSwitch",
+                "name": "wiper2",
+                "title": "Right Windshield Wiper",
+                "type": "dataref"
+              }
+            ],
+            "name": "wipers"
+          }
+        ]
+      },
+      {
+        "name": "hydraulics",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/HydOHPArray",
+                "indx": 5,
+                "name": "elechydpump1",
+                "title": "Electric Hydraulic Pump 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/HydOHPArray",
+                "indx": 9,
+                "name": "elechydpump2",
+                "title": "Electric Hydraulic Pump 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/HydOHPArray",
+                "indx": 3,
+                "name": "elechydpump3",
+                "title": "Electric Hydraulic Pump 3",
+                "type": "dataref"
+              }
+            ],
+            "name": "elechydpumps"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/HydOHPArray",
+                "indx": 0,
+                "name": "enghydpump1",
+                "title": "Engine Hydraulic Pump 1A",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/HydOHPArray",
+                "indx": 1,
+                "name": "enghydpump2",
+                "title": "Engine Hydraulic Pump 1C",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/HydOHPArray",
+                "indx": 2,
+                "name": "enghydpump3",
+                "title": "Engine Hydraulic Pump 2B",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/HydOHPArray",
+                "indx": 3,
+                "name": "enghydpump4",
+                "title": "Engine Hydraulic Pump 2A",
+                "type": "dataref"
+              }
+            ],
+            "name": "enghydpumps"
+          },
+          {
+            "elements": [
+              {
+                "name": "ptu1",
+                "title": "Hydraulic PTU",
+                "type": "undefined"
+              }
+            ],
+            "name": "ptus"
+          }
+        ]
+      },
+      {
+        "name": "landinggears",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "fcheck": "function (a) return get(\"sim/flightmodel2/gear/deploy_ratio\") == 1 end",
+                "name": "_gearlightsgreen",
+                "title": "Gear lights green",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "fcheck": "function (a) return get(\"sim/flightmodel2/gear/deploy_ratio\") > 0 and get(\"sim/flightmodel2/gear/deploy_ratio\") < 1 end",
+                "name": "_gearlightsred",
+                "title": "Gear lights red",
+                "type": "dataref"
+              }
+            ],
+            "name": "gearlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "sim/flight_controls/landing_gear_up",
+                "cmdon": "sim/flight_controls/landing_gear_down",
+                "dref": "sim/cockpit/switches/gear_handle_status",
+                "name": "gearhandle",
+                "title": "Gearhandle",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "gears"
+          }
+        ]
+      },
+      {
+        "name": "lightsexternal",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/OHPLightSwitches",
+                "indx": 4,
+                "name": "landlight1",
+                "title": "Landing light 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/OHPLightSwitches",
+                "indx": 5,
+                "name": "landlight2",
+                "title": "Landing Light 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "alllandlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/OHPLightSwitches",
+                "indx": 0,
+                "name": "beacon1",
+                "title": "Beacon light 1",
+                "type": "dataref"
+              }
+            ],
+            "name": "beacons"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/OHPLightSwitches",
+                "indx": 2,
+                "name": "logolight",
+                "title": "Logo light",
+                "type": "dataref"
+              }
+            ],
+            "name": "logolights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/OHPLightSwitches",
+                "indx": 2,
+                "name": "positionlight",
+                "title": "Position light",
+                "type": "dataref"
+              }
+            ],
+            "name": "positionlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "cmdoff": "toliss_airbus/lightcommands/TurnoffLightOff",
+                "cmdon": "toliss_airbus/lightcommands/TurnoffLightOn",
+                "dref": "AirbusFBW/OHPLightSwitches",
+                "indx": 6,
+                "name": "rwylight1",
+                "title": "Runway light left",
+                "type": "dataref"
+              }
+            ],
+            "name": "rwylights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/OHPLightSwitches",
+                "indx": 7,
+                "name": "strobelight",
+                "title": "Strobe light",
+                "type": "dataref"
+              }
+            ],
+            "name": "strobelights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/OHPLightSwitches",
+                "indx": 3,
+                "name": "taxilight1",
+                "title": "Taxi light",
+                "type": "dataref"
+              }
+            ],
+            "name": "taxilights"
+          },
+          {
+            "elements": [
+              {
+                "name": "wheellight",
+                "title": "Wheel light",
+                "type": "undefined"
+              }
+            ],
+            "name": "wheellights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/OHPLightSwitches",
+                "indx": 1,
+                "name": "winglight",
+                "title": "Wing light",
+                "type": "dataref"
+              }
+            ],
+            "name": "winglights"
+          }
+        ]
+      },
+      {
+        "name": "lightsinternal",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/OHPLightSwitches",
+                "indx": 13,
+                "name": "domelight",
+                "title": "Dome light",
+                "type": "dataref"
+              }
+            ],
+            "name": "domelights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  " ",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/OHPLightSwitches",
+                "indx": 10,
+                "name": "emerlight",
+                "title": "EMER light",
+                "type": "dataref"
+              }
+            ],
+            "name": "emerlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/DUBrightness",
+                "indx": 0,
+                "name": "instrlight1",
+                "title": "Instrument light 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/DUBrightness",
+                "indx": 1,
+                "name": "instrlight2",
+                "title": "Instrument light 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/DUBrightness",
+                "indx": 2,
+                "name": "instrlight3",
+                "title": "Instrument light 3",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/DUBrightness",
+                "indx": 3,
+                "name": "instrlight4",
+                "title": "Instrument light 4",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/DUBrightness",
+                "indx": 4,
+                "name": "instrlight5",
+                "title": "Instrument light 5",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/DUBrightness",
+                "indx": 5,
+                "name": "instrlight6",
+                "title": "Instrument light 6",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/DUBrightness",
+                "indx": 6,
+                "name": "instrlight7",
+                "title": "Instrument light 7",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/DUBrightness",
+                "indx": 7,
+                "name": "instrlight8",
+                "title": "Instrument light 9",
+                "type": "dataref"
+              }
+            ],
+            "name": "instrlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/PanelBrightnessLevel",
+                "name": "panellight1",
+                "title": "Panel light 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/OHPBrightnessLevel",
+                "name": "panellight2",
+                "title": "Panel light 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/PanelFloodBrightnessLevel",
+                "name": "floodlight2",
+                "title": "Flood light 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/PedestalFloodBrightnessLevel",
+                "name": "floodlight1",
+                "title": "Flood light 1",
+                "type": "dataref"
+              }
+            ],
+            "name": "panellights"
+          }
+        ]
+      },
+      {
+        "name": "radios",
+        "systems": [
+          {
+            "elements": {},
+            "name": "adf1"
+          },
+          {
+            "elements": {},
+            "name": "adf2"
+          },
+          {
+            "elements": {},
+            "name": "com1"
+          },
+          {
+            "elements": {},
+            "name": "com2"
+          },
+          {
+            "elements": {},
+            "name": "nav1"
+          },
+          {
+            "elements": {},
+            "name": "nav2"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/XPDRTCASMode",
+                "name": "tcasmode",
+                "title": "TCAS Mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/XPDRTCASMode",
+                "fcheck": "function (a) return a==0 end",
+                "fset": "function (a) set(\"AirbusFBW/XPDRTCASMode\",0) end",
+                "name": "tcasmodestby",
+                "title": "TCAS Mode stby",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/XPDRTCASMode",
+                "fcheck": "function (a) return a==1 end",
+                "fset": "function (a) set(\"AirbusFBW/XPDRTCASMode\",1) end",
+                "name": "tcasmodeta",
+                "title": "TCAS Mode TA",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/XPDRTCASMode",
+                "fcheck": "function (a) return a==2 end",
+                "fset": "function (a) set(\"AirbusFBW/XPDRTCASMode\",2) end",
+                "name": "tcasmodetara",
+                "title": "TCAS Mode TARA",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/radios/actuators/transponder_code",
+                "fset": "function (a) ng_getBckVars():set(\"general:auxvar1\",a) end",
+                "name": "xpdrcode",
+                "title": "XPDR Code",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/XPDRPower",
+                "name": "xpdrmode",
+                "title": "XPDR Mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/XPDRPower",
+                "fcheck": "function (a) return a==1 end",
+                "fset": "function (a) set(\"AirbusFBW/XPDRPower\",1) end",
+                "name": "xpdrmodeauto",
+                "title": "Airbus xpdr auto",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/XPDRPower",
+                "fcheck": "function (a) return a==0 end",
+                "fset": "function (a) set(\"AirbusFBW/XPDRPower\",0) end",
+                "name": "xpdrmodestby",
+                "title": "XPDR Mode STBY",
+                "type": "custom"
+              }
+            ],
+            "name": "transponder"
+          }
+        ]
+      },
+      {
+        "name": "xtensions",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/CrewOxySwitch",
+                "name": "crewsupply",
+                "title": "Crew Supply",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "air"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/EmerCallSwitchAnim",
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) command_once(\"AirbusFBW/purser/all\") end",
+                "name": "_cabincrew",
+                "title": "Cabin Vrew pressed",
+                "type": "custom"
+              }
+            ],
+            "name": "cabin"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/FCCSwitchArray",
+                "indx": 0,
+                "name": "fccprim1",
+                "title": "FCC PRIM1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/FCCSwitchArray",
+                "indx": 1,
+                "name": "fccprim2",
+                "title": "FCC PRIM2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/FCCSwitchArray",
+                "indx": 2,
+                "name": "fccprim3",
+                "title": "FCC PRIM3",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/FCCSwitchArray",
+                "indx": 3,
+                "name": "fccsec1",
+                "title": "FCC SEC1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/FCCSwitchArray",
+                "indx": 4,
+                "name": "fccsec2",
+                "title": "FCC SEC2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "cmdtgl": "sim/systems/yaw_damper_toggle",
+                "dref": "AirbusFBW/FCCSwitchArray",
+                "indx": 8,
+                "name": "turbdamp",
+                "title": "YAW TURB DAMP",
+                "type": "dataref"
+              }
+            ],
+            "name": "fcc"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/GPWSSwitchArray",
+                "indx": 2,
+                "name": "gpwsflap",
+                "title": "GPWS Flap Mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/GPWSSwitchArray",
+                "indx": 1,
+                "name": "gpwsgs",
+                "title": "GPWS GS Mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/GPWSSwitchArray",
+                "indx": 0,
+                "name": "gpwssys",
+                "title": "GPWS SYS",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/GPWSSwitchArray",
+                "indx": 4,
+                "name": "gpwsterr",
+                "title": "GPWS TERR",
+                "type": "dataref"
+              }
+            ],
+            "name": "gpws"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/HotAirSwitch",
+                "name": "hotair1",
+                "title": "Hot air 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/GPWSSwitchArray",
+                "name": "hotair2",
+                "title": "Hot air 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/CargoHotAir",
+                "name": "hotair3",
+                "title": "Hot air",
+                "type": "dataref"
+              }
+            ],
+            "name": "hotair"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/AnnunMode",
+                "name": "annlight",
+                "title": "Annunciator lights",
+                "type": "dataref"
+              },
+              {
+                "name": "domebrightness",
+                "title": "Dome brightness",
+                "type": "undefined"
+              },
+              {
+                "name": "maplightleft",
+                "title": "Maplight left",
+                "type": "undefined"
+              },
+              {
+                "name": "maplightright",
+                "title": "Map light",
+                "type": "undefined"
+              }
+            ],
+            "name": "lights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/ILSonCapt",
+                "fcheck": "function (a) return a==0 end",
+                "name": "lsmode",
+                "title": "Airbus LS Mode",
+                "type": "dataref"
+              }
+            ],
+            "name": "lsmode"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/RMP1Switch",
+                "name": "radiounit1onoff",
+                "title": "RTP 1 swap on/off",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/RMP2Switch",
+                "name": "radiounit2onoff",
+                "title": "RTP2 swap on/off",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/RMP3Switch",
+                "name": "radiounit3onoff",
+                "title": "RTP3 swap on/off",
+                "type": "dataref"
+              }
+            ],
+            "name": "radiounits"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "sim/cockpit2/radios/actuators/transponder_code",
+                "fset": "function (a) print(a) ng_getBckVars():set(\"general:auxvar1\",a) end",
+                "name": "xpdrauxval",
+                "title": "save xpdr code",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/XPDR1",
+                "fset": "function (a) set(\"AirbusFBW/XPDR1\",string.sub(ng_getBckVars():get(\"general:auxvar1\"),4,4)) end",
+                "name": "xpdrdigit1",
+                "title": "XPDR Code digit 1",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/XPDR2",
+                "fset": "function (a) set(\"AirbusFBW/XPDR2\",string.sub(ng_getBckVars():get(\"general:auxvar1\"),3,3)) end",
+                "name": "xpdrdigit2",
+                "title": "XPDR Code digit 2",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/XPDR3",
+                "fset": "function (a) set(\"AirbusFBW/XPDR3\",string.sub(ng_getBckVars():get(\"general:auxvar1\"),2,2)) end",
+                "name": "xpdrdigit3",
+                "title": "XPDR Code digit 3",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "AirbusFBW/XPDR4",
+                "fset": "function (a) set(\"AirbusFBW/XPDR4\",string.sub(ng_getBckVars():get(\"general:auxvar1\"),1,1)) end",
+                "name": "xpdrdigit4",
+                "title": "XPDR Code digit 4",
+                "type": "custom"
+              }
+            ],
+            "name": "xpdrdigits"
+          }
+        ]
+      }
+    ]
+  },
+  "icao": "A3TL",
+  "title": "ToLiss A3xx"
+}

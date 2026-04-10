@@ -83,7 +83,7 @@ function ng_acft_select(component)
 	-- X-Works A330-200 (Laminar A330 until found otherwise)
 	elseif PLANE_ICAO == "A332" or PLANE_ICAO == "A332F" then
 		icao = "A33L"
-		sopicao = "DFLT"
+		sopicao = "A33L"
 		
 	-- FlightFactor A320
 	elseif PLANE_ICAO == "A320" then
@@ -238,7 +238,7 @@ function ng_acft_select(component)
 		sopicao = "DFLT"
 	elseif PLANE_ICAO == "A339" then
 		icao = "A3TL"
-		sopicao = "DFLT"
+		sopicao = "A3TL"
 	elseif PLANE_ICAO == "A346" then
 		icao = "A3TL"
 		sopicao = "DFLT"
