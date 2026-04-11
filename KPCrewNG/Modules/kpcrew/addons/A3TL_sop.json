@@ -84,9 +84,8 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "set",
-                "element": "wxradarstate",
-                "value": 0
+                "action": "off",
+                "element": "wxradarstate"
               }
             ]
           },
@@ -559,7 +558,7 @@
           {
             "challenge": "NO SMOKING",
             "classname": "ProcedureItem",
-            "response": "ARM",
+            "response": "AUTO",
             "role": "ng_firole_FO",
             "setelements": [
               {
@@ -571,7 +570,7 @@
           {
             "challenge": "EMER EXIT LIGHTS",
             "classname": "ProcedureItem",
-            "response": "ON/ARM",
+            "response": "ARM",
             "role": "ng_firole_FO",
             "setelements": [
               {
@@ -689,8 +688,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "seatbelts"
+                "action": "set",
+                "element": "seatbelts",
+				"value": 1
               }
             ]
           },
@@ -858,7 +858,7 @@
           {
             "challenge": "ANTI-SKID",
             "classname": "ProcedureItem",
-            "response": " ",
+            "response": "ON",
             "role": "ng_firole_FO",
             "setelements": [
               {
@@ -3970,7 +3970,7 @@
             "setelements": [
               {
                 "action": "off",
-                "element": "crewsupply"
+                "element": "oxygen1"
               }
             ]
           },
@@ -4069,7 +4069,7 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "dn",
+                "action": "off",
                 "element": "nosmoking"
               }
             ]
@@ -4166,33 +4166,6 @@
         ],
         "phase": "ng_phase_colddark",
         "title": "SECURING THE AIRCRAFT FLOW"
-      },
-      {
-        "classname": "ProcedureFlow",
-        "flowitem": [
-          {
-            "challenge": "EWFWEF",
-            "classname": "ProcedureItem",
-            "nocheck": 1,
-            "response": "RESET",
-            "role": "ng_firole_BOTH",
-            "setelements": [
-              {
-                "action": "on",
-                "element": "strobelight"
-              }
-            ]
-          },
-          {
-            "challenge": "EBD",
-            "classname": "ProcedureItem",
-            "response": " ",
-            "role": "ng_firole_FO",
-            "setelements": {}
-          }
-        ],
-        "phase": "ng_phase_colddark",
-        "title": "TEST"
       }
     ],
     "title": "ToLiss A3xx"

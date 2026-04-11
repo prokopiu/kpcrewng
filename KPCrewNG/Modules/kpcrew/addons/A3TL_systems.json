@@ -2203,8 +2203,6 @@
                   "set",
                   "chk"
                 ],
-                "cmdoff": "toliss_airbus/engcommands/EngineModeSwitchToNorm",
-                "cmdon": "toliss_airbus/engcommands/EngineModeSwitchToStart",
                 "dref": "AirbusFBW/ENGModeSwitch",
                 "name": "engstartsel1",
                 "title": "Engine Start Selector 1",
