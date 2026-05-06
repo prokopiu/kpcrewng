@@ -976,8 +976,8 @@
                 "cmdup": "sim/radios/obs_HSI_up",
                 "dref": "sim/cockpit2/radios/actuators/nav1_obs_deg_mag_pilot",
                 "incr": 1,
-                "max": 360,
-                "min": 0,
+                "max": 361,
+                "min": -1,
                 "name": "crs1",
                 "title": "Course 1",
                 "type": "dialdref"
@@ -993,8 +993,8 @@
                 "cmdup": "sim/radios/copilot_obs_HSI_up",
                 "dref": "sim/cockpit2/radios/actuators/nav2_obs_deg_mag_pilot",
                 "incr": 1,
-                "max": 360,
-                "min": 0,
+                "max": 361,
+                "min": -1,
                 "name": "crs2",
                 "title": "Course 2",
                 "type": "dialdref"
@@ -1010,8 +1010,8 @@
                 "cmdup": "sim/autopilot/heading_up",
                 "dref": "sim/cockpit2/autopilot/heading_dial_deg_mag_pilot",
                 "incr": 1,
-                "max": 359,
-                "min": 0,
+                "max": 360,
+                "min": -1,
                 "name": "hdgsel",
                 "title": "A/P Heading",
                 "type": "dialdref"
@@ -1082,81 +1082,6 @@
                   " "
                 ],
                 "dref": "sim/cockpit2/controls/flap_ratio",
-                "fcheck": "function (a) return a==0.166 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.166) end",
-                "name": "flaplever1",
-                "title": "Flap Lever 1",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
-                "fcheck": "function (a) return a==0.333 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.333) end",
-                "name": "flaplever2",
-                "title": "Flap Lever 2",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
-                "fcheck": "function (a) return a==0.5 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.5) end",
-                "name": "flaplever3",
-                "title": "Flap Lever 3",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
-                "fcheck": "function (a) return a==0.666 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.666) end",
-                "name": "flaplever4",
-                "title": "Flap Lever 4",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
-                "fcheck": "function (a) return a==0.833 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.833) end",
-                "name": "flaplever5",
-                "title": "Flap Lever 5",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
                 "fcheck": "function (a) return a==0 end",
                 "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0) end",
                 "name": "flapleverUP",
@@ -1172,10 +1097,115 @@
                   " "
                 ],
                 "dref": "sim/cockpit2/controls/flap_ratio",
+                "fcheck": "function (a) return a==0.125 end",
+                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.125) end",
+                "name": "flaplever1",
+                "title": "Flap Lever 1",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
+                "fcheck": "function (a) return a==0.250 end",
+                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.250) end",
+                "name": "flaplever2",
+                "title": "Flap Lever 2",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
+                "fcheck": "function (a) return a==0.375 end",
+                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.375) end",
+                "name": "flaplever3",
+                "title": "Flap Lever 3",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
+                "fcheck": "function (a) return a==0.5 end",
+                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.5) end",
+                "name": "flaplever4",
+                "title": "Flap Lever 4",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
+                "fcheck": "function (a) return a==0.625 end",
+                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.625) end",
+                "name": "flaplever5",
+                "title": "Flap Lever 5",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
+                "fcheck": "function (a) return a==0.750 end",
+                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.750) end",
+                "name": "flaplever6",
+                "title": "Flap Lever 6",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
+                "fcheck": "function (a) return a==0.875 end",
+                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.875) end",
+                "name": "flaplever7",
+                "title": "Flap Lever 7",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
                 "fcheck": "function (a) return a==1 end",
                 "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",1) end",
                 "name": "flapleverfull",
-                "title": "Flap Lever 8",
+                "title": "Flap Lever 6",
                 "type": "custom"
               },
               {
@@ -1751,13 +1781,6 @@
                 "type": "undefined"
               },
               {
-                "acts": [
-                  "up",
-                  "dn",
-                  "chk",
-                  "",
-                  ""
-                ],
                 "name": "wxradarstate",
                 "title": "Weather radar on/off",
                 "type": "undefined"
@@ -2305,56 +2328,21 @@
           {
             "elements": [
               {
-                "acts": [
-                  "chk",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "laminar/A333/annun/fire/apu_handle",
-                "fcheck": "function (a) return a>0 end",
                 "name": "_apufire",
                 "title": "APU Fire",
                 "type": "undefined"
               },
               {
-                "acts": [
-                  "chk",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "laminar/A333/annun/engine1_fire",
-                "fcheck": "function (a) return a>0 end",
                 "name": "_eng1fire",
                 "title": "ENG1 Fire",
                 "type": "undefined"
               },
               {
-                "acts": [
-                  "chk",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "laminar/A333/annun/engine2_fire",
-                "fcheck": "function (a) return a>0 end",
                 "name": "_eng2fire",
                 "title": "ENG2 Fire",
                 "type": "undefined"
               },
               {
-                "acts": [
-                  "chk",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "laminar/A333/fire/buttons/engine_test_pos",
                 "name": "engfiretest",
                 "title": "Engine fire test",
                 "type": "undefined"
@@ -3580,7 +3568,6 @@
           {
             "elements": [
               {
-                "acts": {},
                 "name": "emerlight",
                 "title": "EMER light",
                 "type": "undefined"

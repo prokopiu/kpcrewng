@@ -1,6 +1,6 @@
 general:assistance=true
 general:usechecklist=false
-general:showstars=false
+general:showstars=true
 general:jumpflow=true
 general:simbriefuser="prokopiu"
 general:xpdrmode=1

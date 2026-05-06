@@ -14,8 +14,7 @@
                   "chk",
                   " "
                 ],
-                "dref": "sim/cockpit/switches/anti_ice_inlet_heat_per_engine",
-                "indx": 0,
+                "dref": "aero787/cockpit/overhead/deice/engine1Knob",
                 "name": "engaice1",
                 "title": "Engine Antiice 1",
                 "type": "dataref"
@@ -28,8 +27,7 @@
                   "chk",
                   " "
                 ],
-                "dref": "sim/cockpit/switches/anti_ice_inlet_heat_per_engine",
-                "indx": 1,
+                "dref": "aero787/cockpit/overhead/deice/engine2Knob",
                 "name": "engaice2",
                 "title": "Engine Antiice 2",
                 "type": "dataref"
@@ -110,8 +108,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
-                "indx": 0,
+                "dref": "aero787/cockpit/overhead/winHeat/leftSide",
                 "name": "windowheat1",
                 "title": "Window Heat 1",
                 "type": "dataref"
@@ -124,8 +121,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
-                "indx": 1,
+                "dref": "aero787/cockpit/overhead/winHeat/leftFwd",
                 "name": "windowheat2",
                 "title": "Window Heat 2",
                 "type": "dataref"
@@ -138,8 +134,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
-                "indx": 2,
+                "dref": "aero787/cockpit/overhead/winHeat/rightFwd",
                 "name": "windowheat3",
                 "title": "Window Heat 3",
                 "type": "dataref"
@@ -152,10 +147,35 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
-                "indx": 3,
+                "dref": "aero787/cockpit/overhead/winHeat/rightSide",
                 "name": "windowheat4",
                 "title": "Window Heat 4",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/winHeat/leftBackup",
+                "name": "windowheat5",
+                "title": "Window Heat 5",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/winHeat/rightBackup",
+                "name": "windowheat6",
+                "title": "Window Heat 6",
                 "type": "dataref"
               }
             ],
@@ -171,22 +191,9 @@
                   "chk",
                   " "
                 ],
-                "dref": "sim/cockpit/switches/anti_ice_surf_heat_left",
+                "dref": "aero787/cockpit/overhead/deice/wingDeIce",
                 "name": "wingaice1",
                 "title": "Wing Anti Ice 1",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  " "
-                ],
-                "dref": "sim/cockpit/switches/anti_ice_surf_heat_right",
-                "name": "wingaice2",
-                "title": "Wing Anti Ice 2",
                 "type": "dataref"
               }
             ],
@@ -295,16 +302,29 @@
             "elements": [
               {
                 "acts": [
-                  "",
-                  "",
-                  "",
-                  "",
-                  ""
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
                 ],
-                "fcheck": "true",
+                "dref": "aero787/cockpit/overhead/air/equipCoolFwd",
                 "name": "equipcool1",
                 "title": "Equipment Cooling switch",
-                "type": "undefined"
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "aero787/cockpit/overhead/air/equipCoolAft",
+                "name": "equipcool2",
+                "title": "Equipment Cooling switch 2",
+                "type": "dataref"
               }
             ],
             "name": "equipcooling"
@@ -390,7 +410,7 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/bleedair/actuators/pack_left",
+                "dref": "aero787/cockpit/overhead/air/packLeft",
                 "name": "pack1",
                 "title": "Pack 1",
                 "type": "dataref"
@@ -403,7 +423,7 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/bleedair/actuators/pack_right",
+                "dref": "aero787/cockpit/overhead/air/packRight",
                 "name": "pack2",
                 "title": "Pack 2",
                 "type": "dataref"
@@ -431,16 +451,30 @@
           {
             "elements": [
               {
-                "acts": {},
+                "acts": [
+                  "set",
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/air/recircUpper",
                 "name": "recircfan1",
                 "title": "Recirc Fan 1",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
-                "acts": {},
+                "acts": [
+                  "set",
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/air/recircLower",
                 "name": "recircfan2",
                 "title": "Recirc Fan 2",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "recircfans"
@@ -448,22 +482,43 @@
           {
             "elements": [
               {
-                "acts": {},
+                "acts": [
+                  "set",
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/air/cabinTemp",
                 "name": "tempcontrol1",
                 "title": "Temp Control 1",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
-                "acts": {},
+                "acts": [
+                  "set",
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/air/cargoTemp",
                 "name": "tempcontrol2",
                 "title": "Temp Control 2",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
-                "acts": {},
+                "acts": [
+                  "set",
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/air/fltDeckTemp",
                 "name": "tempcontrol3",
                 "title": "Temp Control 3",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "tempcontrols"
@@ -472,27 +527,29 @@
             "elements": [
               {
                 "acts": [
-                  "",
-                  "",
-                  "",
-                  "",
-                  ""
+                  "set",
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
                 ],
+                "dref": "aero787/cockpit/overhead/air/trimAirLeft",
                 "name": "trimair1",
                 "title": "Trim Air Switch 1",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
                 "acts": [
-                  "",
-                  "",
-                  "",
-                  "",
-                  ""
+                  "set",
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
                 ],
+                "dref": "aero787/cockpit/overhead/air/trimAirRight",
                 "name": "trimair2",
                 "title": "Trim Air Switch 2",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "trimair"
@@ -505,28 +562,30 @@
           {
             "elements": [
               {
-                "acts": {},
-                "dref": "",
-                "fcheck": "true",
+                "acts": [
+                  "set",
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/irs/leftOn",
                 "name": "adiru1",
                 "title": "IRS Unit 1",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
-                "acts": {},
-                "dref": "",
-                "fcheck": "true",
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/irs/rightOn",
                 "name": "adiru2",
                 "title": "IRS Unit 2",
-                "type": "undefined"
-              },
-              {
-                "acts": {},
-                "dref": "",
-                "fcheck": "true",
-                "name": "adiru3",
-                "title": "IRS Unit 3",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "adirus"
@@ -607,7 +666,7 @@
                   "tgl"
                 ],
                 "cmdtgl": "sim/autopilot/disconnect",
-                "dref": "sim/cockpit2/datarefs/autopilot_disconnect",
+                "dref": "sim/cockpit2/autopilot/autopilot_disconnect",
                 "name": "yokedisc",
                 "title": "Yoke disc",
                 "type": "onofftgl"
@@ -826,6 +885,19 @@
                 "type": "onofftgl"
               },
               {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/aircraft/autopilot/alt_step_ft",
+                "name": "altstep",
+                "title": "ALT step 100 1000",
+                "type": "dataref"
+              },
+              {
                 "name": "apdisengage",
                 "title": "A/P Disengage",
                 "type": "undefined"
@@ -952,20 +1024,21 @@
             "elements": [
               {
                 "acts": [
-                  "set",
-                  "dn",
                   "up",
-                  "chk"
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
                 ],
                 "cmddn": "sim/autopilot/altitude_down",
                 "cmdup": "sim/autopilot/altitude_up",
                 "dref": "sim/cockpit2/autopilot/altitude_dial_ft",
                 "incr": 100,
-                "max": 99999,
+                "max": 49000,
                 "min": 0,
                 "name": "altsel",
                 "title": "A/P Altitude",
-                "type": "dialdref"
+                "type": "dialcmd"
               },
               {
                 "acts": [
@@ -1012,7 +1085,7 @@
                 "cmdup": "sim/autopilot/heading_up",
                 "dref": "sim/cockpit2/autopilot/heading_dial_deg_mag_pilot",
                 "incr": 1,
-                "max": 360,
+                "max": 361,
                 "min": -1,
                 "name": "hdgsel",
                 "title": "A/P Heading",
@@ -1070,7 +1143,7 @@
                   " ",
                   " "
                 ],
-                "dref": "sim/cockpit2/controls/flap_handle_request_ratio",
+                "dref": "aero787/cockpit/flapLever",
                 "name": "_flapsposition",
                 "title": "Flaps position",
                 "type": "dataref"
@@ -1083,9 +1156,9 @@
                   " ",
                   " "
                 ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
-                "fcheck": "function (a) return a==0.5 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.5) end",
+                "dref": "aero787/cockpit/flapLever",
+                "fcheck": "function (a) return a==1 end",
+                "fset": "function (a) set(\"aero787/cockpit/flapLever\",1) end",
                 "name": "flaplever1",
                 "title": "Flap Lever 1",
                 "type": "custom"
@@ -1098,9 +1171,9 @@
                   " ",
                   " "
                 ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
-                "fcheck": "function (a) return a==0.250 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.250) end",
+                "dref": "aero787/cockpit/flapLever",
+                "fcheck": "function (a) return a==2 end",
+                "fset": "function (a) set(\"aero787/cockpit/flapLever\",2) end",
                 "name": "flaplever2",
                 "title": "Flap Lever 2",
                 "type": "custom"
@@ -1113,9 +1186,9 @@
                   " ",
                   " "
                 ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
-                "fcheck": "function (a) return a==0.375 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.375) end",
+                "dref": "aero787/cockpit/flapLever",
+                "fcheck": "function (a) return a==3 end",
+                "fset": "function (a) set(\"aero787/cockpit/flapLever\",3) end",
                 "name": "flaplever3",
                 "title": "Flap Lever 3",
                 "type": "custom"
@@ -1128,9 +1201,9 @@
                   " ",
                   " "
                 ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
-                "fcheck": "function (a) return a==0.5 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.5) end",
+                "dref": "aero787/cockpit/flapLever",
+                "fcheck": "function (a) return a==4 end",
+                "fset": "function (a) set(\"aero787/cockpit/flapLever\",4) end",
                 "name": "flaplever4",
                 "title": "Flap Lever 4",
                 "type": "custom"
@@ -1143,9 +1216,9 @@
                   " ",
                   " "
                 ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
-                "fcheck": "function (a) return a==0.625 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.625) end",
+                "dref": "aero787/cockpit/flapLever",
+                "fcheck": "function (a) return a==5 end",
+                "fset": "function (a) set(\"aero787/cockpit/flapLever\",5) end",
                 "name": "flaplever5",
                 "title": "Flap Lever 5",
                 "type": "custom"
@@ -1158,39 +1231,9 @@
                   " ",
                   " "
                 ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
-                "fcheck": "function (a) return a==0.750 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.750) end",
-                "name": "flaplever6",
-                "title": "Flap Lever 6",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
-                "fcheck": "function (a) return a==0.875 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.875) end",
-                "name": "flaplever7",
-                "title": "Flap Lever 7",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
+                "dref": "aero787/cockpit/flapLever",
                 "fcheck": "function (a) return a==0 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0) end",
+                "fset": "function (a) set(\"aero787/cockpit/flapLever\",0) end",
                 "name": "flapleverUP",
                 "title": "Flap Lever UP",
                 "type": "custom"
@@ -1203,19 +1246,37 @@
                   " ",
                   " "
                 ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
-                "fcheck": "function (a) return a==1 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",1) end",
+                "dref": "aero787/cockpit/flapLever",
+                "fcheck": "function (a) return a==6 end",
+                "fset": "function (a) set(\"aero787/cockpit/flapLever\",6) end",
                 "name": "flapleverfull",
-                "title": "Flap Lever 6",
+                "title": "Flap Lever 8",
                 "type": "custom"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmddn": "sim/flight_controls/flaps_up",
+                "cmdup": "sim/flight_controls/flaps_down",
+                "dref": "aero787/cockpit/flapLever",
+                "fcheck": "function (a) return true end",
+                "max": 6,
+                "min": 0,
+                "name": "flaplvr",
+                "title": "Flap Lever for kphwng",
+                "type": "dialcmd"
               },
               {
                 "acts": [
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/controls/flap_handle_request_ratio",
+                "dref": "aero787/cockpit/flapCurrentPosition",
                 "name": "flapset",
                 "title": "Set flap directly",
                 "type": "dataref"
@@ -1227,13 +1288,14 @@
             "elements": [
               {
                 "acts": [
-                  "on",
-                  "off",
-                  "tgl",
+                  " ",
+                  " ",
+                  " ",
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/controls/speedbrake_ratio",
+                "dref": "aero787/cockpit/spoilerLever",
+                "fcheck": "function (a) print(a)   return true end",
                 "name": "speedbrake",
                 "title": "Speedbrake Lever",
                 "type": "dataref"
@@ -1255,16 +1317,14 @@
               },
               {
                 "acts": [
-                  "on",
-                  "off",
-                  "tgl",
                   "set",
                   "chk"
                 ],
                 "dref": "sim/cockpit2/controls/elevator_trim",
+                "fcheck": "function (a) return -1 + ((2/17) * ng_getBriefPrefs():get(\"takeoff:pitchtrim\")) end",
                 "name": "pitchtrim",
                 "title": "Pitch Trim",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -1567,7 +1627,7 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot",
+                "dref": "aero787/cockpit/left/baroStdD",
                 "name": "barostd1",
                 "title": "Baro STD left",
                 "type": "dataref"
@@ -1579,7 +1639,7 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot",
+                "dref": "aero787/cockpit/right/baroStdD",
                 "name": "barostd2",
                 "title": "Baro STD right",
                 "type": "dataref"
@@ -1596,9 +1656,9 @@
                   "up",
                   "chk"
                 ],
-                "cmddn": "sim/instruments/barometer_down",
-                "cmdup": "sim/instruments/barometer_up",
-                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
+                "cmddn": "aero787/cockpit/left/baroSettingDn",
+                "cmdup": "aero787/cockpit/left/baroSettingUp",
+                "dref": "aero787/cockpit/left/baroSetting",
                 "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
                 "incr": 0.01,
                 "max": 32,
@@ -1614,33 +1674,15 @@
                   "up",
                   "chk"
                 ],
-                "cmddn": "sim/instruments/barometer_copilot_down",
-                "cmdup": "sim/instruments/barometer_copilot_up",
-                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot",
+                "cmddn": " aero787/cockpit/right/baroSettingDn",
+                "cmdup": "aero787/cockpit/right/baroSettingUp",
+                "dref": "aero787/cockpit/right/baroSetting",
                 "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
                 "incr": 0.01,
                 "max": 32,
                 "min": 22,
                 "name": "barovalue2",
                 "title": "Baro mode right",
-                "type": "dialdref"
-              },
-              {
-                "acts": [
-                  "set",
-                  "dn",
-                  "up",
-                  "chk"
-                ],
-                "cmddn": "sim/instruments/barometer_stby_down",
-                "cmdup": "sim/instruments/barometer_stby__up",
-                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_stby",
-                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
-                "incr": 0.01,
-                "max": 32,
-                "min": 22,
-                "name": "barovalue3",
-                "title": "Baro mode standby",
                 "type": "dialdref"
               }
             ],
@@ -1704,9 +1746,16 @@
                 "type": "undefined"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/leftRadio/wxr",
                 "name": "wxrmode",
                 "title": "Weather Radar mode",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "modes"
@@ -1752,20 +1801,10 @@
           {
             "elements": [
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  ""
-                ],
-                "cmdoff": "sim/instruments/EFIS_wxr_pws_off",
-                "cmdon": "sim/instruments/EFIS_wxr_pws_on",
-                "cmdtgl": "sim/instruments/EFIS_wxr_pws_tog",
                 "dref": "sim/cockpit2/EFIS/EFIS_weather_pws_mode",
                 "name": "wxpws",
                 "title": "<title>",
-                "type": "onofftgl"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -1785,6 +1824,24 @@
                 "type": "undefined"
               },
               {
+                "acts": [
+                  "on"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 0",
+                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",0)",
+                "name": "wxradaroff",
+                "title": "Weather radar OFF",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "",
+                  ""
+                ],
                 "name": "wxradarstate",
                 "title": "Weather radar on/off",
                 "type": "undefined"
@@ -1816,17 +1873,6 @@
                   "on"
                 ],
                 "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 0",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",0)",
-                "name": "wxradaroff",
-                "title": "Weather radar OFF",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
                 "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 5",
                 "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",5)",
                 "name": "wxradarturb",
@@ -1835,14 +1881,17 @@
               },
               {
                 "acts": [
-                  "on"
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
                 ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 2",
+                "dref": "sim/cockpit/switches/EFIS_shows_weather",
                 "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",2)",
                 "name": "wxradarwx",
                 "title": "Weather radar WX",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -1907,19 +1956,31 @@
                 "acts": [
                   "on",
                   "off",
-                  "set"
+                  "set",
+                  "chk"
                 ],
-                "dref": "sim/cockpit/electrical/generator_apu_on",
+                "dref": "aero787/cockpit/overhead/elec/apuGenLeft",
                 "name": "apugen1",
                 "title": "APU Generator 1",
                 "type": "dataref"
               },
               {
                 "acts": [
-                  ""
+                  "on",
+                  "off",
+                  "set",
+                  "chk"
                 ],
+                "dref": "aero787/cockpit/overhead/elec/apuGenRight",
                 "name": "apugen2",
                 "title": "APU Generator 2",
+                "type": "dataref"
+              },
+              {
+                "cmdtgl": "laminar/A333/buttons/APU_master",
+                "dref": "laminar/A333/buttons/APU_master",
+                "name": "apumaster",
+                "title": "APU Master in Airbus",
                 "type": "undefined"
               },
               {
@@ -1927,31 +1988,14 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
-                ],
-                "cmdtgl": "laminar/A333/buttons/APU_master",
-                "dref": "laminar/A333/buttons/APU_master",
-                "name": "apumaster",
-                "title": "APU Master in Airbus",
-                "type": "onofftgl"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
                 "cmdtgl": "laminar/A333/buttons/APU_start",
-                "dref": "sim/cockpit2/electrical/APU_starter_switch",
-                "fcheck": "function (a) return a==2 end",
-                "foff": "function (a) command_end(\"laminar/A333/buttons/APU_start\") end",
-                "fon": "function (a) command_begin(\"laminar/A333/buttons/APU_start\") end",
+                "dref": "aero787/cockpit/overhead/elec/apuSwitch",
                 "name": "apustart",
                 "title": "APU starter",
-                "type": "custom"
+                "type": "dataref"
               }
             ],
             "name": "apu"
@@ -1965,36 +2009,9 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/electrical/battery_on",
-                "indx": 0,
+                "dref": "aero787/cockpit/overhead/elec/batteryOn",
                 "name": "battery1",
                 "title": "Battery 1",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/electrical/battery_on",
-                "indx": 1,
-                "name": "battery2",
-                "title": "Battery 2",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/electrical/battery_on",
-                "indx": 2,
-                "name": "battery3",
-                "title": "Battery 3",
                 "type": "dataref"
               }
             ],
@@ -2058,14 +2075,30 @@
           {
             "elements": [
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/elec/cabPwr",
                 "name": "cabinpower",
                 "title": "Cabin power",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/elec/ifePwr",
                 "name": "ifepower",
                 "title": "Inflight Entertainment",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "consumers"
@@ -2079,8 +2112,7 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/electrical/generator_on",
-                "indx": 0,
+                "dref": "aero787/cockpit/overhead/elec/generatorL1",
                 "name": "generator1",
                 "title": "Engine Generator 1",
                 "type": "dataref"
@@ -2092,10 +2124,33 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/electrical/generator_on",
-                "indx": 1,
+                "dref": "aero787/cockpit/overhead/elec/generatorL2",
                 "name": "generator2",
                 "title": "Engine Generator 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/elec/generatorR1",
+                "name": "generator3",
+                "title": "Engine Generator 3",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/elec/generatorR2",
+                "name": "generator4",
+                "title": "Engine Generator 4",
                 "type": "dataref"
               }
             ],
@@ -2108,16 +2163,13 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  " "
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "sim/ground_ops/toggle_gpu_request",
-                "dref": "sim/cockpit2/electrical/GPU_generator_volts",
-                "fcheck": "function (a) return a>0 end",
-                "ftrans": "function (a) if a>0 then return 1 else return 0 end end",
+                "dref": "aero787/groundSupport/gpuA",
                 "name": "gpuconnect",
                 "title": "GPU Connect",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -2127,11 +2179,10 @@
                   "set",
                   "chk"
                 ],
-                "cmdtgl": "sim/electrical/GPU_toggle",
-                "dref": "xcraft/electric/GPU_sw",
+                "dref": "aero787/cockpit/overhead/elec/extPwrLFwd",
                 "name": "gpugen1",
                 "title": "GPU Generator 1",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "gpu"
@@ -2192,7 +2243,7 @@
                   "chk",
                   ""
                 ],
-                "dref": "sim/cockpit2/electrical/air_driven_generator_on",
+                "dref": "aero787/cockpit/overhead/ramAirTurbineBtn",
                 "name": "ramairturbine",
                 "title": "RAT",
                 "type": "dataref"
@@ -2286,21 +2337,56 @@
           {
             "elements": [
               {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/annun/fire/apu_handle",
+                "fcheck": "function (a) return a>0 end",
                 "name": "_apufire",
                 "title": "APU Fire",
                 "type": "undefined"
               },
               {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/annun/engine1_fire",
+                "fcheck": "function (a) return a>0 end",
                 "name": "_eng1fire",
                 "title": "ENG1 Fire",
                 "type": "undefined"
               },
               {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/annun/engine2_fire",
+                "fcheck": "function (a) return a>0 end",
                 "name": "_eng2fire",
                 "title": "ENG2 Fire",
                 "type": "undefined"
               },
               {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/fire/buttons/engine_test_pos",
                 "name": "engfiretest",
                 "title": "Engine fire test",
                 "type": "undefined"
@@ -2347,12 +2433,11 @@
                 "acts": [
                   "set",
                   "chk",
-                  "",
-                  "",
+                  "on",
+                  "off",
                   ""
                 ],
-                "dref": "sim/cockpit2/engine/actuators/ignition_key",
-                "indx": 0,
+                "dref": "aero787/cockpit/overhead/engine/leftStart",
                 "name": "engstartsel1",
                 "title": "Engine Start Selector 1",
                 "type": "dataref"
@@ -2361,25 +2446,14 @@
                 "acts": [
                   "set",
                   "chk",
-                  "",
-                  "",
+                  "on",
+                  "off",
                   ""
                 ],
-                "dref": "sim/cockpit2/engine/actuators/ignition_key",
-                "indx": 1,
+                "dref": "aero787/cockpit/overhead/engine/rightStart",
                 "name": "engstartsel2",
                 "title": "Engine Start Selector 2",
                 "type": "dataref"
-              },
-              {
-                "name": "engstartsel3",
-                "title": "Engine Start Selector 3",
-                "type": "undefined"
-              },
-              {
-                "name": "engstartsel4",
-                "title": "Engine Start Selector 4",
-                "type": "undefined"
               }
             ],
             "name": "engstartsel"
@@ -2394,10 +2468,22 @@
                   "tgl",
                   "set"
                 ],
-                "dref": "laminar/SF50/ignition_position",
-                "fcheck": "get(\"sim/flightmodel2/engines/starter_is_running\",0)",
+                "dref": "aero787/cockpit/overhead/engine/leftCutoff",
                 "name": "engstrtlvr1",
                 "title": "Engine Start lever 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "on",
+                  "off",
+                  "tgl",
+                  "set"
+                ],
+                "dref": "aero787/cockpit/overhead/engine/rightCutoff",
+                "name": "engstrtlvr2",
+                "title": "Engine Start lever 2",
                 "type": "dataref"
               }
             ],
@@ -2421,8 +2507,37 @@
               },
               {
                 "acts": [
-                  "chk",
-                  "tgl"
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/engine/actuators/throttle_ratio",
+                "indx": 1,
+                "name": "thrustlever2",
+                "title": "Thrust lever 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set"
+                ],
+                "name": "thrustlever3",
+                "title": "Thrust lever 3",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "set"
+                ],
+                "name": "thrustlever4",
+                "title": "Thrust lever 4",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/engine/actuators/throttle_ratio_all",
                 "name": "thrustleverall",
@@ -2471,8 +2586,7 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit/engine/fuel_pump_on",
-                "indx": 0,
+                "dref": "aero787/cockpit/overhead/fuel/Lfwd",
                 "name": "fuelpump1",
                 "title": "Fuel pump left 1",
                 "type": "dataref"
@@ -2484,8 +2598,7 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit/engine/fuel_pump_on",
-                "indx": 1,
+                "dref": "aero787/cockpit/overhead/fuel/Laft",
                 "name": "fuelpump2",
                 "title": "Fuel pump left 2",
                 "type": "dataref"
@@ -2497,8 +2610,7 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit/engine/fuel_pump_on",
-                "indx": 2,
+                "dref": "aero787/cockpit/overhead/fuel/Rfwd",
                 "name": "fuelpump3",
                 "title": "Fuel pump right 1",
                 "type": "dataref"
@@ -2510,21 +2622,34 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit/engine/fuel_pump_on",
-                "indx": 3,
+                "dref": "aero787/cockpit/overhead/fuel/Raft",
                 "name": "fuelpump4",
                 "title": "Fuel pump right 2",
                 "type": "dataref"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/fuel/Cleft",
                 "name": "fuelpump5",
                 "title": "Fuel Pump 5",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/fuel/Cright",
                 "name": "fuelpump6",
                 "title": "Fuel Pump 6",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "fuelpumps"
@@ -2538,17 +2663,10 @@
                   "tgl",
                   "chk"
                 ],
-                "cmdoff": "sim/fuel/auto_crossfeed_off",
-                "cmdon": "sim/fuel/auto_crossfeed_on_open",
-                "dref": "sim/cockpit2/fuel/auto_crossfeed",
-                "name": "fuelxfeed1",
+                "dref": "aero787/cockpit/overhead/fuel/crossfeed",
+                "name": "fuelxfeed",
                 "title": "Fuel Crossfeed 1",
-                "type": "onofftgl"
-              },
-              {
-                "name": "fuelxfeed2",
-                "title": "Fuel Crossfeed 2",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "fuelxfeeds"
@@ -2588,33 +2706,44 @@
               {
                 "acts": [
                   "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/gear/autobrakeKnob",
+                "name": "autobrake",
+                "title": "Autobrake value",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
                   " ",
                   " ",
                   " ",
                   ""
                 ],
-                "cmdon": "sim/flight_controls/brakes_1_auto",
-                "dref": "sim/cockpit2/switches/auto_brake_level",
-                "fcheck": "function (a) return a==3 end",
-                "fon": "function (a) if a~=3 then command_once(\"sim/flight_controls/brakes_1_auto\") end end",
+                "dref": "aero787/cockpit/gear/autobrakeKnob",
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) set(\"aero787/cockpit/gear/autobrakeKnob\",4) end",
                 "name": "autobrake1",
-                "title": "Autobrake LO",
+                "title": "Autobrake 1",
                 "type": "custom"
               },
               {
                 "acts": [
                   "on",
-                  " ",
+                  "chk",
                   " ",
                   " ",
                   ""
                 ],
-                "cmdon": "sim/flight_controls/brakes_2_auto",
-                "dref": "sim/cockpit2/switches/auto_brake_level",
-                "fcheck": "function (a) return a==4 end",
-                "fon": "function (a) if a~=4 then command_once(\"sim/flight_controls/brakes_2_auto\") end end",
+                "dref": "aero787/cockpit/gear/autobrakeKnob",
+                "fcheck": "function (a) return a==5 end",
+                "fon": "function (a) set(\"aero787/cockpit/gear/autobrakeKnob\",5) end",
                 "name": "autobrake2",
-                "title": "Autobrake MED",
+                "title": "Autobrake 2",
                 "type": "custom"
               },
               {
@@ -2625,9 +2754,54 @@
                   " ",
                   ""
                 ],
-                "dref": "sim/cockpit2/switches/auto_brake_level",
-                "fcheck": "function (a) return a==1 end",
-                "fon": "function (a) if a~=1 then command_once(\"sim/flight_controls/brakes_off_auto\") end end",
+                "dref": "aero787/cockpit/gear/autobrakeKnob",
+                "fcheck": "function (a) return a==6 end",
+                "fon": "function (a) set(\"aero787/cockpit/gear/autobrakeKnob\",6) end",
+                "name": "autobrake3",
+                "title": "Autobrake 3",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "aero787/cockpit/gear/autobrakeKnob",
+                "fcheck": "function (a) return a==7 end",
+                "fon": "function (a) set(\"aero787/cockpit/gear/autobrakeKnob\",7) end",
+                "name": "autobrake4",
+                "title": "Autobrake 4",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "aero787/cockpit/gear/autobrakeKnob",
+                "fcheck": "function (a) return a==8 end",
+                "fon": "function (a) set(\"aero787/cockpit/gear/autobrakeKnob\",8) end",
+                "name": "autobrake5",
+                "title": "Autobrake MAX",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "aero787/cockpit/gear/autobrakeKnob",
+                "fcheck": "function (a) return a==2 end",
+                "fon": "function (a) set(\"aero787/cockpit/gear/autobrakeKnob\",2) end",
                 "name": "autobrakeoff",
                 "title": "Autobrake OFF",
                 "type": "custom"
@@ -2641,9 +2815,9 @@
                   ""
                 ],
                 "cmdon": "sim/flight_controls/brakes_rto_auto",
-                "dref": "sim/cockpit2/switches/auto_brake_level",
-                "fcheck": "function (a) return a==0 end",
-                "fon": "function (a) if a~=0 then command_once(\"sim/flight_controls/brakes_rto_auto\") end end",
+                "dref": "aero787/cockpit/gear/autobrakeKnob",
+                "fcheck": "function (a) return a==1 end",
+                "fon": "function (a) set(\"aero787/cockpit/gear/autobrakeKnob\",1) end",
                 "name": "autobrakerto",
                 "title": "Autobrake RTO",
                 "type": "custom"
@@ -2730,12 +2904,11 @@
                   "chk",
                   " "
                 ],
-                "cmdtgl": "sim/flight_controls/door_toggle_10",
-                "dref": "sim/cockpit2/switches/door_open",
-                "indx": 9,
+                "dref": "aero787/doors/cargoStatus",
+                "indx": 1,
                 "name": "dooracargo",
                 "title": "Aft Cargo",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -2745,12 +2918,11 @@
                   "chk",
                   " "
                 ],
-                "cmdtgl": "sim/flight_controls/door_toggle_9",
-                "dref": "sim/cockpit2/switches/door_open",
-                "indx": 8,
+                "dref": "aero787/doors/cargoStatus",
+                "indx": 0,
                 "name": "doorfcargo",
                 "title": "Forward Cargo",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -2760,12 +2932,11 @@
                   "chk",
                   " "
                 ],
-                "cmdtgl": "sim/flight_controls/door_toggle_1",
-                "dref": "sim/cockpit2/switches/door_open",
+                "dref": "aero787/doors/door_open_ratio",
                 "indx": 0,
                 "name": "doorl1",
                 "title": "Door Forward Left",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -2775,12 +2946,11 @@
                   "chk",
                   " "
                 ],
-                "cmdtgl": "sim/flight_controls/door_toggle_7",
-                "dref": "sim/cockpit2/switches/door_open",
-                "indx": 6,
+                "dref": "aero787/doors/door_open_ratio",
+                "indx": 3,
                 "name": "doorl2",
                 "title": "Door Aft Left",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -2791,11 +2961,11 @@
                   " "
                 ],
                 "cmdtgl": "sim/flight_controls/door_toggle_2",
-                "dref": "sim/cockpit2/switches/door_open",
-                "indx": 1,
+                "dref": "aero787/doors/door_open_ratio",
+                "indx": 4,
                 "name": "doorr1",
                 "title": "Door Fwd Right",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -2805,12 +2975,11 @@
                   "chk",
                   " "
                 ],
-                "cmdtgl": "sim/flight_controls/door_toggle_8",
-                "dref": "sim/cockpit2/switches/door_open",
+                "dref": "aero787/doors/door_open_ratio",
                 "indx": 7,
                 "name": "doorr2",
                 "title": "Door Aft Right",
-                "type": "onofftgl"
+                "type": "dataref"
               }
             ],
             "name": "externaldoors"
@@ -2825,13 +2994,10 @@
                   "chk",
                   ""
                 ],
-                "cmdoff": "sim/flight_controls/door_close_12",
-                "cmdon": "sim/flight_controls/door_open_12",
-                "cmdtgl": "sim/flight_controls/door_toggle_12",
-                "dref": "laminar/A333/annun/cockpit_door_open",
+                "dref": "aero787/cockpit/overhead/switches/fdDoor",
                 "name": "cockpitdoor",
                 "title": "Cockpit Door",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "name": "doorlock",
@@ -2861,17 +3027,9 @@
           {
             "elements": [
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  "set"
-                ],
-                "dref": "sim/cockpit2/switches/no_smoking",
                 "name": "nosmoking",
                 "title": "No Smoking",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -2881,7 +3039,7 @@
                   "chk",
                   "set"
                 ],
-                "dref": "sim/cockpit/switches/fasten_seat_belts",
+                "dref": "aero787/cockpit/overhead/switches/seatbelts",
                 "name": "seatbelts",
                 "title": "Seatbelt Signs",
                 "type": "dataref"
@@ -3028,8 +3186,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/switches/wiper_speed_switch",
-                "indx": 0,
+                "dref": "aero787/cockpit/overhead/switches/wiperLeft",
                 "name": "wiper1",
                 "title": "Left Windshield Wiper",
                 "type": "dataref"
@@ -3041,8 +3198,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/switches/wiper_speed_switch",
-                "indx": 1,
+                "dref": "aero787/cockpit/overhead/switches/wiperRight",
                 "name": "wiper2",
                 "title": "Right Windshield Wiper",
                 "type": "dataref"
@@ -3064,7 +3220,7 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/switches/electric_hydraulic_pump_on",
+                "dref": "aero787/cockpit/overhead/hydra/LElec",
                 "name": "elechydpump1",
                 "title": "Electric Hydraulic Pump 1",
                 "type": "dataref"
@@ -3076,20 +3232,36 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/switches/electric_hydraulic_pump2_on",
+                "dref": "aero787/cockpit/overhead/hydra/RElec",
                 "name": "elechydpump2",
                 "title": "Electric Hydraulic Pump 2",
                 "type": "dataref"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/hydra/c1Elec",
                 "name": "elechydpump3",
                 "title": "Electric Hydraulic Pump 3",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "aero787/cockpit/overhead/hydra/c2Elec",
                 "name": "elechydpump4",
                 "title": "Electric Hydraulic Pump 4",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "elechydpumps"
@@ -3103,7 +3275,7 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/hydraulics/actuators/engine_pump",
+                "dref": "aero787/cockpit/overhead/hydra/LEng",
                 "name": "enghydpump1",
                 "title": "Engine Hydraulic Pump 1",
                 "type": "dataref"
@@ -3115,33 +3287,9 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/hydraulics/actuators/engine_pumpA",
+                "dref": "aero787/cockpit/overhead/hydra/REng",
                 "name": "enghydpump2",
                 "title": "Engine Hydraulic Pump 2",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/hydraulics/actuators/engine_pumpB",
-                "name": "enghydpump3",
-                "title": "Engine Hydraulic Pump 3",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/hydraulics/actuators/engine_pumpC",
-                "name": "enghydpump4",
-                "title": "Engine Hydraulic Pump 4",
                 "type": "dataref"
               }
             ],
@@ -3195,7 +3343,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit/switches/gear_handle_status",
+                "dref": "sim/cockpit2/controls/gear_handle_request",
                 "name": "gearhandle",
                 "title": "Gearhandle",
                 "type": "dataref"
@@ -3274,20 +3422,10 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit/electrical/beacon_lights_on",
+                "dref": "sim/cockpit2/switches/beacon_on",
                 "name": "beacon1",
                 "title": "Beacon light 1",
                 "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl"
-                ],
-                "name": "beacon2",
-                "title": "Beacon light 2",
-                "type": "undefined"
               }
             ],
             "name": "beacons"
@@ -3443,8 +3581,7 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit/electrical/cockpit_lights",
-                "indx": 0,
+                "dref": "aero787/cockpit/overhead/switches/dome",
                 "name": "domelight",
                 "title": "Dome light",
                 "type": "dataref"
@@ -3455,6 +3592,7 @@
           {
             "elements": [
               {
+                "acts": {},
                 "name": "emerlight",
                 "title": "EMER light",
                 "type": "undefined"
@@ -3658,7 +3796,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
+                "dref": "aero787/cockpit/transponder/switchPosition",
                 "name": "xpdrmode",
                 "title": "XPDR Mode",
                 "type": "dataref"
@@ -3677,9 +3815,6 @@
               {
                 "acts": [
                   "on",
-                  "off",
-                  "tgl",
-                  "set",
                   "chk"
                 ],
                 "dref": "sim/cockpit2/radios/actuators/transponder_mode",
@@ -3687,7 +3822,7 @@
                 "fon": "set(\"sim/cockpit2/radios/actuators/transponder_mode\",3)",
                 "name": "xpdrmodec",
                 "title": "XPDR Mode C",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -3697,9 +3832,9 @@
                   " ",
                   " "
                 ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
+                "dref": "aero787/cockpit/transponder/switchPosition",
                 "fcheck": "function (a) return true end",
-                "fon": "function (a) return 0 end",
+                "fon": "function (a) return 1 end",
                 "name": "xpdrmodeoff",
                 "title": "XPDR Mode OFF",
                 "type": "custom"
@@ -3721,48 +3856,36 @@
               },
               {
                 "acts": [
+                  "on",
+                  "off",
+                  "tgl",
                   "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
+                  "chk"
                 ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return true end",
-                "fon": "function (a) return 1 end",
+                "dref": "aero787/cockpit/transponder/switchPosition",
+                "fon": "function (a) return 0 end",
                 "name": "xpdrmodestby",
                 "title": "XPDR Mode STBY",
-                "type": "custom"
+                "type": "dataref"
               },
               {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
                 "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return true end",
-                "fon": "function (a) return 2 end",
                 "name": "xpdrmodeta",
                 "title": "XPDR Mode TA",
-                "type": "custom"
+                "type": "undefined"
               },
               {
                 "acts": [
+                  "on",
+                  "off",
+                  "tgl",
                   "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
+                  "chk"
                 ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return true end",
-                "fon": "function (a) return 3 end",
+                "dref": "aero787/cockpit/transponder/switchPosition",
                 "name": "xpdrmodetara",
                 "title": "XPDR Mode TARA",
-                "type": "custom"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -3787,6 +3910,6 @@
       }
     ]
   },
-  "icao": "DFLT",
-  "title": "DEFAULT AIRCRAFT"
+  "icao": "B787",
+  "title": "MAGKNIGHT B787"
 }
