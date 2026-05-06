@@ -254,8 +254,8 @@ create_command("kp/xsp/systems/door_ca_toggle",		"Toggle door AFT CARGO",	"ng_ex
 
 ----------------- Flight Controls --------------------
 
--- create_command("kp/xsp/controls/flaps_up",			"Flaps 1 Up","sysControls.flapsSwitch:actuate(sysControls.flapsUp)","","")
--- create_command("kp/xsp/controls/flaps_down",			"Flaps 1 Down","sysControls.flapsSwitch:actuate(sysControls.flapsDown)","","")
+create_command("kp/xsp/controls/flaps_up",				"Flaps 1 Up",		"ng_execute_actions('flaplvr','dn',nil)","","","")
+create_command("kp/xsp/controls/flaps_down",			"Flaps 1 Down",		"ng_execute_actions('flaplvr','up',nil)","","","")
 
 -- create_command("kp/xsp/controls/pitch_trim_up",		"Pitch Trim Up","sysControls.pitchTrimSwitch:actuate(sysControls.trimUp)","","")
 -- create_command("kp/xsp/controls/pitch_trim_down",	"Pitch Trim Down","sysControls.pitchTrimSwitch:actuate(sysControls.trimDown)","","")

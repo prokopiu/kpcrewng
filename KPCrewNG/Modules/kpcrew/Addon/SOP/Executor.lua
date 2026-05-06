@@ -238,11 +238,13 @@ dprint("ng_action_element: "..element.title)
 				if lvalue ~= nil then
 					if lvalue >= minval and lvalue <= maxval and lvalue ~= getdref() then
 						if lvalue > getdref() then
-							for i = getdref(), lvalue-1, 1 do
+							local increments = (lvalue - getdref())/incr
+							for i = 1, increments do
 								command_once(cmdup)
 							end
 						elseif lvalue < getdref() then
-							for i = getdref(), lvalue+1, -1 do
+							local increments = (getdref() - lvalue)/incr
+							for i = 1, increments do
 								command_once(cmddn)
 							end
 						end
@@ -572,13 +574,21 @@ function ng_check_element(elementname, action, value, fset, fcheck, fvalue)
 			if found == 1 then
 
 				if action == "on" then
-					if value == nil then value = 1 end 
-					return getdref() == value
-					
+					if efcheck ~= nil then
+						local func = loadstring("return "..efcheck)()
+						if func ~= nil then return func(getdref()) end
+					else
+						if value == nil then value = 1 end 
+						return getdref() == value
+					end
 				elseif action == "off" then
-					if value == nil then value = 0 end 
-					return getdref() == value
-
+					if efcheck ~= nil then
+						local func = loadstring("return "..efcheck)()
+						if func ~= nil then return func(getdref()) end
+					else
+						if value == nil then value = 0 end 
+						return getdref() == value
+					end
 				elseif action == "set" or action == "chk" then
 					if efcheck ~= nil then
 						local func = loadstring("return "..efcheck)()

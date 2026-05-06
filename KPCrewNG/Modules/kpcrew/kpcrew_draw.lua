@@ -2269,7 +2269,7 @@ function ng_draw_main_window()
 					end
 					
 					-- only for dialdref
-					if nelement.type == "dialdref" then
+					if nelement.type == "dialdref" or nelement.type == "dialcmd"  then
 
 -- incr		| [                                      ][-][+]
 -- increment for each step up/down

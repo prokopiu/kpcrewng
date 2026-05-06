@@ -58,7 +58,7 @@ function ng_acft_select(component)
 	-- FF A350
 	elseif PLANE_ICAO == "A359" then
 		icao = "A359"	
-		sopicao = "DFLT"
+		sopicao = "A359"
 	
 	-- SSG B748
 	elseif PLANE_ICAO == "B748" then
@@ -106,9 +106,9 @@ function ng_acft_select(component)
 		sopicao = "DFLT"
 		
 	-- Magknight B787
-	elseif PLANE_ICAO == "B788" or PLANE_ICAO == "B789" then
+	elseif PLANE_ICAO == "B788" or PLANE_ICAO == "B789" or PLANE_ICAO == "B78X" then
 		icao = "B787"
-		sopicao = "DFLT"
+		sopicao = "B787"
 
 	-- Airfoillabs Kingair
 	elseif PLANE_ICAO == "B350" then
