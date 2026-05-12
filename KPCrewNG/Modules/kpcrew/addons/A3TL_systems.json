@@ -1637,16 +1637,6 @@
                 "type": "dataref"
               },
               {
-                "name": "wxradarmap",
-                "title": "Weather radar MAP",
-                "type": "undefined"
-              },
-              {
-                "name": "wxradarmode",
-                "title": "Weather radar mode pilot",
-                "type": "undefined"
-              },
-              {
                 "acts": [
                   "on",
                   "off",
@@ -1658,31 +1648,6 @@
                 "name": "wxradarstate",
                 "title": "Weather radar on/off",
                 "type": "dataref"
-              },
-              {
-                "name": "wxradarstby",
-                "title": "Weather radar STBY",
-                "type": "undefined"
-              },
-              {
-                "name": "wxradartest",
-                "title": "Weather radar TEST",
-                "type": "undefined"
-              },
-              {
-                "name": "wxradarturb",
-                "title": "Weather radar TURB",
-                "type": "undefined"
-              },
-              {
-                "name": "wxradarwx",
-                "title": "Weather radar WX",
-                "type": "undefined"
-              },
-              {
-                "name": "wxradarwxt",
-                "title": "Weather radar WX+T",
-                "type": "undefined"
               }
             ],
             "name": "wxradar"
@@ -1774,11 +1739,15 @@
                   "chk",
                   ""
                 ],
+                "cmdoff": "toliss_airbus/apucommands/StarterOff",
                 "cmdon": "toliss_airbus/apucommands/StarterOn",
+                "cmdtgl": "toliss_airbus/apucommands/StarterToggle",
                 "dref": "AirbusFBW/APUStarter",
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) command_once(\"toliss_airbus/apucommands/StarterOn\") end",
                 "name": "apustart",
                 "title": "APU starter",
-                "type": "dataref"
+                "type": "custom"
               }
             ],
             "name": "apu"
@@ -2007,7 +1976,7 @@
                 ],
                 "dref": "AirbusFBW/ElecOHPArray",
                 "fcheck": "function (a) return a==1 end",
-                "indx": 15,
+                "indx": 3,
                 "name": "gpugen1",
                 "title": "GPU Generator 1",
                 "type": "dataref"
@@ -2156,6 +2125,34 @@
                 "name": "engfiretest",
                 "title": "Engine fire test",
                 "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/FireAgentSwitchAnim",
+                "indx": 10,
+                "name": "engfiretest1",
+                "title": "A319 engfiretest1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/FireAgentSwitchAnim",
+                "indx": 11,
+                "name": "engfiretest2",
+                "title": "A319 engfiretest2",
+                "type": "dataref"
               }
             ],
             "name": "enginefire"
@@ -2188,6 +2185,34 @@
                 "indx": 1,
                 "name": "_eng2n2",
                 "title": "Engine 2 N2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "indx": 2,
+                "name": "_eng3n2",
+                "title": "Engine 3 N1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "indx": 3,
+                "name": "_eng4n2",
+                "title": "Engine 4 N1",
                 "type": "dataref"
               }
             ],
@@ -2237,6 +2262,32 @@
                 "dref": "AirbusFBW/ENG2MasterSwitch",
                 "name": "engstrtlvr2",
                 "title": "Engine Start lever 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/ENG3MasterSwitch",
+                "name": "engstrtlvr3",
+                "title": "Engine Start lever 3",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/ENG4MasterSwitch",
+                "name": "engstrtlvr4",
+                "title": "Engine Start lever 4",
                 "type": "dataref"
               }
             ],
@@ -2845,6 +2896,81 @@
               }
             ],
             "name": "simulator"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 1\") end",
+                "name": "spdchkflap1",
+                "title": "speak text",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 2\") end",
+                "name": "spdchkflap2",
+                "title": "speak text",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 3\") end",
+                "name": "spdchkflap3",
+                "title": "speak text",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps full\") end",
+                "name": "spdchkflap4",
+                "title": "speak text",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps up\") end",
+                "name": "spdchkflapup",
+                "title": "speak text",
+                "type": "custom"
+              }
+            ],
+            "name": "speak"
           },
           {
             "elements": [
@@ -3614,9 +3740,9 @@
                   " ",
                   ""
                 ],
-                "dref": "AirbusFBW/XPDRTCASMode",
+                "dref": "AirbusFBW/XPDRPower",
                 "fcheck": "function (a) return a==0 end",
-                "fset": "function (a) set(\"AirbusFBW/XPDRTCASMode\",0) end",
+                "fset": "function (a) set(\"AirbusFBW/XPDRPower\",0) end",
                 "name": "tcasmodestby",
                 "title": "TCAS Mode stby",
                 "type": "custom"
@@ -3629,24 +3755,24 @@
                   " ",
                   ""
                 ],
-                "dref": "AirbusFBW/XPDRTCASMode",
-                "fcheck": "function (a) return a==1 end",
-                "fset": "function (a) set(\"AirbusFBW/XPDRTCASMode\",1) end",
+                "dref": "AirbusFBW/XPDRPower",
+                "fcheck": "function (a) return a==3 end",
+                "fset": "function (a) set(\"AirbusFBW/XPDRPower\",3) end",
                 "name": "tcasmodeta",
                 "title": "TCAS Mode TA",
                 "type": "custom"
               },
               {
                 "acts": [
-                  "set",
+                  "on",
+                  " ",
+                  " ",
                   "chk",
-                  " ",
-                  " ",
                   ""
                 ],
-                "dref": "AirbusFBW/XPDRTCASMode",
-                "fcheck": "function (a) return a==2 end",
-                "fset": "function (a) set(\"AirbusFBW/XPDRTCASMode\",2) end",
+                "dref": "AirbusFBW/XPDRPower",
+                "fcheck": "function (a) return a==4 end",
+                "fon": "function (a) set(\"AirbusFBW/XPDRPower\",4) end",
                 "name": "tcasmodetara",
                 "title": "TCAS Mode TARA",
                 "type": "custom"
@@ -3686,9 +3812,9 @@
                   " ",
                   ""
                 ],
-                "dref": "AirbusFBW/XPDRPower",
+                "dref": "AirbusFBW/XPDRTCASMode",
                 "fcheck": "function (a) return a==1 end",
-                "fset": "function (a) set(\"AirbusFBW/XPDRPower\",1) end",
+                "fset": "function (a) set(\"AirbusFBW/XPDRTCASMode\",1) end",
                 "name": "xpdrmodeauto",
                 "title": "Airbus xpdr auto",
                 "type": "custom"
@@ -3701,9 +3827,9 @@
                   " ",
                   " "
                 ],
-                "dref": "AirbusFBW/XPDRPower",
+                "dref": "AirbusFBW/XPDRTCASMode",
                 "fcheck": "function (a) return a==0 end",
-                "fset": "function (a) set(\"AirbusFBW/XPDRPower\",0) end",
+                "fset": "function (a) set(\"AirbusFBW/XPDRTCASMode\",0) end",
                 "name": "xpdrmodestby",
                 "title": "XPDR Mode STBY",
                 "type": "custom"

@@ -86,9 +86,9 @@ function ng_acft_select(component)
 		sopicao = "A33L"
 		
 	-- FlightFactor A320
-	elseif PLANE_ICAO == "A320" then
-		icao = "A320"
-		sopicao = "DFLT"
+	-- elseif PLANE_ICAO == "A320" then
+		-- icao = "A320"
+		-- sopicao = "DFLT"
 		
 	-- Inibuilds A300
 	elseif PLANE_ICAO == "A306" then
@@ -226,22 +226,22 @@ function ng_acft_select(component)
 	-- ToLiss Airbusses
 	elseif PLANE_ICAO == "A319" and PLANE_TAILNUMBER == "C-GTLS" then
 		icao = "A3TL"
-		sopicao = "DFLT"
-	elseif PLANE_ICAO == "A20N" and PLANE_TAILNUMBER == "C-GTLT" then
+		sopicao = "A3TL"
+	elseif PLANE_ICAO == "A320" and PLANE_TAILNUMBER == "C-GTLT" then
 		icao = "A3TL"
-		sopicao = "DFLT"
+		sopicao = "A3TL"
 	elseif PLANE_ICAO == "A321" then
 		icao = "A3TL"
-		sopicao = "DFLT"
+		sopicao = "A3TL"
 	elseif PLANE_ICAO == "A21N" then
 		icao = "A3TL"
-		sopicao = "DFLT"
+		sopicao = "A3TL"
 	elseif PLANE_ICAO == "A339" then
 		icao = "A3TL"
 		sopicao = "A3TL"
 	elseif PLANE_ICAO == "A346" then
 		icao = "A3TL"
-		sopicao = "DFLT"
+		sopicao = "A3TL"
 		
 	-- Laminar MD-82
 	elseif PLANE_ICAO == "MD82" and PLANE_TAILNUMBER == "N552AA" then
