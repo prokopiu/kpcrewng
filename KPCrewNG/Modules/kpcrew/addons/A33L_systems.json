@@ -1,0 +1,4387 @@
+{
+  "addonsystems": {
+    "categories": [
+      {
+        "name": "aice",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/ice/inlet_heat0_tog",
+                "dref": "laminar/A333/buttons/engine_anti_ice1",
+                "name": "engaice1",
+                "title": "Engine Antiice 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/ice/inlet_heat1_tog",
+                "dref": "laminar/A333/buttons/engine_anti_ice2",
+                "name": "engaice2",
+                "title": "Engine Antiice 2",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "engaice"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "laminar/A333/buttons/probe_window_heat_toggle",
+                "dref": "laminar/A333/buttons/window_probe_ice",
+                "name": "probeheat1",
+                "title": "Probe Heat 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdoff": "sim/ice/pitot_heat1_off",
+                "cmdon": "sim/ice/pitot_heat1_on",
+                "cmdtgl": "sim/ice/pitot_heat1_tog",
+                "dref": "sim/cockpit/switches/pitot_heat_on2",
+                "name": "probeheat2",
+                "title": "Probe Heat 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "probeheat"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
+                "indx": 0,
+                "name": "windowheat1",
+                "title": "Window Heat 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
+                "indx": 1,
+                "name": "windowheat2",
+                "title": "Window Heat 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
+                "indx": 2,
+                "name": "windowheat3",
+                "title": "Window Heat 3",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
+                "indx": 3,
+                "name": "windowheat4",
+                "title": "Window Heat 4",
+                "type": "dataref"
+              }
+            ],
+            "name": "windowheat"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/ice/wing_heat_tog",
+                "dref": "laminar/A333/buttons/wing_anti_ice",
+                "name": "wingaice1",
+                "title": "Wing Anti Ice 1",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "wingaice"
+          }
+        ]
+      },
+      {
+        "name": "air",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/bleed_air/apu_toggle",
+                "dref": "laminar/A333/buttons/apu_bleed_pos",
+                "name": "apubleed",
+                "title": "APU Bleed",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/bleed_air/engine_1_toggle",
+                "dref": "laminar/A333/buttons/eng_bleed_1_pos",
+                "name": "bleed1",
+                "title": "Engine Bleed 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/bleed_air/engine_2_toggle",
+                "dref": "laminar/A333/buttons/eng_bleed_2_pos",
+                "name": "bleed2",
+                "title": "Engine Bleed 2",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "bleeds"
+          },
+          {
+            "elements": [
+              {
+                "name": "cargoheat1",
+                "title": "Cargo heat Switch 1",
+                "type": "undefined"
+              },
+              {
+                "name": "cargoheat2",
+                "title": "Cargo heat Switch 2",
+                "type": "undefined"
+              },
+              {
+                "name": "cargoheat3",
+                "title": "Cargo heat Switch 3",
+                "type": "undefined"
+              }
+            ],
+            "name": "cargoheat"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                "fcheck": "true",
+                "name": "equipcool1",
+                "title": "Equipment Cooling switch",
+                "type": "undefined"
+              }
+            ],
+            "name": "equipcooling"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                "name": "gasperfan1",
+                "title": "Gasper Fan 1",
+                "type": "undefined"
+              }
+            ],
+            "name": "gasperfans"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "laminar/A333/buttons/cargo_cond/bulk_isol_valve_tog",
+                "dref": "laminar/A333/buttons/cargo_cond/bulk_isol_valve_pos",
+                "name": "isovalve1",
+                "title": "Isolation Valve 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "laminar/A333/buttons/cargo_cond/fwd_isol_valve_tog",
+                "dref": "laminar/A333/buttons/cargo_cond/fwd_isol_valve_pos",
+                "name": "isovalve2",
+                "title": "Isolation Valve 2",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "isovalves"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/crew_supply_toggle",
+                "dref": "laminar/A333/buttons/oxy/crew_valve_pos",
+                "name": "oxygen1",
+                "title": "Crew Supply",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "oxygen"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "sim/bleed_air/pack_left_toggle",
+                "dref": "laminar/A333/buttons/pack_1_pos",
+                "name": "pack1",
+                "title": "Pack 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "sim/bleed_air/pack_right_toggle",
+                "dref": "laminar/A333/buttons/pack_2_pos",
+                "name": "pack2",
+                "title": "Pack 2",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "packs"
+          },
+          {
+            "elements": [
+              {
+                "acts": {},
+                "name": "flightalt",
+                "title": "Flight Altitude",
+                "type": "undefined"
+              },
+              {
+                "acts": {},
+                "name": "landalt",
+                "title": "Landing Altitude",
+                "type": "undefined"
+              }
+            ],
+            "name": "pressurization"
+          },
+          {
+            "elements": [
+              {
+                "acts": {},
+                "name": "recircfan1",
+                "title": "Recirc Fan 1",
+                "type": "undefined"
+              },
+              {
+                "acts": {},
+                "name": "recircfan2",
+                "title": "Recirc Fan 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "recircfans"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/knob/cabin_temp",
+                "name": "tempcontrol1",
+                "title": "Temp Control Cabin",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/knob/cockpit_temp",
+                "name": "tempcontrol2",
+                "title": "Temp Control Cockpit",
+                "type": "dataref"
+              }
+            ],
+            "name": "tempcontrols"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                "name": "trimair1",
+                "title": "Trim Air Switch 1",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                "name": "trimair2",
+                "title": "Trim Air Switch 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "trimair"
+          }
+        ]
+      },
+      {
+        "name": "autopilot",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  " ",
+                  " "
+                ],
+                "cmddn": "laminar/A333/knobs/adirs/ir1_knob_left",
+                "cmdup": "laminar/A333/knobs/adirs/ir1_knob_right",
+                "dref": "laminar/A333/buttons/adirs/ir1_knob_pos",
+                "max": 1,
+                "min": 0,
+                "name": "adiru1",
+                "title": "IRS Unit 1",
+                "type": "dialcmd"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  " ",
+                  " "
+                ],
+                "cmddn": "laminar/A333/knobs/adirs/ir2_knob_left",
+                "cmdup": "laminar/A333/knobs/adirs/ir2_knob_right",
+                "dref": "laminar/A333/buttons/adirs/ir2_knob_pos",
+                "fcheck": "true",
+                "max": 1,
+                "min": 0,
+                "name": "adiru2",
+                "title": "IRS Unit 2",
+                "type": "dialcmd"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  " ",
+                  " "
+                ],
+                "cmddn": "laminar/A333/knobs/adirs/ir3_knob_left",
+                "cmdup": "laminar/A333/knobs/adirs/ir3_knob_right",
+                "dref": "laminar/A333/buttons/adirs/ir3_knob_pos",
+                "fcheck": "true",
+                "max": 1,
+                "min": 0,
+                "name": "adiru3",
+                "title": "IRS Unit 3",
+                "type": "dialcmd"
+              }
+            ],
+            "name": "adirus"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/annun/autopilot/ap1_mode",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_ap1state",
+                "title": "AP1 state",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/annun/autopilot/ap2_mode",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_ap2state",
+                "title": "AP2 state",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "sim/autopilot/servos_toggle",
+                "dref": "laminar/A333/autopilot/ap1_pos",
+                "name": "ap1",
+                "title": "AP 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "sim/autopilot/servos2_toggle",
+                "dref": "laminar/A333/autopilot/ap2_pos",
+                "name": "ap2",
+                "title": "AP 2",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "cmdtgl": "sim/autopilot/servos3_toggle",
+                "dref": "sim/cockpit2/autopilot/servos3_on",
+                "name": "ap3",
+                "title": "AP 3",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "sim/autopilot/disconnect",
+                "dref": "sim/cockpit2/datarefs/autopilot_disconnect",
+                "name": "yokedisc",
+                "title": "Yoke disc",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "autopilots"
+          },
+          {
+            "elements": [
+              {
+                "name": "athrclbmode",
+                "title": "Autothrust Climb mode",
+                "type": "undefined"
+              },
+              {
+                "name": "athrconmode",
+                "title": "Autothrust CONtinous power mode",
+                "type": "undefined"
+              },
+              {
+                "name": "athrcrzmode",
+                "title": "Autothrust Cruise Mode",
+                "type": "undefined"
+              },
+              {
+                "name": "athrtogamode",
+                "title": "TOGA Mode button",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "laminar/A333/autopilot/a_thr_toggle",
+                "dref": "laminar/A333/autopilot/athrottle_pos",
+                "name": "autothrottle",
+                "title": "Autothrottle",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "autothrust"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/autopilot/fdir_command_bars_toggle",
+                "dref": "laminar/A333/buttons/capt_fd_pos",
+                "name": "flightdir1",
+                "title": "FD 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/autopilot/fdir2_command_bars_toggle",
+                "dref": "laminar/A333/buttons/fo_fd_pos",
+                "name": "flightdir2",
+                "title": "FD 2",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "flightdirs"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/annun/autopilot/alt_mode",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_alt",
+                "title": "ALT mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/annun/autopilot/appr_mode",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_appr",
+                "title": "APPR annunciator",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/heading_mode",
+                "fcheck": "function (a) return a==1 end",
+                "name": "_hdg",
+                "title": "HDG mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/vnav_speed_window_open",
+                "fcheck": "function (a) return a==1 end",
+                "name": "_ias",
+                "title": "IAS mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/gpss_status",
+                "fcheck": "function (a) return a==1 end",
+                "name": "_lnav",
+                "title": "LNAV mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/annun/autopilot/loc_mode",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_loc",
+                "title": "LOC mode annunciator",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/vnav_speed_window_open",
+                "fcheck": "function (a) return a==1 end",
+                "name": "_n1",
+                "title": "N1 mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/vnav_speed_window_open",
+                "fcheck": "function (a) return a==0 end",
+                "name": "_vnav",
+                "title": "VNAV mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/autopilot/vvi_fpa_window_open",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_vsp",
+                "title": "VSP mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "tgl",
+                  "set",
+                  "chk",
+                  " ",
+                  ""
+                ],
+                "dref": "laminar/A333/lvl_ch_dot",
+                "fset": "function (a) if a == 1 then command_once(\"laminar/A333/autopilot/altitude_knob_pull\") else command_once(\"laminar/A333/autopilot/altitude_knob_push\") end end",
+                "ftgl": "function (a) if a == 1 then command_once(\"laminar/A333/autopilot/altitude_knob_pull\") else command_once(\"laminar/A333/autopilot/altitude_knob_push\") end end",
+                "name": "althold",
+                "title": "Altitude Hold",
+                "type": "custom"
+              },
+              {
+                "name": "apdisengage",
+                "title": "A/P Disengage",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl"
+                ],
+                "cmdtgl": "sim/autopilot/approach",
+                "dref": "sim/cockpit2/autopilot/approach_status",
+                "name": "approach",
+                "title": "Approach mode",
+                "type": "onofftgl"
+              },
+              {
+                "name": "bankanglesel",
+                "title": "Bank Angle Selector",
+                "type": "undefined"
+              },
+              {
+                "name": "flch",
+                "title": "Level Change",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "set",
+                  "tgl",
+                  "chk",
+                  " ",
+                  ""
+                ],
+                "dref": "laminar/A333/autopilot/hdg_window_open",
+                "fset": "function (a) if a == 0 then command_once(\"laminar/A333/autopilot/heading_knob_pull\") else command_once(\"laminar/A333/autopilot/heading_knob_push\") end end",
+                "ftgl": "function (a) if a == 0 then command_once(\"laminar/A333/autopilot/heading_knob_pull\") else command_once(\"laminar/A333/autopilot/heading_knob_push\") end end",
+                "name": "hdghold",
+                "title": "Heading Hold",
+                "type": "custom"
+              },
+              {
+                "name": "hdgtrk",
+                "title": "HDG Track Switch",
+                "type": "undefined"
+              },
+              {
+                "name": "iasmach",
+                "title": "IAR Mach Switch",
+                "type": "undefined"
+              },
+              {
+                "name": "lnav",
+                "title": "LNAV",
+                "type": "undefined"
+              },
+              {
+                "name": "lnavmode",
+                "title": "VNAV",
+                "type": "undefined"
+              },
+              {
+                "name": "n1mode",
+                "title": "VNAV",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "sim/autopilot/NAV",
+                "dref": "sim/cockpit2/autopilot/nav_status",
+                "fcheck": "function (a) return true end",
+                "name": "navhold",
+                "title": "Nav Hold",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "set",
+                  "tgl",
+                  "chk",
+                  " ",
+                  ""
+                ],
+                "dref": "sim/cockpit2/autopilot/vnav_speed_window_open",
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) if a == 0 then command_once(\"laminar/A333/autopilot/speed_knob_pull\") else command_once(\"laminar/A333/autopilot/speed_knob_push\") end end",
+                "ftgl": "function (a) if a == 0 then command_once(\"laminar/A333/autopilot/speed_knob_pull\") else command_once(\"laminar/A333/autopilot/speed_knob_push\") end end",
+                "name": "spdmode",
+                "title": "SPD mode",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "sim/autopilot/take_off_go_arounds",
+                "dref": "sim/cockpit2/autopilot/TOGA_status",
+                "name": "toga",
+                "title": "TOGO Btn",
+                "type": "onofftgl"
+              },
+              {
+                "name": "vnavmode",
+                "title": "VNAV",
+                "type": "undefined"
+              },
+              {
+                "name": "vsfpa",
+                "title": "VS FPA Switch",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "tgl",
+                  "set",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "laminar/A333/autopilot/vvi_fpa_window_open",
+                "fset": "function (a) if a == 0 then command_once(\"laminar/A333/autopilot/vertical_knob_pull\") else command_once(\"laminar/A333/autopilot/vertical_knob_push\") end end",
+                "ftgl": "function (a) if a == 0 then command_once(\"laminar/A333/autopilot/vertical_knob_pull\") else command_once(\"laminar/A333/autopilot/vertical_knob_push\") end end",
+                "name": "vspmode",
+                "title": "Vertical Speed mode",
+                "type": "custom"
+              }
+            ],
+            "name": "modes"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/autopilot/altitude_down",
+                "cmdup": "sim/autopilot/altitude_up",
+                "dref": "sim/cockpit2/autopilot/altitude_dial_ft",
+                "incr": 100,
+                "max": 99999,
+                "min": 0,
+                "name": "altsel",
+                "title": "A/P Altitude",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/radios/obs_HSI_down",
+                "cmdup": "sim/radios/obs_HSI_up",
+                "dref": "sim/cockpit2/radios/actuators/nav1_obs_deg_mag_pilot",
+                "incr": 1,
+                "max": 360,
+                "min": 0,
+                "name": "crs1",
+                "title": "Course 1",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/radios/copilot_obs_HSI_down",
+                "cmdup": "sim/radios/copilot_obs_HSI_up",
+                "dref": "sim/cockpit2/radios/actuators/nav2_obs_deg_mag_pilot",
+                "incr": 1,
+                "max": 360,
+                "min": 0,
+                "name": "crs2",
+                "title": "Course 2",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "cmddn": "sim/autopilot/heading_down",
+                "cmdup": "sim/autopilot/heading_up",
+                "dref": "sim/cockpit2/autopilot/heading_dial_deg_mag_pilot",
+                "incr": 1,
+                "max": 359,
+                "min": 0,
+                "name": "hdgsel",
+                "title": "A/P Heading",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/autopilot/airspeed_down",
+                "cmdup": "sim/autopilot/airspeed_up",
+                "dref": "sim/cockpit2/autopilot/airspeed_dial_kts",
+                "incr": 1,
+                "max": 999,
+                "min": 0,
+                "name": "speedsel",
+                "title": "A/P Speed",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "cmddn": "sim/autopilot/vertical_speed_down",
+                "cmdup": "sim/autopilot/vertical_speed_up",
+                "dref": "sim/cockpit2/autopilot/vvi_dial_fpm",
+                "incr": 100,
+                "max": 7900,
+                "min": -7900,
+                "name": "vspsel",
+                "title": "A/P VSP",
+                "type": "dialdref"
+              }
+            ],
+            "name": "selectors"
+          }
+        ]
+      },
+      {
+        "name": "controls",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
+                "name": "_flapsposition",
+                "title": "Flaps position",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
+                "fcheck": "function (a) return a==0.25 end",
+                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.25) end",
+                "name": "flaplever1",
+                "title": "Flap Lever 1",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_handle_request_ratio",
+                "fcheck": "function (a) return a==0.5 end",
+                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.5) end",
+                "name": "flaplever2",
+                "title": "Flap Lever 2",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
+                "fcheck": "function (a) return a==0.75 end",
+                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0.75) end",
+                "name": "flaplever3",
+                "title": "Flap Lever 3",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
+                "fcheck": "function (a) return a==1 end",
+                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",1) end",
+                "name": "flaplever4",
+                "title": "Flap Lever 4",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_handle_request_ratio",
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) return 0.833 end",
+                "name": "flaplever5",
+                "title": "Flap Lever 5",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
+                "fcheck": "function (a) return a==0 end",
+                "fon": "",
+                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0) end",
+                "name": "flapleverUP",
+                "title": "Flap Lever 0",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
+                "fcheck": "function (a) return a==1 end",
+                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",1) end",
+                "name": "flapleverfull",
+                "title": "Flap Lever 4",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
+                "name": "flapset",
+                "title": "Set flap directly",
+                "type": "dataref"
+              }
+            ],
+            "name": "flaps"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/controls/speedbrake_ratio",
+                "name": "speedbrake",
+                "title": "Speedbrake Lever",
+                "type": "dataref"
+              }
+            ],
+            "name": "speedbrake"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/controls/aileron_trim",
+                "name": "ailerontrim",
+                "title": "Aileron Trim",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/controls/elevator_trim",
+                "fcheck": "function (a) return -1 + ((2/17) * ng_getBriefPrefs():get(\"takeoff:pitchtrim\")) end",
+                "name": "pitchtrim",
+                "title": "Pitch Trim",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "set"
+                ],
+                "dref": "sim/cockpit2/controls/rudder_trim",
+                "name": "ruddertrim",
+                "title": "Rudder Trim",
+                "type": "dataref"
+              }
+            ],
+            "name": "trims"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/yaw_damper_on",
+                "name": "yawdamper",
+                "title": "Yaw Damper",
+                "type": "dataref"
+              }
+            ],
+            "name": "yawdamper"
+          }
+        ]
+      },
+      {
+        "name": "datarefs",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/gauges/indicators/altitude_ft_pilot",
+                "fcheck": "function (a) return a > 10000 end",
+                "name": "_above10k",
+                "title": "above 10.000 ft",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/gauges/indicators/altitude_ft_pilot",
+                "fcheck": "function (a) return a > ng_getBriefPrefs():get(\"origin:transalt\") end",
+                "name": "_abovetalt",
+                "title": "above transition altitude",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/gauges/indicators/altitude_ft_pilot",
+                "fcheck": "function (a) return a < 10000 end",
+                "name": "_below10k",
+                "title": "below 10.000 ft",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/gauges/indicators/altitude_ft_pilot",
+                "fcheck": "function (a) return a < ng_getBriefPrefs():get(\"destination:translvl\") end",
+                "name": "_belowtlvl",
+                "title": "below transition level",
+                "type": "dataref"
+              }
+            ],
+            "name": "_altitudechecks"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/autopilot/autopilot_on",
+                "fcheck": "function (a) return a == 1 end",
+                "name": "_autopilot1on",
+                "title": "Autopilot 1 ON",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/autopilot/autopilot2_on",
+                "fcheck": "function (a) return a == 1 end",
+                "name": "_autopilot2on",
+                "title": "Autopilot 2 ON",
+                "type": "dataref"
+              }
+            ],
+            "name": "_autopilot"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/controls/left_brake_ratio",
+                "fcheck": "function (a) return get(\"sim/cockpit2/controls/left_brake_ratio\") + get(\"sim/cockpit2/controls/right_brake_ratio\") > 1.5 end",
+                "name": "_brakecheck",
+                "title": "true if both wheelbrake 1",
+                "type": "dataref"
+              }
+            ],
+            "name": "_brakeaction"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N1_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N1_percent\",0) > get(\"sim/weather/aircraft/temperature_ambient_deg_c\") end",
+                "indx": 0,
+                "name": "_eng1n1gtoat",
+                "title": "Engine 1 N1 value > OAT",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N1_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N1_percent\",1) > get(\"sim/weather/aircraft/temperature_ambient_deg_c\") end",
+                "indx": 1,
+                "name": "_eng2n1gtoat",
+                "title": "Engine 2 N1 value > OAT",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N1_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N1_percent\",2) > get(\"sim/weather/aircraft/temperature_ambient_deg_c\") end",
+                "indx": 2,
+                "name": "_eng3n1gtoat",
+                "title": "Engine 3 N1 value > OAT",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N1_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N1_percent\",3) > get(\"sim/weather/aircraft/temperature_ambient_deg_c\") end",
+                "indx": 3,
+                "name": "_eng4n1gtoat",
+                "title": "Engine 4 N1 value > OAT",
+                "type": "dataref"
+              }
+            ],
+            "name": "_enginen1"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N2_percent\",0) > 0 end",
+                "indx": 0,
+                "name": "_eng1n2gt0",
+                "title": "Engine 1 N2 value > 0",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return (get(\"sim/cockpit2/engine/indicators/N2_percent\",0) > ng_getAcfPrefs():get(\"engines:n2afterstart\")) end",
+                "indx": 0,
+                "name": "_eng1n2start",
+                "title": "Engine 1 N2 value > x",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N2_percent\",1) > 0 end",
+                "indx": 1,
+                "name": "_eng2n2gt0",
+                "title": "Engine 2 N2 value > 0",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return (get(\"sim/cockpit2/engine/indicators/N2_percent\",1) > ng_getAcfPrefs():get(\"engines:n2afterstart\")) end",
+                "indx": 1,
+                "name": "_eng2n2start",
+                "title": "Engine 2 N2 value > n",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N2_percent\",2) > 0 end",
+                "indx": 2,
+                "name": "_eng3n2gt0",
+                "title": "Engine 3 N2 value > 0",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return (get(\"sim/cockpit2/engine/indicators/N2_percent\",2) > ng_getAcfPrefs():get(\"engines:n2afterstart\")) end",
+                "indx": 2,
+                "name": "_eng3n2start",
+                "title": "Engine 3 N2 value > n",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N2_percent\",3) > 0 end",
+                "indx": 3,
+                "name": "_eng4n2gt0",
+                "title": "Engine 4 N2 value > 0",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return (get(\"sim/cockpit2/engine/indicators/N2_percent\",3) > ng_getAcfPrefs():get(\"engines:n2afterstart\")) end",
+                "indx": 3,
+                "name": "_eng4n2start",
+                "title": "Engine 4 N2 value > n",
+                "type": "dataref"
+              }
+            ],
+            "name": "_enginen2"
+          }
+        ]
+      },
+      {
+        "name": "efis",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": {},
+                "fcheck": "function (a) return true end",
+                "name": "baromode1",
+                "title": "Baro Mode left",
+                "type": "undefined"
+              },
+              {
+                "acts": {},
+                "fcheck": "function (a) return true end",
+                "name": "baromode2",
+                "title": "Baro mode right",
+                "type": "undefined"
+              },
+              {
+                "acts": {},
+                "fcheck": "function (a) return true end",
+                "name": "baromode3",
+                "title": "Baro mode standby",
+                "type": "undefined"
+              }
+            ],
+            "name": "baromodes"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  " ",
+                  ""
+                ],
+                "cmdoff": "laminar/A333/push/baro/capt_std",
+                "cmdon": "laminar/A333/pull/baro/capt_std",
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot",
+                "name": "barostd1",
+                "title": "Baro STD left",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  " ",
+                  ""
+                ],
+                "cmdoff": "laminar/A333/push/baro/fo_std",
+                "cmdon": "laminar/A333/pull/baro/fo_std",
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot",
+                "name": "barostd2",
+                "title": "Baro STD right",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "barostdbtns"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/instruments/barometer_down",
+                "cmdup": "sim/instruments/barometer_up",
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
+                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
+                "incr": 0.01,
+                "max": 32,
+                "min": 22,
+                "name": "barovalue1",
+                "title": "Baro Mode left",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/instruments/barometer_copilot_down",
+                "cmdup": "sim/instruments/barometer_copilot_up",
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot",
+                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
+                "incr": 0.01,
+                "max": 32,
+                "min": 22,
+                "name": "barovalue2",
+                "title": "Baro mode right",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/instruments/barometer_stby_down",
+                "cmdup": "sim/instruments/barometer_stby__up",
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_stby",
+                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
+                "incr": 0.01,
+                "max": 32,
+                "min": 22,
+                "name": "barovalue3",
+                "title": "Baro mode standby",
+                "type": "dialdref"
+              }
+            ],
+            "name": "barovalues"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  ""
+                ],
+                "dref": "sim/cockpit2/gauges/actuators/baro_altimeter_bug_ft_pilot",
+                "name": "da",
+                "title": "Decision altitude",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set",
+                  ""
+                ],
+                "dref": "sim/cockpit/misc/radio_altimeter_minimum",
+                "name": "dh",
+                "title": "Decision Height",
+                "type": "dataref"
+              }
+            ],
+            "name": "dhda"
+          },
+          {
+            "elements": [
+              {
+                "name": "arptmode",
+                "title": "Airport Mode",
+                "type": "undefined"
+              },
+              {
+                "name": "datamode",
+                "title": "DATA mode Boeing",
+                "type": "undefined"
+              },
+              {
+                "name": "posmode",
+                "title": "POS Mode Boeing",
+                "type": "undefined"
+              },
+              {
+                "name": "stamode",
+                "title": "STA Mode Boeing",
+                "type": "undefined"
+              },
+              {
+                "name": "terrainmode",
+                "title": "Terrain mode",
+                "type": "undefined"
+              },
+              {
+                "name": "wptmode",
+                "title": "WPT Mode",
+                "type": "undefined"
+              },
+              {
+                "name": "wxrmode",
+                "title": "Weather Radar mode",
+                "type": "undefined"
+              }
+            ],
+            "name": "modes"
+          },
+          {
+            "elements": [
+              {
+                "name": "mapmode",
+                "title": "ND Mode",
+                "type": "undefined"
+              },
+              {
+                "name": "maprange",
+                "title": "ND Zoom",
+                "type": "undefined"
+              }
+            ],
+            "name": "nd"
+          },
+          {
+            "elements": {},
+            "name": "pfd"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "sim/instruments/EFIS_terr",
+                "dref": "laminar/A333/buttons/EFIS_terr_on_nd_capt",
+                "name": "terronnd",
+                "title": "Terrain",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "terrain"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_pws_mode",
+                "name": "wxpws",
+                "title": "PWS",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "fcheck": "function (a) return a == 4 end",
+                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",4)",
+                "name": "wxradarmap",
+                "title": "Weather radar MAP",
+                "type": "undefined"
+              },
+              {
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "name": "wxradarmode",
+                "title": "Weather radar mode pilot",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdoff": "laminar/A333/switches/weather_radar_left",
+                "cmdon": "laminar/A333/switches/weather_radar_right",
+                "dref": "laminar/A333/switches/weather_radar_pos",
+                "name": "wxradarstate",
+                "title": "Weather radar on/off",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "fcheck": "function (a) return a == 1 end",
+                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",1)",
+                "name": "wxradarstby",
+                "title": "Weather radar STBY",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "fcheck": "function (a) return a == 1 end",
+                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",1)",
+                "name": "wxradartest",
+                "title": "Weather radar TEST",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "fcheck": "function (a) return a == 5 end",
+                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",5)",
+                "name": "wxradarturb",
+                "title": "Weather radar TURB",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "fcheck": "function (a) return a == 2 end",
+                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",2)",
+                "name": "wxradarwx",
+                "title": "Weather radar WX",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "fcheck": "function (a) return a == 3 end",
+                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",3)",
+                "name": "wxradarwxt",
+                "title": "Weather radar WX+T",
+                "type": "undefined"
+              }
+            ],
+            "name": "wxradar"
+          }
+        ]
+      },
+      {
+        "name": "electric",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit/engine/APU_N1",
+                "fcheck": "function (a) return a<2 end",
+                "name": "_apuoff",
+                "title": "APU off",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/electrical/APU_N1_percent",
+                "fcheck": "function (a) return a>98 end",
+                "name": "_apuon",
+                "title": "APU ON",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/fire/apu_test_on",
+                "name": "apufiretest",
+                "title": "APU Fire test",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "laminar/A333/buttons/APU_gen_toggle",
+                "dref": "laminar/A333/buttons/gen_apu_pos",
+                "name": "apugen1",
+                "title": "APU Generator 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  ""
+                ],
+                "name": "apugen2",
+                "title": "APU Generator 2",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/APU_master",
+                "dref": "laminar/A333/buttons/APU_master",
+                "name": "apumaster",
+                "title": "APU Master in Airbus",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/APU_start",
+                "dref": "sim/cockpit2/electrical/APU_starter_switch",
+                "fcheck": "function (a) return a==2 end",
+                "foff": "function (a) command_end(\"laminar/A333/buttons/APU_start\") end",
+                "fon": "function (a) command_begin(\"laminar/A333/buttons/APU_start\") end",
+                "name": "apustart",
+                "title": "APU starter",
+                "type": "custom"
+              }
+            ],
+            "name": "apu"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/electrical/battery_1_toggle",
+                "dref": "laminar/A333/buttons/battery1_pos",
+                "name": "battery1",
+                "title": "Battery 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/electrical/battery_2_toggle",
+                "dref": "laminar/A333/buttons/battery2_pos",
+                "name": "battery2",
+                "title": "Battery 2",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "laminar/A333/buttons/APU_batt_toggle",
+                "dref": "laminar/A333/buttons/APU_batt_pos",
+                "name": "battery3",
+                "title": "apubattery",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "batteries"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "sim/electrical/cross_tie_toggle",
+                "dref": "laminar/A333/buttons/bus_tie_pos",
+                "name": "acbustie1",
+                "title": "AC Bus Tie 1",
+                "type": "onofftgl"
+              },
+              {
+                "name": "acbustie2",
+                "title": "AC Bus Tie 2",
+                "type": "undefined"
+              },
+              {
+                "name": "acbustie3",
+                "title": "AC Bus Tie 3",
+                "type": "undefined"
+              },
+              {
+                "name": "acbustie4",
+                "title": "AC Bus Tie 4",
+                "type": "undefined"
+              },
+              {
+                "name": "dcbustie1",
+                "title": "DC Bus Tie 1",
+                "type": "undefined"
+              },
+              {
+                "name": "dcbustie2",
+                "title": "DC Bus Tie 2",
+                "type": "undefined"
+              },
+              {
+                "name": "dcbustie3",
+                "title": "DC Bus Tie 2",
+                "type": "undefined"
+              },
+              {
+                "name": "dcbustie4",
+                "title": "DC Bus Tie 2",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/ACESSFeed_toggle",
+                "dref": "laminar/A333/buttons/AC_ESS_FEED_pos",
+                "name": "essentialbus1",
+                "title": "Essential Bus 1",
+                "type": "onofftgl"
+              },
+              {
+                "name": "essentialbus2",
+                "title": "Essential Bus 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "busties"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/galley_toggle",
+                "dref": "laminar/A333/buttons/galley_pos",
+                "name": "cabinpower",
+                "title": "Cabin power",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/commercial_toggle",
+                "dref": "laminar/A333/buttons/commercial_pos",
+                "name": "ifepower",
+                "title": "Inflight Entertainment",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "consumers"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/electrical/generator_1_toggle",
+                "dref": "laminar/A333/buttons/gen1_pos",
+                "name": "generator1",
+                "title": "Engine Generator 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/electrical/generator_2_toggle",
+                "dref": "laminar/A333/buttons/gen2_pos",
+                "name": "generator2",
+                "title": "Engine Generator 2",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "generators"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/ground_ops/toggle_gpu_request",
+                "dref": "sim/cockpit2/electrical/GPU_generator_volts",
+                "fcheck": "function (a) return a>0 end",
+                "ftrans": "function (a) if a>0 then return 1 else return 0 end end",
+                "name": "gpuconnect",
+                "title": "GPU Connect",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "laminar/A333/buttons/external_powerA_toggle",
+                "dref": "laminar/A333/buttons/ext_power_A_ctct_on_off",
+                "name": "gpugen1",
+                "title": "GPU Generator 1",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "gpu"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "dref": "sim/cockpit/engine/inverter_on",
+                "indx": 0,
+                "name": "inverter1",
+                "title": "Inverter 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "dref": "sim/cockpit/engine/inverter_on",
+                "indx": 1,
+                "name": "inverter2",
+                "title": "Inverter 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "inverter"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "dref": "sim/cockpit2/electrical/RAT_generator_on",
+                "name": "extendrat",
+                "title": "Extend RAT",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "dref": "sim/cockpit2/electrical/air_driven_generator_on",
+                "name": "ramairturbine",
+                "title": "RAT",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  ""
+                ],
+                "dref": "",
+                "name": "stbypower1",
+                "title": "Standby Power",
+                "type": "undefined"
+              }
+            ],
+            "name": "standby"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/electrical/inverter_on",
+                "indx": 0,
+                "name": "tru1",
+                "title": "Transformer Rectifier 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/electrical/inverter_on",
+                "indx": 1,
+                "name": "tru2",
+                "title": "Transformer Rectifier 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/electrical/cross_tie",
+                "name": "tru3",
+                "title": "TRU3 Essential",
+                "type": "dataref"
+              }
+            ],
+            "name": "trus"
+          }
+        ]
+      },
+      {
+        "name": "engines",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "name": "eec1",
+                "title": "EEC Mode 1",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "name": "eec2",
+                "title": "EEC Mode 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "eec"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/annun/fire/apu_handle",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_apufire",
+                "title": "APU Fire",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/annun/engine1_fire",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_eng1fire",
+                "title": "ENG1 Fire",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/annun/engine2_fire",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_eng2fire",
+                "title": "ENG2 Fire",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/fire/buttons/engine_test_pos",
+                "name": "engfiretest",
+                "title": "Engine fire test",
+                "type": "dataref"
+              }
+            ],
+            "name": "enginefire"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/sound/trent_N2_percent",
+                "indx": 0,
+                "name": "_eng1n2",
+                "title": "Engine 1 N2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/sound/trent_N2_percent",
+                "indx": 1,
+                "name": "_eng2n2",
+                "title": "Engine 2 N2",
+                "type": "dataref"
+              }
+            ],
+            "name": "enginen2"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/actuators/eng_mode_selector",
+                "name": "engstartsel1",
+                "title": "Engine Mode",
+                "type": "dataref"
+              }
+            ],
+            "name": "engstartsel"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "laminar/A333/switches/engine1_start_pos",
+                "name": "engstrtlvr1",
+                "title": "Engine Start lever 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "laminar/A333/switches/engine2_start_pos",
+                "name": "engstrtlvr2",
+                "title": "Engine Start lever 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "engstrtlvrs"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/engine/actuators/throttle_ratio",
+                "indx": 0,
+                "name": "thrustlever1",
+                "title": "Thrust lever 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/engine/actuators/throttle_ratio",
+                "indx": 1,
+                "name": "thrustlever2",
+                "title": "Thrust lever 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/actuators/throttle_ratio_all",
+                "name": "thrustleverall",
+                "title": "Thrust lever all",
+                "type": "dataref"
+              }
+            ],
+            "name": "thrustlevers"
+          }
+        ]
+      },
+      {
+        "name": "fuel",
+        "systems": [
+          {
+            "elements": [
+              {
+                "name": "fuelctrlsw1",
+                "title": "Fuel control switch 1",
+                "type": "undefined"
+              },
+              {
+                "name": "fuelctrlsw2",
+                "title": "Fuel control switch 2",
+                "type": "undefined"
+              },
+              {
+                "name": "fuelctrlsw3",
+                "title": "Fuel control switch 3",
+                "type": "undefined"
+              },
+              {
+                "name": "fuelctrlsw4",
+                "title": "Fuel control switch 4",
+                "type": "undefined"
+              }
+            ],
+            "name": "fuelcontrolsws"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/switches/center_left_pump_toggle",
+                "dref": "laminar/A333/fuel/buttons/center_left_pump_pos",
+                "fcheck": "function (a) return a>0 end",
+                "name": "fuelpump1",
+                "title": "Fuel pump left 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/switches/center_right_pump_toggle",
+                "dref": "laminar/A333/fuel/buttons/center_right_pump_pos",
+                "fcheck": "function (a) return a>0 end",
+                "name": "fuelpump2",
+                "title": "Fuel pump left 2",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/switches/left1_pump_toggle",
+                "dref": "laminar/A333/fuel/buttons/left1_pump_pos",
+                "fcheck": "function (a) return a>0 end",
+                "name": "fuelpump3",
+                "title": "Fuel pump right 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/switches/left2_pump_toggle",
+                "dref": "laminar/A333/fuel/buttons/left2_pump_pos",
+                "fcheck": "function (a) return a>0 end",
+                "name": "fuelpump4",
+                "title": "Fuel pump right 2",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/switches/right1_pump_toggle",
+                "dref": "laminar/A333/fuel/buttons/right1_pump_pos",
+                "fcheck": "function (a) return a>0 end",
+                "name": "fuelpump5",
+                "title": "Fuel Pump 5",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/switches/right2_pump_toggle",
+                "dref": "laminar/A333/fuel/buttons/right2_pump_pos",
+                "fcheck": "function (a) return a>0 end",
+                "name": "fuelpump6",
+                "title": "Fuel Pump 6",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/switches/left_stby_pump_toggle",
+                "dref": "laminar/A333/fuel/buttons/left_stby_pump_pos",
+                "fcheck": "function (a) return a>0 end",
+                "name": "fuelpump7",
+                "title": "Fuel pump 7",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/switches/right_stby_pump_toggle",
+                "dref": "laminar/A333/fuel/buttons/right_stby_pump_pos",
+                "fcheck": "function (a) return a>0 end",
+                "name": "fuelpump8",
+                "title": "Fuel Pump 8",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "fuelpumps"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdoff": "sim/fuel/auto_crossfeed_off",
+                "cmdon": "sim/fuel/auto_crossfeed_on_open",
+                "dref": "sim/cockpit2/fuel/auto_crossfeed",
+                "name": "fuelxfeed1",
+                "title": "Fuel Crossfeed 1",
+                "type": "onofftgl"
+              },
+              {
+                "name": "fuelxfeed2",
+                "title": "Fuel Crossfeed 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "fuelxfeeds"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  ""
+                ],
+                "dref": "sim/cockpit/engine/fuel_tank_selector",
+                "name": "tankselector",
+                "title": "Fuel Tank Selector",
+                "type": "dataref"
+              }
+            ],
+            "name": "tankselector"
+          }
+        ]
+      },
+      {
+        "name": "general",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "sim/flight_controls/nwheel_steer_off",
+                "cmdon": "sim/flight_controls/nwheel_steer_on",
+                "cmdtgl": "sim/flight_controls/nwheel_steer_toggle",
+                "dref": "sim/cockpit2/controls/nosewheel_steer_on",
+                "name": "antiskid",
+                "title": "Anti-skid Switch",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "antiskid"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "cmdon": "sim/flight_controls/brakes_1_auto",
+                "dref": "sim/cockpit/switches/auto_brake_settings",
+                "fcheck": "function (a) return a==3 end",
+                "fon": "function (a) if a~=3 then command_once(\"sim/flight_controls/brakes_1_auto\") end end",
+                "name": "autobrake1",
+                "title": "Autobrake LO",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "cmdon": "sim/flight_controls/brakes_2_auto",
+                "dref": "sim/cockpit/switches/auto_brake_settings",
+                "fcheck": "function (a) return a==4 end",
+                "fon": "function (a) if a~=4 then command_once(\"sim/flight_controls/brakes_2_auto\") end end",
+                "name": "autobrake2",
+                "title": "Autobrake MED",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit/switches/auto_brake_settings",
+                "fcheck": "function (a) return a==1 end",
+                "name": "autobrakeoff",
+                "title": "Autobrake OFF",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "sim/cockpit/switches/auto_brake_settings",
+                "fcheck": "function (a) return a==0 end",
+                "fon": "function (a) if a~=0 then command_once(\"sim/flight_controls/brakes_rto_auto\") end end",
+                "name": "autobrakerto",
+                "title": "Autobrake RTO",
+                "type": "custom"
+              }
+            ],
+            "name": "autobrake"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "laminar/A333/clock/ET_run_stop_reset_dn",
+                "cmdup": "laminar/A333/clock/ET_run_stop_reset_up",
+                "dref": "laminar/A333/clock/ET_run_stop_reset_pos",
+                "max": 1,
+                "min": -1,
+                "name": "chronometer1",
+                "title": "Chronometer 1",
+                "type": "dialcmd"
+              },
+              {
+                "name": "chronometer2",
+                "title": "Chronometer 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "clocks"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  " ",
+                  " "
+                ],
+                "cmdtgl": "sim/flight_controls/toggle_chocks",
+                "dref": "sim/flightmodel2/gear/is_chocked",
+                "foff": "function (a) return 1 end",
+                "fon": "function (a) return 0 end",
+                "indx": 0,
+                "name": "chocks",
+                "title": "Chocks",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "cmdtgl": "openSAM/toggle_jwy",
+                "dref": "opensam/jetway/status",
+                "fcheck": "function (a) return a==2 end",
+                "fon": "function (a) if a~= 2 then command_once(\"openSAM/toggle_jwy\") end end",
+                "name": "samjetwaydock",
+                "title": "Dock openSAM jetway",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "cmdtgl": "openSAM/toggle_jwy",
+                "dref": "opensam/jetway/status",
+                "fcheck": "function (a) return a==1 end",
+                "fon": "function (a) if a == 2 then command_once(\"openSAM/toggle_jwy\") end end",
+                "name": "samjetwayundock",
+                "title": "Undock openSAM jetway",
+                "type": "custom"
+              }
+            ],
+            "name": "external"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/flight_controls/door_toggle_10",
+                "dref": "sim/cockpit2/switches/door_open",
+                "indx": 9,
+                "name": "dooracargo",
+                "title": "Aft Cargo",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/flight_controls/door_toggle_9",
+                "dref": "sim/cockpit2/switches/door_open",
+                "indx": 8,
+                "name": "doorfcargo",
+                "title": "Forward Cargo",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/flight_controls/door_toggle_1",
+                "dref": "sim/cockpit2/switches/door_open",
+                "indx": 0,
+                "name": "doorl1",
+                "title": "Door Forward Left",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/flight_controls/door_toggle_7",
+                "dref": "sim/cockpit2/switches/door_open",
+                "indx": 6,
+                "name": "doorl2",
+                "title": "Door Aft Left",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/flight_controls/door_toggle_2",
+                "dref": "sim/cockpit2/switches/door_open",
+                "indx": 1,
+                "name": "doorr1",
+                "title": "Door Fwd Right",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/flight_controls/door_toggle_8",
+                "dref": "sim/cockpit2/switches/door_open",
+                "indx": 7,
+                "name": "doorr2",
+                "title": "Door Aft Right",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "externaldoors"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "sim/flight_controls/door_close_12",
+                "cmdon": "sim/flight_controls/door_open_12",
+                "cmdtgl": "sim/flight_controls/door_toggle_12",
+                "dref": "laminar/A333/annun/cockpit_door_open",
+                "name": "cockpitdoor",
+                "title": "Cockpit Door",
+                "type": "onofftgl"
+              },
+              {
+                "name": "doorlock",
+                "title": "Door Lock",
+                "type": "undefined"
+              }
+            ],
+            "name": "internaldoors"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "laminar/A333/switch/parking_brake_left",
+                "cmdon": "laminar/A333/switch/parking_brake_right",
+                "dref": "sim/flightmodel/controls/parkbrake",
+                "fcheck": "function (a) return a==1 end",
+                "foff": "function (a) command_once(\"laminar/A333/switch/parking_brake_left\") end",
+                "fon": "function (a) command_once(\"laminar/A333/switch/parking_brake_right\") end",
+                "ftgl": "function (a) if a==0 then command_once(\"laminar/A333/switch/parking_brake_right\") else command_once(\"laminar/A333/switch/parking_brake_left\") end end",
+                "name": "parkbrake",
+                "title": "Parkingbrake",
+                "type": "custom"
+              }
+            ],
+            "name": "parkbrake"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  " ",
+                  " "
+                ],
+                "cmdoff": "laminar/A333/switches/smoking_signs_dn",
+                "cmdon": "laminar/A333/switches/smoking_signs_up",
+                "dref": "laminar/A333/switches/no_smoking",
+                "name": "nosmoking",
+                "title": "No Smoking",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "laminar/A333/switches/seatbelt_signs_dn",
+                "cmdon": "laminar/A333/switches/seatbelt_signs_up",
+                "dref": "laminar/A333/switches/fasten_seatbelts",
+                "max": 999,
+                "min": 0,
+                "name": "seatbelts",
+                "title": "Seatbelt Signs",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "paxsigns"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return false end",
+                "name": "wait",
+                "title": "wait for interaction",
+                "type": "custom"
+              }
+            ],
+            "name": "simulator"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) ng_getBckVars():set(\"general:timein\",ng_dispTimeHHMM(get(\"sim/time/zulu_time_sec\"))) end",
+                "name": "intimer",
+                "title": "in timer",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) ng_getBckVars():set(\"general:timeoff\",ng_dispTimeHHMM(get(\"sim/time/zulu_time_sec\"))) end",
+                "name": "offtimer",
+                "title": "Off Timer",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) ng_getBckVars():set(\"general:timeon\",ng_dispTimeHHMM(get(\"sim/time/zulu_time_sec\"))) end",
+                "name": "ontimer",
+                "title": "on timer",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) ng_getBckVars():set(\"general:timeout\",ng_dispTimeHHMM(get(\"sim/time/zulu_time_sec\"))) end",
+                "name": "outtimer",
+                "title": "Out Timer",
+                "type": "custom"
+              }
+            ],
+            "name": "timers"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/buttons/ecam/to_config_pos",
+                "name": "toconfig",
+                "title": "T.O Config",
+                "type": "dataref"
+              }
+            ],
+            "name": "toconfig"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/annun/master_caution",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_mastercaution",
+                "title": "Master Caution",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/annun/master_warning",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_masterwarn",
+                "title": "<title>",
+                "type": "dataref"
+              }
+            ],
+            "name": "warncaution"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/wiper_speed_switch",
+                "indx": 0,
+                "name": "wiper1",
+                "title": "Left Windshield Wiper",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/wiper_speed_switch",
+                "indx": 1,
+                "name": "wiper2",
+                "title": "Right Windshield Wiper",
+                "type": "dataref"
+              }
+            ],
+            "name": "wipers"
+          }
+        ]
+      },
+      {
+        "name": "hydraulics",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "laminar/A330/buttons/hyd/elec_green_toggle",
+                "dref": "laminar/A330/buttons/hyd/elec_green_tog_pos",
+                "name": "elechydpump1",
+                "title": "Electric Hydraulic Pump 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "laminar/A330/buttons/hyd/elec_blue_toggle",
+                "dref": "laminar/A330/buttons/hyd/elec_blue_tog_pos",
+                "name": "elechydpump2",
+                "title": "Electric Hydraulic Pump 2",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A330/buttons/hyd/elec_yellow_toggle",
+                "dref": "laminar/A330/buttons/hyd/elec_yellow_tog_pos",
+                "name": "elechydpump3",
+                "title": "Electric Hydraulic Pump 3",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "elechydpumps"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/flight_controls/hydraulic_eng1A_tog",
+                "dref": "laminar/A330/buttons/hyd/eng1_pump_green_pos",
+                "name": "enghydpump1",
+                "title": "Engine Hydraulic Pump 1A",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/flight_controls/hydraulic_eng1C_tog",
+                "dref": "laminar/A333/ecam/hyd_blue_eng1_pump_pos",
+                "name": "enghydpump2",
+                "title": "Engine Hydraulic Pump 1C",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/flight_controls/hydraulic_eng2B_tog",
+                "dref": "laminar/A330/buttons/hyd/eng2_pump_yellow_pos",
+                "name": "enghydpump3",
+                "title": "Engine Hydraulic Pump 2B",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "sim/flight_controls/hydraulic_eng2A_tog",
+                "dref": "laminar/A330/buttons/hyd/eng2_pump_green_pos",
+                "name": "enghydpump4",
+                "title": "Engine Hydraulic Pump 2A",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "enghydpumps"
+          },
+          {
+            "elements": [
+              {
+                "name": "ptu1",
+                "title": "Hydraulic PTU",
+                "type": "undefined"
+              }
+            ],
+            "name": "ptus"
+          }
+        ]
+      },
+      {
+        "name": "landinggears",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "fcheck": "function (a) return get(\"sim/flightmodel2/gear/deploy_ratio\") == 1 end",
+                "name": "_gearlightsgreen",
+                "title": "Gear lights green",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "fcheck": "function (a) return get(\"sim/flightmodel2/gear/deploy_ratio\") > 0 and get(\"sim/flightmodel2/gear/deploy_ratio\") < 1 end",
+                "name": "_gearlightsred",
+                "title": "Gear lights red",
+                "type": "dataref"
+              }
+            ],
+            "name": "gearlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit/switches/gear_handle_status",
+                "name": "gearhandle",
+                "title": "Gearhandle",
+                "type": "dataref"
+              }
+            ],
+            "name": "gears"
+          }
+        ]
+      },
+      {
+        "name": "lightsexternal",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/landing_lights_switch",
+                "indx": 0,
+                "name": "landlight1",
+                "title": "Landing light 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/landing_lights_switch",
+                "indx": 1,
+                "name": "landlight2",
+                "title": "Landing Light 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/landing_lights_switch",
+                "indx": 2,
+                "name": "landlight3",
+                "title": "Landing Light 3",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/landing_lights_switch",
+                "indx": 3,
+                "name": "landlight4",
+                "title": "Landing Light 4",
+                "type": "dataref"
+              }
+            ],
+            "name": "alllandlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit/electrical/beacon_lights_on",
+                "name": "beacon1",
+                "title": "Beacon light 1",
+                "type": "dataref"
+              }
+            ],
+            "name": "beacons"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "laminar/A333/toggle_switch/nav_light_pos_dn",
+                "cmdup": "laminar/A333/toggle_switch/nav_light_pos_up",
+                "dref": "sim/cockpit2/switches/navigation_lights_on",
+                "max": 2,
+                "min": 1,
+                "name": "logolight",
+                "title": "Logo light",
+                "type": "dataref"
+              }
+            ],
+            "name": "logolights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "laminar/A333/toggle_switch/nav_light_pos_dn",
+                "cmdup": "laminar/A333/toggle_switch/nav_light_pos_up",
+                "dref": "sim/cockpit2/switches/navigation_lights_on",
+                "max": 2,
+                "min": 0,
+                "name": "positionlight",
+                "title": "Position light",
+                "type": "dialcmd"
+              }
+            ],
+            "name": "positionlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/generic_lights_switch",
+                "indx": 0,
+                "name": "rwylight1",
+                "title": "Runway light left",
+                "type": "dataref"
+              }
+            ],
+            "name": "rwylights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmddn": "laminar/A333/toggle_switch/strobe_pos_dn",
+                "cmdup": "laminar/A333/toggle_switch/strobe_pos_up",
+                "dref": "laminar/a333/switches/strobe_pos",
+                "max": 1,
+                "min": 0,
+                "name": "strobelight",
+                "title": "Strobe light",
+                "type": "dialcmd"
+              }
+            ],
+            "name": "strobelights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/landing_lights_switch",
+                "indx": 1,
+                "max": 999,
+                "min": 0,
+                "name": "taxilight1",
+                "title": "Taxi light",
+                "type": "dataref"
+              }
+            ],
+            "name": "taxilights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/generic_lights_switch",
+                "indx": 11,
+                "name": "wheellight",
+                "title": "Wheel light",
+                "type": "dataref"
+              }
+            ],
+            "name": "wheellights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/generic_lights_switch",
+                "indx": 3,
+                "name": "winglight",
+                "title": "Wing light",
+                "type": "dataref"
+              }
+            ],
+            "name": "winglights"
+          }
+        ]
+      },
+      {
+        "name": "lightsinternal",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmdoff": "laminar/A333/toggle_switch/dome_1_pos_dn",
+                "cmdon": "laminar/A333/toggle_switch/dome_1_pos_up",
+                "dref": "laminar/a333/switches/dome_1_pos",
+                "name": "domelight",
+                "title": "Dome light",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "domelights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  " "
+                ],
+                "cmddn": "laminar/A333/toggle_switch/emer_exit_lt_dn",
+                "cmdup": "laminar/A333/toggle_switch/emer_exit_lt_up",
+                "dref": "laminar/a333/switches/emer_exit_lt_pos",
+                "max": 1,
+                "min": 0,
+                "name": "emerlight",
+                "title": "EMER light",
+                "type": "dialcmd"
+              }
+            ],
+            "name": "emerlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/instrument_brightness_ratio",
+                "indx": 0,
+                "name": "instrlight1",
+                "title": "Instrument light 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/instrument_brightness_ratio",
+                "indx": 1,
+                "name": "instrlight2",
+                "title": "Instrument light 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/instrument_brightness_ratio",
+                "indx": 2,
+                "name": "instrlight3",
+                "title": "Instrument light 3",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/instrument_brightness_ratio",
+                "indx": 3,
+                "name": "instrlight4",
+                "title": "Instrument light 4",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/instrument_brightness_ratio",
+                "indx": 4,
+                "name": "instrlight5",
+                "title": "Instrument light 5",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/instrument_brightness_ratio",
+                "indx": 5,
+                "name": "instrlight6",
+                "title": "Instrument light 6",
+                "type": "dataref"
+              }
+            ],
+            "name": "instrlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "laminar/a333/rheostats/integ_light_brightness",
+                "name": "panellight1",
+                "title": "Panel light 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "laminar/a333/rheostats/integ_glare_brightness",
+                "name": "panellight2",
+                "title": "Panel light 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "laminar/a333/rheostats/flood_brightness",
+                "name": "panellight3",
+                "title": "Panel light 3",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "laminar/a333/rheostats/ped_flood_brightness",
+                "name": "panellight4",
+                "title": "Panel light 4",
+                "type": "dataref"
+              }
+            ],
+            "name": "panellights"
+          }
+        ]
+      },
+      {
+        "name": "radios",
+        "systems": [
+          {
+            "elements": {},
+            "name": "adf1"
+          },
+          {
+            "elements": {},
+            "name": "adf2"
+          },
+          {
+            "elements": {},
+            "name": "com1"
+          },
+          {
+            "elements": {},
+            "name": "com2"
+          },
+          {
+            "elements": {},
+            "name": "nav1"
+          },
+          {
+            "elements": {},
+            "name": "nav2"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmddn": "laminar/A333/transponder/ta_ra_left",
+                "cmdup": "laminar/A333/transponder/ta_ra_right",
+                "dref": "laminar/A333/transponder/ta_ra_knob_pos",
+                "max": 2,
+                "min": 0,
+                "name": "tcasmode",
+                "title": "TCAS Mode",
+                "type": "dialcmd"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "laminar/A333/transponder/ta_ra_knob_pos",
+                "fcheck": "function (a) return a==0 end",
+                "fset": "function (a) command_once(\"laminar/A333/transponder/ta_ra_left\") command_once(\"laminar/A333/transponder/ta_ra_left\") end",
+                "name": "tcasmodestby",
+                "title": "TCAS Mode stby",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "laminar/A333/transponder/ta_ra_knob_pos",
+                "fcheck": "function (a) return a==0 end",
+                "fset": "function (a) command_once(\"laminar/A333/transponder/ta_ra_left\") command_once(\"laminar/A333/transponder/ta_ra_left\") command_once(\"laminar/A333/transponder/ta_ra_right\") end",
+                "name": "tcasmodeta",
+                "title": "TCAS Mode TA",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "laminar/A333/transponder/ta_ra_knob_pos",
+                "fcheck": "function (a) return a==2 end",
+                "fset": "function (a) command_once(\"laminar/A333/transponder/ta_ra_right\") command_once(\"laminar/A333/transponder/ta_ra_right\") end",
+                "name": "tcasmodetara",
+                "title": "TCAS Mode TARA",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/radios/actuators/transponder_code",
+                "name": "xpdrcode",
+                "title": "XPDR Code",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  " ",
+                  " "
+                ],
+                "cmddn": "laminar/A333/transponder/auto_on_off_left",
+                "cmdup": "laminar/A333/transponder/auto_on_off_right",
+                "dref": "laminar/A333/transponder/auto_on_knob_pos",
+                "max": 1,
+                "min": -1,
+                "name": "xpdrmode",
+                "title": "XPDR Mode",
+                "type": "dialcmd"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "laminar/A333/transponder/auto_on_knob_pos",
+                "fcheck": "function (a) return a==0 end",
+                "fset": "function (a) command_once(\"laminar/A333/transponder/auto_on_off_left\") command_once(\"laminar/A333/transponder/auto_on_off_left\") command_once(\"laminar/A333/transponder/auto_on_off_right\") end",
+                "name": "xpdrmodeauto",
+                "title": "Airbus xpdr auto",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/transponder/auto_on_knob_pos",
+                "fcheck": "function (a) return a==-1 end",
+                "fset": "function (a) command_once(\"laminar/A333/transponder/auto_on_off_left\") command_once(\"laminar/A333/transponder/auto_on_off_left\") end",
+                "name": "xpdrmodestby",
+                "title": "XPDR Mode STBY",
+                "type": "custom"
+              }
+            ],
+            "name": "transponder"
+          }
+        ]
+      },
+      {
+        "name": "xtensions",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/adirs/adr1_toggle",
+                "dref": "laminar/A333/adirs/adr1_status",
+                "name": "adr1tgl",
+                "title": "ADR1 Switch",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/adirs/adr2_toggle",
+                "dref": "laminar/A333/adirs/adr2_status",
+                "name": "adr2tgl",
+                "title": "ADR2 Switch",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/adirs/adr3_toggle",
+                "dref": "laminar/A333/adirs/adr3_status",
+                "name": "adr3tgl",
+                "title": "ADR3 Switch",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/adirs/ir1_toggle",
+                "dref": "laminar/A333/adirs/ir1_status",
+                "name": "ir1tgl",
+                "title": "IR1 Toggle",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/adirs/ir2_toggle",
+                "dref": "laminar/A333/adirs/ir2_status",
+                "name": "ir2tgl",
+                "title": "IR2 Toggle",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/adirs/ir3_toggle",
+                "dref": "laminar/A333/adirs/ir3_status",
+                "name": "ir3tgl",
+                "title": "IR3 Toggle",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "adirusw"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/crew_supply_toggle",
+                "dref": "laminar/A333/buttons/oxy/crew_valve_pos",
+                "name": "crewsupply",
+                "title": "Crew Supply",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "air"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "laminar/A333/buttons/call/all_pos",
+                "fcheck": "function (a) return a==1 end",
+                "name": "_cabincrew",
+                "title": "Cabin Vrew pressed",
+                "type": "dataref"
+              }
+            ],
+            "name": "cabin"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/fcc/prim1_toggle",
+                "dref": "laminar/A333/buttons/fcc_prim1_pos",
+                "name": "fccprim1",
+                "title": "FCC PRIM1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/fcc/prim2_toggle",
+                "dref": "laminar/A333/buttons/fcc_prim2_pos",
+                "name": "fccprim2",
+                "title": "FCC PRIM2",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/fcc/prim3_toggle",
+                "dref": "laminar/A333/buttons/fcc_prim3_pos",
+                "name": "fccprim3",
+                "title": "FCC PRIM3",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/fcc/sec1_toggle",
+                "dref": "laminar/A333/buttons/fcc_sec1_pos",
+                "name": "fccsec1",
+                "title": "FCC SEC1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/fcc/sec2_toggle",
+                "dref": "laminar/A333/buttons/fcc_sec2_pos",
+                "name": "fccsec2",
+                "title": "FCC SEC2",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmdtgl": "sim/systems/yaw_damper_toggle",
+                "dref": "laminar/A333/buttons/fcc_turb_damp_pos",
+                "name": "turbdamp",
+                "title": "YAW TURB DAMP",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "fcc"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/gpws/flap_mode_toggle",
+                "dref": "laminar/A333/buttons/gpws/flap_toggle_pos",
+                "name": "gpwsflap",
+                "title": "GPWS Flap Mode",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/gpws/gs_mode_toggle",
+                "dref": "laminar/A333/buttons/gpws/glideslope_toggle_pos",
+                "name": "gpwsgs",
+                "title": "GPWS GS Mode",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/gpws/sys_toggle",
+                "dref": "laminar/A333/buttons/gpws/system_toggle_pos",
+                "name": "gpwssys",
+                "title": "GPWS SYS",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/gpws/terr_toggle",
+                "dref": "laminar/A333/buttons/gpws/terrain_toggle_pos",
+                "name": "gpwsterr",
+                "title": "GPWS TERR",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "gpws"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/switches/hot_air2_toggle",
+                "dref": "laminar/A333/buttons/hot_air2_pos",
+                "name": "hotair2",
+                "title": "Hot air 2",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/buttons/cargo_cond/hot_air_tog",
+                "dref": "laminar/A333/buttons/cargo_cond/hot_air_pos",
+                "name": "hotair3",
+                "title": "Hot air",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/switches/hot_air1_toggle",
+                "dref": "laminar/A333/buttons/hot_air1_pos",
+                "name": "hotrair1",
+                "title": "Hot air 1",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "hotair"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmddn": "laminar/A333/toggle_switch/ann_lt_dn",
+                "cmdup": "laminar/A333/toggle_switch/ann_lt_up",
+                "dref": "laminar/a333/switches/ann_light_pos",
+                "max": 1,
+                "min": 0,
+                "name": "annlight",
+                "title": "A333 annunciator light",
+                "type": "dialcmd"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmddn": "laminar/A333/toggle_switch/dome_bright_dn",
+                "cmdup": "laminar/A333/toggle_switch/dome_bright_up",
+                "dref": "laminar/a333/switches/dome_brightness",
+                "max": 1,
+                "min": 0,
+                "name": "domebrightness",
+                "title": "A333 Dome brightness",
+                "type": "dialcmd"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/generic_lights_switch",
+                "indx": 9,
+                "name": "maplightleft",
+                "title": "A333 maplight left",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/generic_lights_switch",
+                "indx": 12,
+                "name": "maplightright",
+                "title": "A333 map light",
+                "type": "dataref"
+              }
+            ],
+            "name": "lights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  " ",
+                  " "
+                ],
+                "cmdtgl": "laminar/A333/buttons/capt_ils_bars_push",
+                "dref": "laminar/A333/status/capt_ls_bars",
+                "fcheck": "function (a) return a==0 end",
+                "name": "lsmode",
+                "title": "Airbus LS Mode",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "lsmode"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  " ",
+                  " "
+                ],
+                "cmdtgl": "laminar/A333/rtp_L/off_switch",
+                "dref": "laminar/A333/comm/rtp_L/off_status",
+                "fcheck": "function (a) return a==0 end",
+                "name": "radiounit1onoff",
+                "title": "RTP 1 swap on/off",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/rtp_R/off_switch",
+                "dref": "laminar/A333/comm/rtp_R/off_status",
+                "fcheck": "function (a) return a==0 end",
+                "name": "radiounit2onoff",
+                "title": "RTP2 swap on/off",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmdtgl": "laminar/A333/rtp_C/off_switch",
+                "dref": "laminar/A333/comm/rtp_C/off_status",
+                "fcheck": "function (a) return a==0 end",
+                "name": "radiounit3onoff",
+                "title": "RTP3 swap on/off",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "radiounits"
+          }
+        ]
+      }
+    ]
+  },
+  "icao": "A33L",
+  "title": "Laminar A330-300"
+}
