@@ -1,4 +1,4 @@
-# KPCrewNG and KPHWNG
+# KPCrewNG and KPHWNG alpha-01 rev. 01
 Next generation of KPCrew - a complete re-write of the old, somewhat overgrown concept.
 
 ## Introduction
