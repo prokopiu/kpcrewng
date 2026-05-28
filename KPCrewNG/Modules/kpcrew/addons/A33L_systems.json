@@ -1751,7 +1751,6 @@
                 "acts": [
                   "on",
                   "off",
-                  "tgl",
                   "chk"
                 ],
                 "cmdoff": "laminar/A333/switches/weather_radar_left",
@@ -3033,6 +3032,81 @@
               }
             ],
             "name": "simulator"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 1\") end",
+                "name": "spdchkflap1",
+                "title": "speak text",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 2\") end",
+                "name": "spdchkflap2",
+                "title": "speak text",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 3\") end",
+                "name": "spdchkflap3",
+                "title": "speak text",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps full\") end",
+                "name": "spdchkflap4",
+                "title": "speak text",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps up\") end",
+                "name": "spdchkflapup",
+                "title": "speak text",
+                "type": "custom"
+              }
+            ],
+            "name": "speak"
           },
           {
             "elements": [
