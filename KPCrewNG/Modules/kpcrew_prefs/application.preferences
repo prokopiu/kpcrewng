@@ -1,5 +1,5 @@
 general:assistance=true
-general:usechecklist=false
+general:usechecklist=true
 general:showstars=true
 general:jumpflow=true
 general:simbriefuser="prokopiu"
