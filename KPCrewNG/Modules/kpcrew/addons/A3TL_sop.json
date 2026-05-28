@@ -1005,7 +1005,7 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
+                "action": "chk",
                 "element": "#adirus"
               }
             ]
