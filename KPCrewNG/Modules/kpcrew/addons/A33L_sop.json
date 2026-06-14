@@ -170,7 +170,7 @@
           {
             "challenge": "BUS TIE",
             "classname": "ProcedureItem",
-            "response": "ON",
+            "response": "AUTO",
             "role": "ng_firole_PF",
             "setelements": [
               {
@@ -280,12 +280,11 @@
             "condition": "ng_getAcfPrefs():get(\"electric:startupapu\")",
             "nocheck": 1,
             "response": "ON BUS",
-            "role": "ng_firole_FO",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
-                "action": "set",
-                "element": "#apugens",
-                "value": 1
+                "action": "on",
+                "element": "apugen1"
               }
             ]
           },
@@ -294,7 +293,7 @@
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"electric:startupapu\")",
             "response": "ON",
-            "role": "ng_firole_FO",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "on",
@@ -398,7 +397,7 @@
             "challenge": "SPEED BRAKE LEVER",
             "classname": "ProcedureItem",
             "response": "RETRACTED & DISARMED",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_CM1",
             "setelements": [
               {
                 "action": "off",
@@ -446,6 +445,7 @@
           {
             "challenge": "*EXTERIOR WALKAROUND",
             "classname": "ProcedureItem",
+            "condition": "ng_getAppPrefs():get(\"general:showstars\")",
             "response": "PERFORM",
             "role": "ng_firole_CM2",
             "setelements": [
@@ -516,7 +516,7 @@
                 "element": "#rwylights"
               },
               {
-                "action": "on",
+                "action": "off",
                 "element": "#winglights"
               },
               {
@@ -599,6 +599,7 @@
           {
             "challenge": "*ENGINE FIRE",
             "classname": "ProcedureItem",
+            "condition": "ng_getAppPrefs():get(\"general:showstars\")",
             "response": "CHECK/TEST",
             "role": "ng_firole_PF",
             "setelements": [
@@ -944,7 +945,7 @@
             ]
           },
           {
-            "challenge": "CHOCKS",
+            "challenge": "<GND>CHOCKS",
             "classname": "ProcedureItem",
             "response": "OFF",
             "role": "ng_firole_SYS",
@@ -956,7 +957,7 @@
             ]
           },
           {
-            "challenge": "DOORS & WINDOWS",
+            "challenge": "<GND>DOORS & WINDOWS",
             "classname": "ProcedureItem",
             "delay": 5,
             "response": "CLOSE & LOCK",
@@ -998,8 +999,8 @@
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"electric:startupapu\") == false",
             "delay": 5,
-            "response": " ",
-            "role": "ng_firole_FO",
+            "response": "PUSH",
+            "role": "ng_firole_PM",
             "setelements": [
               {
                 "action": "chk",
@@ -1094,7 +1095,7 @@
             "challenge": "ATC",
             "classname": "ProcedureItem",
             "response": "AUTO",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_PF",
             "setelements": [
               {
                 "action": "set",
@@ -1198,7 +1199,7 @@
             "setelements": {}
           },
           {
-            "challenge": "JETWAY",
+            "challenge": "<GND>JETWAY",
             "classname": "ProcedureItem",
             "condition": "ng_getAppPrefs():get(\"general:opensam\")",
             "nocheck": 1,
@@ -1406,7 +1407,7 @@
             "classname": "ProcedureItem",
             "nocheck": 1,
             "response": "AS REQUIRED",
-            "role": "ng_firole_FO",
+            "role": "ng_firole_PM",
             "setelements": [
               {
                 "action": "off",
@@ -2087,7 +2088,7 @@
             "challenge": "FLAPS",
             "classname": "ProcedureItem",
             "condition": "get(\"sim/cockpit2/controls/flap_handle_request_ratio\") > 0.250",
-            "response": "AT S SPEED",
+            "response": " ",
             "role": "ng_firole_PM",
             "setelements": [
               {
@@ -2104,7 +2105,7 @@
             "challenge": "*CALL FOR FLAPS UP",
             "classname": "ProcedureItem",
             "condition": "get(\"sim/cockpit2/controls/flap_handle_request_ratio\") > 0",
-            "response": " ",
+            "response": "AT S SPEED",
             "role": "ng_firole_PF",
             "setelements": [
               {
@@ -3595,7 +3596,7 @@
             "setelements": {}
           },
           {
-            "challenge": "JETWAY",
+            "challenge": "<GND>JETWAY",
             "classname": "ProcedureItem",
             "condition": "ng_getAppPrefs():get(\"general:opensam\")",
             "nocheck": 1,
@@ -3609,7 +3610,7 @@
             ]
           },
           {
-            "challenge": "DOORS",
+            "challenge": "<GND>DOORS",
             "classname": "ProcedureItem",
             "nocheck": 1,
             "response": "AS REQUIRED",
@@ -3715,7 +3716,7 @@
             ]
           },
           {
-            "challenge": "CHOCKS",
+            "challenge": "<GND>CHOCKS",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:hasgroundobj\") and ng_getAcfPrefs():get(\"general:haschocks\")",
             "response": "SET",
@@ -3810,7 +3811,7 @@
             ]
           },
           {
-            "challenge": "ADIRS 1,3,2",
+            "challenge": "ADIRS",
             "classname": "ProcedureItem",
             "delay": 1,
             "response": "OFF",
@@ -3906,7 +3907,7 @@
             ]
           },
           {
-            "challenge": "BAT 1 & 2",
+            "challenge": "BAT",
             "classname": "ProcedureItem",
             "response": "OFF",
             "role": "ng_firole_CM2",

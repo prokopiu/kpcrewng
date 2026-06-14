@@ -1708,14 +1708,6 @@
               },
               {
                 "acts": [
-                  ""
-                ],
-                "name": "apugen2",
-                "title": "APU Generator 2",
-                "type": "undefined"
-              },
-              {
-                "acts": [
                   "on",
                   "off",
                   "tgl",
