@@ -39,6 +39,40 @@
                 "name": "engaice2",
                 "title": "Engine Antiice 2",
                 "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdoff": "toliss_airbus/antiicecommands/ENG3Off",
+                "cmdon": "toliss_airbus/antiicecommands/ENG3On",
+                "cmdtgl": "toliss_airbus/antiicecommands/ENG3Toggle",
+                "dref": "AirbusFBW/ATA30SwitchAnims",
+                "indx": 4,
+                "name": "engaice3",
+                "title": "Engine Antiice 3",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdoff": "toliss_airbus/antiicecommands/ENG4Off",
+                "cmdon": "toliss_airbus/antiicecommands/ENG4On",
+                "cmdtgl": "toliss_airbus/antiicecommands/ENG4Toggle",
+                "dref": "AirbusFBW/ATA30SwitchAnims",
+                "indx": 5,
+                "name": "engaice4",
+                "title": "Engine Antiice 4",
+                "type": "onofftgl"
               }
             ],
             "name": "engaice"
@@ -145,6 +179,32 @@
                 "name": "bleed2",
                 "title": "Engine Bleed 2",
                 "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "dref": "AirbusFBW/ENG3BleedSwitch",
+                "name": "bleed3",
+                "title": "Engine Bleed 3",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "dref": "AirbusFBW/ENG4BleedSwitch",
+                "name": "bleed4",
+                "title": "Engine Bleed 4",
+                "type": "dataref"
               }
             ],
             "name": "bleeds"
@@ -227,7 +287,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "AirbusFBW/AftIsolValve",
+                "dref": "AirbusFBW/FwdIsolValve",
                 "name": "isovalve2",
                 "title": "Isolation Valve 2",
                 "type": "dataref"
@@ -307,12 +367,6 @@
                 "acts": {},
                 "name": "recircfan1",
                 "title": "Recirc Fan 1",
-                "type": "undefined"
-              },
-              {
-                "acts": {},
-                "name": "recircfan2",
-                "title": "Recirc Fan 2",
                 "type": "undefined"
               }
             ],
@@ -1189,8 +1243,9 @@
                 "acts": [
                   "chk"
                 ],
-                "dref": "sim/cockpit2/controls/left_brake_ratio",
-                "fcheck": "function (a) return get(\"sim/cockpit2/controls/left_brake_ratio\") + get(\"sim/cockpit2/controls/right_brake_ratio\") > 1.5 end",
+                "dref": "AirbusFBW/BrakePedalAnim",
+                "fcheck": "function (a) return get(\"AirbusFBW/BrakePedalAnim\") == 1 end",
+                "indx": 0,
                 "name": "_brakecheck",
                 "title": "true if both wheelbrake 1",
                 "type": "dataref"
@@ -1709,14 +1764,6 @@
               },
               {
                 "acts": [
-                  ""
-                ],
-                "name": "apugen2",
-                "title": "APU Generator 2",
-                "type": "undefined"
-              },
-              {
-                "acts": [
                   "on",
                   "off",
                   "tgl",
@@ -1825,48 +1872,8 @@
                 "type": "dataref"
               },
               {
-                "name": "acbustie2",
-                "title": "AC Bus Tie 2",
-                "type": "undefined"
-              },
-              {
-                "name": "acbustie3",
-                "title": "AC Bus Tie 3",
-                "type": "undefined"
-              },
-              {
-                "name": "acbustie4",
-                "title": "AC Bus Tie 4",
-                "type": "undefined"
-              },
-              {
-                "name": "dcbustie1",
-                "title": "DC Bus Tie 1",
-                "type": "undefined"
-              },
-              {
-                "name": "dcbustie2",
-                "title": "DC Bus Tie 2",
-                "type": "undefined"
-              },
-              {
-                "name": "dcbustie3",
-                "title": "DC Bus Tie 2",
-                "type": "undefined"
-              },
-              {
-                "name": "dcbustie4",
-                "title": "DC Bus Tie 2",
-                "type": "undefined"
-              },
-              {
                 "name": "essentialbus1",
                 "title": "Essential Bus 1",
-                "type": "undefined"
-              },
-              {
-                "name": "essentialbus2",
-                "title": "Essential Bus 2",
                 "type": "undefined"
               }
             ],
@@ -1933,6 +1940,34 @@
                 "indx": 1,
                 "name": "generator2",
                 "title": "Engine Generator 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/ElecOHPArray",
+                "indx": 13,
+                "name": "generator3",
+                "title": "Engine Generator 3",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/ElecOHPArray",
+                "indx": 14,
+                "name": "generator4",
+                "title": "Engine Generator 4",
                 "type": "dataref"
               }
             ],
@@ -2058,11 +2093,6 @@
               {
                 "name": "eec1",
                 "title": "EEC Mode 1",
-                "type": "undefined"
-              },
-              {
-                "name": "eec2",
-                "title": "EEC Mode 2",
                 "type": "undefined"
               }
             ],
@@ -2346,21 +2376,6 @@
                 "name": "fuelctrlsw1",
                 "title": "Fuel control switch 1",
                 "type": "undefined"
-              },
-              {
-                "name": "fuelctrlsw2",
-                "title": "Fuel control switch 2",
-                "type": "undefined"
-              },
-              {
-                "name": "fuelctrlsw3",
-                "title": "Fuel control switch 3",
-                "type": "undefined"
-              },
-              {
-                "name": "fuelctrlsw4",
-                "title": "Fuel control switch 4",
-                "type": "undefined"
               }
             ],
             "name": "fuelcontrolsws"
@@ -2379,6 +2394,132 @@
                 "indx": 0,
                 "name": "fuelpump1",
                 "title": "Fuel pump left 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 11,
+                "name": "fuelpump10",
+                "title": "Fuel Pump 10",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 8,
+                "name": "fuelpump11",
+                "title": "Fuel Pump 11",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 9,
+                "name": "fuelpump12",
+                "title": "Fuel Pump 12",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 17,
+                "name": "fuelpump13",
+                "title": "Fuel Pump 13",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 18,
+                "name": "fuelpump14",
+                "title": "Fuel Pump 14",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 19,
+                "name": "fuelpump15",
+                "title": "Fuel Pump 15",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 20,
+                "name": "fuelpump16",
+                "title": "Fuel Pump 16",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 21,
+                "name": "fuelpump17",
+                "title": "Fuel Pump 17",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 23,
+                "name": "fuelpump18",
+                "title": "Fuel Pump 18",
                 "type": "dataref"
               },
               {
@@ -2450,6 +2591,48 @@
                 "name": "fuelpump6",
                 "title": "Fuel Pump 6",
                 "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 15,
+                "name": "fuelpump7",
+                "title": "Fuel Pump 7",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 16,
+                "name": "fuelpump8",
+                "title": "Fuel Pump 8",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 10,
+                "name": "fuelpump9",
+                "title": "Fuel Pump 9",
+                "type": "dataref"
               }
             ],
             "name": "fuelpumps"
@@ -2471,9 +2654,46 @@
                 "type": "dataref"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 12,
                 "name": "fuelxfeed2",
                 "title": "Fuel Crossfeed 2",
-                "type": "undefined"
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 13,
+                "name": "fuelxfeed3",
+                "title": "Fuel Crossfeed 3",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "AirbusFBW/FuelOHPArray",
+                "indx": 14,
+                "name": "fuelxfeed4",
+                "title": "Fuel Crossfeed 4",
+                "type": "dataref"
               }
             ],
             "name": "fuelxfeeds"
@@ -2614,17 +2834,16 @@
                 "acts": [
                   "on",
                   "off",
-                  " ",
-                  " ",
-                  ""
+                  "tgl",
+                  "set",
+                  "chk"
                 ],
-                "dref": "AirbusFBW/ClockChronoValue",
-                "fcheck": "function (a) return true end",
+                "dref": "AirbusFBW/ClockETSwitch",
                 "foff": "function (a) command_once(\"toliss_airbus/chrono/ChronoResetPush\") end",
                 "fon": "function (a) command_once(\"toliss_airbus/chrono/ChronoStartStopPush\") end",
-                "name": "chronometer",
+                "name": "chronometer1",
                 "title": "Chronometer 1",
-                "type": "custom"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -2850,31 +3069,37 @@
             "elements": [
               {
                 "acts": [
-                  "on",
-                  "off",
-                  "tgl",
+                  "up",
+                  "dn",
+                  "set",
                   "chk",
-                  "set"
+                  ""
                 ],
                 "dref": "AirbusFBW/OHPLightSwitches",
+                "incr": 1,
                 "indx": 12,
+                "max": 1,
+                "min": 0,
                 "name": "nosmoking",
                 "title": "No Smoking",
-                "type": "dataref"
+                "type": "dialdref"
               },
               {
                 "acts": [
-                  "on",
-                  "off",
-                  "tgl",
+                  "up",
+                  "dn",
+                  "set",
                   "chk",
-                  "set"
+                  ""
                 ],
                 "dref": "AirbusFBW/OHPLightSwitches",
+                "incr": 1,
                 "indx": 11,
+                "max": 1,
+                "min": 0,
                 "name": "seatbelts",
                 "title": "Seatbelt Signs",
-                "type": "dataref"
+                "type": "dialdref"
               }
             ],
             "name": "paxsigns"
@@ -3122,6 +3347,24 @@
       {
         "name": "hydraulics",
         "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "AirbusFBW/BrakeAccu",
+                "name": "accupress",
+                "title": "ACCU PRESS",
+                "type": "dataref"
+              }
+            ],
+            "name": "accu"
+          },
           {
             "elements": [
               {
@@ -3408,17 +3651,20 @@
             "elements": [
               {
                 "acts": [
-                  "on",
-                  "off",
-                  "tgl",
+                  "up",
+                  "dn",
+                  "set",
                   "chk",
-                  "set"
+                  ""
                 ],
                 "dref": "AirbusFBW/OHPLightSwitches",
+                "incr": 1,
                 "indx": 7,
+                "max": 1,
+                "min": 0,
                 "name": "strobelight",
                 "title": "Strobe light",
-                "type": "dataref"
+                "type": "dialdref"
               }
             ],
             "name": "strobelights"
@@ -3480,17 +3726,20 @@
             "elements": [
               {
                 "acts": [
-                  "on",
-                  "off",
-                  "tgl",
+                  "up",
+                  "dn",
                   "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
                 "dref": "AirbusFBW/OHPLightSwitches",
+                "incr": 1,
                 "indx": 13,
+                "max": 1,
+                "min": 0,
                 "name": "domelight",
                 "title": "Dome light",
-                "type": "dataref"
+                "type": "dialdref"
               }
             ],
             "name": "domelights"
@@ -3499,17 +3748,20 @@
             "elements": [
               {
                 "acts": [
-                  "on",
-                  "off",
-                  " ",
+                  "up",
+                  "dn",
                   "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
                 "dref": "AirbusFBW/OHPLightSwitches",
+                "incr": 1,
                 "indx": 10,
+                "max": 1,
+                "min": 0,
                 "name": "emerlight",
                 "title": "EMER light",
-                "type": "dataref"
+                "type": "dialdref"
               }
             ],
             "name": "emerlights"
@@ -3855,7 +4107,7 @@
                 "dref": "AirbusFBW/CrewOxySwitch",
                 "name": "crewsupply",
                 "title": "Crew Supply",
-                "type": "onofftgl"
+                "type": "dataref"
               }
             ],
             "name": "air"
@@ -4170,6 +4422,24 @@
               }
             ],
             "name": "radiounits"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/CvrGndCtrl",
+                "name": "rcdrgndctl",
+                "title": "RCDR GND CTRL",
+                "type": "dataref"
+              }
+            ],
+            "name": "recorder"
           },
           {
             "elements": [
