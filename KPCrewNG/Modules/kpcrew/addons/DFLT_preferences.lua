@@ -49,6 +49,7 @@ general:add(preference:new("mcpdefspd",100,	ng_type_int,"MCP Initial Speed|0"))	
 general:add(preference:new("mcpdefhdg",1,	ng_type_int,"MCP Initial Heading|0"))				-- general:mcpdefhdg
 general:add(preference:new("mcpdefalt",4900,ng_type_int,"MCP Initial Altitude|0"))				-- general:mcpdefalt
 general:add(preference:new("hasantiskid",	false,ng_type_flag,	"Has Anti-Skid?|Yes|No"))		-- general:hasantiskid
+general:add(preference:new("hastoconfig",	false,ng_type_flag,	"Has T.O. Config Warn?|Yes|No"))		-- general:hastoconfig
 
 -- --------------------------------------------------------------------------------------------
 
@@ -121,6 +122,7 @@ controls:add(preference:new("numtoflaps",	5,ng_type_int,"# T/O Flaps|0"))						-
 controls:add(preference:new("numldflaps",	4,ng_type_int,"# LDG Flaps|0"))						-- controls:numldflaps
 	controls:add(preference:new("ldflapslbl",	"|5|6|7|FULL",ng_type_text,"LDG Flaps|"))				-- controls:ldflapslbl
 	controls:add(preference:new("ldflapsind",	"|6|7|8|9",ng_type_text,"LDG Flaps Index|"))			-- controls:ldflapsind
+controls:add(preference:new("hasyawdamper",	false,ng_type_flag,"Has Yawdamper?|Yes|No"))		-- controls:hasyawdamper
 -- --------------------------------------------------------------------------------------------
 
 -- -------------------------- EFIS
@@ -154,7 +156,8 @@ engines:add(preference:new("nrengines",		2,ng_type_int,"Number of Engines|0"))		
 engines:add(preference:new("startseq",		"|2 THEN 1|1 THEN 2",ng_type_text,"Start Sequence|")) -- engines:startseq
 engines:add(preference:new("hasfiretests",	false,ng_type_flag,"Has Fire Test?|Yes|No"))		-- engines:hasfiretests
 engines:add(preference:new("haseec",		false,ng_type_flag,"Has EEC?|Yes|No"))				-- engines:haseec
-engines:add(preference:new("hasstartsels",	false,ng_type_flag,"Has Start Selectors?|Yes|No"))	-- engines:hasstartsels
+engines:add(preference:new("hasstartsels",	false,ng_type_flag,"Has Start Selectors?|Yes|No"))		-- engines:hasstartsels
+engines:add(preference:new("hasstartlvrs",	false,ng_type_flag,"Has Start Levers?|Yes|No"))		-- engines:hasstartlvrs
 engines:add(preference:new("hastothrust",	false,ng_type_flag,
 	"Has Takeoff Thrust Rating?|Yes|No")) 														-- engines:hastothrust
 	engines:add(preference:new("tothrust",	"|OPTIMUM|D-TO|D-TO1|D-TO2",ng_type_text,"Takeoff Thrust|",	
@@ -188,6 +191,10 @@ lights:add(preference:new("hasdomelts",		true,ng_type_flag,"Has Dome Lights|Yes|
 lights:add(preference:new("hasemerlts",		false,ng_type_flag,"Has Emergency Lights|Yes|No"))	-- lights:hasemerlts
 lights:add(preference:new("hasstrbbeacon",	false,ng_type_flag,"Has Strobes as Beacon|Yes|No"))	-- lights:hasstrbbeacon
 lights:add(preference:new("hasllastaxi",	false,ng_type_flag,"Has LLs as Taxilight|Yes|No"))	-- lights:hasllastaxi
+lights:add(preference:new("haslogolts",		true,ng_type_flag,"Has Logo Lights?|Yes|No"))		-- lights:haslogolts
+lights:add(preference:new("haswinglts",		true,ng_type_flag,"Has Wing Lights?|Yes|No"))		-- lights:haswinglts
+lights:add(preference:new("haswheellts",	true,ng_type_flag,"Has Wheel Lights?|Yes|No"))		-- lights:haswheellts
+lights:add(preference:new("hasrwylts",		true,ng_type_flag,"Has Runway Lights?|Yes|No"))		-- lights:hasrwylts
 lights:add(preference:new("nrlandlights",	2,ng_type_int,"Number Landing Lights|0"))			-- lights:nrlandlights
 
 -- --------------------------------------------------------------------------------------------
