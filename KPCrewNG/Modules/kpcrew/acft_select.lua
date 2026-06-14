@@ -16,7 +16,7 @@ function ng_acft_select(component)
 	-- ====== Select the addon modules based on ICAO code
 	if PLANE_ICAO == "B738" and PLANE_TAILNUMBER == "ZB738" then
 		icao = "B737" -- Zibo B738
-		sopicao = "DFLT"
+		sopicao = "B737"
 	elseif PLANE_ICAO == "B739" then
 		icao = "B737" -- LevelUp B739
 		sopicao = "DFLT"
@@ -86,9 +86,9 @@ function ng_acft_select(component)
 		sopicao = "A33L"
 		
 	-- FlightFactor A320
-	-- elseif PLANE_ICAO == "A320" then
-		-- icao = "A320"
-		-- sopicao = "DFLT"
+	elseif PLANE_ICAO == "A320" and PLANE_TAILNUMBER == "D-AXLA" then
+		icao = "A320"
+		sopicao = "A320"
 		
 	-- Inibuilds A300
 	elseif PLANE_ICAO == "A306" then
@@ -121,12 +121,12 @@ function ng_acft_select(component)
 		sopicao = "DFLT"
 
 	-- Airsim3D C-560XL
-	elseif PLANE_TAILNUM == "C-DVMC" then
+	elseif PLANE_TAILNUMBER == "C-DVMC" then
 		icao = "C560"
 		sopicao = "DFLT"
 
 	-- Coolimata Concorde
-	elseif PLANE_TAILNUM == "CONC" then
+	elseif PLANE_TAILNUMBER == "CONC" then
 		icao = "CONC"
 		sopicao = "DFLT"
 
