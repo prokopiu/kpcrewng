@@ -2019,7 +2019,7 @@ function ng_draw_main_window()
 -- -----------------------------------------------------------------------------------------
 -- appy current state to be active
 		local function systems_apply()
-			systems_save()
+			-- systems_save()
 			local systems = Systems:new("Aircraft Systems",SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_system_icao.."_systems.json")
 			systems:load()
 			ng_set_active_sys(systems)
@@ -2590,7 +2590,7 @@ function ng_draw_main_window()
 -- -----------------------------------------------------------------------------------------
 --- apply edited SOP
 		local function sop_apply()
-			sop_save()
+			-- sop_save()
 			local sop = SOP:new("SOP Default Aircraft",SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_sop_icao.."_sop.json")
 			sop:load()
 			ng_set_active_sop(sop)
