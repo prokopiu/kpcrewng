@@ -158,12 +158,7 @@ engines:add(preference:new("hasfiretests",	false,ng_type_flag,"Has Fire Test?|Ye
 engines:add(preference:new("haseec",		false,ng_type_flag,"Has EEC?|Yes|No"))				-- engines:haseec
 engines:add(preference:new("hasstartsels",	false,ng_type_flag,"Has Start Selectors?|Yes|No"))		-- engines:hasstartsels
 engines:add(preference:new("hasstartlvrs",	false,ng_type_flag,"Has Start Levers?|Yes|No"))		-- engines:hasstartlvrs
-engines:add(preference:new("hastothrust",	false,ng_type_flag,
-	"Has Takeoff Thrust Rating?|Yes|No")) 														-- engines:hastothrust
-	engines:add(preference:new("tothrust",	"|OPTIMUM|D-TO|D-TO1|D-TO2",ng_type_text,"Takeoff Thrust|",	
-		nil,"return ng_getAcfPrefs():get(\"engines:hastothrust\")"))  								-- engines:tothrust
-	engines:add(preference:new("hasflextemp",	false,ng_type_flag,"Has Takeoff Flex Temperature?|Yes|No",
-		nil,"return ng_getAcfPrefs():get(\"controls:hastothrust\")"))								-- engines:hasflextemp
+engines:add(preference:new("hastothrust",	false,ng_type_flag,"Has T/O Thrust Rating?|Yes|No")) -- engines:hastothrust
 engines:add(preference:new("n2afterstart",	50,ng_type_int,"N2 Value start|0"))					-- engines:n2afterstart
 -- --------------------------------------------------------------------------------------------
 
