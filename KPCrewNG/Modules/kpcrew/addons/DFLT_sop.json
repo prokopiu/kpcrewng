@@ -124,7 +124,7 @@
             ]
           },
           {
-            "challenge": "*HYDRAULIC PUMPS BOEING",
+            "challenge": "*HYDRAULIC PANEL BOEING",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
             "response": "ELEC OFF & ENG ON",
@@ -147,7 +147,7 @@
             ]
           },
           {
-            "challenge": "*HYDRAULIC PUMPS AIRBUS",
+            "challenge": "*HYDRAULIC PANEL AIRBUS",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:isairbus\")",
             "response": "ALL PUMPS AUTO/OFF",
@@ -894,6 +894,33 @@
             ]
           },
           {
+            "challenge": "*GLARESHIELD",
+            "classname": "ProcedureItem",
+            "response": "INITIAL SETUP",
+            "role": "ng_firole_CPT",
+            "setelements": [
+              {
+                "action": "set",
+                "element": "hdgsel",
+                "fvalue": "ng_getBriefPrefs():get(\"takeoff:inithdg\")+0"
+              },
+              {
+                "action": "set",
+                "element": "altsel",
+                "fvalue": "ng_getBriefPrefs():get(\"takeoff:initalt\")+0"
+              },
+              {
+                "action": "set",
+                "element": "speedsel",
+                "fvalue": "ng_getBriefPrefs():get(\"takeoff:rwyv2\")+0"
+              },
+              {
+                "action": "chk",
+                "element": "wait"
+              }
+            ]
+          },
+          {
             "challenge": "*OXYGEN PANEL",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"air:hasoxygen\")",
@@ -920,7 +947,7 @@
             ]
           },
           {
-            "challenge": "*MACH OVERSPEED TEST",
+            "challenge": "*MACH OVSPD & STALL WARNING TESTS",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
             "response": "PERFORM",
@@ -950,7 +977,7 @@
             ]
           },
           {
-            "challenge": "*NAVIGATION PANEL",
+            "challenge": "*NAVIGATION PANEL BOEING",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
             "response": "ON",
@@ -963,7 +990,7 @@
             ]
           },
           {
-            "challenge": "*DISPLAY PANEL",
+            "challenge": "*DISPLAY PANEL BOEING",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
             "response": "ON",
@@ -1153,7 +1180,7 @@
             ]
           },
           {
-            "challenge": "*PRESSURIZATION BOEING",
+            "challenge": "*PRESSURIZATION PANEL BOEING",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
             "response": "ALTITUDES & MODE SELECTOR GND",
@@ -1304,12 +1331,7 @@
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": " ",
             "role": "ng_firole_PM",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
+            "setelements": {}
           },
           {
             "challenge": "GEAR PINS & COVERS",
@@ -1790,20 +1812,6 @@
             "response": "COMPLETED",
             "role": "ng_firole_FO",
             "setelements": {}
-          },
-          {
-            "challenge": "JETWAY",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAppPrefs():get(\"general:opensam\")",
-            "nocheck": 1,
-            "response": "DISCONNECT",
-            "role": "ng_firole_SYS",
-            "setelements": [
-              {
-                "action": "on",
-                "element": "samjetwayundock"
-              }
-            ]
           },
           {
             "challenge": "*START PUSHBACK",
@@ -2405,6 +2413,18 @@
             "response": "COMPLETED",
             "role": "ng_firole_FO",
             "setelements": {}
+          },
+          {
+            "challenge": "*RECALL",
+            "classname": "ProcedureItem",
+            "response": "CHECKED",
+            "role": "ng_firole_FO",
+            "setelements": [
+              {
+                "action": "chk",
+                "element": "wait"
+              }
+            ]
           },
           {
             "challenge": "*TAXI LIGHTS",

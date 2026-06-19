@@ -207,11 +207,17 @@
                   "chk",
                   "set"
                 ],
-                "dref": "sim/cockpit2/bleedair/actuators/apu_bleed",
-                "name": "apubleed",
-                "title": "APU Bleed",
+                "dref": "sim/cockpit2/bleedair/actuators/engine_bleed_sov",
+                "indx": 0,
+                "name": "bleed1",
+                "title": "Engine Bleed 1",
                 "type": "dataref"
-              },
+              }
+            ],
+            "name": "apubleeds"
+          },
+          {
+            "elements": [
               {
                 "acts": [
                   "on",
@@ -420,9 +426,19 @@
                 "type": "undefined"
               },
               {
+                "name": "fltgndswitch",
+                "title": "Boeing FLT GND Switch",
+                "type": "undefined"
+              },
+              {
                 "acts": {},
                 "name": "landalt",
                 "title": "Landing Altitude",
+                "type": "undefined"
+              },
+              {
+                "name": "pressuremode",
+                "title": "Pressurization mode selector",
                 "type": "undefined"
               }
             ],
@@ -1889,14 +1905,6 @@
                 "type": "undefined"
               },
               {
-                "acts": [
-                  "chk",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "laminar/A333/fire/apu_test_on",
                 "name": "apufiretest",
                 "title": "APU Fire test",
                 "type": "undefined"
@@ -2089,7 +2097,12 @@
                 "name": "gendrivedisc4",
                 "title": "Generator Drive Disconnect 4",
                 "type": "undefined"
-              },
+              }
+            ],
+            "name": "gendrives"
+          },
+          {
+            "elements": [
               {
                 "acts": [
                   "on",
@@ -2164,15 +2177,6 @@
                 "type": "onofftgl"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "set",
-                  "chk"
-                ],
-                "cmdtgl": "sim/electrical/GPU_toggle",
-                "dref": "xcraft/electric/GPU_sw",
                 "name": "gpugen1",
                 "title": "GPU Generator 1",
                 "type": "undefined"
@@ -2362,7 +2366,7 @@
                   " ",
                   " "
                 ],
-                "dref": "laminar/A333/sound/trent_N2_percent",
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
                 "indx": 0,
                 "name": "_eng1n2",
                 "title": "Engine 1 N2",
@@ -2370,13 +2374,13 @@
               },
               {
                 "acts": [
-                  "chk",
                   " ",
                   " ",
                   " ",
-                  " "
+                  " ",
+                  "chk"
                 ],
-                "dref": "laminar/A333/sound/trent_N2_percent",
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
                 "indx": 1,
                 "name": "_eng2n2",
                 "title": "Engine 2 N2",
