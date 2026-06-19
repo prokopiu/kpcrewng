@@ -2871,7 +2871,7 @@ function ng_draw_main_window()
 											ng_imgui_in_button(nlabel..nelement.element.."removeval", "-", 15, 20, 
 												function () nelement.value = nil end) imgui.SameLine()
 											if nelement.value ~= nil then
-												ng_imgui_in_floatfield(nlabel..nelement.element.."val", 258, color_white, 0, "%7.2f",  
+												ng_imgui_in_floatfield(nlabel..nelement.element.."val", 258, color_white, 0, "%8.3f",  
 													nelement.value, function (textout) nelement.value = textout end) 
 											end
 										else
@@ -3389,7 +3389,7 @@ function ng_draw_sop_window()
 		-- imgui.SetNextWindowSize(460,(15 + 2 ) * 23 + 12 + 27)
 		imgui.SetNextWindowPos(ng_scrn_width-455,ng_scrn_height-((15 + 2 ) * 23 + 12 + 77))
 	else
-		imgui.SetNextWindowSize({490,ng_get_active_sop():getNumberFlows()*25})
+		imgui.SetNextWindowSize({490,ng_get_active_sop():getNumberFlows()*46})
 		imgui.SetNextWindowPos({ng_scrn_width-497, (60/17)*ng_get_active_sop():getNumberFlows()})
 	end
 
@@ -3446,7 +3446,7 @@ function ng_draw_ctrl_window()
 		imgui.SetNextWindowPos(ng_scrn_width-705,ng_scrn_height-46)
 	else
 		imgui.SetNextWindowSize({615,50})
-		imgui.SetNextWindowPos({ng_scrn_width-615,ng_scrn_height-46})
+		imgui.SetNextWindowPos({ng_scrn_width-615,ng_scrn_height-146})
 	end
 	
 	local sop = ng_get_active_sop()
