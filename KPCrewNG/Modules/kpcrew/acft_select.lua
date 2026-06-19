@@ -30,6 +30,11 @@ function ng_acft_select(component)
 		icao = "B737" -- LevelUp B738
 		sopicao = "DFLT"
 
+	-- FlyJsim B732
+	elseif PLANE_ICAO == "B732" then
+		icao = "B732"
+		sopicao = "B732"
+
 	-- Epic Victory Aerobask
 	elseif PLANE_ICAO == "EVIC" then
 		icao = "EVIC"
