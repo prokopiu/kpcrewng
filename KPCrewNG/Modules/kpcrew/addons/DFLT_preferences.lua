@@ -199,6 +199,7 @@ local weights 				= preferenceGroup:new("weights","WEIGHTS")
 weights:add(preference:new("canloadpld",	false,ng_type_flag,"Can load payload?|Yes|No"))		-- weights:canloadfuel
 weights:add(preference:new("maxramp",		-1,ng_type_int,"Max Ramp Weight|0"))				-- weights:maxramp
 weights:add(preference:new("dow",			-1,ng_type_int,"Dry Operating Weight|0"))			-- weights:dow	
+weights:add(preference:new("oew",			-1,ng_type_int,"Operating empty Weight|0"))			-- weights:oew	
 weights:add(preference:new("maxzfw",		-1,ng_type_int,"Max ZFW|0"))						-- weights:maxzfw
 weights:add(preference:new("maxtow",		-1,ng_type_int,"Max TOW|0"))						-- weights:maxtow
 weights:add(preference:new("maxldw",		-1,ng_type_int,"Max LDW|0"))						-- weights:maxldw
@@ -257,10 +258,11 @@ end
 
 --- Get Dry Operating Weight. Use Empty Weight if not specified
 function ng_get_DOW()
-	local dow = ng_getAcfPrefs():get("weights:dow")
+	local dow = ng_getAcfPrefs():get("weights:oew")
 	if dow == -1 then
 		dow = get("sim/aircraft/weight/acf_m_empty")
-		ng_getAcfPrefs():set("weights:dow",dow)
+		ng_getAcfPrefs():set("weights:oew",dow)
+		ng_getAcfPrefs():set("weights:dow",dow-250)
 	end
 	if ng_getAppPrefs():get("general:weightunit") == 1 then
 		return dow
@@ -330,7 +332,7 @@ end
 function ng_get_MaxPayload()
 	local mpayload = ng_getAcfPrefs():get("weights:maxpayload")
 	if mpayload == -1 then
-		mpayload = ng_get_MaxRampWeight() - ng_get_DOW() - ng_get_MaxFuel()
+		mpayload = ng_get_MZFW() - ng_get_DOW()
 		ng_getAcfPrefs():set("weights:maxpayload",mpayload)
 	end
 	if ng_getAppPrefs():get("general:weightunit") then

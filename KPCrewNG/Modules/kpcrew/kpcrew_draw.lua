@@ -322,10 +322,13 @@ function ng_draw_main_window()
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
+			imgui.Separator()
 			ng_imgui_out_text(color_white,"TRIP FUEL")
 			imgui.TableNextColumn()
+			imgui.Separator()
 			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("fuel:enroute")*ng_kgslbs))
 			imgui.TableNextColumn()
+			imgui.Separator()
 			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:estenroute")))
 
 			imgui.TableNextRow()
@@ -340,9 +343,9 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"FINAL RESERVE")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("fuel:alternate")*ng_kgslbs))
+			ng_imgui_out_text(color_bright_orange, string.format("%6.0f",ng_getBriefPrefs():get("fuel:reserve")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:reserve")))
+			ng_imgui_out_text(color_bright_orange, os.date("!%H%M",ng_getBriefPrefs():get("times:reserve")))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
@@ -374,15 +377,14 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"PLAN BLOCK")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("fuel:plantakeoff")*ng_kgslbs))
+			ng_imgui_out_text(color_bright_orange, string.format("%6.0f",ng_getBriefPrefs():get("fuel:planramp")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:endurance")))
+			ng_imgui_out_text(color_bright_orange, os.date("!%H%M",ng_getBriefPrefs():get("times:endurance")))
 			
-			imgui.Separator()
-			imgui.Separator()
-
 		imgui.EndTable()	
-	
+		imgui.Separator()
+		imgui.Separator()
+
 	end
 -- -----------------------------------------------------------------------------------------
 
@@ -417,15 +419,18 @@ function ng_draw_main_window()
 			ng_imgui_out_text(color_yellow,"   "..ng_weightunit)
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_yellow," MAX/ACF")
-			imgui.Separator()
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
+			imgui.Separator()
 			ng_imgui_out_text(color_white,"EST ZFW")
 			imgui.TableNextColumn()
+			imgui.Separator()
 			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("weights:estzfw")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxzfw")*ng_kgslbs))
+			imgui.Separator()
+			local pcolor = (ng_getBriefPrefs():get("weights:estzfw")*ng_kgslbs > ng_getBriefPrefs():get("weights:maxzfw")*ng_kgslbs and color_red or color_green) 
+			ng_imgui_out_text(pcolor, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxzfw")*ng_kgslbs))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
@@ -433,7 +438,8 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("weights:esttow")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxtow")*ng_kgslbs))
+			local pcolor = (ng_getBriefPrefs():get("weights:esttow")*ng_kgslbs > ng_getBriefPrefs():get("weights:maxtow")*ng_kgslbs and color_red or color_green) 
+			ng_imgui_out_text(pcolor, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxtow")*ng_kgslbs))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
@@ -441,7 +447,8 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("weights:estldw")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxldw")*ng_kgslbs))
+			local pcolor = (ng_getBriefPrefs():get("weights:estldw")*ng_kgslbs > ng_getBriefPrefs():get("weights:maxldw")*ng_kgslbs and color_red or color_green) 
+			ng_imgui_out_text(pcolor, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxldw")*ng_kgslbs))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
@@ -461,7 +468,7 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("weights:payload")*ng_kgslbs))
 			imgui.TableNextColumn()
-			local pcolor = (ng_getBriefPrefs():get("weights:payload")*ng_kgslbs > ng_get_MaxPayload() and color_red or color_grey) 
+			local pcolor = (ng_getBriefPrefs():get("weights:payload")*ng_kgslbs > ng_get_MaxPayload() and color_red or color_green) 
 			ng_imgui_out_text(pcolor, string.format("%6.0f MAX",ng_get_MaxPayload()))
 
 			imgui.TableNextRow()
@@ -486,50 +493,58 @@ function ng_draw_main_window()
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_white,"DOW")
+			ng_imgui_out_text(color_white,"OEW")
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_getBriefPrefs():get("weights:oew")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_get_DOW()))
+			local pcolor = (ng_getBriefPrefs():get("weights:oew")*ng_kgslbs > ng_get_DOW() and color_red or color_green) 
+			ng_imgui_out_text(pcolor, string.format("%6.0f",ng_get_DOW()))
 			
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_white,"*BLOCK FUEL")
+			ng_imgui_out_text(color_white,"PLANNED FUEL")
 			imgui.TableNextColumn()
-			ng_imgui_in_intfield("*BLOCK FUEL:", 50, color_white, 0, ng_getBriefPrefs():get("fuel:planramp")*ng_kgslbs, 
-			function (textout) ng_getBriefPrefs():set("fuel:planramp",textout) end )
+			ng_imgui_out_text(color_bright_orange, string.format("%6.0f", ng_getBriefPrefs():get("fuel:planramp")*ng_kgslbs))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, string.format("%6.0f MAX",ng_getBriefPrefs():get("fuel:maxtanks")*ng_kgslbs))
+			local pcolor = (ng_getBriefPrefs():get("fuel:planramp")*ng_kgslbs > ng_getBriefPrefs():get("fuel:maxtanks")*ng_kgslbs and color_red or color_green) 
+			ng_imgui_out_text(pcolor, string.format("%6.0f MAX",ng_getBriefPrefs():get("fuel:maxtanks")*ng_kgslbs))
+
+			imgui.TableNextRow()
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_white,"ACT FUEL")
+			imgui.TableNextColumn()
+			ng_imgui_out_text(color_bright_orange, string.format("%6.0f",get("sim/flightmodel/weight/m_fuel_total")*ng_kgslbs))
+			imgui.TableNextColumn()
+			local pcolor = (get("sim/flightmodel/weight/m_fuel_total")*ng_kgslbs < ng_getBriefPrefs():get("fuel:planramp")*ng_kgslbs and color_red or color_green) 
+			ng_imgui_out_text(pcolor, string.format("%6.0f PLAN",ng_getBriefPrefs():get("fuel:planramp")*ng_kgslbs))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"ACT ZFW")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_get_zfw()))
+			ng_imgui_out_text(color_bright_orange, string.format("%6.0f",ng_get_zfw()))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxzfw")*ng_kgslbs))
+			local pcolor = (ng_get_zfw() > ng_getBriefPrefs():get("weights:maxzfw")*ng_kgslbs and color_red or color_green) 
+			ng_imgui_out_text(pcolor, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxzfw")*ng_kgslbs))
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"ACT WEIGHT")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, string.format("%6.0f",ng_get_gross_weight()))
+			ng_imgui_out_text(color_bright_orange, string.format("%6.0f",ng_get_gross_weight()))
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxtow")*ng_kgslbs))
+			local pcolor = (ng_get_gross_weight() > ng_getBriefPrefs():get("weights:maxtow")*ng_kgslbs and color_red or color_green) 
+			ng_imgui_out_text(pcolor, string.format("%6.0f MAX",ng_getBriefPrefs():get("weights:maxtow")*ng_kgslbs))
 			
-			imgui.Separator()
-
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"MAC CG")
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_grey, string.format("%6.2f",21.2)) --ng_getBriefPrefs():get("weights:paxweight")))
-			
-			imgui.Separator()
-			imgui.Separator()
-			
+						
 		imgui.EndTable()
-	
+		imgui.Separator()
+
 	end
 -- -----------------------------------------------------------------------------------------
 
@@ -562,14 +577,16 @@ function ng_draw_main_window()
 			ng_imgui_out_text(color_yellow,"EST HHMM")
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_yellow,"SCED HHMM")
-			imgui.Separator()
 			
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
+			imgui.Separator()
 			ng_imgui_out_text(color_white,"TRIP TIME")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:estenroute")).." h")
+			imgui.Separator()
+			ng_imgui_out_text(color_bright_orange, os.date("!%H%M",ng_getBriefPrefs():get("times:estenroute")).." h")
 			imgui.TableNextColumn()
+			imgui.Separator()
 			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:schedenroute")).." h")
 
 			imgui.TableNextRow()
@@ -608,9 +625,9 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"BLOCK TIME")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:estblock")).." h")
+			ng_imgui_out_text(color_bright_orange, os.date("!%H%M",ng_getBriefPrefs():get("times:estblock")).." h")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:schedblock")).." h")
+			ng_imgui_out_text(color_bright_orange, os.date("!%H%M",ng_getBriefPrefs():get("times:schedblock")).." h")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
@@ -628,13 +645,13 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"RESERVE TIME")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:reserve")).." h")
+			ng_imgui_out_text(color_bright_orange, os.date("!%H%M",ng_getBriefPrefs():get("times:reserve")).." h")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"ENDURANCE")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, os.date("!%H%M",ng_getBriefPrefs():get("times:endurance")).." h")
+			ng_imgui_out_text(color_bright_orange, os.date("!%H%M",ng_getBriefPrefs():get("times:endurance")).." h")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
@@ -682,15 +699,15 @@ function ng_draw_main_window()
 			local ddwidth=146
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_yellow,"ORIGIN")
-			imgui.Separator()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_yellow, ng_getBriefPrefs():get("origin:icao").." / "..ng_getBriefPrefs():get("origin:name"))		
-			imgui.Separator()
 			
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
+			imgui.Separator()
 			ng_imgui_out_text(color_white,"AIRPORT ELEVATION")
 			imgui.TableNextColumn()
+			imgui.Separator()
 			ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("origin:elevation").." ft")
 
 			imgui.TableNextRow()
@@ -772,7 +789,7 @@ function ng_draw_main_window()
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_white,"TAKEOFF RWY")
+			ng_imgui_out_text(color_bright_orange,"TAKEOFF RWY")
 			imgui.TableNextColumn()
 			if #ng_briefing_to_rwys > 0 then
 				-- build takeoff runway list
@@ -849,7 +866,7 @@ function ng_draw_main_window()
 				ng_imgui_out_text(color_white,"MAGNETIC COURSE")
 				imgui.TableNextColumn()
 				ng_getBriefPrefs():set("takeoff:rwycourse",ng_briefing_to_rwys[ng_getBriefPrefs():get("origin:selectedrwy")].magnetic_course)
-				ng_imgui_out_text(color_white, ng_getBriefPrefs():get("takeoff:rwycourse"))
+				ng_imgui_out_text(color_bright_orange, ng_getBriefPrefs():get("takeoff:rwycourse"))
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
@@ -860,13 +877,13 @@ function ng_draw_main_window()
 				-- ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("takeoff:rwyheadwind").." kts / "..ng_getBriefPrefs():get("takeoff:rwycrosswind").." kts")
 				ng_getBriefPrefs():set("takeoff:rwyheadwind",ng_calc_headwind_spd(ng_getBriefPrefs():get("takeoff:windhdg"),ng_getBriefPrefs():get("takeoff:windspd"),ng_getBriefPrefs():get("takeoff:rwycourse")))
 				ng_getBriefPrefs():set("takeoff:rwycrosswind",ng_calc_crosswind_spd(ng_getBriefPrefs():get("takeoff:windhdg"),ng_getBriefPrefs():get("takeoff:windspd"),ng_getBriefPrefs():get("takeoff:rwycourse")))
-				ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("takeoff:rwyheadwind").." kts / "..ng_getBriefPrefs():get("takeoff:rwycrosswind").." kts")
+				ng_imgui_out_text(color_bright_orange, ng_getBriefPrefs():get("takeoff:rwyheadwind").." kts / "..ng_getBriefPrefs():get("takeoff:rwycrosswind").." kts")
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"WIND | TEMP")
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_white, string.format("%03.0f",ng_getBriefPrefs():get("takeoff:windhdg")).."/"..string.format("%02.0f",ng_getBriefPrefs():get("takeoff:windspd")).." | "..ng_getBriefPrefs():get("takeoff:temperature").." C")
+				ng_imgui_out_text(color_bright_orange, string.format("%03.0f",ng_getBriefPrefs():get("takeoff:windhdg")).."/"..string.format("%02.0f",ng_getBriefPrefs():get("takeoff:windspd")).." | "..ng_getBriefPrefs():get("takeoff:temperature").." C")
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
@@ -881,6 +898,7 @@ function ng_draw_main_window()
 			end
 
 		imgui.EndTable()
+		imgui.Separator()
 		imgui.Separator()
 	
 	end
@@ -918,8 +936,10 @@ function ng_draw_main_window()
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
+			imgui.Separator()
 			ng_imgui_out_text(color_white,"DEPARTURE TYPE")
 			imgui.TableNextColumn()
+			imgui.Separator()
 			local splitTitle = ng_split(ng_getBriefPrefs():find("origin:deptype"):getTitle(),"|")
 			ng_imgui_in_combolist("Odeptype", splitTitle, ng_getBriefPrefs():get("origin:deptype"), 
 				function (textin) ng_getBriefPrefs():set("origin:deptype",textin) end, ddwidth)
@@ -935,12 +955,12 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"SQUAWK")
 			imgui.TableNextColumn()
-			ng_imgui_in_tfield("Osquawk", ddwidth, color_white, 5, string.format("%04.0f",ng_getBriefPrefs():get("origin:squawk")), 
+			ng_imgui_in_tfield("Osquawk", ddwidth, color_bright_orange, 5, string.format("%04.0f",ng_getBriefPrefs():get("origin:squawk")), 
 				function (textout) ng_getBriefPrefs():set("origin:squawk",textout) end )
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_white,"TAKEOFF FLAPS")
+			ng_imgui_out_text(color_bright_orange,"TAKEOFF FLAPS")
 			imgui.TableNextColumn()
 			local splitTitle = ng_split(ng_getAcfPrefs():get("controls:toflapslbl"),"|")
 			ng_imgui_in_combolist("oflaps", splitTitle, ng_getBriefPrefs():get("takeoff:selectedflaps"), 
@@ -998,11 +1018,11 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"TAKEOFF V1,VR,V2")
 			imgui.TableNextColumn()
-			ng_imgui_in_intfield("ov1", 30, color_white, 0, ng_getBriefPrefs():get("takeoff:rwyv1"), 
+			ng_imgui_in_intfield("ov1", 30, color_bright_orange, 0, ng_getBriefPrefs():get("takeoff:rwyv1"), 
 				function (textout) ng_getBriefPrefs():set("takeoff:rwyv1",textout) end ) imgui.SameLine()
-			ng_imgui_in_intfield("ovr", 30, color_white, 0, ng_getBriefPrefs():get("takeoff:rwyvr"), 
+			ng_imgui_in_intfield("ovr", 30, color_bright_orange, 0, ng_getBriefPrefs():get("takeoff:rwyvr"), 
 				function (textout) ng_getBriefPrefs():set("takeoff:rwyvr",textout) end ) imgui.SameLine()
-			ng_imgui_in_intfield("ov2", 30, color_white, 0, ng_getBriefPrefs():get("takeoff:rwyv2"), 
+			ng_imgui_in_intfield("ov2", 30, color_bright_orange, 0, ng_getBriefPrefs():get("takeoff:rwyv2"), 
 				function (textout) ng_getBriefPrefs():set("takeoff:rwyv2",textout) end ) imgui.SameLine()
 
 			imgui.TableNextRow()
@@ -1012,17 +1032,17 @@ function ng_draw_main_window()
 			if #ng_briefing_to_rwys > 0 then
 				ng_getBriefPrefs():set("takeoff:inithdg",ng_getBriefPrefs():get("takeoff:rwycourse"))
 			end
-			ng_imgui_in_intfield("ohdg", 30, color_white, 0, ng_getBriefPrefs():get("takeoff:inithdg"), 
+			ng_imgui_in_intfield("ohdg", 30, color_bright_orange, 0, ng_getBriefPrefs():get("takeoff:inithdg"), 
 				function (textout) ng_getBriefPrefs():set("takeoff:inithdg",textout) end ) imgui.SameLine()
 			
-			ng_imgui_in_intfield("oinitalt", 70, color_white, 0, ng_getBriefPrefs():get("takeoff:initalt"), 
+			ng_imgui_in_intfield("oinitalt", 70, color_bright_orange, 0, ng_getBriefPrefs():get("takeoff:initalt"), 
 				function (textout) ng_getBriefPrefs():set("takeoff:initalt",textout) end ) imgui.SameLine()					
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"*BARO Q/A")
 			imgui.TableNextColumn()
-			ng_imgui_in_floatfield("baroq", 40, color_white, 0, "%04.0f",ng_getBriefPrefs():get("takeoff:qaltimeter"), 
+			ng_imgui_in_floatfield("baroq", 40, color_bright_orange, 0, "%04.0f",ng_getBriefPrefs():get("takeoff:qaltimeter"), 
 				function (textout) ng_getBriefPrefs():set("takeoff:qaltimeter",textout) end ) imgui.SameLine()
 			ng_imgui_in_button("convbaro", "<", 15, 20, 
 				function () ng_getBriefPrefs():set("takeoff:qaltimeter",(ng_getBriefPrefs():get("takeoff:altimeter") * 33.8639)) end ) imgui.SameLine()
@@ -1062,15 +1082,15 @@ function ng_draw_main_window()
 			local ddwidth=146
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_yellow,"DESTINATION")
-			imgui.Separator()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_yellow, ng_getBriefPrefs():get("destination:icao").." / "..ng_getBriefPrefs():get("destination:name"))		
-			imgui.Separator()
 			
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
+			imgui.Separator()
 			ng_imgui_out_text(color_white,"AIRPORT ELEVATION")
 			imgui.TableNextColumn()
+			imgui.Separator()
 			ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("destination:elevation").." ft")
 
 			imgui.TableNextRow()
@@ -1121,7 +1141,7 @@ function ng_draw_main_window()
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_white,"LANDING RWY")
+			ng_imgui_out_text(color_bright_orange,"LANDING RUNWAY")
 			imgui.TableNextColumn()
 			if #ng_briefing_ld_rwys > 0 then -- landing runways exist in sim
 				
@@ -1170,13 +1190,13 @@ function ng_draw_main_window()
 				imgui.TableNextColumn()
 				ng_getBriefPrefs():set("landing:rwyheadwind",ng_calc_headwind_spd(ng_getBriefPrefs():get("landing:windhdg"),ng_getBriefPrefs():get("landing:windspd"),ng_getBriefPrefs():get("landing:rwycourse")))
 				ng_getBriefPrefs():set("landing:rwycrosswind",ng_calc_crosswind_spd(ng_getBriefPrefs():get("landing:windhdg"),ng_getBriefPrefs():get("landing:windspd"),ng_getBriefPrefs():get("landing:rwycourse")))
-				ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("landing:rwyheadwind").." kts / "..ng_getBriefPrefs():get("landing:rwycrosswind").." kts")
+				ng_imgui_out_text(color_bright_orange, ng_getBriefPrefs():get("landing:rwyheadwind").." kts / "..ng_getBriefPrefs():get("landing:rwycrosswind").." kts")
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"WIND | TEMP")
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_white, string.format("%03.0f",ng_getBriefPrefs():get("landing:windhdg")).."/"..string.format("%02.0f",ng_getBriefPrefs():get("landing:windspd")).." | "..ng_getBriefPrefs():get("landing:temperature").." C")
+				ng_imgui_out_text(color_bright_orange, string.format("%03.0f",ng_getBriefPrefs():get("landing:windhdg")).."/"..string.format("%02.0f",ng_getBriefPrefs():get("landing:windspd")).." | "..ng_getBriefPrefs():get("landing:temperature").." C")
 
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
@@ -1272,7 +1292,7 @@ function ng_draw_main_window()
 				
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_white,"LANDING FLAPS")
+			ng_imgui_out_text(color_bright_orange,"LANDING FLAPS")
 			imgui.TableNextColumn()
 			local splitTitle = ng_split(ng_getAcfPrefs():get("controls:ldflapslbl"),"|")
 			ng_imgui_in_combolist("dflaps", splitTitle, ng_getBriefPrefs():get("landing:selectedflaps"), 
@@ -1288,7 +1308,7 @@ function ng_draw_main_window()
 
 			if ng_getBriefPrefs():get("landing:approachtype") == 1 then
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_white,"ILS FREQ")
+				ng_imgui_out_text(color_bright_orange,"ILS FREQ")
 				imgui.TableNextColumn()
 				ng_imgui_in_tfield("dilsfreq", ddwidth, color_white, 10, ng_getBriefPrefs():get("landing:rwyilsfreq"), 
 					function (textout) ng_getBriefPrefs():set("landing:rwyilsfreq",textout) end )	
@@ -1298,9 +1318,9 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"LANDING CRS1,CRS2")
 			imgui.TableNextColumn()
-			ng_imgui_in_intfield("dcrs1", 30, color_white, 0, ng_getBriefPrefs():get("landing:rwycourse"), 
+			ng_imgui_in_intfield("dcrs1", 30, color_bright_orange, 0, ng_getBriefPrefs():get("landing:rwycourse"), 
 				function (textout) ng_getBriefPrefs():set("landing:rwycourse",textout) end ) imgui.SameLine()
-			ng_imgui_in_intfield("dcrs2", 30, color_white, 0, ng_getBriefPrefs():get("landing:rwycourse2"), 
+			ng_imgui_in_intfield("dcrs2", 30, color_bright_orange, 0, ng_getBriefPrefs():get("landing:rwycourse2"), 
 				function (textout) ng_getBriefPrefs():set("landing:rwycourse2",textout) end ) 
 			
 			if ng_getAcfPrefs():get("general:hasenginebleeds") then
@@ -1325,15 +1345,15 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"LANDING VREF,VAPP")
 			imgui.TableNextColumn()
-			ng_imgui_in_intfield("dvref", 30, color_white, 0, ng_getBriefPrefs():get("landing:rwyvref"), 
+			ng_imgui_in_intfield("dvref", 30, color_bright_orange, 0, ng_getBriefPrefs():get("landing:rwyvref"), 
 				function (textout) ng_getBriefPrefs():set("landing:rwyvref",textout) end ) imgui.SameLine()
-			ng_imgui_in_intfield("dvapp", 30, color_white, 0, ng_getBriefPrefs():get("landing:rwyvapp"), 
+			ng_imgui_in_intfield("dvapp", 30, color_bright_orange, 0, ng_getBriefPrefs():get("landing:rwyvapp"), 
 				function (textout) ng_getBriefPrefs():set("landing:rwyvapp",textout) end ) 
 
 			if ng_getAcfPrefs():get("general:hasautobrk") then
 				imgui.TableNextRow()
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_white,"AUTOBRAKE")
+				ng_imgui_out_text(color_bright_orange,"AUTOBRAKE")
 				imgui.TableNextColumn()
 				local splitTitle = ng_split(ng_getAcfPrefs():get("general:abrkmodelblt"),"|")
 				ng_imgui_in_combolist("abrkset", splitTitle, ng_getBriefPrefs():get("landing:selectedabrk"), 
@@ -1344,18 +1364,18 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"DECISION HEIGHT/ALT")
 			imgui.TableNextColumn()
-			ng_imgui_in_intfield("ddh", 30, color_white, 0, ng_getBriefPrefs():get("landing:decisionheight"), 
+			ng_imgui_in_intfield("ddh", 30, color_bright_orange, 0, ng_getBriefPrefs():get("landing:decisionheight"), 
 				function (textout) ng_getBriefPrefs():set("landing:decisionheight",textout) end ) imgui.SameLine()
-			ng_imgui_in_intfield("dda", 40, color_white, 0, ng_getBriefPrefs():get("landing:decisionalt"), 
+			ng_imgui_in_intfield("dda", 40, color_bright_orange, 0, ng_getBriefPrefs():get("landing:decisionalt"), 
 				function (textout) ng_getBriefPrefs():set("landing:decisionalt",textout) end ) 
 			
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"GO-AROUND HDG/ALT")
 			imgui.TableNextColumn()
-			ng_imgui_in_intfield("dgahdg", 30, color_white, 0, ng_getBriefPrefs():get("landing:gaheading"), 
+			ng_imgui_in_intfield("dgahdg", 30, color_bright_orange, 0, ng_getBriefPrefs():get("landing:gaheading"), 
 				function (textout) ng_getBriefPrefs():set("landing:gaheading",textout) end ) imgui.SameLine()
-			ng_imgui_in_intfield("dgaalt", 40, color_white, 0, ng_getBriefPrefs():get("landing:gaaltitude"), 
+			ng_imgui_in_intfield("dgaalt", 40, color_bright_orange, 0, ng_getBriefPrefs():get("landing:gaaltitude"), 
 				function (textout) ng_getBriefPrefs():set("landing:gaaltitude",textout) end ) 
 
 			imgui.TableNextRow()
@@ -1385,7 +1405,7 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"*BARO Q/A")
 			imgui.TableNextColumn()
-			ng_imgui_in_floatfield("lbaroq", 40, color_white, 0, "%04.0f",ng_getBriefPrefs():get("landing:qaltimeter"), 
+			ng_imgui_in_floatfield("lbaroq", 40, color_bright_orange, 0, "%04.0f",ng_getBriefPrefs():get("landing:qaltimeter"), 
 				function (textout) ng_getBriefPrefs():set("landing:qaltimeter",textout) end ) imgui.SameLine()
 			ng_imgui_in_button("lconvbaro", "<", 15, 20, 
 				function () ng_getBriefPrefs():set("landing:qaltimeter",(ng_getBriefPrefs():get("landing:altimeter") * 33.8639)) end ) imgui.SameLine()
@@ -1427,15 +1447,15 @@ function ng_draw_main_window()
 			local ddwidth=146
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_yellow,"ALTERNATE")
-			imgui.Separator()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_yellow, ng_getBriefPrefs():get("alternate:icao").." / "..ng_getBriefPrefs():get("alternate:name"))		
-			imgui.Separator()
 			
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
+			imgui.Separator()
 			ng_imgui_out_text(color_white,"AIRPORT ELEVATION")
 			imgui.TableNextColumn()
+			imgui.Separator()
 			ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("alternate:elevation").." ft")
 
 			imgui.TableNextRow()
@@ -1486,7 +1506,7 @@ function ng_draw_main_window()
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_white,"RUNWAY")
+			ng_imgui_out_text(color_bright_orange,"LANDING RUNWAY")
 			imgui.TableNextColumn()
 			ng_imgui_in_tfield("arwy", ddwidth, color_white, 10, ng_getBriefPrefs():get("alternate:planrwy"), 
 				function (textout) ng_getBriefPrefs():set("alternate:planrwy",textout) end )				
@@ -1495,7 +1515,7 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"WIND | TEMP")
 			imgui.TableNextColumn()
-			ng_imgui_out_text(color_grey, string.format("%03.0f",ng_getBriefPrefs():get("alternate:windhdg")).."/"..string.format("%02.0f",ng_getBriefPrefs():get("alternate:windspd")).." | "..ng_getBriefPrefs():get("alternate:temperature").." C")
+			ng_imgui_out_text(color_bright_orange, string.format("%03.0f",ng_getBriefPrefs():get("alternate:windhdg")).."/"..string.format("%02.0f",ng_getBriefPrefs():get("alternate:windspd")).." | "..ng_getBriefPrefs():get("alternate:temperature").." C")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
@@ -1507,7 +1527,7 @@ function ng_draw_main_window()
 			end
 			ng_getBriefPrefs():set("alternate:rwyheadwind",ng_calc_headwind_spd(ng_getBriefPrefs():get("alternate:windhdg"),ng_getBriefPrefs():get("alternate:windspd"),rwyapphdg))
 			ng_getBriefPrefs():set("alternate:rwycrosswind",ng_calc_crosswind_spd(ng_getBriefPrefs():get("alternate:windhdg"),ng_getBriefPrefs():get("alternate:windspd"),rwyapphdg))
-			ng_imgui_out_text(color_grey, ng_getBriefPrefs():get("alternate:rwyheadwind").." kts / "..ng_getBriefPrefs():get("alternate:rwycrosswind").." kts")
+			ng_imgui_out_text(color_bright_orange, ng_getBriefPrefs():get("alternate:rwyheadwind").." kts / "..ng_getBriefPrefs():get("alternate:rwycrosswind").." kts")
 
 			imgui.TableNextRow()
 			imgui.TableNextColumn()
@@ -1521,7 +1541,7 @@ function ng_draw_main_window()
 			imgui.TableNextColumn()
 			ng_imgui_out_text(color_white,"*BARO Q/A")
 			imgui.TableNextColumn()
-			ng_imgui_in_floatfield("abaroq", 40, color_white, 0, "%04.0f",ng_getBriefPrefs():get("alternate:qaltimeter"), 
+			ng_imgui_in_floatfield("abaroq", 40, color_bright_orange, 0, "%04.0f",ng_getBriefPrefs():get("alternate:qaltimeter"), 
 				function (textout) ng_getBriefPrefs():set("alternate:qaltimeter",textout) end ) imgui.SameLine()
 			ng_imgui_in_button("aconvbaro", "<", 15, 20, 
 				function () ng_getBriefPrefs():set("alternate:qaltimeter",(ng_getBriefPrefs():get("alternate:altimeter") * 33.8639)) end ) imgui.SameLine()
@@ -1802,58 +1822,64 @@ function ng_draw_main_window()
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"TIME OUT")
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_grey, ng_getBckVars():get("general:timeout"))
+				ng_imgui_out_text(color_bright_orange, ng_getBckVars():get("general:timeout"))
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"TIME OFF")
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_grey, ng_getBckVars():get("general:timeoff"))
+				ng_imgui_out_text(color_bright_orange, ng_getBckVars():get("general:timeoff"))
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"TIME IN")
+				imgui.Separator()				
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_grey, ng_getBckVars():get("general:timein"))
+				ng_imgui_out_text(color_bright_orange, ng_getBckVars():get("general:timein"))
+				imgui.Separator()				
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"TIME ON")
+				imgui.Separator()				
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_grey, ng_getBckVars():get("general:timeon"))
-			imgui.Separator()
+				ng_imgui_out_text(color_bright_orange, ng_getBckVars():get("general:timeon"))
+				imgui.Separator()				
 
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"ACT ZFW")
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_yellow, string.format("%6.0f KG",get("sim/flightmodel/weight/m_total")-get("sim/flightmodel/weight/m_fuel_total")))
+				ng_imgui_out_text(color_bright_orange, string.format("%6.0f KG",get("sim/flightmodel/weight/m_total")-get("sim/flightmodel/weight/m_fuel_total")))
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"ACT GROSS")
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_yellow, string.format("%6.0f KG",get("sim/flightmodel/weight/m_total")))
+				ng_imgui_out_text(color_bright_orange, string.format("%6.0f KG",get("sim/flightmodel/weight/m_total")))
 				
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"ACT FUEL")
+				imgui.Separator()				
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_yellow, string.format("%6.0f KG",get("sim/flightmodel/weight/m_fuel_total")))
+				local pcolor = (get("sim/flightmodel/weight/m_fuel_total")*ng_kgslbs < (ng_getBriefPrefs():get("fuel:reserve")+(ng_getBriefPrefs():get("fuel:reserve")/2))*ng_kgslbs and color_red or color_bright_orange) 
+				ng_imgui_out_text(pcolor, string.format("%6.0f KG",get("sim/flightmodel/weight/m_fuel_total")*ng_kgslbs))
+				imgui.Separator()				
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"FF KGS/H")
+				imgui.Separator()				
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_yellow,  string.format("%6.0f",get("sim/cockpit2/engine/indicators/fuel_flow_kg_sec",0)*3600))
-			imgui.Separator()
+				ng_imgui_out_text(color_bright_orange,  string.format("%6.0f",get("sim/cockpit2/engine/indicators/fuel_flow_kg_sec",0)*3600))
+				imgui.Separator()				
 
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"AMB WIND")
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_yellow, string.format("%03.0f/%02.0f",get("sim/weather/wind_direction_degt"),get("sim/weather/wind_speed_kt")))
+				ng_imgui_out_text(color_bright_orange, string.format("%03.0f/%02.0f",get("sim/weather/wind_direction_degt"),get("sim/weather/wind_speed_kt")))
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"AMB TEMP")
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_yellow,  string.format("%4.1f C",get("sim/weather/temperature_ambient_c")))
-			imgui.Separator()
+				ng_imgui_out_text(color_bright_orange,  string.format("%4.1f C",get("sim/weather/temperature_ambient_c")))
 				
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"CURR ALT")
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_yellow, string.format("%6.0f",get("sim/flightmodel2/position/pressure_altitude")))
+				ng_imgui_out_text(color_bright_orange, string.format("%6.0f",get("sim/flightmodel2/position/pressure_altitude")))
 				imgui.TableNextColumn()
 				ng_imgui_out_text(color_white,"GRND SPD")
 				imgui.TableNextColumn()
-				ng_imgui_out_text(color_yellow, string.format("%3.0f KTS",get("sim/flightmodel2/position/groundspeed")))
+				ng_imgui_out_text(color_bright_orange, string.format("%3.0f KTS",get("sim/flightmodel2/position/groundspeed")))
 				
 
 			imgui.EndTable()

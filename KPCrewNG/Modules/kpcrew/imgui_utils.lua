@@ -18,6 +18,7 @@ color_dark_green 		= 0xFF002f00
 color_white 			= 0xFFFFFFFF
 color_light_blue 		= 0xFFFFFF00
 color_orange 			= 0xFF003FBF
+color_bright_orange		= 0xFF1b9af8
 color_grey 				= 0xFFC0C0C0
 color_dark_grey 		= 0xFF606060
 color_left_display 		= 0xFFA0AFFF
