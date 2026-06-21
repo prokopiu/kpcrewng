@@ -1075,19 +1075,6 @@
                   "on",
                   "off",
                   "tgl",
-                  "set",
-                  "chk"
-                ],
-                "dref": "FJS/732/FltControls/SpeedBreakHandleMo",
-                "name": "",
-                "title": "Speedbrake Lever",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
                   "chk",
                   ""
                 ],
@@ -1097,6 +1084,19 @@
                 "name": "spdbrkarm",
                 "title": "Speedbrake arm",
                 "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/FltControls/SpeedBreakHandleMo",
+                "name": "speedbrake",
+                "title": "Speedbrake Lever",
+                "type": "dataref"
               }
             ],
             "name": "speedbrake"

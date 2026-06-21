@@ -612,7 +612,6 @@
           {
             "challenge": "*ATC CLEARANCE",
             "classname": "ProcedureItem",
-            "condition": "ng_getAppPrefs():get(\"general:showstars\")",
             "response": "OBTAIN",
             "role": "ng_firole_PF",
             "setelements": [
@@ -787,6 +786,10 @@
               {
                 "action": "off",
                 "element": "fltgndswitch"
+              },
+              {
+                "action": "chk",
+                "element": "wait"
               }
             ]
           },
@@ -820,8 +823,9 @@
             "role": "ng_firole_CPT",
             "setelements": [
               {
-                "action": "off",
-                "element": "speedbrake"
+                "action": "chk",
+                "element": "speedbrake",
+                "value": 0
               }
             ]
           },
@@ -2622,6 +2626,7 @@
           {
             "challenge": "AUTOBRAKE",
             "classname": "ChecklistItem",
+            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "AS REQUIRED",
             "role": "ng_firole_CPT",
             "setelements": [
@@ -2635,6 +2640,7 @@
           {
             "challenge": "LANDING DATA",
             "classname": "ChecklistItem",
+            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "VREF____, MINIMUMS____",
             "role": "ng_firole_BOTH",
             "setelements": {}
@@ -2642,6 +2648,7 @@
           {
             "challenge": "APPROACH BRIEFING",
             "classname": "ChecklistItem",
+            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "COMPLETED",
             "role": "ng_firole_BOTH",
             "setelements": {}
@@ -2649,6 +2656,7 @@
           {
             "challenge": "DESCENT CHECKLIST",
             "classname": "ChecklistItem",
+            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "COMPLETED",
             "role": "ng_firole_SYS",
             "setelements": {}
@@ -3136,6 +3144,7 @@
           {
             "challenge": "SPEEDBRAKES",
             "classname": "ChecklistItem",
+            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "ARMED",
             "role": "ng_firole_PM",
             "setelements": [
@@ -3148,6 +3157,7 @@
           {
             "challenge": "GEAR",
             "classname": "ChecklistItem",
+            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "DOWN",
             "role": "ng_firole_PM",
             "setelements": [
