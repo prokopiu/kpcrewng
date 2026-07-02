@@ -17,7 +17,6 @@ general:add(preference:new("weightunit",	1,ng_type_list,"Weight Unit|kgs|lbs"))
 general:add(preference:new("barounit",		1,ng_type_list,"Baro Unit|mb|inhg"))
 general:add(preference:new("deftransalt",	5000,ng_type_int,"Default Transalt|0"))
 general:add(preference:new("deftranslvl",	6000,ng_type_int,"Default Translvl|0"))
-general:add(preference:new("developer",		false,ng_type_flag,"Show Editors|On|Off"))
 general:add(preference:new("opensam",		false,ng_type_flag,"Use OpenSAM|On|Off"))
 
 local kphwng = preferenceGroup:new("kphwng","KPHardware specific settings")
@@ -41,8 +40,13 @@ kphwng:add(preference:new("thryoke",		false,ng_type_flag,"Support THR Boeing Yok
 kphwng:add(preference:new("thrwarthog",		false,ng_type_flag,"Support THR Warthog Stick|Yes|No"))
 kphwng:add(preference:new("thrwarthog",		false,ng_type_flag,"Support THR Warthog Stick|Yes|No"))
 
+local kpcrew = preferenceGroup:new("kpcrew","KPCrew internal settings")
+kpcrew:add(preference:new("developer",		false,ng_type_flag,"Show Editors|On|Off"))
+kpcrew:add(preference:new("syshiderem",		true,ng_type_flag,"Hide Sys Add/Remove|On|Off"))
+
 applicationPrefSet:addGroup(general)
 applicationPrefSet:addGroup(kphwng)
+applicationPrefSet:addGroup(kpcrew)
 
 function ng_getAppPrefs()
 	return applicationPrefSet

@@ -407,3 +407,13 @@ function ng_calc_crosswind_spd(windhdg, windspd, tohdg)
 	local result = windspd * math.sin(math.rad(alpha))
 	return math.abs(math.ceil(result))
 end
+
+---------------------- other function ------
+
+--- round number on given step level
+-- @param int number - number to round
+--@param int step - like 50, 10 
+-- @return int rounded number
+function ng_round_step(num,step)
+	return math.floor(num/step)*step
+end

@@ -1,3 +1,5 @@
+require "kpcrew.nggenutils"
+
 ng_stateindex = 0
 
 -- -----------------------------------------------------------------------------------------
@@ -268,8 +270,23 @@ dprint("ng_action_element: "..element.title)
 					if getdref() > minval then command_once(cmddn) end
 
 				elseif action == "set" then
-					setvalue(getvalue())
-					
+					if getdref() >= minval and getdref() <= maxval then
+						if getvalue() ~= nil then
+							if getvalue() >= minval and getdref() <= maxval then
+								if getvalue() ~= getdref() then
+									if getvalue() > getdref() then
+										for i=1,getvalue()-getdref(),incr do
+											command_once(cmdup)
+										end
+									else
+										for i=1,getdref()-getvalue(),incr do
+											command_once(cmddn)
+										end
+									end
+								end
+							end
+						end
+					end
 				end
 			else
 				print("Action not allowed: "..action.." in "..elementname)

@@ -68,6 +68,8 @@ ng_editor_sop_remove_flow = false
 ng_editor_sop_remove_item = false
 ng_editor_sop_remove_element = false
 
+-- ng_debug_window_str = "DEBUG"
+
 ng_preferences_error = ""
 
 -- =========================================================================================
@@ -1988,21 +1990,21 @@ function ng_draw_main_window()
 			
 			if flag == false then 
 				imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
-					imgui.PushStyleColor(imgui.constant.Col.Text, color_black)
+					imgui.PushStyleColor(imgui.constant.Col.Text, color_white)
 						ng_imgui_in_button(label.."del", "REMOVE "..what.." "..label, width, 20, 
 							function () flag = true end) 
 					imgui.PopStyleColor()
 				imgui.PopStyleColor()
 			else 
 				imgui.PushStyleColor(imgui.constant.Col.Button, color_green)
-					imgui.PushStyleColor(imgui.constant.Col.Text, color_black)
+					imgui.PushStyleColor(imgui.constant.Col.Text, color_white)
 						ng_imgui_in_button(label.."yes", "YES ", width/2-2, 20, 
 							function () table.remove(item, nidx) flag = false end) 
 					imgui.PopStyleColor()
 				imgui.PopStyleColor()
 				imgui.SameLine()
 				imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
-					imgui.PushStyleColor(imgui.constant.Col.Text, color_black)
+					imgui.PushStyleColor(imgui.constant.Col.Text, color_white)
 						ng_imgui_in_button(label.."no", "NO ", width/2-2, 20, 
 							function () flag = false end) 
 					imgui.PopStyleColor()
@@ -2118,6 +2120,12 @@ function ng_draw_main_window()
 				
 				local ename = nelement.name -- base name to use for imgui id 
 
+				if ng_getAppPrefs():get("kpcrew:syshiderem") == false or category == "xtensions" then
+					imgui.NextColumn() 
+					ng_editor_remove_element = sop_remove_buttons(ename, "ELEMENT", nsystem.elements, ielement, 300, ng_editor_remove_element)
+					imgui.NextColumn() 
+				end
+
 -- name		| [                                           ]
 				ng_imgui_out_text(color_white, "name") imgui.NextColumn()
 				ng_imgui_in_tfield(ename.."name", 300, color_white, 255,  
@@ -2129,7 +2137,13 @@ function ng_draw_main_window()
 					ng_imgui_in_combolist(ename.."etype", ng_editor_types, ng_indexOf(ng_editor_types,nelement.type)-1, 
 						function (textin) 
 							nelement.type=ng_editor_types[textin+1]
-							nelement.acts = nil
+							-- nelement.acts = nil
+							if nelement.type == "dataref" then nelement.acts={"on","off","tgl","set","chk"} 
+								elseif nelement.type == "onofftgl" then nelement.acts={"on","off","tgl","chk",""} 
+								elseif nelement.type == "dialdref" then nelement.acts={"up","dn","set","chk",""} 
+								elseif nelement.type == "dialcmd" then nelement.acts={"up","dn","chk","",""} 
+								elseif nelement.type == "custom" then nelement.acts={"on","off","tgl","chk","set"} 
+							end
 						end,
 					300) imgui.NextColumn()
 				else -- if empty draw the plus button
@@ -2344,7 +2358,7 @@ function ng_draw_main_window()
 							ng_imgui_in_button(ename.."nilincr", "-", 15, 20, 
 								function () nelement.incr = nil end) imgui.SameLine()
 							if nelement.incr ~= nil then
-								ng_imgui_in_intfield(ename.."incr", 300, color_white, 1, 
+								ng_imgui_in_intfield(ename.."incr", 281, color_white, 1, 
 								nelement.incr, function (textout) nelement.incr = textout end) 
 							end
 							imgui.NextColumn()
@@ -2459,11 +2473,6 @@ function ng_draw_main_window()
 					
 				end
 					
-					imgui.NextColumn() imgui.NextColumn() imgui.NextColumn()
-					ng_editor_remove_element = sop_remove_buttons(ename, "ELEMENT", nsystem.elements, ielement, 300, ng_editor_remove_element)
-
-				-- end 				
-				
 				imgui.Separator()
 				
 			imgui.EndGroup()
@@ -2488,14 +2497,18 @@ function ng_draw_main_window()
 				-- only show for custom category (others are fixed)
 				-- if string.lower(ncategory.name) == "custom" then
 					
-					ng_editor_remove_system = sop_remove_buttons(sname, "SYSTEM", ncategory.systems, isystem, 375, ng_editor_remove_system)
+					if ng_getAppPrefs():get("kpcrew:syshiderem") == false or string.lower(ncategory.name) == "xtensions" then
+						ng_editor_remove_system = sop_remove_buttons(sname, "SYSTEM", ncategory.systems, isystem, 375, ng_editor_remove_system)
 
-					ng_imgui_in_button(sname.."append", "Append Element", 115, 20, 
-						function () if ng_editor_system_newelement ~= "" then newelement.name=ng_editor_system_newelement
-							table.insert (nsystem.elements, newelement) ng_editor_system_newelement = "" end end) 
-					imgui.SameLine() ng_imgui_in_tfield(sname.."name", 250, color_white, 285, 
-						ng_editor_system_newelement, function (textout) ng_editor_system_newelement = textout end)
-						
+						ng_imgui_in_button(sname.."append", "Append Element", 115, 20, 
+							function () if ng_editor_system_newelement ~= "" then 
+								newelement.name=ng_editor_system_newelement
+								table.insert (nsystem.elements, newelement) ng_editor_system_newelement = "" end 
+								newelement.acts={"on","off","tgl","set","chk"} 
+							end) 
+						imgui.SameLine() ng_imgui_in_tfield(sname.."name", 250, color_white, 285, 
+							ng_editor_system_newelement, function (textout) ng_editor_system_newelement = textout end)
+					end	
 				-- end
 
 				local function compareNames(a, b)
@@ -2530,15 +2543,15 @@ function ng_draw_main_window()
 
 			if imgui.TreeNode(ncategory.name) then
 
-				-- if string.lower(ncategory.name) == "custom" then
-					
+				if ng_getAppPrefs():get("kpcrew:syshiderem") == false or string.lower(ncategory.name) == "xtensions" then
+	
 					ng_imgui_in_button(ncategory.name.."append", "Append System", 190, 20, 
 						function () if ng_editor_system_newsystem ~= "" then newsystem.name=ng_editor_system_newsystem
 							table.insert (ncategory.systems, newsystem) ng_editor_system_newsystem = "" end end) 
 					imgui.SameLine() ng_imgui_in_tfield(ncategory.name.."name", 200, color_white, 270, 
 						ng_editor_system_newsystem, function (textout) ng_editor_system_newsystem = textout end)
 						
-				-- end
+				end
 
 				local function compareNames(a, b)
 					return a.name < b.name
@@ -2917,7 +2930,7 @@ function ng_draw_main_window()
 											end
 										else
 											ng_imgui_in_button(nlabel..nelement.element.."addfvalue", "+", 15, 20, 
-												function () nelement.fvalue = "return \"\"" end) 
+												function () nelement.fvalue = "0" end) 
 										end
 												
 										-- fset code to set the value with lua statetement "<code to do complex logic>"
@@ -3301,7 +3314,7 @@ function ng_draw_main_window()
 				
 			imgui.NextColumn() -- settingsh
 
-				if ng_getAppPrefs():get("general:developer") then
+				if ng_getAppPrefs():get("kpcrew:developer") then
 					-- right tab with aircraft preferences
 					if FLYWITHLUA then imgui.BeginChild("prefscolh2",0,50) else imgui.BeginChild("prefscolh2",{0,50}) end
 						
@@ -3347,7 +3360,7 @@ function ng_draw_main_window()
 				
 			imgui.NextColumn()
 			
-				if ng_getAppPrefs():get("general:developer") then
+				if ng_getAppPrefs():get("kpcrew:developer") then
 					imgui.BeginChild("settingscolc2")
 											
 						-- render aircraft preferences tree
@@ -3378,7 +3391,7 @@ function ng_draw_main_window()
 	if FLYWITHLUA == false then imgui.Begin("KPCrewNG " .. ng_version) end
 
 	local tabsDef = {}
-	if ng_getAppPrefs():get("general:developer") then
+	if ng_getAppPrefs():get("kpcrew:developer") then
 		tabsDef = {[0]="Flight", [1]="Full SOP", [2]="Settings", [3]="Editor"}
 	else
 		tabsDef = {[0]="Flight", [1]="Full SOP", [2]="Settings"}
@@ -3395,7 +3408,7 @@ function ng_draw_main_window()
 	if     ng_imgui_current_main_tab == 0 then render_main_tab_flight()
 	elseif ng_imgui_current_main_tab == 1 then render_main_tab_sop() 
 	elseif ng_imgui_current_main_tab == 2 then render_main_tab_settings()
-	elseif ng_imgui_current_main_tab == 3 and ng_getAppPrefs():get("general:developer") then render_main_tab_editor()
+	elseif ng_imgui_current_main_tab == 3 and ng_getAppPrefs():get("kpcrew:developer") then render_main_tab_editor()
 	end
 	imgui.EndGroup()
 	
@@ -3415,8 +3428,8 @@ function ng_draw_sop_window()
 		-- imgui.SetNextWindowSize(460,(15 + 2 ) * 23 + 12 + 27)
 		imgui.SetNextWindowPos(ng_scrn_width-455,ng_scrn_height-((15 + 2 ) * 23 + 12 + 77))
 	else
-		imgui.SetNextWindowSize({490,ng_get_active_sop():getNumberFlows()*46})
-		imgui.SetNextWindowPos({ng_scrn_width-497, (60/17)*ng_get_active_sop():getNumberFlows()})
+		imgui.SetNextWindowSize({490,ng_get_active_sop():getNumberFlows()*42})
+		imgui.SetNextWindowPos({ng_scrn_width-497, (50/17)*ng_get_active_sop():getNumberFlows()})
 	end
 
 	if FLYWITHLUA == false then imgui.Begin(ng_get_active_sop():getTitle()) end
@@ -3471,7 +3484,7 @@ function ng_draw_ctrl_window()
 		-- imgui.SetNextWindowSize(700,50)
 		imgui.SetNextWindowPos(ng_scrn_width-705,ng_scrn_height-46)
 	else
-		imgui.SetNextWindowSize({615,50})
+		imgui.SetNextWindowSize({615,80})
 		imgui.SetNextWindowPos({ng_scrn_width-615,ng_scrn_height-146})
 	end
 	
@@ -3536,6 +3549,10 @@ function ng_draw_ctrl_window()
 		ng_imgui_in_button("ctrlreset","RESET", 50, 20,
 			function () sop:reset() end)		
 	imgui.PopStyleColor()
+
+	if FLYWITHLUA == false then 
+		ng_imgui_in_button("debug",ng_debug_window_str, 420, 20, function () end)
+	end
 	
 	if FLYWITHLUA == false then imgui.End() end
 end
