@@ -747,7 +747,9 @@ function ng_prev_flow()
 end		
 
 -- -----------------------------------------------------------------------------------------
--- master action
+-- master action function. When the Master button is pressed, either a flow starts, 
+-- or the next flow item is executed or the flow is paused or a failed item gets skipped
+-- -----------------------------------------------------------------------------------------
 function ng_master_action()
 
 	local sop = ng_get_active_sop()

@@ -108,8 +108,22 @@ alternate:add(preference:new("windhdg",		0,ng_type_int,                         
 	"Altername Wind Heading|10"))                                                  
 alternate:add(preference:new("windspd",		0,ng_type_int,"Alternate Wind Speed|1"))   									-- alternate:windspd
 alternate:add(preference:new("temperature",	0,ng_type_int,"Alternate Temperature|1")) 									-- alternate:temperature
-alternate:add(preference:new("surfacecond",	"",ng_type_text,                                                            -- takeoff:surfacecond",	
-	"Alternate Surface Condition|"))                                           
+alternate:add(preference:new("surfacecond",	1,ng_type_list,                                                             -- alternate:surfacecond"	
+	"Alternate Surface Condition|DRY|WET"))                                           
+alternate:add(preference:new("route",		"",ng_type_text,"Route|","alternate.route"))		                        -- alternate:route		
+alternate:add(preference:new("star",		"",ng_type_text,"Alternate STAR|"))                  						-- alternate:star
+alternate:add(preference:new("startransition","",ng_type_text,"Alternate STAR Transition|"))   							-- alternate:startransition
+alternate:add(preference:new("arrtype",		1,ng_type_list,"Arrival Type|STAR|VECTORS"))								-- alternate:arrtype
+alternate:add(preference:new("selectedflaps",	1,ng_type_int,"Selected ldg Flaps|"))                                   -- alternate:selectedflaps
+alternate:add(preference:new("approachtype",	1,ng_type_list,"Approach Type|ILS|RNAV|VOR|NDB|VFR"))   				-- alternate:approachtype
+alternate:add(preference:new("rwyilsfreq",	"",ng_type_text, "Landing Runway ILS Freq|"))                  				-- alternate:rwyilsfreq             
+alternate:add(preference:new("rwycourse1",	0,ng_type_int, "Landing Runway Mag Course 1|10"))                           -- alternate:rwycourse1
+alternate:add(preference:new("rwycourse2",	0,ng_type_int, "Landing Runway Mag Course 2|10"))                           -- alternate:rwycourse2
+alternate:add(preference:new("selectedbleed",	2,ng_type_int,"Selected Ldg Bleeds|"))                                  -- alternate:selectedbleed
+alternate:add(preference:new("selectedaice",	1,ng_type_int,"Selected Ldg Aice|"))                                    -- alternate:selectedaice
+alternate:add(preference:new("selectedabrk",	1,ng_type_int,"Selected Autobrake|"))                                   -- alternate:selectedabrk
+alternate:add(preference:new("rwyvref",		0,ng_type_int,"landing Vref|1"))                                             -- alternate:rwyvref
+alternate:add(preference:new("rwyvapp",		0,ng_type_int,"landing Vapp|1"))                                             -- alternate:rwyvapp
 
 -- --------------------------------------------------------------------------------------------
 
@@ -227,7 +241,7 @@ landing:add(preference:new("rwyilsfreq",	"",ng_type_text,                       
 	"Landing Runway ILS Freq|","tlr.landing.runway[ng_briefing_ld_rwyidx].ils_frequency"))                               
 landing:add(preference:new("rwylda",		0,ng_type_int,                                                               -- landing:rwylda
 	"Landing Runway LDA|10","tlr.landing.runway[ng_briefing_ld_rwyidx].length_lda"))
-landing:add(preference:new("approachtype",	1,ng_type_list,"Approach Type|ILS|RNAV|VOR|NDB|VFR"))   	
+landing:add(preference:new("approachtype",	1,ng_type_list,"Approach Type|ILS|RNAV|VOR|NDB|VFR"))   					 -- landing:approachtype
 -- --------------------------------------------------------------------------------------------
 
 -- --------------------------- Fuel related fields and settings

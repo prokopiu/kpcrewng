@@ -115,6 +115,15 @@ function ngSOP:getActiveFlowIdx() return self.activeFlow end
 -- @param int idx - inex of flow to set active
 function ngSOP:setActiveFlowIdx(idx) self.activeFlow = idx end
 
+--- set the visibility flag for all flows
+-- @value true or false
+function ngSOP:setVisibility(value)
+	for k, flow in ipairs(self.flows) do
+		flowVisibleFull[k] = value
+		flowVisible[k] = value
+	end
+end
+
 -- Output and rendering functions
 
 --- Get the flow color for rendering
@@ -216,31 +225,60 @@ function ngSOP:render(type)
 				end
 			end
 		end
-	end		
+	end
+	
+-- render list of flows in SOP window
 	if type == "i" then 
 		for k, flow in ipairs(self.flows) do
 			if flowVisible[k] == nil then flowVisible[k] = false end 
 			if flow:getFlightPhase() ~= nil and flow:getFlightPhase() >= 0 then
-				if flow:getClassName() ~= "StateFlow" and flow:getClassName() ~= "BackgroundFlow" then 
+				if flow:getClassName() ~= "StateFlow" and flow:getClassName() ~= "BackgroundFlow" then -- can be removed
 					imgui.SetCursorPosY(imgui.GetCursorPosY() + 1)
 					local color = getFlowColor(flow)
+					-- [+] Fold/Unfold button
 					ng_imgui_in_button(flow:getTitle().."toggle",flowVisible[k] and "-" or "+",15, 18, 
-					function() flowVisible[k]= not flowVisible[k] end) imgui.SameLine()
-					imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
-						ng_imgui_in_button(flow:getTitle().."reset","R",15, 18, 
-						function() flow:reset() end)
-					imgui.PopStyleColor()
+					function() flowVisible[k]= not flowVisible[k] end,"Unfold/Fold this flow") imgui.SameLine()
+					
+					-- [S] Start button
+					-- imgui.PushStyleColor(imgui.constant.Col.Button, color_green)
+						ng_imgui_in_button(flow:getTitle().."start","S",15, 18, 
+						function() ng_master_action() end,"Start button. Works like Action button in control window")
+					-- imgui.PopStyleColor()
+
 					imgui.SameLine()
 					imgui.PushStyleColor(imgui.constant.Col.Button, color)
 						imgui.PushStyleColor(imgui.constant.Col.ButtonActive, color_flow_active)
 							imgui.PushStyleColor(imgui.constant.Col.ButtonHovered, color_flow_hovered)
 								ng_imgui_in_button(flow:getClassName()..flow:getTitle(), 
 								flow:getTitle() .. " [" .. ng_get_flight_phase_title(math.abs(flow:getFlightPhase())) .. "]", 
-								410, 18, function() activateFlow(self,k) end)
+								410, 18, function() 
+									if self.flows[self.activeFlow]  == nil then
+										activateFlow(self,k)
+									else
+										if self.flows[self.activeFlow]:getState() ~= ng_flowstate_run and self.flows[self.activeFlow]:getState() ~= ng_flowstate_pause 
+											and self.flows[self.activeFlow]:getState() ~= ng_flowstate_err then 
+												activateFlow(self,k)
+										end
+									end
+								end,"Press to select this flow")
+								
+								imgui.SameLine()
+								imgui.PushStyleColor(imgui.constant.Col.Button, color_red)
+									ng_imgui_in_button(flow:getTitle().."reset","R",15, 18, 
+									function() flow:reset() end,"Resets this flow to start over")
+								imgui.PopStyleColor()
+								
+								imgui.SameLine()
+								imgui.PushStyleColor(imgui.constant.Col.Button, color_green)
+									ng_imgui_in_button(flow:getTitle().."complete","C",15, 18, 
+									function() flow:complete() end,"Stop the flow and set all to complete")
+								imgui.PopStyleColor()
+								
 								if flowVisible[k] then flow:render("i") end
 							imgui.PopStyleColor()
 						imgui.PopStyleColor()
 					imgui.PopStyleColor()
+
 				end
 			end
 		end

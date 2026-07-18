@@ -4,9 +4,9 @@ local preferenceSet = require( "kpcrew.Addon.Preferences.PreferenceSet" )
 local preferenceGroup = require( "kpcrew.Addon.Preferences.PreferenceGroup" )
 local preference = require("kpcrew.Addon.Preferences.PreferenceItem")
 
-local applicationPrefSet = preferenceSet:new("application","APPLICATION PREFERENCES",SCRIPT_DIRECTORY .. "../Modules/kpcrew_prefs/application.preferences")
+local applicationPrefSet = preferenceSet:new("application","APPLICATION SETTINGS",SCRIPT_DIRECTORY .. "../Modules/kpcrew_prefs/application.preferences")
 
-local general = preferenceGroup:new("general","GENERAL PREFERENCES")
+local general = preferenceGroup:new("general","GENERAL SETTINGS")
 general:add(preference:new("assistance",	false,ng_type_flag,"Assistance|On|Off"))
 general:add(preference:new("usechecklist",	true,ng_type_flag,"Use Checklists|Yes|No"))
 general:add(preference:new("showstars",		true,ng_type_flag,"Show * Items|Yes|No"))
@@ -19,7 +19,7 @@ general:add(preference:new("deftransalt",	5000,ng_type_int,"Default Transalt|0")
 general:add(preference:new("deftranslvl",	6000,ng_type_int,"Default Translvl|0"))
 general:add(preference:new("opensam",		false,ng_type_flag,"Use OpenSAM|On|Off"))
 
-local kphwng = preferenceGroup:new("kphwng","KPHardware specific settings")
+local kphwng = preferenceGroup:new("kphwng","KPHWNG SETTINGS")
 -- level of exposure (to save memory and ressources
 -- 1 = basic (a/p, basic functions (gear, flaps etc...)
 -- 2 = full (everything filtered)
@@ -38,9 +38,8 @@ kphwng:add(preference:new("bravo",			false,ng_type_flag,"Support Bravo Throttle|
 kphwng:add(preference:new("alpha",			false,ng_type_flag,"Support Alpha Yoke|Yes|No"))
 kphwng:add(preference:new("thryoke",		false,ng_type_flag,"Support THR Boeing Yoke|Yes|No"))
 kphwng:add(preference:new("thrwarthog",		false,ng_type_flag,"Support THR Warthog Stick|Yes|No"))
-kphwng:add(preference:new("thrwarthog",		false,ng_type_flag,"Support THR Warthog Stick|Yes|No"))
 
-local kpcrew = preferenceGroup:new("kpcrew","KPCrew internal settings")
+local kpcrew = preferenceGroup:new("kpcrew","KPCREW INTERNAL SETTINGS")
 kpcrew:add(preference:new("developer",		false,ng_type_flag,"Show Editors|On|Off"))
 kpcrew:add(preference:new("syshiderem",		true,ng_type_flag,"Hide Sys Add/Remove|On|Off"))
 
