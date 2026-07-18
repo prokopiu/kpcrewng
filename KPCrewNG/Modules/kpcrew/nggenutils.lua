@@ -91,7 +91,7 @@ function ng_convertDMS(lat, lng)
     local longitude = ng_toDegMinSec(lng);
     local longitudeCardinal = (lng >= 0) and "E" or "W";
 
-    return latitude .. " " .. latitudeCardinal .. " - " .. longitude .. " " .. longitudeCardinal;
+    return latitude .. " " .. latitudeCardinal .. " " .. longitude .. " " .. longitudeCardinal;
 end
 
 ------------- time related functions ---------------
