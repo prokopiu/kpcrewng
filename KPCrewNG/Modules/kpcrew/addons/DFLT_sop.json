@@ -43,7 +43,7 @@
           {
             "challenge": "<GND>DOORS",
             "classname": "ProcedureItem",
-            "nocheck": 1,
+            "delay": 2,
             "response": "OPEN",
             "role": "ng_firole_SYS",
             "setelements": [
@@ -70,10 +70,20 @@
               {
                 "action": "off",
                 "element": "doorr2"
-              },
+              }
+            ]
+          },
+          {
+            "challenge": "<GND>STAIRS",
+            "classname": "ProcedureItem",
+            "condition": "ng_getAcfPrefs():get(\"general:hasstairs\")",
+            "nocheck": 1,
+            "response": "OUT",
+            "role": "ng_firole_SYS",
+            "setelements": [
               {
-                "action": "chk",
-                "element": "wait"
+                "action": "on",
+                "element": "airstair1"
               }
             ]
           },
@@ -90,91 +100,37 @@
             ]
           },
           {
-            "challenge": "*BATTERY BOEING",
+            "challenge": "BATTERY BOEING",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
             "response": "ON & GUARDED",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
                 "element": "#batteries"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*STANDBY POWER BOEING",
+            "challenge": "STANDBY POWER BOEING",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
             "response": "ON & GUARDED",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
                 "element": "stbypower1"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*HYDRAULIC PANEL BOEING",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
-            "response": "ELEC OFF & ENG ON",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "off",
-                "condition": "ng_getAcfPrefs():get(\"hydraulic:hashydelecpmps\")",
-                "element": "#elechydpumps"
-              },
-              {
-                "action": "on",
-                "condition": "ng_getAcfPrefs():get(\"hydraulic:hashydengpmps\")",
-                "element": "#enghydpumps"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*HYDRAULIC PANEL AIRBUS",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:isairbus\")",
-            "response": "ALL PUMPS AUTO/OFF",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "off",
-                "condition": "ng_getAcfPrefs():get(\"hydraulic:hashydelecpmps\")",
-                "element": "#elechydpumps"
-              },
-              {
-                "action": "off",
-                "condition": "ng_getAcfPrefs():get(\"hydraulic:hashydengpmps\")",
-                "element": "#enghydpumps"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*HYDRAULIC PUMPS",
+            "challenge": "HYDRAULIC PUMPS",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:isboeing\") == false and ng_getAcfPrefs():get(\"general:isairbus\") == false",
-            "response": "ALL PUMPS OFF",
-            "role": "ng_firole_CPT",
+            "response": "ALL OFF",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
@@ -185,10 +141,6 @@
                 "action": "off",
                 "condition": "ng_getAcfPrefs():get(\"hydraulic:hashydengpmps\")",
                 "element": "#enghydpumps"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -206,53 +158,15 @@
             ]
           },
           {
-            "challenge": "*FLAP LEVER",
+            "challenge": "FLAP LEVER",
             "classname": "ProcedureItem",
             "response": "CHECK POSITION / UP",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "set",
-                "element": "flapleverUP"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*ENGINE MASTER LEVERS AIRBUS",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:isairbus\")",
-            "response": "OFF",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "off",
-                "element": "#engstrtlvrs"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*ENGINE MODE SELECTOR AIRBUS",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:isairbus\")",
-            "response": "NORM",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "engstartsel1",
-                "value": 1
-              },
-              {
-                "action": "chk",
-                "element": "wait"
+                "element": "flapset",
+                "value": 0
               }
             ]
           },
@@ -266,72 +180,59 @@
               {
                 "action": "off",
                 "element": "#engstrtlvrs"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*WINDSHIELD WIPERS",
+            "challenge": "WINDSHIELD WIPERS",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:haswipers\")",
             "response": "OFF / PARK",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
                 "element": "#wipers"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*TRANSPONDER MODE",
-            "classname": "ProcedureItem",
-            "response": "STBY",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "xpdrmodestby"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*WEATHER RADAR",
+            "challenge": "WEATHER RADAR",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"efis:haswxradar\")",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
-                "element": "wait"
+                "action": "set",
+                "element": "wxradarstate",
+                "value": 0
               }
             ]
           },
           {
-            "challenge": "*LANDING GEAR LEVER",
+            "challenge": "TRANSPONDER MODE",
+            "classname": "ProcedureItem",
+            "response": "STBY",
+            "role": "ng_firole_FO",
+            "setelements": [
+              {
+                "action": "set",
+                "element": "xpdrmode",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "challenge": "LANDING GEAR LEVER",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:hasretgear\")",
             "response": "DOWN",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
                 "element": "gearhandle"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -345,27 +246,19 @@
                 "action": "chk",
                 "element": "thrustleverall",
                 "value": 0
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*BATTERIES",
+            "challenge": "BATTERIES",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:isboeing\") == false",
             "response": "ON",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
                 "element": "#batteries"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -379,10 +272,6 @@
               {
                 "action": "on",
                 "element": "gpuconnect"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -396,31 +285,14 @@
               {
                 "action": "on",
                 "element": "gpugen1"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*T.O. CONFIG WARN BOEING",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:hastoconfig\") and ng_getAcfPrefs():get(\"general:isboeing\")",
-            "response": "THR LVR FULL FORWARD",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*FUEL PUMPS & XFEED",
+            "challenge": "FUEL PUMPS & XFEED",
             "classname": "ProcedureItem",
             "response": "AS REQUIRED",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
@@ -431,23 +303,6 @@
                 "action": "off",
                 "condition": "ng_getAcfPrefs():get(\"fuel:hasfuelxfeed\")",
                 "element": "fuelxfeed"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*FIRE TESTS",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"engines:hasfiretests\") and ng_getBriefPrefs():get(\"origin:standpower\") == 2",
-            "response": "PERFORM",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -460,54 +315,7 @@
             "setelements": [
               {
                 "action": "off",
-                "element": "apubleed"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*AFT FUEL PUMP FOR APU BOEING",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:hasapu\") and ng_getBriefPrefs():get(\"origin:standpower\") == 2 and ng_getAcfPrefs():get(\"general:isboeing\")",
-            "response": "ON",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "on",
-                "element": "fuelpump2"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*APU MASTER AIRBUS",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:hasapu\") and ng_getBriefPrefs():get(\"origin:standpower\") == 2 and ng_getAcfPrefs():get(\"general:isairbus\")",
-            "response": "PRESS",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*APU START AIRBUS",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:hasapu\") and ng_getBriefPrefs():get(\"origin:standpower\") == 2 and ng_getAcfPrefs():get(\"general:isairbus\")",
-            "response": "PRESS",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
+                "element": "apubleed1"
               }
             ]
           },
@@ -558,16 +366,16 @@
             "role": "ng_firole_CPT",
             "setelements": [
               {
-                "action": "chk",
-                "element": "wait"
+                "action": "on",
+                "element": "apubleed1"
               }
             ]
           },
           {
-            "challenge": "*ELECTRIC PANEL",
+            "challenge": "ELECTRIC PANEL",
             "classname": "ProcedureItem",
             "response": "AS REQUIRED",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
@@ -598,10 +406,6 @@
                 "action": "on",
                 "condition": "ng_getAcfPrefs():get(\"electric:hasenggens\")",
                 "element": "#generators"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -646,10 +450,6 @@
                 "condition": "ng_is_daylight()",
                 "element": "#instrlights",
                 "value": 1
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -710,18 +510,14 @@
                 "action": "on",
                 "condition": "ng_is_daylight() == false and ng_getAcfPrefs():get(\"lights:haslogolts\")",
                 "element": "#logolights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*PAX SIGNS",
+            "challenge": "CABIN SIGNS",
             "classname": "ProcedureItem",
             "response": "ON/AUTO",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
@@ -732,10 +528,6 @@
                 "action": "on",
                 "condition": "ng_getAcfPrefs():get(\"general:general:hasnosmoking\")",
                 "element": "nosmoking"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -773,7 +565,7 @@
             "role": "ng_firole_CPT",
             "setelements": [
               {
-                "action": "on",
+                "action": "off",
                 "element": "#flightdirs"
               },
               {
@@ -790,28 +582,6 @@
                 "action": "set",
                 "element": "speedsel",
                 "fvalue": "ng_getAcfPrefs():get(\"general:mcpdefspd\")+0"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "FCU AIRBUS",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:isairbus\")",
-            "response": "INITIAL SETUP",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "altsel",
-                "fvalue": "ng_getAcfPrefs():get(\"general:mcpdefalt\")+0"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -825,10 +595,6 @@
               {
                 "action": "on",
                 "element": "#adirus"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -913,10 +679,6 @@
                 "action": "set",
                 "element": "speedsel",
                 "fvalue": "ng_getBriefPrefs():get(\"takeoff:rwyv2\")+0"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -947,142 +709,23 @@
             ]
           },
           {
-            "challenge": "*MACH OVSPD & STALL WARNING TESTS",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
-            "response": "PERFORM",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*YAW DAMPER",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"control:hasyawdamper\") and ng_getAcfPrefs():get(\"general:isboeing\")",
-            "response": "ON",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "on",
-                "element": "yawdamper"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*NAVIGATION PANEL BOEING",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
-            "response": "ON",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*DISPLAY PANEL BOEING",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
-            "response": "ON",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*ELECTRIC PANEL",
-            "classname": "ProcedureItem",
-            "response": "AS REQUIRED",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "on",
-                "condition": "ng_getAcfPrefs():get(\"electric:hasbusties\")",
-                "element": "#busties"
-              },
-              {
-                "action": "on",
-                "condition": "ng_getAcfPrefs():get(\"electric:hasstbypower\")",
-                "element": "stbypower1"
-              },
-              {
-                "action": "on",
-                "condition": "ng_getAcfPrefs():get(\"electric:hasifepwr\")",
-                "element": "ifepower"
-              },
-              {
-                "action": "on",
-                "condition": "ng_getAcfPrefs():get(\"electric:hascabinpwr\")",
-                "element": "cabinpower"
-              },
-              {
-                "action": "on",
-                "condition": "ng_getAcfPrefs():get(\"electric:hasessbus\")",
-                "element": "essentialbus1"
-              },
-              {
-                "action": "on",
-                "condition": "ng_getAcfPrefs():get(\"electric:hasenggens\")",
-                "element": "#generators"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*WINDOW HEAT",
+            "challenge": "WINDOW HEAT",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"aice:haswindowht\") and ng_getAcfPrefs():get(\"general:isboeing\")",
             "response": "ON",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
                 "element": "#windowheat"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*WINDOW / PROBE HEAT AIRBUS",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"aice:haswindowht\") and ng_getAcfPrefs():get(\"general:isairbus\")",
-            "response": "AUTO",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "off",
-                "element": "#windowheat"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*ANTI-ICE",
+            "challenge": "ANTI-ICE",
             "classname": "ProcedureItem",
             "response": "OFF / AUTO",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
@@ -1091,70 +734,15 @@
               {
                 "action": "off",
                 "element": "#wingaice"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*AIR TEMP PANEL BOEING",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"air:hastempcontrol\") and ng_getAcfPrefs():get(\"general:isboeing\")",
-            "response": "AS REQUIRED",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "#tempcontrols",
-                "value": 0.5
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*AIR CONTROL PANEL BOEING",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
-            "response": "RECIRC, GASPER, TRIM AIR, PACKS",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "on",
-                "condition": "ng_getAcfPrefs():get(\"air:haspacks\")",
-                "element": "#packs"
-              },
-              {
-                "action": "on",
-                "condition": "ng_getAcfPrefs():get(\"air:hasgasper\")",
-                "element": "#gasperfans"
-              },
-              {
-                "action": "on",
-                "condition": "ng_getAcfPrefs():get(\"air:trimair\")",
-                "element": "#trimair"
-              },
-              {
-                "action": "on",
-                "condition": "ng_getAcfPrefs():get(\"air:recircfans\")",
-                "element": "#recircfans"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*ISOLATION VALVES",
+            "challenge": "ISOLATION VALVE",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"air:hasisovalves\") and ng_getAcfPrefs():get(\"general:isairbus\") == false",
             "response": "ON / AUTO",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
@@ -1163,42 +751,15 @@
             ]
           },
           {
-            "challenge": "*ENGINE BLEEDS",
+            "challenge": "ENGINE BLEEDS",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"air:hasenginebleeds\")",
             "response": "ON",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
                 "element": "#bleeds"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*PRESSURIZATION PANEL BOEING",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
-            "response": "ALTITUDES & MODE SELECTOR GND",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "flightalt",
-                "value": 0
-              },
-              {
-                "action": "set",
-                "element": "landalt",
-                "value": 0
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -1248,10 +809,6 @@
               {
                 "action": "off",
                 "element": "speedbrake"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -1308,10 +865,10 @@
             ]
           },
           {
-            "challenge": "*AILERON & RUDDER TRIM",
+            "challenge": "AILERON & RUDDER TRIM",
             "classname": "ProcedureItem",
             "response": "RESET",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "set",
@@ -1364,15 +921,11 @@
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\") and ng_getAcfPrefs():get(\"general:hasseatbelts\")",
             "response": "ON",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
                 "element": "seatbelts"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -1381,15 +934,11 @@
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\") and ng_getAcfPrefs():get(\"autopilot:hasirs\") and ng_getAcfPrefs():get(\"general:isairbus\")",
             "response": "NAV",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
                 "element": "#adirus"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -1490,18 +1039,30 @@
             ]
           },
           {
+            "challenge": "<GND>STAIRS",
+            "classname": "ProcedureItem",
+            "condition": "ng_getAcfPrefs():get(\"general:hasstairs\")",
+            "delay": 2,
+            "nocheck": 1,
+            "response": "IN",
+            "role": "ng_firole_SYS",
+            "setelements": [
+              {
+                "action": "off",
+                "element": "airstair1"
+              }
+            ]
+          },
+          {
             "challenge": "<GND>DOORS",
             "classname": "ProcedureItem",
+            "delay": 2,
             "response": "CLOSED",
             "role": "ng_firole_SYS",
             "setelements": [
               {
                 "action": "off",
                 "element": "#externaldoors"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -1520,19 +1081,15 @@
             ]
           },
           {
-            "challenge": "*BEACON",
+            "challenge": "BEACON",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"lights:hasbeacon\")",
             "response": "ON",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
                 "element": "#beacons"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -1545,28 +1102,7 @@
             "setelements": [
               {
                 "action": "off",
-                "element": "apubleed"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*AFT FUEL PUMP FOR APU BOEING",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:hasapu\") and ng_getBriefPrefs():get(\"origin:standpower\") ~= 2 and ng_getAcfPrefs():get(\"general:isboeing\")",
-            "response": "ON",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "on",
-                "element": "fuelpump2"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
+                "element": "apubleed1"
               }
             ]
           },
@@ -1617,8 +1153,8 @@
             "role": "ng_firole_CPT",
             "setelements": [
               {
-                "action": "chk",
-                "element": "wait"
+                "action": "on",
+                "element": "apubleed1"
               }
             ]
           },
@@ -1636,68 +1172,36 @@
             ]
           },
           {
-            "challenge": "*FUEL QUANTITY",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAppPrefs():get(\"general:showstars\")",
-            "response": "CHECK",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*T.O. DATA",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAppPrefs():get(\"general:showstars\")",
-            "response": "CHECK",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*PACK SWITCHES",
+            "challenge": "PACK SWITCHES",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"air:haspacks\") and ng_getAcfPrefs():get(\"general:isairbus\") == false",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
                 "element": "#packs"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*TRANSPONDER MODE",
+            "challenge": "TRANSPONDER MODE",
             "classname": "ProcedureItem",
             "response": "AUTO",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "set",
-                "element": "xpdrmodetara"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
+                "element": "xpdrmode",
+                "value": 7
               }
             ]
           },
           {
-            "challenge": "*EXTERNAL POWER",
+            "challenge": "*<WAIT>EXTERNAL POWER",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"electric:hasgpu\") and ng_getBriefPrefs():get(\"origin:standpower\") == 1",
+            "delay": 2,
             "response": "OFF / DISCONNECT",
             "role": "ng_firole_CPT",
             "setelements": [
@@ -1708,10 +1212,6 @@
               {
                 "action": "off",
                 "element": "gpuconnect"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -1746,9 +1246,14 @@
             "challenge": "PARKING BRAKE",
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
-            "response": "AS REQUIRED",
-            "role": "ng_firole_CPT",
-            "setelements": {}
+            "response": "ON",
+            "role": "ng_firole_PM",
+            "setelements": [
+              {
+                "action": "on",
+                "element": "parkbrake"
+              }
+            ]
           },
           {
             "challenge": "TAKEOFF SPEEDS & THRUST",
@@ -1761,18 +1266,32 @@
           {
             "challenge": "FUEL",
             "classname": "ChecklistItem",
-            "condition": "ng_getAppPrefs():get(\"general:usechecklist\") and ng_getAcfPrefs():get(\"general:isboeing\")",
+            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "____KGS, PUMPS ON",
             "role": "ng_firole_CPT",
-            "setelements": {}
+            "setelements": [
+              {
+                "action": "chk",
+                "element": "wait"
+              }
+            ]
           },
           {
             "challenge": "PASSENGER SIGNS",
             "classname": "ChecklistItem",
-            "condition": "ng_getAppPrefs():get(\"general:usechecklist\") and ng_getAcfPrefs():get(\"general:isboeing\")",
+            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "SET",
-            "role": "ng_firole_CPT",
-            "setelements": {}
+            "role": "ng_firole_FO",
+            "setelements": [
+              {
+                "action": "on",
+                "element": "seatbelts"
+              },
+              {
+                "action": "on",
+                "element": "nosmoking"
+              }
+            ]
           },
           {
             "challenge": "WINDOWS",
@@ -1785,17 +1304,28 @@
           {
             "challenge": "RUDDER & AILERON TRIM",
             "classname": "ChecklistItem",
-            "condition": "ng_getAppPrefs():get(\"general:usechecklist\") and ng_getAcfPrefs():get(\"general:isboeing\")",
+            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "FREE & ZERO",
-            "role": "ng_firole_CPT",
-            "setelements": {}
+            "role": "ng_firole_FO",
+            "setelements": [
+              {
+                "action": "chk",
+                "element": "ailerontrim",
+                "value": 0
+              },
+              {
+                "action": "chk",
+                "element": "ruddertrim",
+                "value": 0
+              }
+            ]
           },
           {
             "challenge": "BEACON",
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "ON",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
@@ -1833,8 +1363,8 @@
             "role": "ng_firole_CPT",
             "setelements": [
               {
-                "action": "chk",
-                "element": "wait"
+                "action": "off",
+                "element": "cockpitdoor"
               }
             ]
           },
@@ -1860,24 +1390,6 @@
             "response": " ",
             "role": "ng_firole_SYS",
             "setelements": {}
-          },
-          {
-            "challenge": "*ENGINE MODE SELECTOR AIRBUS",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:isairbus\")",
-            "response": "IGN/START",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "engstartsel1",
-                "value": 2
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
           },
           {
             "challenge": "*ENGINE 1 START",
@@ -1931,11 +1443,11 @@
             ]
           },
           {
-            "challenge": "*HYDRAULIC SYSTEM",
+            "challenge": "HYDRAULIC SYSTEM",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"hydraulic:hashydengpmps\") and ng_getAcfPrefs():get(\"general:isairbus\") == false",
+            "condition": "ng_getAcfPrefs():get(\"hydraulic:hashydengpmps\")",
             "response": "CHECK/SET",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
@@ -1944,27 +1456,19 @@
               {
                 "action": "on",
                 "element": "#elechydpumps"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*GENERATOR SWITCHES",
+            "challenge": "GENERATOR SWITCHES",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"electric:hasenggens\")",
             "response": "ON / AUTO",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
                 "element": "#generators"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -1994,10 +1498,10 @@
             ]
           },
           {
-            "challenge": "*WING & ENG ANTI-ICE",
+            "challenge": "WING & ENG ANTI-ICE",
             "classname": "ProcedureItem",
             "response": "AS REQUIRED",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
@@ -2018,44 +1522,19 @@
                 "action": "on",
                 "condition": "ng_getBriefPrefs():get(\"takeoff:selectedaice\") == 3",
                 "element": "#wingaice"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*PROBE HEAT BOEING",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"air:hasprobeheat\") and ng_getAcfPrefs():get(\"general:isboeing\")",
-            "response": "ON",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "on",
-                "element": "#probeheat"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*PACK SWITCHES",
+            "challenge": "PACK SWITCHES",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"air:haspacks\")",
             "response": "ON",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
                 "element": "#packs"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -2076,7 +1555,7 @@
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"electric:hasapu\")",
             "response": "OFF",
-            "role": "ng_firole_FO",
+            "role": "ng_firole_CPT",
             "setelements": [
               {
                 "action": "chk",
@@ -2105,26 +1584,8 @@
             "role": "ng_firole_CPT",
             "setelements": [
               {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*ENGINE MODE SELECTOR AIRBUS",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:isairbus\")",
-            "response": "NORM",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "engstartsel1",
-                "value": 1
-              },
-              {
-                "action": "chk",
-                "element": "wait"
+                "action": "off",
+                "element": "apubleed1"
               }
             ]
           },
@@ -2232,68 +1693,69 @@
               {
                 "action": "set",
                 "condition": "ng_getBriefPrefs():get(\"takeoff:selectedflaps\") == 1",
-                "element": "flapleverUP"
+                "element": "flapset",
+                "value": 0
               },
               {
                 "action": "set",
                 "condition": "ng_getBriefPrefs():get(\"takeoff:selectedflaps\") == 2",
-                "element": "flaplever1"
+                "element": "flapset",
+                "value": 0.125
               },
               {
                 "action": "set",
                 "condition": "ng_getBriefPrefs():get(\"takeoff:selectedflaps\") == 3",
-                "element": "flaplever2"
+                "element": "flapset",
+                "value": 0.25
               },
               {
                 "action": "set",
                 "condition": "ng_getBriefPrefs():get(\"takeoff:selectedflaps\") == 4",
-                "element": "flaplever3"
+                "element": "flapset",
+                "value": 0.375
               },
               {
                 "action": "set",
                 "condition": "ng_getBriefPrefs():get(\"takeoff:selectedflaps\") == 5",
-                "element": "flaplever4"
+                "element": "flapset",
+                "value": 0.5
               },
               {
                 "action": "set",
                 "condition": "ng_getBriefPrefs():get(\"takeoff:selectedflaps\") == 6",
-                "element": "flaplever5"
+                "element": "flapset",
+                "value": 0.625
               },
               {
                 "action": "set",
                 "condition": "ng_getBriefPrefs():get(\"takeoff:selectedflaps\") == 7",
-                "element": "flaplever6"
+                "element": "flapset",
+                "value": 0.75
               },
               {
                 "action": "set",
                 "condition": "ng_getBriefPrefs():get(\"takeoff:selectedflaps\") == 8",
-                "element": "flaplever7"
+                "element": "flapset",
+                "value": 0.875
               },
               {
                 "action": "set",
                 "condition": "ng_getBriefPrefs():get(\"takeoff:selectedflaps\") == 9",
-                "element": "flapleverFull"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
+                "element": "flapset",
+                "value": 1
               }
             ]
           },
           {
-            "challenge": "*ENGINE BLEEDS",
+            "challenge": "ENGINE BLEEDS",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"air:hasenginebleeds\")",
             "response": "ON / AUTO",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
                 "element": "#bleeds"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -2311,34 +1773,27 @@
             ]
           },
           {
-            "challenge": "*TRANSPONDER",
+            "challenge": "TRANSPONDER",
             "classname": "ProcedureItem",
             "response": "MODE C",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "xpdrmodetara"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
+                "action": "set",
+                "element": "xpdrmode",
+                "value": 7
               }
             ]
           },
           {
-            "challenge": "*DOMELIGHT",
+            "challenge": "DOMELIGHT",
             "classname": "ProcedureItem",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
                 "element": "domelight"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -2372,36 +1827,16 @@
             "setelements": {}
           },
           {
-            "challenge": "*WEATHER RADAR",
+            "challenge": "WEATHER RADAR",
             "classname": "ChecklistItem",
-            "condition": "ng_getAppPrefs():get(\"general:usechecklist\") and ng_getAcfPrefs():get(\"general:isairbus\") == false",
+            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "ON",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "wxpws"
-              },
-              {
-                "action": "up",
-                "element": "wxradarstate"
-              }
-            ]
-          },
-          {
-            "challenge": "*RADAR & PREDICTIVE W/S",
-            "classname": "ChecklistItem",
-            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")  and ng_getAcfPrefs():get(\"general:isairbus\")",
-            "response": "ON/AUTO",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "on",
-                "element": "wxpws"
-              },
-              {
-                "action": "up",
-                "element": "wxradarstate"
+                "action": "set",
+                "element": "wxradarstate",
+                "value": 7
               }
             ]
           },
@@ -2436,10 +1871,6 @@
               {
                 "action": "on",
                 "element": "#taxilights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -2475,10 +1906,6 @@
               {
                 "action": "on",
                 "element": "#strobelights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -2491,10 +1918,6 @@
               {
                 "action": "on",
                 "element": "#alllandlights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -2508,52 +1931,6 @@
               {
                 "action": "off",
                 "element": "#taxilights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*WEATHER RADAR",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"efis:haswxradar\")",
-            "response": "ON",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "on",
-                "element": "wxradarwx"
-              }
-            ]
-          },
-          {
-            "challenge": "*TRANSPONDER",
-            "classname": "ProcedureItem",
-            "response": "MODE C / T A R A",
-            "role": "ng_firole_FO",
-            "setelements": [
-              {
-                "action": "on",
-                "element": "xpdrmodetara"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*PRESSURIZATION MODE",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
-            "response": "FLT",
-            "role": "ng_firole_FO",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -2576,22 +1953,6 @@
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "___",
             "role": "ng_firole_BOTH",
-            "setelements": {}
-          },
-          {
-            "challenge": "T CAS",
-            "classname": "ChecklistItem",
-            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
-            "response": "_____",
-            "role": "ng_firole_CPT",
-            "setelements": {}
-          },
-          {
-            "challenge": "PACKS",
-            "classname": "ChecklistItem",
-            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
-            "response": "____",
-            "role": "ng_firole_CPT",
             "setelements": {}
           },
           {
@@ -2683,8 +2044,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever7"
+                "action": "set",
+                "element": "flapset",
+                "value": 0.875
               }
             ]
           },
@@ -2709,8 +2071,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever6"
+                "action": "set",
+                "element": "flapset",
+                "value": 0.75
               }
             ]
           },
@@ -2735,8 +2098,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever5"
+                "action": "set",
+                "element": "flapset",
+                "value": 0.67500001192093
               }
             ]
           },
@@ -2761,8 +2125,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever4"
+                "action": "set",
+                "element": "flapset",
+                "value": 0.5
               }
             ]
           },
@@ -2787,8 +2152,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever3"
+                "action": "set",
+                "element": "flapset",
+                "value": 0.375
               }
             ]
           },
@@ -2813,8 +2179,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever2"
+                "action": "set",
+                "element": "flapset",
+                "value": 0.25
               }
             ]
           },
@@ -2839,8 +2206,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever1"
+                "action": "set",
+                "element": "flapset",
+                "value": 0.125
               }
             ]
           },
@@ -2865,8 +2233,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flapleverUP"
+                "action": "set",
+                "element": "flapset",
+                "value": 0
               }
             ]
           },
@@ -2884,10 +2253,10 @@
             ]
           },
           {
-            "challenge": "*PACKS & BLEEDS",
+            "challenge": "PACKS & BLEEDS",
             "classname": "ProcedureItem",
             "response": "ON",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
@@ -2898,10 +2267,51 @@
                 "action": "on",
                 "condition": "ng_getAcfPrefs():get(\"air:haspacks\")",
                 "element": "#packs"
-              },
+              }
+            ]
+          },
+          {
+            "challenge": "<WAIT>TRANSITION ALTITUDE_",
+            "classname": "ProcedureItem",
+            "condition": "ng_getBriefPrefs():get(\"origin:transalt\") < 10000",
+            "response": "REACHED",
+            "role": "ng_firole_SYS",
+            "setelements": [
               {
                 "action": "chk",
-                "element": "wait"
+                "element": "_abovetalt"
+              }
+            ]
+          },
+          {
+            "challenge": "BARO STD_",
+            "classname": "ProcedureItem",
+            "condition": "ng_getBriefPrefs():get(\"origin:transalt\") < 10000",
+            "response": "SET",
+            "role": "ng_firole_FO",
+            "setelements": [
+              {
+                "action": "set",
+                "element": "barovalue1",
+                "value": 29.92
+              },
+              {
+                "action": "set",
+                "element": "barovalue2",
+                "value": 29.92
+              },
+              {
+                "action": "set",
+                "element": "barovalue3",
+                "value": 29.92
+              },
+              {
+                "action": "on",
+                "element": "barostd1"
+              },
+              {
+                "action": "on",
+                "element": "barostd2"
               }
             ]
           },
@@ -2918,7 +2328,7 @@
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "UP",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_PNF",
             "setelements": [
               {
                 "action": "off",
@@ -2931,11 +2341,12 @@
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "UP",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_PNF",
             "setelements": [
               {
-                "action": "set",
-                "element": "flapleverUP"
+                "action": "chk",
+                "element": "flapset",
+                "value": 0
               }
             ]
           },
@@ -2944,7 +2355,7 @@
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\") and ng_getAcfPrefs():get(\"air:haspacks\")",
             "response": "ON / AUTO",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_PNF",
             "setelements": [
               {
                 "action": "on",
@@ -2962,54 +2373,8 @@
             "setelements": {}
           },
           {
-            "challenge": "<WAIT>TRANSITION ALTITUDE_",
-            "classname": "ProcedureItem",
-            "condition": "ng_getBriefPrefs():get(\"origin:transalt\") < 10000",
-            "response": "REACHED",
-            "role": "ng_firole_SYS",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "_abovetalt"
-              }
-            ]
-          },
-          {
-            "challenge": "BARO STD_",
-            "classname": "ProcedureItem",
-            "condition": "ng_getBriefPrefs():get(\"origin:transalt\") < 10000",
-            "response": "SET",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "barovalue1",
-                "value": 29.92
-              },
-              {
-                "action": "set",
-                "element": "barovalue2",
-                "value": 29.92
-              },
-              {
-                "action": "set",
-                "element": "barovalue3",
-                "value": 29.92
-              },
-              {
-                "action": "on",
-                "element": "barostd1"
-              },
-              {
-                "action": "on",
-                "element": "barostd2"
-              }
-            ]
-          },
-          {
             "challenge": "<WAIT>10.000",
             "classname": "ProcedureItem",
-            "condition": "true",
             "response": "REACHED",
             "role": "ng_firole_SYS",
             "setelements": [
@@ -3023,7 +2388,7 @@
             "challenge": "LANDING LIGHTS",
             "classname": "ProcedureItem",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
@@ -3032,66 +2397,9 @@
             ]
           },
           {
-            "challenge": "RWY LIGHTS",
-            "classname": "ProcedureItem",
-            "response": "OFF",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "off",
-                "element": "#rwylights"
-              }
-            ]
-          },
-          {
-            "challenge": "TRANSITION ALTITUDE",
-            "classname": "ProcedureItem",
-            "condition": "ng_getBriefPrefs():get(\"origin:transalt\") >= 10000",
-            "response": "REACHED",
-            "role": "ng_firole_SYS",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "_abovetalt"
-              }
-            ]
-          },
-          {
-            "challenge": "BARO STD",
-            "classname": "ProcedureItem",
-            "condition": "ng_getBriefPrefs():get(\"origin:transalt\") >= 10000",
-            "response": "SET",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "barovalue1",
-                "value": 29.92
-              },
-              {
-                "action": "set",
-                "element": "barovalue2",
-                "value": 29.92
-              },
-              {
-                "action": "set",
-                "element": "barovalue3",
-                "value": 29.920000076294
-              },
-              {
-                "action": "on",
-                "element": "barostd1"
-              },
-              {
-                "action": "on",
-                "element": "barostd2"
-              }
-            ]
-          },
-          {
             "challenge": "<WAIT>TRANSITION ALTITUDE_",
             "classname": "ProcedureItem",
-            "condition": "ng_getBriefPrefs():get(\"origin:transalt\") < 10000",
+            "condition": "ng_getBriefPrefs():get(\"origin:transalt\") >= 10000",
             "response": "REACHED",
             "role": "ng_firole_SYS",
             "setelements": [
@@ -3103,63 +2411,6 @@
           },
           {
             "challenge": "BARO STD_",
-            "classname": "ProcedureItem",
-            "condition": "ng_getBriefPrefs():get(\"origin:transalt\") < 10000",
-            "response": "SET",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "barovalue1",
-                "value": 29.92
-              },
-              {
-                "action": "set",
-                "element": "barovalue2",
-                "value": 29.92
-              }
-            ]
-          },
-          {
-            "challenge": "10.000",
-            "classname": "ProcedureItem",
-            "condition": "true",
-            "response": "REACHED",
-            "role": "ng_firole_SYS",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "_above10k"
-              }
-            ]
-          },
-          {
-            "challenge": "LANDING LIGHTS",
-            "classname": "ProcedureItem",
-            "response": "OFF",
-            "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "off",
-                "element": "#alllandlights"
-              }
-            ]
-          },
-          {
-            "challenge": "TRANSITION ALTITUDE",
-            "classname": "ProcedureItem",
-            "condition": "ng_getBriefPrefs():get(\"origin:transalt\") >= 10000",
-            "response": "REACHED",
-            "role": "ng_firole_SYS",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "_abovetalt"
-              }
-            ]
-          },
-          {
-            "challenge": "BARO STD",
             "classname": "ProcedureItem",
             "condition": "ng_getBriefPrefs():get(\"origin:transalt\") >= 10000",
             "response": "SET",
@@ -3187,7 +2438,7 @@
             "challenge": "ENGINE & WING ANTI-ICE",
             "classname": "ProcedureItem",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
@@ -3300,10 +2551,10 @@
             ]
           },
           {
-            "challenge": "*ENGINE ANTI-ICE",
+            "challenge": "ENGINE ANTI-ICE",
             "classname": "ProcedureItem",
             "response": "AS REQUIRED",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_PNF",
             "setelements": [
               {
                 "action": "on",
@@ -3324,18 +2575,14 @@
                 "action": "off",
                 "condition": "ng_getBriefPrefs():get(\"landing:selectedaice\") == 1",
                 "element": "engaice2"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*WING ANTI-ICE",
+            "challenge": "WING ANTI-ICE",
             "classname": "ProcedureItem",
             "response": "AS REQUIRED",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_PNF",
             "setelements": [
               {
                 "action": "on",
@@ -3346,10 +2593,6 @@
                 "action": "on",
                 "condition": "ng_getBriefPrefs():get(\"takeoff:selectedaice\") < 3",
                 "element": "wingaice1"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -3419,10 +2662,6 @@
               {
                 "action": "on",
                 "element": "#alllandlights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -3436,10 +2675,6 @@
               {
                 "action": "on",
                 "element": "seatbelts"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -3546,10 +2781,6 @@
                 "action": "set",
                 "element": "landalt",
                 "value": 0
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -3585,10 +2816,6 @@
               {
                 "action": "on",
                 "element": "#alllandlights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -3601,10 +2828,6 @@
               {
                 "action": "on",
                 "element": "#rwylights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -3770,8 +2993,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever1"
+                "action": "set",
+                "element": "flapset",
+                "value": 0.125
               }
             ]
           },
@@ -3796,8 +3020,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever2"
+                "action": "set",
+                "element": "flapset",
+                "value": 0.25
               }
             ]
           },
@@ -3846,8 +3071,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever3"
+                "action": "set",
+                "element": "flapset",
+                "value": 0.375
               }
             ]
           },
@@ -3872,8 +3098,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever4"
+                "action": "set",
+                "element": "flapset",
+                "value": 0.5
               }
             ]
           },
@@ -3898,8 +3125,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever5"
+                "action": "set",
+                "element": "flapset",
+                "value": 0.625
               }
             ]
           },
@@ -3924,8 +3152,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever6"
+                "action": "set",
+                "element": "flapset",
+                "value": 0.75
               }
             ]
           },
@@ -3950,8 +3179,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever7"
+                "action": "set",
+                "element": "flapset",
+                "value": 0.875
               }
             ]
           },
@@ -3976,8 +3206,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flaplever8"
+                "action": "set",
+                "element": "flapset",
+                "value": 1
               }
             ]
           },
@@ -3991,10 +3222,6 @@
                 "action": "set",
                 "element": "speedbrake",
                 "value": -0.5
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -4109,10 +3336,6 @@
               {
                 "action": "off",
                 "element": "#alllandlights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -4125,10 +3348,6 @@
               {
                 "action": "off",
                 "element": "#strobelights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -4141,10 +3360,6 @@
               {
                 "action": "off",
                 "element": "#rwylights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -4158,10 +3373,6 @@
               {
                 "action": "on",
                 "element": "#taxilights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -4174,59 +3385,45 @@
               {
                 "action": "off",
                 "element": "speedbrake"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*FLAPS",
+            "challenge": "FLAPS",
             "classname": "ProcedureItem",
             "response": "RETRACT",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "flapleverUP"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
+                "action": "set",
+                "element": "flapset",
+                "value": 0
               }
             ]
           },
           {
-            "challenge": "*WEATHER RADAR",
+            "challenge": "WEATHER RADAR",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"efis:haswxradar\")",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "off",
-                "element": "wxradaroff"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
+                "action": "set",
+                "element": "wxradarstate",
+                "value": 0
               }
             ]
           },
           {
-            "challenge": "*FLIGHT DIRECTORS",
+            "challenge": "FLIGHT DIRECTORS",
             "classname": "ProcedureItem",
             "response": "OFF",
-            "role": "ng_firole_BOTH",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
                 "element": "#flightdirs"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -4265,10 +3462,10 @@
             ]
           },
           {
-            "challenge": "*ANTI-ICE",
+            "challenge": "ANTI-ICE",
             "classname": "ProcedureItem",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
@@ -4284,10 +3481,6 @@
                 "action": "off",
                 "condition": "ng_getAcfPrefs():get(\"aice:hasprobeheat\")",
                 "element": "#probeheat"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -4358,10 +3551,6 @@
               {
                 "action": "off",
                 "element": "#taxilights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -4421,26 +3610,19 @@
               {
                 "action": "off",
                 "element": "#taxilights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*TRANSPONDER",
+            "challenge": "TRANSPONDER",
             "classname": "ProcedureItem",
             "response": "STANDBY",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "xpdrmodestby"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
+                "action": "set",
+                "element": "xpdrmode",
+                "value": 0
               }
             ]
           },
@@ -4509,19 +3691,15 @@
             ]
           },
           {
-            "challenge": "*SEAT BELT SIGNS",
+            "challenge": "SEAT BELT LIGHTS",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:hasseatbelts\")",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
                 "element": "seatbelts"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -4543,7 +3721,7 @@
             "challenge": "INTERNAL LIGHTS",
             "classname": "ProcedureItem",
             "response": "AS REQUIRED",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "set",
@@ -4585,19 +3763,15 @@
                 "action": "off",
                 "condition": "ng_getAcfPrefs():get(\"lights:hasemerlts\")",
                 "element": "#emerlights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*BEACON",
+            "challenge": "BEACON",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"lights:hasbeacon\")",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
@@ -4606,10 +3780,6 @@
               {
                 "action": "off",
                 "element": "#strobelights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -4650,44 +3820,36 @@
             ]
           },
           {
-            "challenge": "*WINDOW HEAT",
+            "challenge": "WINDOW HEAT",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"aice:haswindowht\")",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
                 "element": "#windowheat"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*FUEL PUMPS",
+            "challenge": "FUEL PUMPS",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"fuel:hasfuelpumps\")",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
                 "element": "#fuelpumps"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*HYDRAULIC PUMPS",
+            "challenge": "HYDRAULIC PUMPS",
             "classname": "ProcedureItem",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
@@ -4698,23 +3860,6 @@
                 "action": "off",
                 "condition": "ng_getAcfPrefs():get(\"hydraulic:hashydelecpmps\")",
                 "element": "#elechydpumps"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*PRESSURIZATION MODE",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:isboeing\")",
-            "response": "GRD",
-            "role": "ng_firole_FO",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -4796,10 +3941,10 @@
             "setelements": {}
           },
           {
-            "challenge": "*LIGHTING PANEL",
+            "challenge": "LIGHTING PANEL",
             "classname": "ProcedureItem",
             "response": "AS REQUIRED",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
@@ -4838,10 +3983,6 @@
                 "action": "off",
                 "condition": "ng_getAcfPrefs():get(\"lights:haslogolts\")",
                 "element": "#logolights"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -4855,18 +3996,14 @@
               {
                 "action": "off",
                 "element": "#adirus"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*PAX SIGNS",
+            "challenge": "PAX SIGNS",
             "classname": "ProcedureItem",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
@@ -4877,62 +4014,46 @@
                 "action": "off",
                 "condition": "ng_getAcfPrefs():get(\"general:hasseatbelts\")",
                 "element": "seatbelts"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*EMERGENCY EXIT LIGHTS",
+            "challenge": "EMERGENCY EXIT LIGHTS",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"lights:hasemerlts\")",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "set",
                 "element": "#emerlights",
                 "value": 0
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*WINDOW HEAT",
+            "challenge": "WINDOW HEAT",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"aice:haswindowht\")",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
                 "element": "#windowheat"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
           {
-            "challenge": "*PACK SWITCHES",
+            "challenge": "PACK SWITCHES",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"air:haspacks\")",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
                 "element": "#packs"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -4943,10 +4064,6 @@
             "response": "OFF",
             "role": "ng_firole_CPT",
             "setelements": [
-              {
-                "action": "off",
-                "element": "apumaster"
-              },
               {
                 "action": "chk",
                 "element": "wait"
@@ -4967,10 +4084,6 @@
               {
                 "action": "off",
                 "element": "gpuconnect"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -4983,10 +4096,6 @@
               {
                 "action": "off",
                 "element": "#batteries"
-              },
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -5005,7 +4114,7 @@
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\") and ng_getAcfPrefs():get(\"autopilot:hasirs\")",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
@@ -5018,7 +4127,7 @@
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\") and ng_getAcfPrefs():get(\"lights:hasemerlts\")",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "dn",
@@ -5031,7 +4140,7 @@
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\") and ng_getAcfPrefs():get(\"aice:haswindowht\")",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
@@ -5044,7 +4153,7 @@
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\") and ng_getAcfPrefs():get(\"air:haspacks\")",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",
@@ -5065,7 +4174,7 @@
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "OFF",
-            "role": "ng_firole_CPT",
+            "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "off",

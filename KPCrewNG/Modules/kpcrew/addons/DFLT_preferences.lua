@@ -22,6 +22,7 @@ addon:add(preference:new("aircraftname",	"AIRCRAFT",ng_type_text,"Aircraft name|
 
 -- --------------------------- General settings not associated with a preference group
 local general 				= preferenceGroup:new("general","GENERAL PREFERENCES")
+general:add(preference:new("isga",			false,ng_type_flag,	"Is GA Airplane?|Yes|No"))		-- general:isga
 general:add(preference:new("isairbus",		false,ng_type_flag,	"Is Airbus?|Yes|No"))			-- general:isairbus
 general:add(preference:new("isboeing",		false,ng_type_flag,	"Is Boeing?|Yes|No"))			-- general:isboeing
 general:add(preference:new("iscargo",		false,ng_type_flag,	"Is Cargo Aircraft?|Yes|No"))	-- general:iscargo
@@ -135,11 +136,11 @@ efis:add(preference:new("haswxradar",	false,ng_type_flag,"Has WX Radar|Yes|No"))
 local electric 				= preferenceGroup:new("electric","ELECTRIC SYSTEMS")
 electric:add(preference:new("hasstbypower",	false,ng_type_flag,"Has Standby Power|Yes|No"))		-- electric:hasstbypower
 electric:add(preference:new("hasgpu",		false,ng_type_flag,"Has GPU?|Yes|No"))				-- electric:hasgpu
-	electric:add(preference:new("startupgpu",true,ng_type_flag,"GPU @ start|On|Off",
-		nil,"return ng_getAcfPrefs():get(\"electric:hasgpu\")"))								-- electric:startupgpu
+	-- electric:add(preference:new("startupgpu",true,ng_type_flag,"GPU @ start|On|Off",
+		-- nil,"return ng_getAcfPrefs():get(\"electric:hasgpu\")"))								-- electric:startupgpu
 electric:add(preference:new("hasapu",		false,ng_type_flag,"Has APU?|Yes|No"))				-- electric:hasapu
-	electric:add(preference:new("startupapu",false,ng_type_flag,"APU @ start|On|Off",
-		nil,"return ng_getAcfPrefs():get(\"electric:hasapu\")"))								-- electric:startupapu
+	-- electric:add(preference:new("startupapu",false,ng_type_flag,"APU @ start|On|Off",
+		-- nil,"return ng_getAcfPrefs():get(\"electric:hasapu\")"))								-- electric:startupapu
 	electric:add(preference:new("apun1run",		98,ng_type_int,"APU N1 running|0",
 		nil,"return ng_getAcfPrefs():get(\"electric:hasapu\")"))								-- electric:apun1run
 electric:add(preference:new("hascabinpwr",	false,ng_type_flag,"Has Cabin Power?|Yes|No"))		-- electric:hascabinpwr
@@ -160,6 +161,9 @@ engines:add(preference:new("hasstartsels",	false,ng_type_flag,"Has Start Selecto
 engines:add(preference:new("hasstartlvrs",	false,ng_type_flag,"Has Start Levers?|Yes|No"))		-- engines:hasstartlvrs
 engines:add(preference:new("hastothrust",	false,ng_type_flag,"Has T/O Thrust Rating?|Yes|No")) -- engines:hastothrust
 engines:add(preference:new("n2afterstart",	50,ng_type_int,"N2 Value start|0"))					-- engines:n2afterstart
+engines:add(preference:new("rpmafterstart",	0,ng_type_int,"RPM Value start|0"))					-- engines:rpmafterstart
+engines:add(preference:new("hasproplvrs",	false,ng_type_flag,"Has Prop Levers?|Yes|No"))		-- engines:hasproplvrs
+engines:add(preference:new("hasmixlvrs",	false,ng_type_flag,"Has Mixture Levers?|Yes|No"))		-- engines:hasmixlvrs
 -- --------------------------------------------------------------------------------------------
 
 -- -------------------------- Fuel related settings 

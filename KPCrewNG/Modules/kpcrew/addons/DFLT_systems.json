@@ -209,8 +209,8 @@
                 ],
                 "dref": "sim/cockpit2/bleedair/actuators/engine_bleed_sov",
                 "indx": 0,
-                "name": "bleed1",
-                "title": "Engine Bleed 1",
+                "name": "apubleed1",
+                "title": "APU  Bleed 1",
                 "type": "dataref"
               }
             ],
@@ -1783,91 +1783,16 @@
               },
               {
                 "acts": [
-                  "on"
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "function (a) return a == 4 end",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",4)",
-                "name": "wxradarmap",
-                "title": "Weather radar MAP",
-                "type": "undefined"
-              },
-              {
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "name": "wxradarmode",
-                "title": "Weather radar mode pilot",
-                "type": "undefined"
-              },
-              {
                 "name": "wxradarstate",
-                "title": "Weather radar on/off",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "function (a) return a == 1 end",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",1)",
-                "name": "wxradarstby",
-                "title": "Weather radar STBY",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 1",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",1)",
-                "name": "wxradartest",
-                "title": "Weather radar TEST",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 0",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",0)",
-                "name": "wxradaroff",
-                "title": "Weather radar OFF",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 5",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",5)",
-                "name": "wxradarturb",
-                "title": "Weather radar TURB",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 2",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",2)",
-                "name": "wxradarwx",
-                "title": "Weather radar WX",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 3",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",3)",
-                "name": "wxradarwxt",
-                "title": "Weather radar WX+T",
-                "type": "undefined"
+                "title": "WX Radar state",
+                "type": "dataref"
               }
             ],
             "name": "wxradar"
@@ -2944,6 +2869,18 @@
                   "chk",
                   ""
                 ],
+                "name": "airstair1",
+                "title": "Stairs",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
                 "cmdoff": "sim/flight_controls/door_close_12",
                 "cmdon": "sim/flight_controls/door_open_12",
                 "cmdtgl": "sim/flight_controls/door_toggle_12",
@@ -2951,11 +2888,6 @@
                 "name": "cockpitdoor",
                 "title": "Cockpit Door",
                 "type": "onofftgl"
-              },
-              {
-                "name": "doorlock",
-                "title": "Door Lock",
-                "type": "undefined"
               }
             ],
             "name": "internaldoors"
@@ -3781,116 +3713,6 @@
                 "name": "xpdrmode",
                 "title": "XPDR Mode",
                 "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return a==2 end",
-                "fon": "set(\"sim/cockpit2/radios/actuators/transponder_mode\",2)",
-                "name": "xpdrmodea",
-                "title": "XPDR Mode A",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return a==2 end",
-                "fon": "set(\"sim/cockpit2/radios/actuators/transponder_mode\",3)",
-                "name": "xpdrmodec",
-                "title": "XPDR Mode C",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return true end",
-                "fon": "function (a) return 0 end",
-                "name": "xpdrmodeoff",
-                "title": "XPDR Mode OFF",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return a==2 end",
-                "fon": "set(\"sim/cockpit2/radios/actuators/transponder_mode\",5)",
-                "name": "xpdrmodes",
-                "title": "XPDR Mode S GND",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return true end",
-                "fon": "function (a) return 1 end",
-                "name": "xpdrmodestby",
-                "title": "XPDR Mode STBY",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return true end",
-                "fon": "function (a) return 2 end",
-                "name": "xpdrmodeta",
-                "title": "XPDR Mode TA",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return true end",
-                "fon": "function (a) return 3 end",
-                "name": "xpdrmodetara",
-                "title": "XPDR Mode TARA",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "on",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "true",
-                "fon": "set(\"sim/cockpit2/radios/actuators/transponder_mode\",4)",
-                "name": "xpdrmodetest",
-                "title": "XPDR Mode TEST",
-                "type": "undefined"
               }
             ],
             "name": "transponder"

@@ -19,16 +19,16 @@ function ng_acft_select(component)
 		sopicao = "B737"
 	elseif PLANE_ICAO == "B739" then
 		icao = "B737" -- LevelUp B739
-		sopicao = "DFLT"
+		sopicao = "B737"
 	elseif PLANE_ICAO == "B736" then
 		icao = "B737" -- LevelUp B736
-		sopicao = "DFLT"
+		sopicao = "B737"
 	elseif PLANE_ICAO == "B737" then
 		icao = "B737" -- LevelUp B737
-		sopicao = "DFLT"
+		sopicao = "B737"
 	elseif PLANE_ICAO == "B738" and PLANE_TAILNUMBER == "B738" then
 		icao = "B737" -- LevelUp B738
-		sopicao = "DFLT"
+		sopicao = "B737"
 
 	-- FlyJsim B732
 	elseif PLANE_ICAO == "B732" then

@@ -42,7 +42,7 @@ function render_edit_tab_pref()
 
 		-- render aircraft preferences tree
 		imgui.BeginChild("#prefrender")
-			imgui.SetNextItemOpen(true)
+			-- imgui.SetNextItemOpen(true)
 			ng_getAcfPrefs():render("tree")
 		imgui.EndChild()
 		

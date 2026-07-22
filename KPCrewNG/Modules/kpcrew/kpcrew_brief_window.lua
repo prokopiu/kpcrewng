@@ -1974,8 +1974,8 @@ function render_simbrief_flight_plan()
 	ng_imgui_in_tfield("origicao:", 38, 0xFF1b9af8, 5, 
 		ng_getBriefPrefs():get("origin:icao"),function (textin) ng_getBriefPrefs():set("origin:icao",textin) end)
 	imgui.SameLine()
-	ng_imgui_in_tfield("destrwy:", 25, 0xFF1b9af8, 3, 
-		ng_getBriefPrefs():get("destination:planrwy"),function (textin) ng_getBriefPrefs():set("destination:planrwy",textin) end)
+	ng_imgui_in_tfield("origrwy:", 25, 0xFF1b9af8, 3, 
+		ng_getBriefPrefs():get("origin:planrwy"),function (textin) ng_getBriefPrefs():set("origin:planrwy",textin) end)
 	imgui.SameLine()
 	ng_imgui_in_tfield("Route:", 545, 0xFF1b9af8, 255,ng_getBriefPrefs():get("general:route"), 
 		function (textin) ng_getBriefPrefs():set("general:route",textin) end)		
