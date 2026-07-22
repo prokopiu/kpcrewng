@@ -305,6 +305,19 @@
                 "name": "oxygen1",
                 "title": "Oxygen Master",
                 "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "laminar/B738/push_button/oxy_test_cpt_pos",
+                "name": "oxytestbtn1",
+                "title": "Oxygen Mask test button cpt",
+                "type": "dataref"
               }
             ],
             "name": "oxygen"
@@ -380,6 +393,19 @@
                 "min": -1000,
                 "name": "landalt",
                 "title": "Landing Altitude",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "laminar/B738/toggle_switch/air_valve_ctrl",
+                "name": "prsmodeselector",
+                "title": "Pressurization Mode Selector",
                 "type": "dataref"
               }
             ],
@@ -488,29 +514,39 @@
             "elements": [
               {
                 "acts": [
+                  "up",
+                  "dn",
+                  "chk",
                   "set",
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
+                  ""
                 ],
+                "cmddn": "laminar/B738/toggle_switch/irs_L_left",
+                "cmdup": "laminar/B738/toggle_switch/irs_L_right",
                 "dref": "laminar/B738/toggle_switch/irs_left",
+                "incr": 1,
+                "max": 3,
+                "min": 0,
                 "name": "adiru1",
                 "title": "IRS Unit 1",
-                "type": "dataref"
+                "type": "dialcmd"
               },
               {
                 "acts": [
-                  "on",
-                  "off",
-                  "tgl",
+                  "up",
+                  "dn",
+                  "chk",
                   "set",
-                  "chk"
+                  ""
                 ],
+                "cmddn": "laminar/B738/toggle_switch/irs_R_left",
+                "cmdup": "laminar/B738/toggle_switch/irs_R_right",
                 "dref": "laminar/B738/toggle_switch/irs_right",
+                "incr": 1,
+                "max": 3,
+                "min": 0,
                 "name": "adiru2",
                 "title": "IRS Unit 2",
-                "type": "dataref"
+                "type": "dialcmd"
               }
             ],
             "name": "adirus"
@@ -1276,6 +1312,37 @@
             "elements": [
               {
                 "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "laminar/B738/annunciator/gen_off_bus1",
+                "name": "_gen1offbus",
+                "title": "GEN 1 OFF BUS",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "laminar/B738/annunciator/gen_off_bus2",
+                "name": "_gen2offbus",
+                "title": "GEN 2 OFF BUS",
+                "type": "dataref"
+              }
+            ],
+            "name": "_electric"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
                   "chk"
                 ],
                 "dref": "sim/cockpit2/engine/indicators/N1_percent",
@@ -1413,6 +1480,24 @@
               }
             ],
             "name": "_enginen2"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "laminar/B738/controls/rudder_deg",
+                "name": "_rudderaxis",
+                "title": "Rudder Axis",
+                "type": "dataref"
+              }
+            ],
+            "name": "_rudder"
           }
         ]
       },
@@ -1750,101 +1835,17 @@
             "elements": [
               {
                 "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "function (a) return a == 4 end",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",4)",
-                "name": "wxradarmap",
-                "title": "Weather radar MAP",
-                "type": "undefined"
-              },
-              {
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "name": "wxradarmode",
-                "title": "Weather radar mode pilot",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 0",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",0)",
-                "name": "wxradaroff",
-                "title": "Weather radar OFF",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "up",
-                  "dn",
-                  "chk",
-                  "",
-                  ""
-                ],
-                "name": "wxradarstate",
-                "title": "Weather radar on/off",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "function (a) return a == 1 end",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",1)",
-                "name": "wxradarstby",
-                "title": "Weather radar STBY",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 1",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",1)",
-                "name": "wxradartest",
-                "title": "Weather radar TEST",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 5",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",5)",
-                "name": "wxradarturb",
-                "title": "Weather radar TURB",
-                "type": "undefined"
-              },
-              {
-                "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
-                "dref": "sim/cockpit/switches/EFIS_shows_weather",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",2)",
-                "name": "wxradarwx",
-                "title": "Weather radar WX",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 3",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",3)",
-                "name": "wxradarwxt",
-                "title": "Weather radar WX+T",
-                "type": "undefined"
+                "cmdtgl": "laminar/B738/EFIS_control/capt/push_button/wxr_press",
+                "dref": "laminar/B738/EFIS/EFIS_wx_on",
+                "name": "wxradarmode",
+                "title": "Weather radar mode pilot",
+                "type": "onofftgl"
               }
             ],
             "name": "wxradar"
@@ -1951,17 +1952,18 @@
                 "acts": [
                   "on",
                   "off",
-                  " ",
+                  "tgl",
                   "chk",
                   ""
                 ],
+                "cmdoff": "laminar/B738/push_button/batt_full_off",
+                "cmdon": "laminar/B738/push_button/batt_full_on",
                 "dref": "laminar/B738/electric/battery_pos",
-                "fcheck": "function (a) return get(\"laminar/B738/electric/battery_pos\",0) == 1 end",
                 "foff": "function (a) if get(\"laminar/B738/button_switch/cover_position\",2) == 0 then command_once(\"laminar/B738/button_switch_cover02\") end command_once(\"laminar/B738/push_button/batt_full_off\") end",
                 "fon": "function (a) command_once(\"laminar/B738/switch/battery_dn\") if get(\"laminar/B738/button_switch/cover_position\",2) ~= 0 then command_once(\"laminar/B738/button_switch_cover02\") end end",
                 "name": "battery1",
                 "title": "Battery 1",
-                "type": "custom"
+                "type": "onofftgl"
               }
             ],
             "name": "batteries"
@@ -2139,16 +2141,18 @@
                 "acts": [
                   "on",
                   "off",
-                  " ",
+                  "tgl",
                   "chk",
                   ""
                 ],
+                "cmdoff": "laminar/B738/switch/standby_bat_off",
+                "cmdon": "laminar/B738/switch/standby_bat_on",
                 "dref": "laminar/B738/electric/standby_bat_pos",
                 "foff": "function (a) if get(\"laminar/B738/button_switch/cover_position\",3) == 0 then command_once(\"laminar/B738/button_switch_cover03\") endcommand_once(\"laminar/B738/switch/standby_bat_off\") end",
                 "fon": "function (a) command_once(\"laminar/B738/switch/standby_bat_on\") if get(\"laminar/B738/button_switch/cover_position\",3) ~= 0 then command_once(\"laminar/B738/button_switch_cover03\") end end",
                 "name": "stbypower1",
                 "title": "Standby Power",
-                "type": "custom"
+                "type": "onofftgl"
               }
             ],
             "name": "standby"
@@ -2344,7 +2348,7 @@
               {
                 "acts": [
                   "chk",
-                  " ",
+                  "set",
                   " ",
                   " ",
                   " "
@@ -2358,7 +2362,7 @@
               {
                 "acts": [
                   "chk",
-                  " ",
+                  "set",
                   " ",
                   " ",
                   " "
@@ -2371,7 +2375,8 @@
               },
               {
                 "acts": [
-                  "chk"
+                  "chk",
+                  "tgl"
                 ],
                 "dref": "sim/cockpit2/engine/actuators/throttle_ratio_all",
                 "name": "thrustleverall",
@@ -2804,7 +2809,7 @@
                 "cmdup": "laminar/B738/toggle_switch/no_smoking_dn",
                 "dref": "laminar/B738/toggle_switch/no_smoking_pos",
                 "incr": 1,
-                "max": 1,
+                "max": 2,
                 "min": 0,
                 "name": "nosmoking",
                 "title": "No Smoking",
@@ -2822,7 +2827,7 @@
                 "cmdup": "laminar/B738/toggle_switch/seatbelt_sign_dn",
                 "dref": "laminar/B738/toggle_switch/seatbelt_sign_pos",
                 "incr": 1,
-                "max": 1,
+                "max": 2,
                 "min": 0,
                 "name": "seatbelts",
                 "title": "Seatbelt Signs",
@@ -2931,7 +2936,7 @@
                   " "
                 ],
                 "dref": "laminar/B738/annunciator/master_caution_light",
-                "fcheck": "function (a) return a>0 end",
+                "ftrans": "function (a) if a>0 then a=1 end return a end",
                 "name": "_mastercaution",
                 "title": "Master Caution",
                 "type": "dataref"
@@ -3381,32 +3386,17 @@
                   "set",
                   ""
                 ],
-                "cmddn": "laminar/B738/toggle_switch/emer_exit_lights_dn",
+                "cmddn": "laminar/B738/toggle_switch/emer_exit_lights_up",
                 "cmdon": "laminar/B738/toggle_switch/emer_exit_lights_dn",
                 "cmdtgl": "laminar/B738/toggle_switch/elt_arm",
-                "cmdup": "laminar/B738/toggle_switch/emer_exit_lights_up",
-                "dref": "laminar/B738/toggle_switch/elt",
+                "cmdup": "laminar/B738/toggle_switch/emer_exit_lights_dn",
+                "dref": "laminar/B738/toggle_switch/emer_exit_lights",
                 "incr": 1,
                 "max": 2,
                 "min": 0,
                 "name": "emerlight",
                 "title": "EMER light",
                 "type": "dialcmd"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  ""
-                ],
-                "cmdtgl": "laminar/B738/button_switch_cover09",
-                "dref": "laminar/B738/button_switch/cover_position",
-                "indx": 9,
-                "name": "emerlightguard",
-                "title": "ELT Cover",
-                "type": "onofftgl"
               }
             ],
             "name": "emerlights"
@@ -3631,6 +3621,56 @@
             "elements": [
               {
                 "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/B738/button_switch_cover02",
+                "dref": "laminar/B738/button_switch/cover_position",
+                "indx": 2,
+                "name": "batterycover",
+                "title": "Battery cover",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/B738/button_switch_cover09",
+                "dref": "laminar/B738/button_switch/cover_position",
+                "indx": 9,
+                "name": "emerlightcover",
+                "title": "Emergency Lights cover",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "laminar/B738/button_switch_cover03",
+                "dref": "laminar/B738/button_switch/cover_position",
+                "indx": 3,
+                "name": "standbycover",
+                "title": "Standby Power Cover",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "covers"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
                   "up",
                   "dn",
                   "chk",
@@ -3726,6 +3766,24 @@
               }
             ],
             "name": "navpanel"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "laminar/B738/buttons/capt_6_pack_pos",
+                "name": "_6packbtncpt",
+                "title": "Warning button CPT",
+                "type": "dataref"
+              }
+            ],
+            "name": "warnings"
           }
         ]
       }
