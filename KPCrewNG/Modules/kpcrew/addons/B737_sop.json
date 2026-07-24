@@ -43,6 +43,7 @@
             "challenge": "<GND>JETWAY",
             "classname": "ProcedureItem",
             "condition": "ng_getAppPrefs():get(\"general:opensam\")",
+            "delay": 3,
             "nocheck": 1,
             "response": "CONNECT",
             "role": "ng_firole_SYS",
@@ -1655,7 +1656,7 @@
             ]
           },
           {
-            "challenge": "*STABILIZER TREIM",
+            "challenge": "*STABILIZER TRIM",
             "classname": "ProcedureItem",
             "response": "SET FOR TAKEOFF",
             "role": "ng_firole_CPT",
@@ -3020,6 +3021,10 @@
                 "action": "set",
                 "element": "barovalue2",
                 "fvalue": "ng_getBriefPrefs():get(\"landing:altimeter\")"
+              },
+              {
+                "action": "off",
+                "element": "#barostdbtns"
               }
             ]
           },
@@ -3223,19 +3228,6 @@
             ]
           },
           {
-            "challenge": "GEAR",
-            "classname": "ProcedureItem",
-            "delay": 5,
-            "response": "DOWN",
-            "role": "ng_firole_PNF",
-            "setelements": [
-              {
-                "action": "on",
-                "element": "gearhandle"
-              }
-            ]
-          },
-          {
             "challenge": "FLAPS",
             "classname": "ProcedureItem",
             "response": "15",
@@ -3245,6 +3237,19 @@
                 "action": "set",
                 "element": "flapset",
                 "value": 0.625
+              }
+            ]
+          },
+          {
+            "challenge": "GEAR",
+            "classname": "ProcedureItem",
+            "delay": 5,
+            "response": "DOWN",
+            "role": "ng_firole_PNF",
+            "setelements": [
+              {
+                "action": "on",
+                "element": "gearhandle"
               }
             ]
           },
@@ -3809,17 +3814,12 @@
             "challenge": "<WAIT>CONNECT EXTERNAL POWER",
             "classname": "ProcedureItem",
             "condition": "ng_getBriefPrefs():get(\"destination:standpower\") == 2",
-            "delay": 5,
             "response": " ",
             "role": "ng_firole_FO",
             "setelements": [
               {
                 "action": "on",
                 "element": "gpuconnect"
-              },
-              {
-                "action": "on",
-                "element": "gpugen1"
               }
             ]
           },
@@ -3827,12 +3827,12 @@
             "challenge": "<WAIT>EXTERNAL POWER",
             "classname": "ProcedureItem",
             "condition": "ng_getBriefPrefs():get(\"destination:standpower\") == 2",
-            "delay": 2,
+            "delay": 3,
             "response": "ON BUS",
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "off",
+                "action": "on",
                 "element": "gpugen1"
               }
             ]

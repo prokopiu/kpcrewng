@@ -1156,7 +1156,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "laminar/B738/flt_ctrls/speedbrake_lever",
+                "dref": "sim/cockpit2/controls/speedbrake_ratio",
                 "name": "speedbrake",
                 "title": "Speedbrake Lever",
                 "type": "dataref"
