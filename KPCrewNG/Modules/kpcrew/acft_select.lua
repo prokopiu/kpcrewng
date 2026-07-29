@@ -258,10 +258,15 @@ function ng_acft_select(component)
 		icao = "MD88"
 		sopicao = "DFLT"
 		
-	-- LES Saab SF34
+	-- Carenado Saab 340
 	elseif PLANE_ICAO == "SF34" then
 		icao = "SF34"
 		sopicao = "SF34"
+		
+	-- Carenado Fokker 50
+	elseif PLANE_ICAO == "F50" then
+		icao = "FK50"
+		sopicao = "FK50"
 		
 	-- MSparks B747
 	elseif PLANE_ICAO == "B744" or PLANE_ICAO == "B744F" then
