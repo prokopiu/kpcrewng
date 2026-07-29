@@ -6,6 +6,14 @@
         "classname": "ProcedureFlow",
         "flowitem": [
           {
+            "challenge": "==================== FLOW BEGIN =====================",
+            "classname": "ProcedureItem",
+            "nocheck": 1,
+            "response": " ",
+            "role": "ng_firole_SYS",
+            "setelements": {}
+          },
+          {
             "challenge": "<GND>CHOCKS",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:haschocks\")",
@@ -15,6 +23,21 @@
               {
                 "action": "on",
                 "element": "chocks"
+              }
+            ]
+          },
+          {
+            "challenge": "<GND>JETWAY",
+            "classname": "ProcedureItem",
+            "condition": "ng_getAppPrefs():get(\"general:opensam\")",
+            "delay": 3,
+            "nocheck": 1,
+            "response": "CONNECT",
+            "role": "ng_firole_SYS",
+            "setelements": [
+              {
+                "action": "on",
+                "element": "samjetwaydock"
               }
             ]
           },
@@ -48,20 +71,10 @@
               {
                 "action": "off",
                 "element": "doorr2"
-              }
-            ]
-          },
-          {
-            "challenge": "<GND>JETWAY",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAppPrefs():get(\"general:opensam\")",
-            "nocheck": 1,
-            "response": "CONNECT",
-            "role": "ng_firole_SYS",
-            "setelements": [
+              },
               {
                 "action": "on",
-                "element": "samjetwaydock"
+                "element": "cockpitdoor"
               }
             ]
           },
@@ -107,6 +120,18 @@
             ]
           },
           {
+            "challenge": "WINDSHIELD WIPERS",
+            "classname": "ProcedureItem",
+            "response": "OFF",
+            "role": "ng_firole_CM2",
+            "setelements": [
+              {
+                "action": "off",
+                "element": "#wipers"
+              }
+            ]
+          },
+          {
             "challenge": "WEATHER RADAR",
             "classname": "ProcedureItem",
             "response": "OFF",
@@ -132,6 +157,18 @@
             ]
           },
           {
+            "challenge": "FLAPS",
+            "classname": "ProcedureItem",
+            "response": "RETRACTED",
+            "role": "ng_firole_CM2",
+            "setelements": [
+              {
+                "action": "set",
+                "element": "flapleverUP"
+              }
+            ]
+          },
+          {
             "challenge": "LANDING GEAR",
             "classname": "ProcedureItem",
             "response": "DOWN",
@@ -144,19 +181,20 @@
             ]
           },
           {
-            "challenge": "BOTH WIPER SELECTORS",
+            "challenge": "*THRUST LEVERS",
             "classname": "ProcedureItem",
-            "response": "OFF",
-            "role": "ng_firole_CM2",
+            "response": "IDLE",
+            "role": "ng_firole_CM1",
             "setelements": [
               {
-                "action": "off",
-                "element": "#wipers"
+                "action": "chk",
+                "element": "thrustleverall",
+                "value": 0
               }
             ]
           },
           {
-            "challenge": "BAT",
+            "challenge": "BATTERIES",
             "classname": "ProcedureItem",
             "response": "ON",
             "role": "ng_firole_CM2",
@@ -182,7 +220,7 @@
           {
             "challenge": "<WAIT>CONNECT EXTERNAL POWER",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:startupgpu\")",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") == 1",
             "delay": 2,
             "response": " ",
             "role": "ng_firole_SYS",
@@ -196,7 +234,7 @@
           {
             "challenge": "<WAIT>EXT PWR A",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:startupgpu\")",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") == 1",
             "response": "ON BUS",
             "role": "ng_firole_CM2",
             "setelements": [
@@ -209,7 +247,7 @@
           {
             "challenge": "*APU FIRE TEST",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:startupapu\")",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") == 2",
             "response": "PUSH",
             "role": "ng_firole_CM2",
             "setelements": [
@@ -235,7 +273,7 @@
           {
             "challenge": "APU MASTER",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:startupapu\")",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") == 2",
             "delay": 1,
             "response": "PUSH",
             "role": "ng_firole_PM",
@@ -249,7 +287,7 @@
           {
             "challenge": "APU START",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:startupapu\")",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") == 2",
             "delay": 1,
             "response": "PUSH",
             "role": "ng_firole_PM",
@@ -263,7 +301,7 @@
           {
             "challenge": "<WAIT>APU STARTED",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:startupapu\")",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") == 2",
             "response": " ",
             "role": "ng_firole_SYS",
             "setelements": [
@@ -277,7 +315,7 @@
           {
             "challenge": "APU GEN",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:startupapu\")",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") == 2",
             "nocheck": 1,
             "response": "ON BUS",
             "role": "ng_firole_CM2",
@@ -291,7 +329,7 @@
           {
             "challenge": "APU BLEED",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:startupapu\")",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") == 2",
             "response": "ON",
             "role": "ng_firole_CM2",
             "setelements": [
@@ -378,19 +416,52 @@
             ]
           },
           {
-            "challenge": "FLAPS",
+            "challenge": "EXTERIOR LIGHTS",
             "classname": "ProcedureItem",
-            "response": "RETRACTED",
-            "role": "ng_firole_CM2",
+            "nocheck": 1,
+            "response": "AS REQUIRED",
+            "role": "ng_firole_PM",
             "setelements": [
               {
+                "action": "off",
+                "element": "#beacons"
+              },
+              {
                 "action": "set",
-                "element": "flapleverUP"
+                "element": "#taxilights",
+                "value": 0
+              },
+              {
+                "action": "off",
+                "element": "#rwylights"
+              },
+              {
+                "action": "off",
+                "element": "#winglights"
+              },
+              {
+                "action": "off",
+                "element": "#alllandlights"
+              },
+              {
+                "action": "set",
+                "element": "positionlight",
+                "value": 1
+              },
+              {
+                "action": "set",
+                "condition": "ng_is_daylight() == false",
+                "element": "positionlight",
+                "value": 2
+              },
+              {
+                "action": "up",
+                "element": "strobelight"
               }
             ]
           },
           {
-            "challenge": "SPEED BRAKE LEVER",
+            "challenge": "*SPEED BRAKE LEVER",
             "classname": "ProcedureItem",
             "response": "RETRACTED & DISARMED",
             "role": "ng_firole_CM1",
@@ -439,11 +510,10 @@
             ]
           },
           {
-            "challenge": "*EXTERIOR WALKAROUND",
+            "challenge": "*ATIS",
             "classname": "ProcedureItem",
-            "condition": "ng_getAppPrefs():get(\"general:showstars\")",
-            "response": "PERFORM",
-            "role": "ng_firole_CM2",
+            "response": "OBTAIN",
+            "role": "ng_firole_CM1",
             "setelements": [
               {
                 "action": "chk",
@@ -452,11 +522,11 @@
             ]
           },
           {
-            "challenge": "*ATIS",
+            "challenge": "*EXTERIOR WALKAROUND",
             "classname": "ProcedureItem",
             "condition": "ng_getAppPrefs():get(\"general:showstars\")",
-            "response": "OBTAIN",
-            "role": "ng_firole_CM1",
+            "response": "PERFORM",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "chk",
@@ -480,10 +550,80 @@
         "classname": "ProcedureFlow",
         "flowitem": [
           {
+            "challenge": "==================== FLOW BEGIN =====================",
+            "classname": "ProcedureItem",
+            "nocheck": 1,
+            "response": " ",
+            "role": "ng_firole_SYS",
+            "setelements": {}
+          },
+          {
+            "challenge": "*ATC CLEARANCE",
+            "classname": "ProcedureItem",
+            "condition": "ng_getAppPrefs():get(\"general:showstars\")",
+            "response": "OBTAIN",
+            "role": "ng_firole_CM1",
+            "setelements": [
+              {
+                "action": "chk",
+                "element": "wait"
+              }
+            ]
+          },
+          {
+            "challenge": "*FMS SETUP",
+            "classname": "ProcedureItem",
+            "response": "PREPARE & CROSSCHECK",
+            "role": "ng_firole_CM1",
+            "setelements": [
+              {
+                "action": "chk",
+                "element": "wait"
+              }
+            ]
+          },
+          {
+            "challenge": "*GLARESHIELD",
+            "classname": "ProcedureItem",
+            "nocheck": 1,
+            "response": "INITIAL SETUP",
+            "role": "ng_firole_CM1",
+            "setelements": [
+              {
+                "action": "on",
+                "element": "#flightdirs"
+              },
+              {
+                "action": "set",
+                "element": "altsel",
+                "fvalue": "ng_getBriefPrefs():get(\"takeoff:initalt\")+0"
+              },
+              {
+                "action": "off",
+                "element": "lsmode"
+              },
+              {
+                "action": "set",
+                "element": "barovalue1",
+                "fvalue": "string.format(\"%5.2f\",get(\"sim/weather/barometer_sealevel_inhg\"))+0.0"
+              },
+              {
+                "action": "set",
+                "element": "barovalue2",
+                "fvalue": "string.format(\"%5.2f\",get(\"sim/weather/barometer_sealevel_inhg\"))+0.0"
+              },
+              {
+                "action": "set",
+                "element": "barovalue3",
+                "fvalue": "string.format(\"%5.2f\",get(\"sim/weather/barometer_sealevel_inhg\"))+0.0"
+              }
+            ]
+          },
+          {
             "challenge": "RCDR GND CTL PB",
             "classname": "ProcedureItem",
             "response": "ON",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM1",
             "setelements": [
               {
                 "action": "on",
@@ -492,55 +632,10 @@
             ]
           },
           {
-            "challenge": "EXTERIOR LIGHTS",
-            "classname": "ProcedureItem",
-            "nocheck": 1,
-            "response": "AS REQUIRED",
-            "role": "ng_firole_PM",
-            "setelements": [
-              {
-                "action": "off",
-                "element": "#beacons"
-              },
-              {
-                "action": "set",
-                "element": "#taxilights",
-                "value": 0
-              },
-              {
-                "action": "off",
-                "element": "#rwylights"
-              },
-              {
-                "action": "off",
-                "element": "#winglights"
-              },
-              {
-                "action": "off",
-                "element": "#alllandlights"
-              },
-              {
-                "action": "set",
-                "element": "positionlight",
-                "value": 1
-              },
-              {
-                "action": "set",
-                "condition": "ng_is_daylight() == false",
-                "element": "positionlight",
-                "value": 2
-              },
-              {
-                "action": "up",
-                "element": "strobelight"
-              }
-            ]
-          },
-          {
             "challenge": "SIGNS PANEL",
             "classname": "ProcedureItem",
             "response": "SET",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "up",
@@ -556,7 +651,7 @@
             "challenge": "PROBE/WINDOW HEAT PB",
             "classname": "ProcedureItem",
             "response": "AUTO",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "off",
@@ -568,7 +663,7 @@
             "challenge": "ELEC PANEL",
             "classname": "ProcedureItem",
             "response": "CHECK / SET",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "on",
@@ -593,7 +688,7 @@
             "classname": "ProcedureItem",
             "condition": "ng_getAppPrefs():get(\"general:showstars\")",
             "response": "CHECK / TEST",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM1",
             "setelements": [
               {
                 "action": "chk",
@@ -607,7 +702,7 @@
             "classname": "ProcedureItem",
             "nocheck": 1,
             "response": "AS REQUIRED",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "on",
@@ -664,7 +759,7 @@
             "classname": "ProcedureItem",
             "condition": "ng_getAppPrefs():get(\"general:showstars\")",
             "response": "CHECK/SET",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "chk",
@@ -676,7 +771,7 @@
             "challenge": "A/SKID & N/W STRG SWITCH",
             "classname": "ProcedureItem",
             "response": "ON",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "on",
@@ -688,7 +783,7 @@
             "challenge": "*THRUST LEVERS",
             "classname": "ProcedureItem",
             "response": "IDLE",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM1",
             "setelements": [
               {
                 "action": "chk",
@@ -701,7 +796,7 @@
             "challenge": "ATC / TCAS",
             "classname": "ProcedureItem",
             "response": "STBY, ATC SYS 1",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "set",
@@ -714,73 +809,11 @@
             ]
           },
           {
-            "challenge": "*ATC CLEARANCE",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAppPrefs():get(\"general:showstars\")",
-            "response": "OBTAIN",
-            "role": "ng_firole_PF",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "*FMS SETUP",
-            "classname": "ProcedureItem",
-            "response": "PREPARE & CROSSCHECK",
-            "role": "ng_firole_PF",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
-          },
-          {
-            "challenge": "GLARE SHIELD",
-            "classname": "ProcedureItem",
-            "nocheck": 1,
-            "response": "INITIAL SETUP",
-            "role": "ng_firole_PF",
-            "setelements": [
-              {
-                "action": "on",
-                "element": "#flightdirs"
-              },
-              {
-                "action": "set",
-                "element": "altsel",
-                "fvalue": "ng_getBriefPrefs():get(\"takeoff:initalt\")+0"
-              },
-              {
-                "action": "off",
-                "element": "lsmode"
-              },
-              {
-                "action": "set",
-                "element": "barovalue1",
-                "fvalue": "string.format(\"%5.2f\",get(\"sim/weather/barometer_sealevel_inhg\"))+0.0"
-              },
-              {
-                "action": "set",
-                "element": "barovalue2",
-                "fvalue": "string.format(\"%5.2f\",get(\"sim/weather/barometer_sealevel_inhg\"))+0.0"
-              },
-              {
-                "action": "set",
-                "element": "barovalue3",
-                "fvalue": "string.format(\"%5.2f\",get(\"sim/weather/barometer_sealevel_inhg\"))+0.0"
-              }
-            ]
-          },
-          {
             "challenge": "*DEPARTURE BRIEFING",
             "classname": "ProcedureItem",
             "condition": "ng_getAppPrefs():get(\"general:showstars\")",
             "response": "PERFORM",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM1",
             "setelements": [
               {
                 "action": "chk",
@@ -793,7 +826,7 @@
             "classname": "ProcedureItem",
             "condition": "ng_getAppPrefs():get(\"general:showstars\")",
             "response": "CHECK",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM1",
             "setelements": [
               {
                 "action": "chk",
@@ -806,20 +839,15 @@
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": " ",
-            "role": "ng_firole_PM",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
+            "role": "ng_firole_CM2",
+            "setelements": {}
           },
           {
             "challenge": "GEAR PINS & COVERS",
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "REMOVED",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM1",
             "setelements": [
               {
                 "action": "chk",
@@ -832,7 +860,7 @@
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "______ KG/LB",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM1",
             "setelements": [
               {
                 "action": "chk",
@@ -845,7 +873,7 @@
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "AUTO",
-            "role": "ng_firole_PM",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "on",
@@ -858,7 +886,7 @@
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "NAV",
-            "role": "ng_firole_PM",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "up",
@@ -885,14 +913,14 @@
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "nocheck": 1,
             "response": "COMPLETED",
-            "role": "ng_firole_PM",
+            "role": "ng_firole_CM2",
             "setelements": {}
           },
           {
             "challenge": "RUDDER TRIM",
             "classname": "ProcedureItem",
             "response": "RESET",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM1",
             "setelements": [
               {
                 "action": "set",
@@ -917,10 +945,18 @@
         "classname": "ProcedureFlow",
         "flowitem": [
           {
+            "challenge": "==================== FLOW BEGIN =====================",
+            "classname": "ProcedureItem",
+            "nocheck": 1,
+            "response": " ",
+            "role": "ng_firole_SYS",
+            "setelements": {}
+          },
+          {
             "challenge": "PARKING BRAKE",
             "classname": "ProcedureItem",
             "response": "ON",
-            "role": "ng_firole_PM",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "on",
@@ -958,7 +994,7 @@
             "challenge": "BEACON",
             "classname": "ProcedureItem",
             "response": "ON",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "on",
@@ -967,25 +1003,12 @@
             ]
           },
           {
-            "challenge": "THRUST LEVERS",
-            "classname": "ProcedureItem",
-            "response": "IDLE",
-            "role": "ng_firole_PF",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "thrustleverall",
-                "value": 0
-              }
-            ]
-          },
-          {
             "challenge": "*APU FIRE TEST",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:startupapu\") == false",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") ~= 2",
             "delay": 5,
             "response": "PUSH",
-            "role": "ng_firole_PM",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "chk",
@@ -997,10 +1020,10 @@
           {
             "challenge": "APU MASTER",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:startupapu\") == false",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") ~= 2",
             "delay": 3,
             "response": "PUSH",
-            "role": "ng_firole_PM",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "on",
@@ -1011,10 +1034,10 @@
           {
             "challenge": "APU START",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:startupapu\") == false",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") ~= 2",
             "delay": 2,
             "response": "PUSH",
-            "role": "ng_firole_PM",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "on",
@@ -1025,7 +1048,7 @@
           {
             "challenge": "<WAIT>APU STARTED",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:startupapu\") == false",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") ~= 2",
             "response": " ",
             "role": "ng_firole_SYS",
             "setelements": [
@@ -1039,10 +1062,10 @@
           {
             "challenge": "APU GEN",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:startupapu\") == false",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") ~= 2",
             "nocheck": 1,
             "response": "ON BUS",
-            "role": "ng_firole_PM",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "on",
@@ -1053,9 +1076,9 @@
           {
             "challenge": "APU BLEED",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:startupapu\") == false",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") ~= 2",
             "response": "ON",
-            "role": "ng_firole_PM",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "on",
@@ -1067,7 +1090,7 @@
             "challenge": "TRANSPONDER CODE",
             "classname": "ProcedureItem",
             "response": "SET SQUAWK CODE",
-            "role": "ng_firole_PM",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "set",
@@ -1080,7 +1103,7 @@
             "challenge": "ATC",
             "classname": "ProcedureItem",
             "response": "AUTO",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "set",
@@ -1106,7 +1129,7 @@
             "classname": "ProcedureItem",
             "nocheck": 1,
             "response": "OFF / DISCONNECT",
-            "role": "ng_firole_PM",
+            "role": "ng_firole_SYS",
             "setelements": [
               {
                 "action": "off",
@@ -1119,7 +1142,7 @@
             ]
           },
           {
-            "challenge": "DISCONNECT EXTERNAL POWER",
+            "challenge": "<WAIT>EXTERNAL POWER DISCONNECTED",
             "classname": "ProcedureItem",
             "delay": 2,
             "response": " ",
@@ -1137,20 +1160,15 @@
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "delay": 1,
             "response": " ",
-            "role": "ng_firole_PM",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
+            "role": "ng_firole_CM2",
+            "setelements": {}
           },
           {
             "challenge": "PARKING BRAKE",
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "AS REQUIRED",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM2",
             "setelements": {}
           },
           {
@@ -1196,9 +1214,8 @@
           {
             "challenge": "*START / PUSHBACK CLEARANCE",
             "classname": "ProcedureItem",
-            "condition": "ng_getAppPrefs():get(\"general:showstars\")",
             "response": "RECEIVED",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM1",
             "setelements": [
               {
                 "action": "chk",
@@ -1211,7 +1228,7 @@
             "classname": "ProcedureItem",
             "condition": "ng_getBriefPrefs():get(\"origin:standtype\") < 3",
             "response": " ",
-            "role": "ng_firole_PF",
+            "role": "ng_firole_CM1",
             "setelements": [
               {
                 "action": "chk",
@@ -1223,7 +1240,7 @@
             "challenge": "COCKPIT DOOR",
             "classname": "ProcedureItem",
             "response": " ",
-            "role": "ng_firole_PM",
+            "role": "ng_firole_CM2",
             "setelements": [
               {
                 "action": "off",
@@ -1246,6 +1263,14 @@
       {
         "classname": "ProcedureFlow",
         "flowitem": [
+          {
+            "challenge": "==================== FLOW BEGIN =====================",
+            "classname": "ProcedureItem",
+            "nocheck": 1,
+            "response": " ",
+            "role": "ng_firole_SYS",
+            "setelements": {}
+          },
           {
             "challenge": "ENG MODE SELECTOR",
             "classname": "ProcedureItem",
@@ -1584,6 +1609,14 @@
         "classname": "ProcedureFlow",
         "flowitem": [
           {
+            "challenge": "==================== FLOW BEGIN =====================",
+            "classname": "ProcedureItem",
+            "nocheck": 1,
+            "response": " ",
+            "role": "ng_firole_SYS",
+            "setelements": {}
+          },
+          {
             "challenge": "FLAPS",
             "classname": "ProcedureItem",
             "condition": "ng_getBriefPrefs():get(\"takeoff:selectedflaps\") == 1",
@@ -1848,6 +1881,14 @@
         "classname": "ProcedureFlow",
         "flowitem": [
           {
+            "challenge": "==================== FLOW BEGIN =====================",
+            "classname": "ProcedureItem",
+            "nocheck": 1,
+            "response": " ",
+            "role": "ng_firole_SYS",
+            "setelements": {}
+          },
+          {
             "challenge": "TERR ON ND",
             "classname": "ProcedureItem",
             "response": "ON",
@@ -2014,6 +2055,14 @@
       {
         "classname": "ProcedureFlow",
         "flowitem": [
+          {
+            "challenge": "==================== FLOW BEGIN =====================",
+            "classname": "ProcedureItem",
+            "nocheck": 1,
+            "response": " ",
+            "role": "ng_firole_SYS",
+            "setelements": {}
+          },
           {
             "challenge": "SET TIMER",
             "classname": "ProcedureItem",
@@ -2435,6 +2484,14 @@
         "classname": "ProcedureFlow",
         "flowitem": [
           {
+            "challenge": "==================== FLOW BEGIN =====================",
+            "classname": "ProcedureItem",
+            "nocheck": 1,
+            "response": " ",
+            "role": "ng_firole_SYS",
+            "setelements": {}
+          },
+          {
             "challenge": "*ATIS/WEATHER",
             "classname": "ProcedureItem",
             "response": "CHECK",
@@ -2752,6 +2809,14 @@
         "classname": "ProcedureFlow",
         "flowitem": [
           {
+            "challenge": "==================== FLOW BEGIN =====================",
+            "classname": "ProcedureItem",
+            "nocheck": 1,
+            "response": " ",
+            "role": "ng_firole_SYS",
+            "setelements": {}
+          },
+          {
             "challenge": "LANDING LIGHTS",
             "classname": "ProcedureItem",
             "response": "ON",
@@ -2899,6 +2964,14 @@
       {
         "classname": "ProcedureFlow",
         "flowitem": [
+          {
+            "challenge": "==================== FLOW BEGIN =====================",
+            "classname": "ProcedureItem",
+            "nocheck": 1,
+            "response": " ",
+            "role": "ng_firole_SYS",
+            "setelements": {}
+          },
           {
             "challenge": "CALL FOR FLAPS 1",
             "classname": "ProcedureItem",
@@ -3120,6 +3193,14 @@
       {
         "classname": "ProcedureFlow",
         "flowitem": [
+          {
+            "challenge": "==================== FLOW BEGIN =====================",
+            "classname": "ProcedureItem",
+            "nocheck": 1,
+            "response": " ",
+            "role": "ng_firole_SYS",
+            "setelements": {}
+          },
           {
             "challenge": "*OK TO START AFTER LANDING FLOW?",
             "classname": "ProcedureItem",
@@ -3423,6 +3504,14 @@
       {
         "classname": "ProcedureFlow",
         "flowitem": [
+          {
+            "challenge": "==================== FLOW BEGIN =====================",
+            "classname": "ProcedureItem",
+            "nocheck": 1,
+            "response": " ",
+            "role": "ng_firole_SYS",
+            "setelements": {}
+          },
           {
             "challenge": "SET TIMER",
             "classname": "ProcedureItem",
@@ -3840,6 +3929,14 @@
       {
         "classname": "ProcedureFlow",
         "flowitem": [
+          {
+            "challenge": "==================== FLOW BEGIN =====================",
+            "classname": "ProcedureItem",
+            "nocheck": 1,
+            "response": " ",
+            "role": "ng_firole_SYS",
+            "setelements": {}
+          },
           {
             "challenge": "PARKING BRAKE",
             "classname": "ProcedureItem",

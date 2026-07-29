@@ -2858,6 +2858,137 @@
             "elements": [
               {
                 "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps up\") end",
+                "name": "spkchechflapsup",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 1\") end",
+                "name": "spkchechflaps1",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 5\") end",
+                "name": "spkchechflaps5",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 15\") end",
+                "name": "spkchechflaps15",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 25\") end",
+                "name": "spkchechflaps25",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 30\") end",
+                "name": "spkchechflaps30",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 40\") end",
+                "name": "spkchechflaps40",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"Starting engine 1\") end",
+                "name": "spkstarteng1",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"Starting engine 2\") end",
+                "name": "spkstarteng2",
+                "title": "speak",
+                "type": "custom"
+              }
+            ],
+            "name": "speak"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
                   "on",
                   " ",
                   " ",

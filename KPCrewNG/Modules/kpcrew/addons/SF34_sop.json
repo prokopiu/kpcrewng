@@ -1298,7 +1298,20 @@
           {
             "challenge": "*START PUSHBACK",
             "classname": "ProcedureItem",
-            "condition": "ng_getBriefPrefs():get(\"origin:standtype\") < 3",
+            "condition": "ng_getBriefPrefs():get(\"origin:standtype\") < 3 and ng_getBriefPrefs():get(\"origin:standpower\") ~= 1",
+            "response": " ",
+            "role": "ng_firole_CPT",
+            "setelements": [
+              {
+                "action": "chk",
+                "element": "wait"
+              }
+            ]
+          },
+          {
+            "challenge": "*DEFER PUSHBACK UNTIL 1ST ENGINE STARTED",
+            "classname": "ProcedureItem",
+            "condition": "ng_getBriefPrefs():get(\"origin:standtype\") < 3 and ng_getBriefPrefs():get(\"origin:standpower\") == 1",
             "response": " ",
             "role": "ng_firole_CPT",
             "setelements": [
@@ -1440,6 +1453,36 @@
                 "action": "set",
                 "element": "engstartsel2",
                 "value": 0
+              }
+            ]
+          },
+          {
+            "challenge": "*EXTERNAL POWER",
+            "classname": "ProcedureItem",
+            "condition": "ng_getBriefPrefs():get(\"origin:standtype\") < 3 and ng_getBriefPrefs():get(\"origin:standpower\") == 1",
+            "response": "OFF / DISCONNECT",
+            "role": "ng_firole_CPT",
+            "setelements": [
+              {
+                "action": "off",
+                "element": "gpugen1"
+              },
+              {
+                "action": "off",
+                "element": "gpuconnect"
+              }
+            ]
+          },
+          {
+            "challenge": "*START PUSHBACK",
+            "classname": "ProcedureItem",
+            "condition": "ng_getBriefPrefs():get(\"origin:standtype\") < 3 and ng_getBriefPrefs():get(\"origin:standpower\") == 1",
+            "response": " ",
+            "role": "ng_firole_CPT",
+            "setelements": [
+              {
+                "action": "chk",
+                "element": "wait"
               }
             ]
           },
@@ -1630,7 +1673,7 @@
           {
             "challenge": "*EXTERNAL POWER",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"electric:hasgpu\") and ng_getBriefPrefs():get(\"origin:standpower\") == 1",
+            "condition": "ng_getBriefPrefs():get(\"origin:standpower\") == 1",
             "response": "OFF / DISCONNECT",
             "role": "ng_firole_CPT",
             "setelements": [
@@ -4342,6 +4385,20 @@
             "response": "COMPLETED",
             "role": "ng_firole_FO",
             "setelements": {}
+          },
+          {
+            "challenge": "<GND>DOORS",
+            "classname": "ProcedureItem",
+            "delay": 2,
+            "response": "CLOSED",
+            "role": "ng_firole_SYS",
+            "setelements": [
+              {
+                "action": "off",
+                "element": "#externaldoors",
+                "nocheck": 1
+              }
+            ]
           },
           {
             "challenge": "==================== FLOW END =====================",

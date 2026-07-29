@@ -1528,7 +1528,7 @@
             "setelements": {}
           },
           {
-            "challenge": "*SET IGNITION & START ENGINES",
+            "challenge": "*SET IGNITION & START ENGINE 2",
             "classname": "ProcedureItem",
             "response": " ",
             "role": "ng_firole_CPT",
@@ -1546,6 +1546,10 @@
             "response": "GRD",
             "role": "ng_firole_FO",
             "setelements": [
+              {
+                "action": "set",
+                "element": "spkstarteng2"
+              },
               {
                 "action": "dn",
                 "element": "engstartsel2"
@@ -1571,12 +1575,28 @@
             ]
           },
           {
+            "challenge": "*START ENGINE 1",
+            "classname": "ProcedureItem",
+            "response": " ",
+            "role": "ng_firole_CPT",
+            "setelements": [
+              {
+                "action": "chk",
+                "element": "wait"
+              }
+            ]
+          },
+          {
             "challenge": "*ENGINE 1 STARTER",
             "classname": "ProcedureItem",
             "delay": 21,
             "response": "GRD",
             "role": "ng_firole_FO",
             "setelements": [
+              {
+                "action": "chk",
+                "element": "spkstarteng1"
+              },
               {
                 "action": "dn",
                 "element": "engstartsel1"
@@ -2360,6 +2380,10 @@
             "setelements": [
               {
                 "action": "set",
+                "element": "spkchechflaps5"
+              },
+              {
+                "action": "set",
                 "element": "flapset",
                 "value": 0.375
               }
@@ -2387,6 +2411,10 @@
             "setelements": [
               {
                 "action": "set",
+                "element": "spkchechflaps1"
+              },
+              {
+                "action": "set",
                 "element": "flapset",
                 "value": 0.125
               }
@@ -2412,6 +2440,10 @@
             "response": "UP",
             "role": "ng_firole_PNF",
             "setelements": [
+              {
+                "action": "chk",
+                "element": "spkchechflapsup"
+              },
               {
                 "action": "set",
                 "element": "flapset",
@@ -3157,6 +3189,10 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
+                "action": "chk",
+                "element": "spkchechflaps1"
+              },
+              {
                 "action": "set",
                 "element": "flapset",
                 "value": 0.125
@@ -3181,6 +3217,10 @@
             "response": "5",
             "role": "ng_firole_FO",
             "setelements": [
+              {
+                "action": "chk",
+                "element": "spkchechflaps5"
+              },
               {
                 "action": "set",
                 "element": "flapset",
@@ -3228,19 +3268,6 @@
             ]
           },
           {
-            "challenge": "FLAPS",
-            "classname": "ProcedureItem",
-            "response": "15",
-            "role": "ng_firole_FO",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "flapset",
-                "value": 0.625
-              }
-            ]
-          },
-          {
             "challenge": "GEAR",
             "classname": "ProcedureItem",
             "delay": 5,
@@ -3250,6 +3277,23 @@
               {
                 "action": "on",
                 "element": "gearhandle"
+              }
+            ]
+          },
+          {
+            "challenge": "FLAPS",
+            "classname": "ProcedureItem",
+            "response": "15",
+            "role": "ng_firole_FO",
+            "setelements": [
+              {
+                "action": "chk",
+                "element": "spkchechflaps15"
+              },
+              {
+                "action": "set",
+                "element": "flapset",
+                "value": 0.625
               }
             ]
           },
@@ -3271,6 +3315,10 @@
             "response": "25",
             "role": "ng_firole_FO",
             "setelements": [
+              {
+                "action": "chk",
+                "element": "spkchechflaps25"
+              },
               {
                 "action": "set",
                 "element": "flapset",
@@ -3299,6 +3347,10 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
+                "action": "chk",
+                "element": "spkchechflaps30"
+              },
+              {
                 "action": "set",
                 "element": "flapset",
                 "value": 0.875
@@ -3325,6 +3377,10 @@
             "response": "40",
             "role": "ng_firole_FO",
             "setelements": [
+              {
+                "action": "chk",
+                "element": "spkchechflaps40"
+              },
               {
                 "action": "set",
                 "element": "flapset",
