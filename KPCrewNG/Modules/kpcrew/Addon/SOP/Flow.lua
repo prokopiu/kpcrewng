@@ -134,6 +134,14 @@ function ngFlow:reset()
 	end
 end
 
+--- complete this flow by setting all items to end and flow to end
+function ngFlow:complete() 
+	for k, item in ipairs(self.items) do item:setState(ng_fistate_end) end
+	self.state = ng_flowstate_end
+	self.activeItem = 0
+	ng_stateindex = 0
+end
+
 -- Output and render functions
 
 --- render the items of this flow

@@ -169,7 +169,8 @@
                   "off",
                   "tgl",
                   "chk",
-                  " "                ],
+                  " "
+                ],
                 "dref": "sim/cockpit/switches/anti_ice_surf_heat_left",
                 "name": "wingaice1",
                 "title": "Wing Anti Ice 1",
@@ -181,7 +182,8 @@
                   "off",
                   "tgl",
                   "chk",
-                  " "                ],
+                  " "
+                ],
                 "dref": "sim/cockpit/switches/anti_ice_surf_heat_right",
                 "name": "wingaice2",
                 "title": "Wing Anti Ice 2",
@@ -205,11 +207,17 @@
                   "chk",
                   "set"
                 ],
-                "dref": "sim/cockpit2/bleedair/actuators/apu_bleed",
-                "name": "apubleed",
-                "title": "APU Bleed",
+                "dref": "sim/cockpit2/bleedair/actuators/engine_bleed_sov",
+                "indx": 0,
+                "name": "apubleed1",
+                "title": "APU  Bleed 1",
                 "type": "dataref"
-              },
+              }
+            ],
+            "name": "apubleeds"
+          },
+          {
+            "elements": [
               {
                 "acts": [
                   "on",
@@ -219,7 +227,7 @@
                   "set"
                 ],
                 "dref": "sim/cockpit2/bleedair/actuators/engine_bleed_sov",
-				"indx": 0,
+                "indx": 0,
                 "name": "bleed1",
                 "title": "Engine Bleed 1",
                 "type": "dataref"
@@ -233,7 +241,7 @@
                   "set"
                 ],
                 "dref": "sim/cockpit2/bleedair/actuators/engine_bleed_sov",
-				"indx": 1,
+                "indx": 1,
                 "name": "bleed2",
                 "title": "Engine Bleed 2",
                 "type": "dataref"
@@ -332,7 +340,7 @@
                   "off",
                   "tgl",
                   "set",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/bleedair/actuators/isol_valve_left",
                 "name": "isovalve1",
@@ -345,7 +353,7 @@
                   "off",
                   "tgl",
                   "set",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/bleedair/actuators/isol_valve_right",
                 "name": "isovalve2",
@@ -367,8 +375,8 @@
                   "on",
                   "off",
                   "tgl",
-				  "set",
-				  "chk"
+                  "set",
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/oxygen/actuators/demand_flow_setting",
                 "name": "oxygen1",
@@ -386,7 +394,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/bleedair/actuators/pack_left",
                 "name": "pack1",
@@ -399,7 +407,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/bleedair/actuators/pack_right",
                 "name": "pack2",
@@ -418,9 +426,19 @@
                 "type": "undefined"
               },
               {
+                "name": "fltgndswitch",
+                "title": "Boeing FLT GND Switch",
+                "type": "undefined"
+              },
+              {
                 "acts": {},
                 "name": "landalt",
                 "title": "Landing Altitude",
+                "type": "undefined"
+              },
+              {
+                "name": "pressuremode",
+                "title": "Pressurization mode selector",
                 "type": "undefined"
               }
             ],
@@ -564,7 +582,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "cmdtgl": "sim/autopilot/servos_toggle",
                 "dref": "sim/cockpit2/autopilot/servos_on",
@@ -577,7 +595,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "cmdtgl": "sim/autopilot/servos2_toggle",
                 "dref": "sim/cockpit2/autopilot/servos2_on",
@@ -590,7 +608,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "cmdtgl": "sim/autopilot/servos3_toggle",
                 "dref": "sim/cockpit2/autopilot/servos3_on",
@@ -658,8 +676,8 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk",
-				  "set"
+                  "chk",
+                  "set"
                 ],
                 "dref": "sim/cockpit2/autopilot/flight_director_mode",
                 "name": "flightdir1",
@@ -671,8 +689,8 @@
                   "on",
                   "off",
                   "tgl",
-				  "set",
-				  "chk"
+                  "set",
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/autopilot/flight_director2_mode",
                 "name": "flightdir2",
@@ -815,7 +833,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "cmdtgl": "sim/autopilot/altitude_hold",
                 "dref": "sim/cockpit2/autopilot/altitude_hold_status",
@@ -833,7 +851,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "cmdtgl": "sim/autopilot/approach",
                 "dref": "sim/cockpit2/autopilot/approach_status",
@@ -856,7 +874,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/autopilot/heading_mode",
                 "name": "hdghold",
@@ -888,7 +906,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "cmdtgl": "sim/autopilot/NAV",
                 "dref": "sim/cockpit2/autopilot/nav_status",
@@ -918,7 +936,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "cmdtgl": "sim/autopilot/take_off_go_arounds",
                 "dref": "sim/cockpit2/autopilot/TOGA_status",
@@ -1211,7 +1229,7 @@
               {
                 "acts": [
                   "set",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/controls/flap_handle_request_ratio",
                 "name": "flapset",
@@ -1244,7 +1262,7 @@
               {
                 "acts": [
                   "set",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/controls/aileron_trim",
                 "name": "ailerontrim",
@@ -1254,7 +1272,7 @@
               {
                 "acts": [
                   "set",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/controls/elevator_trim",
                 "fcheck": "function (a) return -1 + ((2/17) * ng_getBriefPrefs():get(\"takeoff:pitchtrim\")) end",
@@ -1281,7 +1299,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/switches/yaw_damper_on",
                 "name": "yawdamper",
@@ -1561,7 +1579,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot",
                 "name": "barostd1",
@@ -1573,7 +1591,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot",
                 "name": "barostd2",
@@ -1765,91 +1783,16 @@
               },
               {
                 "acts": [
-                  "on"
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "function (a) return a == 4 end",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",4)",
-                "name": "wxradarmap",
-                "title": "Weather radar MAP",
-                "type": "undefined"
-              },
-              {
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "name": "wxradarmode",
-                "title": "Weather radar mode pilot",
-                "type": "undefined"
-              },
-              {
                 "name": "wxradarstate",
-                "title": "Weather radar on/off",
-                "type": "undefined"
-              },
-			  {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "function (a) return a == 1 end",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",1)",
-                "name": "wxradarstby",
-                "title": "Weather radar STBY",
-                "type": "undefined"
-              },
-			  {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 1",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",1)",
-                "name": "wxradartest",
-                "title": "Weather radar TEST",
-                "type": "undefined"
-              },
-			  {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 0",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",0)",
-                "name": "wxradaroff",
-                "title": "Weather radar OFF",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 5",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",5)",
-                "name": "wxradarturb",
-                "title": "Weather radar TURB",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 2",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",2)",
-                "name": "wxradarwx",
-                "title": "Weather radar WX",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
-                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 3",
-                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",3)",
-                "name": "wxradarwxt",
-                "title": "Weather radar WX+T",
-                "type": "undefined"
+                "title": "WX Radar state",
+                "type": "dataref"
               }
             ],
             "name": "wxradar"
@@ -1887,19 +1830,11 @@
                 "type": "undefined"
               },
               {
-                "acts": [
-                  "chk",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "laminar/A333/fire/apu_test_on",
                 "name": "apufiretest",
                 "title": "APU Fire test",
                 "type": "undefined"
               },
-			  {
+              {
                 "acts": [
                   "on",
                   "off",
@@ -1918,7 +1853,7 @@
                 "title": "APU Generator 2",
                 "type": "undefined"
               },
-			  {
+              {
                 "acts": [
                   "on",
                   "off",
@@ -1959,7 +1894,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/electrical/battery_on",
                 "indx": 0,
@@ -1972,7 +1907,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/electrical/battery_on",
                 "indx": 1,
@@ -1985,7 +1920,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/electrical/battery_on",
                 "indx": 2,
@@ -2087,13 +2022,18 @@
                 "name": "gendrivedisc4",
                 "title": "Generator Drive Disconnect 4",
                 "type": "undefined"
-              },
+              }
+            ],
+            "name": "gendrives"
+          },
+          {
+            "elements": [
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/electrical/generator_on",
                 "indx": 0,
@@ -2106,7 +2046,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/electrical/generator_on",
                 "indx": 1,
@@ -2119,7 +2059,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/electrical/generator_on",
                 "indx": 2,
@@ -2132,7 +2072,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/electrical/generator_on",
                 "indx": 3,
@@ -2162,15 +2102,6 @@
                 "type": "onofftgl"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "set",
-                  "chk"
-                ],
-                "cmdtgl": "sim/electrical/GPU_toggle",
-                "dref": "xcraft/electric/GPU_sw",
                 "name": "gpugen1",
                 "title": "GPU Generator 1",
                 "type": "undefined"
@@ -2360,7 +2291,7 @@
                   " ",
                   " "
                 ],
-                "dref": "laminar/A333/sound/trent_N2_percent",
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
                 "indx": 0,
                 "name": "_eng1n2",
                 "title": "Engine 1 N2",
@@ -2368,13 +2299,13 @@
               },
               {
                 "acts": [
-                  "chk",
                   " ",
                   " ",
                   " ",
-                  " "
+                  " ",
+                  "chk"
                 ],
-                "dref": "laminar/A333/sound/trent_N2_percent",
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
                 "indx": 1,
                 "name": "_eng2n2",
                 "title": "Engine 2 N2",
@@ -2582,7 +2513,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit/engine/fuel_pump_on",
                 "indx": 0,
@@ -2595,7 +2526,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit/engine/fuel_pump_on",
                 "indx": 1,
@@ -2608,7 +2539,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit/engine/fuel_pump_on",
                 "indx": 2,
@@ -2621,7 +2552,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit/engine/fuel_pump_on",
                 "indx": 3,
@@ -2649,7 +2580,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "cmdoff": "sim/fuel/auto_crossfeed_off",
                 "cmdon": "sim/fuel/auto_crossfeed_on_open",
@@ -2671,7 +2602,7 @@
               {
                 "acts": [
                   "set",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit/engine/fuel_tank_selector",
                 "name": "tankselector",
@@ -2938,6 +2869,18 @@
                   "chk",
                   ""
                 ],
+                "name": "airstair1",
+                "title": "Stairs",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
                 "cmdoff": "sim/flight_controls/door_close_12",
                 "cmdon": "sim/flight_controls/door_open_12",
                 "cmdtgl": "sim/flight_controls/door_toggle_12",
@@ -2945,11 +2888,6 @@
                 "name": "cockpitdoor",
                 "title": "Cockpit Door",
                 "type": "onofftgl"
-              },
-              {
-                "name": "doorlock",
-                "title": "Door Lock",
-                "type": "undefined"
               }
             ],
             "name": "internaldoors"
@@ -2961,7 +2899,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/flightmodel/controls/parkbrake",
                 "name": "parkbrake",
@@ -3139,7 +3077,7 @@
                   "on",
                   "off",
                   "set",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/switches/wiper_speed_switch",
                 "indx": 0,
@@ -3152,7 +3090,7 @@
                   "on",
                   "off",
                   "set",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/switches/wiper_speed_switch",
                 "indx": 1,
@@ -3175,7 +3113,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/switches/electric_hydraulic_pump_on",
                 "name": "elechydpump1",
@@ -3187,7 +3125,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/switches/electric_hydraulic_pump2_on",
                 "name": "elechydpump2",
@@ -3214,7 +3152,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/hydraulics/actuators/engine_pump",
                 "name": "enghydpump1",
@@ -3226,7 +3164,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/hydraulics/actuators/engine_pumpA",
                 "name": "enghydpump2",
@@ -3238,7 +3176,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/hydraulics/actuators/engine_pumpB",
                 "name": "enghydpump3",
@@ -3250,7 +3188,7 @@
                   "on",
                   "off",
                   "tgl",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/hydraulics/actuators/engine_pumpC",
                 "name": "enghydpump4",
@@ -3277,7 +3215,7 @@
         "systems": [
           {
             "elements": [
-             {
+              {
                 "acts": [
                   "chk"
                 ],
@@ -3306,7 +3244,7 @@
                   "off",
                   "tgl",
                   "set",
-				  "chk"
+                  "chk"
                 ],
                 "dref": "sim/cockpit/switches/gear_handle_status",
                 "name": "gearhandle",
@@ -3775,116 +3713,6 @@
                 "name": "xpdrmode",
                 "title": "XPDR Mode",
                 "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on"
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return a==2 end",
-                "fon": "set(\"sim/cockpit2/radios/actuators/transponder_mode\",2)",
-                "name": "xpdrmodea",
-                "title": "XPDR Mode A",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on",
-				  "chk"
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return a==2 end",
-                "fon": "set(\"sim/cockpit2/radios/actuators/transponder_mode\",3)",
-                "name": "xpdrmodec",
-                "title": "XPDR Mode C",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return true end",
-                "fon": "function (a) return 0 end",
-                "name": "xpdrmodeoff",
-                "title": "XPDR Mode OFF",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return a==2 end",
-                "fon": "set(\"sim/cockpit2/radios/actuators/transponder_mode\",5)",
-                "name": "xpdrmodes",
-                "title": "XPDR Mode S GND",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return true end",
-                "fon": "function (a) return 1 end",
-                "name": "xpdrmodestby",
-                "title": "XPDR Mode STBY",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return true end",
-                "fon": "function (a) return 2 end",
-                "name": "xpdrmodeta",
-                "title": "XPDR Mode TA",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "function (a) return true end",
-                "fon": "function (a) return 3 end",
-                "name": "xpdrmodetara",
-                "title": "XPDR Mode TARA",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "on",
-				  "chk"
-                ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
-                "fcheck": "true",
-                "fon": "set(\"sim/cockpit2/radios/actuators/transponder_mode\",4)",
-                "name": "xpdrmodetest",
-                "title": "XPDR Mode TEST",
-                "type": "undefined"
               }
             ],
             "name": "transponder"

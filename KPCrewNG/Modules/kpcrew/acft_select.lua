@@ -16,19 +16,24 @@ function ng_acft_select(component)
 	-- ====== Select the addon modules based on ICAO code
 	if PLANE_ICAO == "B738" and PLANE_TAILNUMBER == "ZB738" then
 		icao = "B737" -- Zibo B738
-		sopicao = "DFLT"
+		sopicao = "B737"
 	elseif PLANE_ICAO == "B739" then
 		icao = "B737" -- LevelUp B739
-		sopicao = "DFLT"
+		sopicao = "B737"
 	elseif PLANE_ICAO == "B736" then
 		icao = "B737" -- LevelUp B736
-		sopicao = "DFLT"
+		sopicao = "B737"
 	elseif PLANE_ICAO == "B737" then
 		icao = "B737" -- LevelUp B737
-		sopicao = "DFLT"
+		sopicao = "B737"
 	elseif PLANE_ICAO == "B738" and PLANE_TAILNUMBER == "B738" then
 		icao = "B737" -- LevelUp B738
-		sopicao = "DFLT"
+		sopicao = "B737"
+
+	-- FlyJsim B732
+	elseif PLANE_ICAO == "B732" then
+		icao = "B732"
+		sopicao = "B732"
 
 	-- Epic Victory Aerobask
 	elseif PLANE_ICAO == "EVIC" then
@@ -44,6 +49,11 @@ function ng_acft_select(component)
 	elseif PLANE_ICAO == "C510" then
 		icao = "C510"
 		sopicao = "DFLT"
+
+	-- Carenado FA50
+	elseif PLANE_ICAO == "FA50" then
+		icao = "FA50"
+		sopicao = "FA50"
 
 	-- Aeroworx DC-3 Freeware
 	elseif PLANE_ICAO == "DC3" then
@@ -86,9 +96,9 @@ function ng_acft_select(component)
 		sopicao = "A33L"
 		
 	-- FlightFactor A320
-	-- elseif PLANE_ICAO == "A320" then
-		-- icao = "A320"
-		-- sopicao = "DFLT"
+	elseif PLANE_ICAO == "A320" and PLANE_TAILNUMBER == "D-AXLA" then
+		icao = "A320"
+		sopicao = "A320"
 		
 	-- Inibuilds A300
 	elseif PLANE_ICAO == "A306" then
@@ -121,12 +131,12 @@ function ng_acft_select(component)
 		sopicao = "DFLT"
 
 	-- Airsim3D C-560XL
-	elseif PLANE_TAILNUM == "C-DVMC" then
+	elseif PLANE_TAILNUMBER == "C-DVMC" then
 		icao = "C560"
 		sopicao = "DFLT"
 
 	-- Coolimata Concorde
-	elseif PLANE_TAILNUM == "CONC" then
+	elseif PLANE_TAILNUMBER == "CONC" then
 		icao = "CONC"
 		sopicao = "DFLT"
 
@@ -253,10 +263,15 @@ function ng_acft_select(component)
 		icao = "MD88"
 		sopicao = "DFLT"
 		
-	-- LES Saab SF34
+	-- Carenado Saab 340
 	elseif PLANE_ICAO == "SF34" then
 		icao = "SF34"
-		sopicao = "DFLT"
+		sopicao = "SF34"
+		
+	-- Carenado Fokker 50
+	elseif PLANE_ICAO == "F50" then
+		icao = "FK50"
+		sopicao = "FK50"
 		
 	-- MSparks B747
 	elseif PLANE_ICAO == "B744" or PLANE_ICAO == "B744F" then

@@ -644,8 +644,8 @@ function xsp_set_light_drefs()
 	xsp_parking_brake[0] 				= ng_get_state("parkbrake","chk",1)
 
 	-- General Gear light green on/off
-	xsp_gear_light_green[0] 			= ng_get_state("_gearlightsgreen","chk",nil)
-	xsp_gear_light_red[0] 				= ng_get_state("_gearlightsred","chk",nil)
+	xsp_gear_light_green[0] 			= ng_get_state("_gearlightsgreen","chk",1)
+	xsp_gear_light_red[0] 				= ng_get_state("_gearlightsred","chk",1)
 
 	-- DOORS annunciator
 	xsp_doors[0] = ng_get_state("doorl1","chk",1) + ng_get_state("doorl2","chk",1) + 
