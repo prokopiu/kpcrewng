@@ -2804,32 +2804,6 @@
             "setelements": {}
           },
           {
-            "challenge": "GO AROUND ALTITUDE",
-            "classname": "ProcedureItem",
-            "response": "SET",
-            "role": "ng_firole_FO",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "altsel",
-                "fvalue": "ng_getBriefPrefs():get(\"landing:gaaltitude\")"
-              }
-            ]
-          },
-          {
-            "challenge": "GO AROUND HEADING",
-            "classname": "ProcedureItem",
-            "response": "SET",
-            "role": "ng_firole_FO",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "hdgsel",
-                "fvalue": "ng_getBriefPrefs():get(\"landing:gaheading\")"
-              }
-            ]
-          },
-          {
             "challenge": "*CALL FOR FLAPS 1 230KT",
             "classname": "ProcedureItem",
             "condition": "false",
@@ -3039,6 +3013,32 @@
               {
                 "action": "chk",
                 "element": "wait"
+              }
+            ]
+          },
+          {
+            "challenge": "GO AROUND ALTITUDE",
+            "classname": "ProcedureItem",
+            "response": "SET",
+            "role": "ng_firole_FO",
+            "setelements": [
+              {
+                "action": "set",
+                "element": "altsel",
+                "fvalue": "ng_getBriefPrefs():get(\"landing:gaaltitude\")"
+              }
+            ]
+          },
+          {
+            "challenge": "GO AROUND HEADING",
+            "classname": "ProcedureItem",
+            "response": "SET",
+            "role": "ng_firole_FO",
+            "setelements": [
+              {
+                "action": "set",
+                "element": "hdgsel",
+                "fvalue": "ng_getBriefPrefs():get(\"landing:gaheading\")"
               }
             ]
           },

@@ -3157,32 +3157,6 @@
             "setelements": {}
           },
           {
-            "challenge": "GO AROUND ALTITUDE",
-            "classname": "ProcedureItem",
-            "response": "SET",
-            "role": "ng_firole_FO",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "altsel",
-                "fvalue": "ng_getBriefPrefs():get(\"landing:gaaltitude\")"
-              }
-            ]
-          },
-          {
-            "challenge": "GO AROUND HEADING",
-            "classname": "ProcedureItem",
-            "response": "SET",
-            "role": "ng_firole_FO",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "hdgsel",
-                "fvalue": "ng_getBriefPrefs():get(\"landing:gaheading\")"
-              }
-            ]
-          },
-          {
             "challenge": "*CALL FOR FLAPS 7 150 KTS",
             "classname": "ProcedureItem",
             "condition": "ng_split(ng_getAcfPrefs():get(\"controls:ldflapsind\"),\"|\")[ng_getBriefPrefs():get(\"landing:selectedflaps\")+1]+0 >= 2",
@@ -3298,6 +3272,32 @@
                 "action": "set",
                 "element": "flapset",
                 "value": 1
+              }
+            ]
+          },
+          {
+            "challenge": "GO AROUND ALTITUDE",
+            "classname": "ProcedureItem",
+            "response": "SET",
+            "role": "ng_firole_FO",
+            "setelements": [
+              {
+                "action": "set",
+                "element": "altsel",
+                "fvalue": "ng_getBriefPrefs():get(\"landing:gaaltitude\")"
+              }
+            ]
+          },
+          {
+            "challenge": "GO AROUND HEADING",
+            "classname": "ProcedureItem",
+            "response": "SET",
+            "role": "ng_firole_FO",
+            "setelements": [
+              {
+                "action": "set",
+                "element": "hdgsel",
+                "fvalue": "ng_getBriefPrefs():get(\"landing:gaheading\")"
               }
             ]
           },

@@ -50,6 +50,11 @@ function ng_acft_select(component)
 		icao = "C510"
 		sopicao = "DFLT"
 
+	-- Carenado FA50
+	elseif PLANE_ICAO == "FA50" then
+		icao = "FA50"
+		sopicao = "FA50"
+
 	-- Aeroworx DC-3 Freeware
 	elseif PLANE_ICAO == "DC3" then
 		icao = "ADC3"
