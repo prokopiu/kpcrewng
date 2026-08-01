@@ -2865,36 +2865,22 @@
                   " "
                 ],
                 "fcheck": "function (a) return true end",
-                "fset": "function (a) ng_speakNoText(0, \"speed check flaps up\") end",
-                "name": "spkchechflapsup",
-                "title": "speak",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "fcheck": "function (a) return true end",
                 "fset": "function (a) ng_speakNoText(0, \"speed check flaps 1\") end",
-                "name": "spkchechflaps1",
+                "name": "spkcheckflaps1",
                 "title": "speak",
                 "type": "custom"
               },
               {
                 "acts": [
-                  "set",
                   " ",
                   " ",
                   " ",
-                  " "
+                  " ",
+                  "set"
                 ],
                 "fcheck": "function (a) return true end",
-                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 5\") end",
-                "name": "spkchechflaps5",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 10\") end",
+                "name": "spkcheckflaps10",
                 "title": "speak",
                 "type": "custom"
               },
@@ -2908,21 +2894,21 @@
                 ],
                 "fcheck": "function (a) return true end",
                 "fset": "function (a) ng_speakNoText(0, \"speed check flaps 15\") end",
-                "name": "spkchechflaps15",
+                "name": "spkcheckflaps15",
                 "title": "speak",
                 "type": "custom"
               },
               {
                 "acts": [
-                  "set",
-                  " ",
-                  " ",
-                  " ",
-                  " "
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
                 ],
                 "fcheck": "function (a) return true end",
                 "fset": "function (a) ng_speakNoText(0, \"speed check flaps 25\") end",
-                "name": "spkchechflaps25",
+                "name": "spkcheckflaps25",
                 "title": "speak",
                 "type": "custom"
               },
@@ -2936,7 +2922,7 @@
                 ],
                 "fcheck": "function (a) return true end",
                 "fset": "function (a) ng_speakNoText(0, \"speed check flaps 30\") end",
-                "name": "spkchechflaps30",
+                "name": "spkcheckflaps30",
                 "title": "speak",
                 "type": "custom"
               },
@@ -2950,7 +2936,63 @@
                 ],
                 "fcheck": "function (a) return true end",
                 "fset": "function (a) ng_speakNoText(0, \"speed check flaps 40\") end",
-                "name": "spkchechflaps40",
+                "name": "spkcheckflaps40",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 5\") end",
+                "name": "spkcheckflaps5",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps up\") end",
+                "name": "spkcheckflapsup",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"gear down\") end",
+                "name": "spkgeardown",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"gear up\") end",
+                "name": "spkgearup",
                 "title": "speak",
                 "type": "custom"
               },
