@@ -56,12 +56,17 @@ ng_imgui_main_wnd_width = 960
 ng_imgui_main_wnd_height = 950
 ng_weightunit = "KGS"
 ng_kgslbs = 1
-ng_settings_icao = ng_acft_select(2)
+ng_settings_icao = ng_acf_prficao
 
 ng_sop_flows_visible = false
 
+ng_editor_assignments_json = nil
+ng_editor_assignments_error = ""
+ng_editor_remove_assignment = false
+ng_editor_assignment_newelement = ""
+
 ng_editor_system_title = ""
-ng_editor_system_icao = ng_acft_select(2)
+ng_editor_system_icao = ng_acf_sysicao
 ng_editor_system_json = nil
 ng_editor_system_newsystem = ""
 ng_editor_system_newelement = ""
@@ -84,7 +89,7 @@ ng_editor_sop_title = ""
 ng_editor_flow_title = ""
 ng_editor_step_title = ""
 
-ng_editor_sop_icao = ng_acft_select(1)
+ng_editor_sop_icao = ng_acf_sopicao
 ng_editor_sop_json = nil
 ng_editor_sop_expand1 = false
 ng_editor_sop_expcol1 = 0

@@ -28,7 +28,9 @@ require "kpcrew.Addon.Briefing.briefing_preferences" -- definition of briefing f
 
 -- ====== Global variables =======
 ng_version 		= "NG-dev V0.1-R03"
-ng_acf_icao 	= "DFLT" -- ICAO code to control what aircraft to load
+ng_acf_sopicao 	= "DFLT" -- ICAO code to control what aircraft to loadng_acf_sopicao 	= "DFLT" -- ICAO code to control what aircraft to load
+ng_acf_sysicao  = "DFLT"
+ng_acf_prficao  = "DFLT"
 
 -- ======== UI related global settings
 -- kb_wnd_width		= 960
@@ -68,14 +70,18 @@ ng_simversion 		= get("sim/version/xplane_internal_version") -- XP version
 logMsg ( "FWL: ** Starting KPCrewNG version " .. ng_version .. " on XP " .. ng_simversion .. " **" )
 
 -- ====== Select the addon modules based on ICAO code
-ng_acf_icao = ng_acft_select(1)
-logMsg("ICAO: ".. ng_acf_icao)
+local Assignments	= require("kpcrew.Addon.Assignments.AircraftAssignments")
+local activeAssignments = Assignments:new("Aircraft Assignments",SCRIPT_DIRECTORY.."../Modules/kpcrew_prefs/acftselect.json")
+activeAssignments:load()
+ng_acf_sopicao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER):getElementNode().sopicao
+ng_acf_prficao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER):getElementNode().preficao
+ng_acf_sysicao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER):getElementNode().sysicao
+logMsg("ICAO: ".. ng_acf_sopicao)
 
 -- ====== Aircraft Addon Specific SOP/Checklist/Procedure Definitions & Preferences
 local PreferenceSet = require("kpcrew.Addon.Preferences.PreferenceSet")
-
-if ng_file_exists(SCRIPT_DIRECTORY.."kpcres.addons"..ng_acf_icao.."_preferences.lua") then 
-	require ("kpcrew.addons."..ng_acf_icao.."_preferences")
+if ng_file_exists(SCRIPT_DIRECTORY.."kpcres.addons"..ng_acf_prficao.."_preferences.lua") then 
+	require ("kpcrew.addons."..ng_acf_prficao.."_preferences")
 end
 
 -- ====== Initialize application preferences
@@ -94,16 +100,16 @@ local SOP 		= require("kpcrew.Addon.SOP.SOP")
 local Systems 	= require("kpcrew.Addon.Systems.AddonSystems")
 
 -- ====== Initialize addon specific SOP
-local activeSOP = SOP:new("SOP Default Aircraft",SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_acf_icao.."_sop.json")
+local activeSOP = SOP:new("SOP Default Aircraft",SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_acf_sopicao.."_sop.json")
 activeSOP:load()
 function ng_get_active_sop() return activeSOP end -- global function to be used everywhere
 function ng_set_active_sop(newSOP) activeSOP = newSOP end -- global function to replace SOP
 
 -- ====== Get aircraft specific preferences - first load DFLT preference set then overwrite with specific - then load prefs
 local acfPreferences = ng_getAcfPrefs()
-acfPreferences:setName(ng_acf_icao) -- set aircraft specific icao as name
+acfPreferences:setName(ng_acf_prficao) -- set aircraft specific icao as name
 -- check if icao preferences file exists, if not create new
-acfPreferences:setFilePath(SCRIPT_DIRECTORY .."../Modules/kpcrew_prefs/"..ng_acf_icao..".preferences")
+acfPreferences:setFilePath(SCRIPT_DIRECTORY .."../Modules/kpcrew_prefs/"..ng_acf_prficao..".preferences")
 if ng_file_exists(acfPreferences:getFilePath()) == false then acfPreferences:save() end
 acfPreferences:load()
 acfPreferences:setTitle(acfPreferences:get("addon:aircraftname")) -- set overloaded aircraft name
@@ -117,14 +123,14 @@ ng_load_simbrief() -- if exists load last simbrief xml download and overwrite
 function ng_get_active_brief() return briefPreferences end -- global function to be used everywhere
 
 -- ====== Get Aicraft Systems (all required switches and other elements)
-local acfSystems = Systems:new("Aircraft Systems",SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_acf_icao.."_systems.json")
+local acfSystems = Systems:new("Aircraft Systems",SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_acf_sysicao.."_systems.json")
 acfSystems:load()
 ng_init_acf_prefs() -- initialize and make custom settings if available
 function ng_get_active_sys() return acfSystems end -- global function to be used everywhere
 function ng_set_active_sys(newsystems) acfSystems = newsystems end
 
 -- ====== Initialize Addon
-local activeAddon = Addon:new(ng_acf_icao,"Addon")
+local activeAddon = Addon:new(ng_acf_sopicao,"Addon")
 activeAddon:setSop(activeSOP) -- deprecated
 activeAddon:setPreferences(acfPreferences) -- deprecated - will be replaced eventually
 activeAddon:setBriefing(briefPreferences) -- deprecated

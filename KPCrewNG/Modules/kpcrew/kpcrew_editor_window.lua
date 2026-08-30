@@ -3,6 +3,7 @@
 -- -----------------------------------------------------------------------------------------
 require "kpcrew.kpcrew_edit_sop"
 require "kpcrew.kpcrew_edit_systems"
+require "kpcrew.kpcrew_edit_assignments"
 
 -- -----------------------------------------------------------------------------------------
 -- draw the Settings tab
@@ -103,7 +104,7 @@ function ng_draw_edit_window()
 
 	if FLYWITHLUA == false then imgui.Begin("EDITOR") end
 
-		local tabsDef = {[0]="SOP", [1]="SYSTEMS", [2]="PREFS"}
+		local tabsDef = {[0]="SOP", [1]="SYSTEMS", [2]="PREFS", [3]="ASSIGN"}
 		
 		local tabsNumber = (#tabsDef+1)
 		local tabsSize = 480 / tabsNumber - 4
@@ -116,6 +117,7 @@ function ng_draw_edit_window()
 		if ng_imgui_current_edit_tab == 0 then render_edit_tab_sop()
 		elseif ng_imgui_current_edit_tab == 1 then render_edit_tab_sys() 
 		elseif ng_imgui_current_edit_tab == 2 then render_edit_tab_pref()
+		elseif ng_imgui_current_edit_tab == 3 then render_edit_tab_asgn()
 		end
 		imgui.EndGroup()
 

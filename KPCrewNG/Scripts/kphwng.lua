@@ -15,12 +15,18 @@ require ("kpcrew.addons.DFLT_preferences") -- definition of aircraft settings
 
 -- ====== Global variables =======
 local nh_version = "NG-Dev V0.1"
-nh_acf_icao = "DFLT" -- ICAO code to control what aircraft to load
+nh_acf_sysicao  = "DFLT"
+nh_acf_prficao  = "DFLT"
 
 logMsg ("FWL: ** Starting KPHWNG version " .. nh_version .." **")
 
-nh_acf_icao = ng_acft_select(2) -- can differ from sop icao
-logMsg("ICAO: "..ng_acf_icao)
+-- ====== Select the addon modules based on ICAO code
+local Assignments	= require("kpcrew.Addon.Assignments.AircraftAssignments")
+local activeAssignments = Assignments:new("Aircraft Assignments",SCRIPT_DIRECTORY.."../Modules/kpcrew_prefs/acftselect.json")
+activeAssignments:load()
+nh_acf_prficao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER):getElementNode().preficao
+nh_acf_sysicao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER):getElementNode().sysicao
+logMsg("ICAO: ".. ng_acf_sopicao)
 
 -- level of exposure (to save memory and ressources
 -- 0 = basic (a/p, basic functions (gear, flaps etc...)
@@ -29,8 +35,8 @@ logMsg("ICAO: "..ng_acf_icao)
 
 -- ====== Aircraft Addon Specific SOP/Checklist/Procedure Definitions & Preferences
 local PreferenceSet = require("kpcrew.Addon.Preferences.PreferenceSet")
-if ng_file_exists(SCRIPT_DIRECTORY.."kpcres.addons"..ng_acf_icao.."_preferences.lua") then 
-	require ("kpcrew.addons."..ng_acf_icao.."_preferences")
+if ng_file_exists(SCRIPT_DIRECTORY.."kpcres.addons"..nh_acf_prficao.."_preferences.lua") then 
+	require ("kpcrew.addons."..nh_acf_prficao.."_preferences")
 end
 
 -- ====== Build object structure (Addon deprecated, will be removed eventually)
@@ -46,22 +52,22 @@ appPreferences:load()
 
 -- ====== Get aircraft specific preferences - first load DFLT preference set then overwrite with specific - then load prefs
 local acfPreferences = ng_getAcfPrefs()
-acfPreferences:setName(nh_acf_icao) -- set aircraft specific icao as name
+acfPreferences:setName(nh_acf_prficao) -- set aircraft specific icao as name
 -- check if icao preferences file exists, if not create new
-acfPreferences:setFilePath(SCRIPT_DIRECTORY .."../Modules/kpcrew_prefs/"..nh_acf_icao..".preferences")
+acfPreferences:setFilePath(SCRIPT_DIRECTORY .."../Modules/kpcrew_prefs/"..nh_acf_prficao..".preferences")
 if ng_file_exists(acfPreferences:getFilePath()) == false then acfPreferences:save() end
 acfPreferences:load()
 acfPreferences:setTitle(acfPreferences:get("addon:aircraftname")) -- set overloaded aircraft name
 function nh_get_active_prefs() return acfPreferences end -- global function to be used everywhere
 
 -- ====== Get Aicraft Systems (all required switches and other elements)
-local acfSystems = Systems:new("Aircraft Systems",SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..nh_acf_icao.."_systems.json")
+local acfSystems = Systems:new("Aircraft Systems",SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..nh_acf_sysicao.."_systems.json")
 acfSystems:load()
 ng_init_acf_prefs() -- initialize and make custom settings if available
 function nh_get_active_sys() return acfSystems end -- global function to be used everywhere
 
 -- ====== Initialize Addon
-local activeAddon = Addon:new(ng_acf_icao,"Addon")
+local activeAddon = Addon:new(nh_acf_prficao,"Addon")
 activeAddon:setPreferences(acfPreferences) -- deprecated - will be replaced eventually
 activeAddon:setSystems(acfSystems) -- deprecated
 function nh_get_active_addon() return activeAddon end -- global function to be used everywhere

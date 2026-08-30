@@ -25,17 +25,19 @@ end
 -- -----------------------------------------------------------------------------------------
 -- save the edited system json 
 function systems_save()
-	local path = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_system_icao.."_systems.json"
-	if ng_editor_system_icao == "DFLT" then 
-		ng_editor_system_error = "DFLT not allowed - XXXX"
-		-- return 
-	end 
-	local prettyprint = require ("kpcrew.json_pretty_print")
-	local jsonout = prettyprint:pretty_print(ng_editor_system_json,nil,true)
-	local filesystem = io.open(path, "w+")
-	filesystem:write(jsonout)
-	filesystem:close()
-	ng_editor_system_error = ""
+	if ng_editor_system_json ~= nil then
+		local path = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_system_icao.."_systems.json"
+		if ng_editor_system_icao == "DFLT" then 
+			ng_editor_system_error = "DFLT not allowed - XXXX"
+			-- return 
+		end 
+		local prettyprint = require ("kpcrew.json_pretty_print")
+		local jsonout = prettyprint:pretty_print(ng_editor_system_json,nil,true)
+		local filesystem = io.open(path, "w+")
+		filesystem:write(jsonout)
+		filesystem:close()
+		ng_editor_system_error = ""
+	end
 end
 -- -----------------------------------------------------------------------------------------
 

@@ -1,0 +1,216 @@
+{
+  "acftselect": {
+    "addons": [
+      {
+        "name": "Aerobask Phenom 300",
+        "planeicao": "E55P",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "E55P",
+          "sopicao": "DFLT",
+          "sysicao": "E55P"
+        }
+      },
+      {
+        "name": "Aerogenesis A333",
+        "planeicao": "A333",
+        "planetailnum": "D-AGEN",
+        "settings": {
+          "preficao": "A33L",
+          "sopicao": "A33L",
+          "sysicao": "A33L"
+        }
+      },
+      {
+        "name": "Carenado CT210M",
+        "planeicao": "T210",
+        "planetailnum": "N3888Y",
+        "settings": {
+          "preficao": "T210",
+          "sopicao": "GAAC",
+          "sysicao": "T210"
+        }
+      },
+      {
+        "name": "Carenado PA31",
+        "planeicao": "",
+        "planetailnum": "NC4134",
+        "settings": {
+          "preficao": "PA31",
+          "sopicao": "GAAC",
+          "sysicao": "PA31"
+        }
+      },
+      {
+        "name": "Carenado Saab 340",
+        "planeicao": "SF34",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "SF34",
+          "sopicao": "SF34",
+          "sysicao": "SF34"
+        }
+      },
+      {
+        "name": "DFLT",
+        "planeicao": "DFLT",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "Laminar A330",
+        "planeicao": "A333",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "A33L",
+          "sopicao": "A33L",
+          "sysicao": "A33L"
+        }
+      },
+      {
+        "name": "Laminar C172",
+        "planeicao": "C172",
+        "planetailnum": "N172SP",
+        "settings": {
+          "preficao": "C172",
+          "sopicao": "GAAC",
+          "sysicao": "C172"
+        }
+      },
+      {
+        "name": "Level Up 736",
+        "planeicao": "B736",
+        "planetailnum": "B736",
+        "settings": {
+          "preficao": "B736",
+          "sopicao": "B737",
+          "sysicao": "B737"
+        }
+      },
+      {
+        "name": "Level Up 737",
+        "planeicao": "B737",
+        "planetailnum": "B737",
+        "settings": {
+          "preficao": "B737",
+          "sopicao": "B737",
+          "sysicao": "B737"
+        }
+      },
+      {
+        "name": "Level Up 738",
+        "planeicao": "B738",
+        "planetailnum": "B738",
+        "settings": {
+          "preficao": "B738",
+          "sopicao": "B737",
+          "sysicao": "B737"
+        }
+      },
+      {
+        "name": "Level Up 739",
+        "planeicao": "B739",
+        "planetailnum": "B739",
+        "settings": {
+          "preficao": "B739",
+          "sopicao": "B737",
+          "sysicao": "B737"
+        }
+      },
+      {
+        "name": "Starving Pilot Metroliner III",
+        "planeicao": "AMF",
+        "planetailnum": "N360AE",
+        "settings": {
+          "preficao": "SW4",
+          "sopicao": "SW4",
+          "sysicao": "SW4"
+        }
+      },
+      {
+        "name": "ToLiss A21N",
+        "planeicao": "A21N",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "A21N",
+          "sopicao": "A3TL",
+          "sysicao": "A3TL"
+        }
+      },
+      {
+        "name": "ToLiss A319",
+        "planeicao": "A319",
+        "planetailnum": "C-GTLS",
+        "settings": {
+          "preficao": "A319",
+          "sopicao": "A3TL",
+          "sysicao": "A3TL"
+        }
+      },
+      {
+        "name": "ToLiss A320, A20N",
+        "planeicao": "A320",
+        "planetailnum": "C-GTLT",
+        "settings": {
+          "preficao": "A320",
+          "sopicao": "A3TL",
+          "sysicao": "A3TL"
+        }
+      },
+      {
+        "name": "ToLiss A321",
+        "planeicao": "A321",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "A321",
+          "sopicao": "A3TL",
+          "sysicao": "A3TL"
+        }
+      },
+      {
+        "name": "ToLiss A339",
+        "planeicao": "A339",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "A339",
+          "sopicao": "A3TL",
+          "sysicao": "A3TL"
+        }
+      },
+      {
+        "name": "ToLiss A340",
+        "planeicao": "A346",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "A346",
+          "sopicao": "A3TL",
+          "sysicao": "A3TL"
+        }
+      },
+      {
+        "name": "X-Works A330",
+        "planeicao": "A332",
+        "planetailnum": "D-AIKN",
+        "settings": {
+          "preficao": "A33L",
+          "sopicao": "A33L",
+          "sysicao": "A33L"
+        }
+      },
+      {
+        "name": "Zibo Mod",
+        "planeicao": "B738",
+        "planetailnum": "ZB738",
+        "settings": {
+          "preficao": "B738",
+          "sopicao": "B737",
+          "sysicao": "B737"
+        }
+      }
+    ]
+  }
+}

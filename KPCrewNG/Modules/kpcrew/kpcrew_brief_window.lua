@@ -455,7 +455,7 @@ function render_briefing_flightstate()
 		ng_imgui_out_text(color_white,"AIRCRAFT")
 		imgui.TableNextColumn()
 		ng_imgui_out_text(color_yellow, 
-			ng_acf_icao .. " / " .. PLANE_ICAO .. " / " .. ng_getBriefPrefs():get("general:acficao"))
+			ng_acf_sopicao .. " / " .. PLANE_ICAO .. " / " .. ng_getBriefPrefs():get("general:acficao"))
 
 -- CRUISE ALT	[999999]	CRUISE LVL	FL999
 		imgui.TableNextColumn()

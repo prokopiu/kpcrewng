@@ -6,8 +6,7 @@
 
 --- Return the matching KPCrew addon icao code
 -- @param int 0 = both, 1 = sop only, 2 = systems only
-function ng_acft_select(component)
-
+function ng_acft_select(component) 
 	if component == nil then component = 0 end
 	
 	local icao = "DFLT" -- active addon aircraft ICAO code (DFLT when nothing found)
@@ -134,6 +133,11 @@ function ng_acft_select(component)
 	elseif PLANE_TAILNUMBER == "C-DVMC" then
 		icao = "C560"
 		sopicao = "DFLT"
+
+	-- Carenado PA31
+	elseif PLANE_TAILNUMBER == "NC4134" then
+		icao = "PA31"
+		sopicao = "GAAC"
 
 	-- Coolimata Concorde
 	elseif PLANE_TAILNUMBER == "CONC" then

@@ -528,18 +528,19 @@ end
 --- save edited SOP
 function sop_save()
 
-	local path = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_sop_icao.."_sop.json"
-	if ng_editor_sop_icao == "DFLT" then 
-		ng_editor_sop_error = "DFLT not allowed - XXXX"
-		-- return 
-	end 
-	local prettyprint = require ("kpcrew.json_pretty_print")
-	local jsonout = prettyprint:pretty_print(ng_editor_sop_json,nil,true)
-	local filesystem = io.open(path, "w+")
-	filesystem:write(jsonout)
-	filesystem:close()
-	ng_editor_sop_error = ""
-
+	if ng_editor_sop_json ~= nil then
+		local path = SCRIPT_DIRECTORY.."../Modules/kpcrew/addons/"..ng_editor_sop_icao.."_sop.json"
+		if ng_editor_sop_icao == "DFLT" then 
+			ng_editor_sop_error = "DFLT not allowed - XXXX"
+			-- return 
+		end 
+		local prettyprint = require ("kpcrew.json_pretty_print")
+		local jsonout = prettyprint:pretty_print(ng_editor_sop_json,nil,true)
+		local filesystem = io.open(path, "w+")
+		filesystem:write(jsonout)
+		filesystem:close()
+		ng_editor_sop_error = ""
+	end
 end
 -- -----------------------------------------------------------------------------------------
 
