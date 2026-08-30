@@ -35,7 +35,18 @@ general:add(preference:new("haswipers",		false,ng_type_flag,	"Has Wipers?|Yes|No
 general:add(preference:new("hasseatbelts",	false,ng_type_flag,	"Has Seatbelt Signs?|Yes|No"))	-- general:hasseatbelts
 general:add(preference:new("hasnosmoking",	false,ng_type_flag,	"Has No Smoking Signs?|Yes|No"))-- general:hasnosmoking
 general:add(preference:new("hasdoors",		true,ng_type_flag,	"Has External Doors?|Yes|No"))	-- general:hasdoors
-general:add(preference:new("hasretgear",	true,ng_type_flag,	"Has Retractable Gear?|Yes|No"))-- general:hasretgear
+	general:add(preference:new("hasdoorl1",	true,ng_type_flag,"Door left Front|Yes|No",
+		nil,"return ng_getAcfPrefs():get(\"general:hasdoors\")"))									-- general:hasdoorleft
+	general:add(preference:new("hasdoorr1",	true,ng_type_flag,"Door right Front|Yes|No",
+		nil,"return ng_getAcfPrefs():get(\"general:hasdoors\")"))									-- general:hasdoorleftgeneral:add(preference:new("hasretgear",	true,ng_type_flag,	"Has Retractable Gear?|Yes|No"))-- general:hasretgear
+	general:add(preference:new("hasdoorl2",	true,ng_type_flag,"Door left back|Yes|No",
+		nil,"return ng_getAcfPrefs():get(\"general:hasdoors\")"))									-- general:hasdoorleftgeneral:add(preference:new("hasretgear",	true,ng_type_flag,	"Has Retractable Gear?|Yes|No"))-- general:hasretgear
+	general:add(preference:new("hasdoorr2",	true,ng_type_flag,"Door right Back|Yes|No",
+		nil,"return ng_getAcfPrefs():get(\"general:hasdoors\")"))									-- general:hasdoorleftgeneral:add(preference:new("hasretgear",	true,ng_type_flag,	"Has Retractable Gear?|Yes|No"))-- general:hasretgear
+	general:add(preference:new("hasdoorcf",	true,ng_type_flag,"Door Cargo Front|Yes|No",
+		nil,"return ng_getAcfPrefs():get(\"general:hasdoors\")"))									-- general:hasdoorleftgeneral:add(preference:new("hasretgear",	true,ng_type_flag,	"Has Retractable Gear?|Yes|No"))-- general:hasretgear
+	general:add(preference:new("hasdoorca",	true,ng_type_flag,"Door Cargo Aft|Yes|No",
+		nil,"return ng_getAcfPrefs():get(\"general:hasdoors\")"))									-- general:hasdoorleftgeneral:add(preference:new("hasretgear",	true,ng_type_flag,	"Has Retractable Gear?|Yes|No"))-- general:hasretgear
 -- autobreak related setting
 general:add(preference:new("hasautobrk",	false,ng_type_flag,	"Has Autobrake?|Yes|No"))		-- general:hasautobrk
 	general:add(preference:new("abrkmodelblt",	"|MAX MAN|RTO|OFF|1|2|3|4",ng_type_text,"A/BRK Labels|",
@@ -87,10 +98,12 @@ air:add(preference:new("hasoxygen",			false,ng_type_flag,"Has Oxygen Supply|Yes|
 air:add(preference:new("haspresspnl",		false,ng_type_flag,"Has Pressure Panel|Yes|No"))	-- air:haspresspnl
 air:add(preference:new("hasequipcool",		false,ng_type_flag,"Has Equip Cooling|Yes|No"))		-- air:hasequipcooling
 air:add(preference:new("hascargoheat",		false,ng_type_flag,"Has Cargo Heat|Yes|No"))		-- air:hascargoheat
+air:add(preference:new("hasvacuum",			false,ng_type_flag,"Has Vacuum|Yes|No"))			-- air:hasvacuum
 -- --------------------------------------------------------------------------------------------
 
 -- --------------------------- Autopilot related settings 
 local autopilot 			= preferenceGroup:new("autopilot","AUTOPILOT")
+autopilot:add(preference:new("hasautopilot",	true,ng_type_flag,"Has A/P?|Yes|No"))				-- autopilot:hasathr
 autopilot:add(preference:new("hasathr",	false,ng_type_flag,"Has A/THR?|Yes|No"))				-- autopilot:hasathr
 autopilot:add(preference:new("hasirs",		false,ng_type_flag,"Has IRS?|Yes|No"))				-- autopilot:hasirs
 	autopilot:add(preference:new("irsoff",		0,ng_type_int,"IRS OFF INDX|0",
@@ -149,12 +162,14 @@ electric:add(preference:new("hasbusties",	false,ng_type_flag,"Has Bus Ties?|Yes|
 electric:add(preference:new("hasenggens",	true,ng_type_flag,"Has Engine Generators?|Yes|No")) -- electric:hasenggens
 electric:add(preference:new("hasessbus",	false,ng_type_flag,"Has Essential Bus?|Yes|No")) 	-- electric:hasessbus
 electric:add(preference:new("hastrus",		false,ng_type_flag,"Has TRUs?|Yes|No")) 			-- electric:hastrus
+electric:add(preference:new("hasavionics",	false,ng_type_flag,"Has Avionics?|Yes|No")) 			-- electric:avionics
 -- --------------------------------------------------------------------------------------------
 
 -- ------------------------- Engines related settings 
 local engines 				= preferenceGroup:new("engines","ENGINE SYSTEMS")
 engines:add(preference:new("nrengines",		2,ng_type_int,"Number of Engines|0"))					-- engines:nrengines
-engines:add(preference:new("startseq",		"|2 THEN 1|1 THEN 2",ng_type_text,"Start Sequence|")) -- engines:startseq
+	engines:add(preference:new("startseq",	"|2 THEN 1|1 THEN 2",ng_type_text,"Start Sequence|",
+		nil,"return ng_getAcfPrefs():get(\"engines:nrengines\") > 1"))							-- engines:startseq
 engines:add(preference:new("hasfiretests",	false,ng_type_flag,"Has Fire Test?|Yes|No"))		-- engines:hasfiretests
 engines:add(preference:new("haseec",		false,ng_type_flag,"Has EEC?|Yes|No"))				-- engines:haseec
 engines:add(preference:new("hasstartsels",	false,ng_type_flag,"Has Start Selectors?|Yes|No"))		-- engines:hasstartsels
@@ -164,14 +179,16 @@ engines:add(preference:new("n2afterstart",	50,ng_type_int,"N2 Value start|0"))		
 engines:add(preference:new("rpmafterstart",	0,ng_type_int,"RPM Value start|0"))					-- engines:rpmafterstart
 engines:add(preference:new("hasproplvrs",	false,ng_type_flag,"Has Prop Levers?|Yes|No"))		-- engines:hasproplvrs
 engines:add(preference:new("hasmixlvrs",	false,ng_type_flag,"Has Mixture Levers?|Yes|No"))		-- engines:hasmixlvrs
+engines:add(preference:new("hascowlflaps",	false,ng_type_flag,"Has Cowl flaps?|Yes|No"))		-- engines:cowlflaps
 -- --------------------------------------------------------------------------------------------
 
 -- -------------------------- Fuel related settings 
 local fuel 					= preferenceGroup:new("fuel","FUEL SYSTEMS")
 fuel:add(preference:new("canloadfuel",		false,ng_type_flag,"Can load fuel?|Yes|No"))		-- fuel:canloadfuel		
-fuel:add(preference:new("hasfuelxfeed",		false,ng_type_flag,"Has Fuel Crossfeeds|Yes|No"))	-- fuel:hasfuelxfeed
+fuel:add(preference:new("hasfuelshut",		false,ng_type_flag,"Has Fuel Shutoff|Yes|No"))		-- fuel:hasfuelxfeed
 fuel:add(preference:new("hasfuelselector",	false,ng_type_flag,"Has Fuel Selector|Yes|No"))		-- fuel:hasfuelselector
 fuel:add(preference:new("hasfuelpumps",		false,ng_type_flag,"Has Fuel Pump Sws|Yes|No"))		-- fuel:hasfuelpumps
+fuel:add(preference:new("hasfuelxfeed",		false,ng_type_flag,"Has Fuel Crossfeeds|Yes|No"))	-- fuel:hasfuelxfeed
 -- --------------------------------------------------------------------------------------------
 
 -- ----------------------- Hydraulic related settings
@@ -194,6 +211,7 @@ lights:add(preference:new("haslogolts",		true,ng_type_flag,"Has Logo Lights?|Yes
 lights:add(preference:new("haswinglts",		true,ng_type_flag,"Has Wing Lights?|Yes|No"))		-- lights:haswinglts
 lights:add(preference:new("haswheellts",	true,ng_type_flag,"Has Wheel Lights?|Yes|No"))		-- lights:haswheellts
 lights:add(preference:new("hasrwylts",		true,ng_type_flag,"Has Runway Lights?|Yes|No"))		-- lights:hasrwylts
+lights:add(preference:new("hasexitlts",		false,ng_type_flag,"Has Exit Lights?|Yes|No"))		-- lights:hasrwylts
 lights:add(preference:new("nrlandlights",	2,ng_type_int,"Number Landing Lights|0"))			-- lights:nrlandlights
 
 -- --------------------------------------------------------------------------------------------

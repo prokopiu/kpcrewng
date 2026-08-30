@@ -1926,7 +1926,7 @@
                 "indx": 2,
                 "name": "battery3",
                 "title": "Battery 3",
-                "type": "dataref"
+                "type": "undefined"
               }
             ],
             "name": "batteries"
@@ -2065,7 +2065,7 @@
                 "indx": 2,
                 "name": "generator3",
                 "title": "Engine Generator 3",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -2078,7 +2078,7 @@
                 "indx": 3,
                 "name": "generator4",
                 "title": "Engine Generator 4",
-                "type": "dataref"
+                "type": "undefined"
               }
             ],
             "name": "generators"
@@ -2422,6 +2422,117 @@
             "elements": [
               {
                 "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/engine/actuators/ignition_key",
+                "indx": 0,
+                "name": "ignitionset1",
+                "title": "Ignition",
+                "type": "dataref"
+              }
+            ],
+            "name": "ignition"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/actuators/mixture_ratio",
+                "indx": 0,
+                "name": "mixlever1",
+                "title": "Mixture lever 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/actuators/mixture_ratio",
+                "indx": 1,
+                "name": "mixlever2",
+                "title": "Mixture lever 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/actuators/mixture_ratio_all",
+                "name": "mixleversall",
+                "title": "mixture lever all",
+                "type": "dataref"
+              }
+            ],
+            "name": "mixturelevers"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/actuators/prop_ratio",
+                "indx": 0,
+                "name": "proplever1",
+                "title": "Prop lever 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/actuators/prop_ratio",
+                "indx": 1,
+                "name": "proplever2",
+                "title": "Prop lever 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/actuators/prop_ratio_all",
+                "name": "propleversall",
+                "title": "Prop lever all",
+                "type": "dataref"
+              }
+            ],
+            "name": "proplevers"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
                   "chk",
                   " ",
                   " ",
@@ -2532,7 +2643,7 @@
                 "indx": 1,
                 "name": "fuelpump2",
                 "title": "Fuel pump left 2",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -2545,7 +2656,7 @@
                 "indx": 2,
                 "name": "fuelpump3",
                 "title": "Fuel pump right 1",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -2558,7 +2669,7 @@
                 "indx": 3,
                 "name": "fuelpump4",
                 "title": "Fuel pump right 2",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
                 "name": "fuelpump5",
