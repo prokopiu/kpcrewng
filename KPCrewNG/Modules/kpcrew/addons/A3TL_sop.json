@@ -1149,6 +1149,29 @@
             "setelements": {}
           },
           {
+            "challenge": "BEACON",
+            "classname": "ChecklistItem",
+            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
+            "response": "ON",
+            "role": "ng_firole_CM2",
+            "setelements": [
+              {
+                "action": "on",
+                "element": "#beacons"
+              }
+            ]
+          },
+          {
+            "challenge": "BEFORE START CHECKLIST",
+            "classname": "ChecklistItem",
+            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
+            "delay": 1,
+            "nocheck": 1,
+            "response": "COMPLETED",
+            "role": "ng_firole_CM2",
+            "setelements": {}
+          },
+          {
             "challenge": "<WAIT>EXTERNAL POWER DISCONNECTED",
             "classname": "ProcedureItem",
             "delay": 2,
@@ -1177,16 +1200,6 @@
                 "element": "gpuconnectb"
               }
             ]
-          },
-          {
-            "challenge": "BEFORE START CHECKLIST",
-            "classname": "ChecklistItem",
-            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
-            "delay": 1,
-            "nocheck": 1,
-            "response": "COMPLETED",
-            "role": "ng_firole_CM2",
-            "setelements": {}
           },
           {
             "challenge": "<GND>JETWAY",
@@ -2291,50 +2304,6 @@
                 "value": 0
               }
             ]
-          },
-          {
-            "challenge": "CLIMB CHECKLIST",
-            "classname": "ChecklistItem",
-            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
-            "response": " ",
-            "role": "ng_firole_CM2",
-            "setelements": {}
-          },
-          {
-            "challenge": "LANDING GEAR",
-            "classname": "ChecklistItem",
-            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
-            "response": "UP",
-            "role": "ng_firole_CM2",
-            "setelements": [
-              {
-                "action": "off",
-                "element": "gearhandle"
-              }
-            ]
-          },
-          {
-            "challenge": "FLAPS",
-            "classname": "ChecklistItem",
-            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
-            "response": "UP",
-            "role": "ng_firole_CM2",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "flapset",
-                "value": 0
-              }
-            ]
-          },
-          {
-            "challenge": "CLIMB CHECKLIST",
-            "classname": "ChecklistItem",
-            "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
-            "nocheck": 1,
-            "response": "COMPLETED",
-            "role": "ng_firole_CM2",
-            "setelements": {}
           },
           {
             "challenge": "PACKS & BLEEDS",
