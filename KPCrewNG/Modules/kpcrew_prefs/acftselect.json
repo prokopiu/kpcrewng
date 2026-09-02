@@ -32,6 +32,16 @@
         }
       },
       {
+        "name": "Carenado Fokker 50",
+        "planeicao": "F50",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "FK50",
+          "sopicao": "FK50",
+          "sysicao": "FK50"
+        }
+      },
+      {
         "name": "Carenado PA31",
         "planeicao": "",
         "planetailnum": "NC4134",

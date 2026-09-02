@@ -44,56 +44,75 @@
                   "on",
                   "off",
                   "tgl",
-                  "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
-                "dref": "thranda/Button",
-                "indx": 84,
+                "cmdtgl": "thranda/buttons/Button83",
+                "dref": "thranda/ButtonMonitor",
+                "indx": 83,
                 "name": "probeheat1",
                 "title": "Probe Heat 1",
-                "type": "dataref"
+                "type": "onofftgl"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
-                "dref": "thranda/Button",
-                "indx": 85,
+                "cmdtgl": "thranda/buttons/Button84",
+                "dref": "thranda/ButtonMonitor",
+                "indx": 84,
                 "name": "probeheat2",
                 "title": "Probe Heat 2",
-                "type": "dataref"
+                "type": "onofftgl"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
-                "dref": "thranda/Button",
-                "indx": 86,
+                "cmdtgl": "thranda/buttons/Button85",
+                "dref": "thranda/ButtonMonitor",
+                "indx": 85,
                 "name": "probeheat3",
                 "title": "Probe heat 3",
-                "type": "dataref"
+                "type": "onofftgl"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
-                "dref": "thranda/Button",
-                "indx": 87,
+                "cmdtgl": "thranda/buttons/Button86",
+                "dref": "thranda/ButtonMonitor",
+                "indx": 86,
                 "name": "probeheat4",
                 "title": "probeheat 4",
-                "type": "dataref"
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "thranda/buttons/Button87",
+                "dref": "thranda/ButtonMonitor",
+                "indx": 87,
+                "name": "probeheat5",
+                "title": "probheat 5",
+                "type": "onofftgl"
               }
             ],
             "name": "probeheat"
@@ -183,30 +202,32 @@
                   "on",
                   "off",
                   "tgl",
-                  "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
-                "dref": "sim/cockpit2/bleedair/actuators/engine_bleed_sov",
+                "cmdtgl": "thranda/buttons/Button55",
+                "dref": "thranda/ButtonMonitor",
                 "foff": "function (a) return -1 end",
                 "fon": "function (a) return 0 end",
-                "indx": 0,
+                "indx": 55,
                 "name": "bleed1",
                 "title": "Engine Bleed 1",
-                "type": "dataref"
+                "type": "onofftgl"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
-                "dref": "sim/cockpit2/bleedair/actuators/engine_bleed_sov",
-                "indx": 1,
+                "cmdtgl": "thranda/buttons/Button57",
+                "dref": "thranda/ButtonMonitor",
+                "indx": 57,
                 "name": "bleed2",
                 "title": "Engine Bleed 2",
-                "type": "dataref"
+                "type": "onofftgl"
               }
             ],
             "name": "bleeds"
@@ -1670,26 +1691,30 @@
                   "on",
                   "off",
                   "tgl",
-                  "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
-                "dref": "thranda/electrical/BusSw5",
+                "cmdtgl": "thranda/buttons/Button34",
+                "dref": "thranda/ButtonMonitor",
+                "indx": 34,
                 "name": "avionic1",
                 "title": "Avionic Left",
-                "type": "dataref"
+                "type": "onofftgl"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
-                "dref": "thranda/electrical/BusSw6",
+                "cmdtgl": "thranda/buttons/Button34",
+                "dref": "thranda/ButtonMonitor",
+                "indx": 35,
                 "name": "avionic2",
                 "title": "Avionic Right",
-                "type": "dataref"
+                "type": "onofftgl"
               }
             ],
             "name": "avionics"
@@ -2198,28 +2223,30 @@
                   "on",
                   "off",
                   "tgl",
-                  "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
-                "dref": "sim/cockpit2/engine/actuators/igniter_on",
-                "indx": 0,
+                "cmdtgl": "thranda/buttons/Button80",
+                "dref": "thranda/ButtonMonitor",
+                "indx": 80,
                 "name": "ignition1",
                 "title": "Ignition 1",
-                "type": "dataref"
+                "type": "onofftgl"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
-                "dref": "sim/cockpit2/engine/actuators/igniter_on",
-                "indx": 1,
+                "cmdtgl": "thranda/buttons/Button82",
+                "dref": "thranda/ButtonMonitor",
+                "indx": 82,
                 "name": "ignition2",
                 "title": "Ignition 2",
-                "type": "dataref"
+                "type": "onofftgl"
               }
             ],
             "name": "ignition"
@@ -3457,7 +3484,7 @@
                   ""
                 ],
                 "cmdtgl": "thranda/buttons/Button63",
-                "dref": "thranda/ButtonAnnLt2",
+                "dref": "thranda/ButtonMonitor",
                 "indx": 63,
                 "name": "battcharger1",
                 "title": "Charger 1",
@@ -3472,7 +3499,7 @@
                   ""
                 ],
                 "cmdtgl": "thranda/buttons/Button64",
-                "dref": "thranda/ButtonAnnLt2",
+                "dref": "thranda/ButtonMonitor",
                 "indx": 64,
                 "name": "battcharger2",
                 "title": "Charger 2",
