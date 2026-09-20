@@ -12,10 +12,9 @@
                   "off",
                   "tgl",
                   "chk",
-                  " "
+                  "set"
                 ],
-                "dref": "sim/cockpit/switches/anti_ice_inlet_heat_per_engine",
-                "indx": 0,
+                "dref": "FJS/732/AntiIce/EngAntiIce1Switch",
                 "name": "engaice1",
                 "title": "Engine Antiice 1",
                 "type": "dataref"
@@ -26,40 +25,11 @@
                   "off",
                   "tgl",
                   "chk",
-                  " "
+                  "set"
                 ],
-                "dref": "sim/cockpit/switches/anti_ice_inlet_heat_per_engine",
-                "indx": 1,
+                "dref": "FJS/732/AntiIce/EngAntiIce2Switch",
                 "name": "engaice2",
                 "title": "Engine Antiice 2",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  " "
-                ],
-                "dref": "sim/cockpit/switches/anti_ice_inlet_heat_per_engine",
-                "indx": 2,
-                "name": "engaice3",
-                "title": "Engine Antiice 3",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  " "
-                ],
-                "dref": "sim/cockpit/switches/anti_ice_inlet_heat_per_engine",
-                "indx": 3,
-                "name": "engaice4",
-                "title": "Engine Antiice 4",
                 "type": "dataref"
               }
             ],
@@ -72,30 +42,26 @@
                   "on",
                   "off",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "cmdoff": "sim/ice/pitot_heat0_off",
-                "cmdon": "sim/ice/pitot_heat0_on",
-                "cmdtgl": "sim/ice/pitot_heat0_tog",
-                "dref": "sim/cockpit/switches/pitot_heat_on",
+                "dref": "FJS/732/AntiIce/PitotStaticSwitchA",
                 "name": "probeheat1",
                 "title": "Probe Heat 1",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "cmdoff": "sim/ice/pitot_heat1_off",
-                "cmdon": "sim/ice/pitot_heat1_on",
-                "cmdtgl": "sim/ice/pitot_heat1_tog",
-                "dref": "sim/cockpit/switches/pitot_heat_on2",
+                "dref": "FJS/732/AntiIce/PitotStaticSwitchB",
                 "name": "probeheat2",
                 "title": "Probe Heat 2",
-                "type": "onofftgl"
+                "type": "dataref"
               }
             ],
             "name": "probeheat"
@@ -110,8 +76,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
-                "indx": 0,
+                "dref": "FJS/732/AntiIce/WindowHeatL1Switch",
                 "name": "windowheat1",
                 "title": "Window Heat 1",
                 "type": "dataref"
@@ -124,8 +89,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
-                "indx": 1,
+                "dref": "FJS/732/AntiIce/WindowHeatL2Switch",
                 "name": "windowheat2",
                 "title": "Window Heat 2",
                 "type": "dataref"
@@ -138,8 +102,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
-                "indx": 2,
+                "dref": "FJS/732/AntiIce/WindowHeatR1Switch",
                 "name": "windowheat3",
                 "title": "Window Heat 3",
                 "type": "dataref"
@@ -152,8 +115,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/ice/ice_window_heat_on_window",
-                "indx": 3,
+                "dref": "FJS/732/AntiIce/WindowHeatR2Switch",
                 "name": "windowheat4",
                 "title": "Window Heat 4",
                 "type": "dataref"
@@ -169,24 +131,11 @@
                   "off",
                   "tgl",
                   "chk",
-                  " "
+                  "set"
                 ],
-                "dref": "sim/cockpit/switches/anti_ice_surf_heat_left",
+                "dref": "FJS/732/AntiIce/WingAntiIceSwitch",
                 "name": "wingaice1",
                 "title": "Wing Anti Ice 1",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  " "
-                ],
-                "dref": "sim/cockpit/switches/anti_ice_surf_heat_right",
-                "name": "wingaice2",
-                "title": "Wing Anti Ice 2",
                 "type": "dataref"
               }
             ],
@@ -204,13 +153,12 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  "set"
+                  "set",
+                  "chk"
                 ],
-                "dref": "sim/cockpit2/bleedair/actuators/engine_bleed_sov",
-                "indx": 0,
-                "name": "apubleed1",
-                "title": "APU  Bleed 1",
+                "dref": "FJS/732/Pneumatic/APUBleedSwitch",
+                "name": "apubleed",
+                "title": "APU bleed",
                 "type": "dataref"
               }
             ],
@@ -226,8 +174,7 @@
                   "chk",
                   "set"
                 ],
-                "dref": "sim/cockpit2/bleedair/actuators/engine_bleed_sov",
-                "indx": 0,
+                "dref": "FJS/732/Pneumatic/EngBleed1Switch",
                 "name": "bleed1",
                 "title": "Engine Bleed 1",
                 "type": "dataref"
@@ -240,38 +187,9 @@
                   "chk",
                   "set"
                 ],
-                "dref": "sim/cockpit2/bleedair/actuators/engine_bleed_sov",
-                "indx": 1,
+                "dref": "FJS/732/Pneumatic/EngBleed2Switch",
                 "name": "bleed2",
                 "title": "Engine Bleed 2",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  "set"
-                ],
-                "dref": "sim/cockpit2/bleedair/actuators/engine_bleed_sov",
-                "indx": 2,
-                "name": "bleed3",
-                "title": "Engine Bleed 3",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  "set"
-                ],
-                "dref": "sim/cockpit2/bleedair/actuators/engine_bleed_sov",
-                "indx": 3,
-                "name": "bleed4",
-                "title": "Engine Bleed 4",
                 "type": "dataref"
               }
             ],
@@ -301,16 +219,16 @@
             "elements": [
               {
                 "acts": [
-                  "",
-                  "",
-                  "",
-                  "",
-                  ""
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
                 ],
-                "fcheck": "true",
+                "dref": "FJS/732/Pneumatic/EquipCoolingSwitch",
                 "name": "equipcool1",
                 "title": "Equipment Cooling switch",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "equipcooling"
@@ -319,15 +237,16 @@
             "elements": [
               {
                 "acts": [
-                  "",
-                  "",
-                  "",
-                  "",
-                  ""
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
                 ],
+                "dref": "FJS/732/Pneumatic/GasperFanSwitch",
                 "name": "gasperfan1",
                 "title": "Gasper Fan 1",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "gasperfans"
@@ -342,28 +261,10 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/bleedair/actuators/isol_valve_left",
+                "dref": "FJS/732/Pneumatic/IsoValveSwitch",
                 "name": "isovalve1",
                 "title": "Isolation Valve 1",
                 "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "set",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/bleedair/actuators/isol_valve_right",
-                "name": "isovalve2",
-                "title": "Isolation Valve 2",
-                "type": "dataref"
-              },
-              {
-                "name": "isovalve3",
-                "title": "Isolation Valve 3",
-                "type": "undefined"
               }
             ],
             "name": "isovalves"
@@ -371,17 +272,9 @@
           {
             "elements": [
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "set",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/oxygen/actuators/demand_flow_setting",
                 "name": "oxygen1",
                 "title": "Oxygen Master 1",
-                "type": "dataref"
+                "type": "undefined"
               }
             ],
             "name": "oxygen"
@@ -396,7 +289,7 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/bleedair/actuators/pack_left",
+                "dref": "FJS/732/Pneumatic/LPackSwitch",
                 "name": "pack1",
                 "title": "Pack 1",
                 "type": "dataref"
@@ -409,7 +302,7 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/bleedair/actuators/pack_right",
+                "dref": "FJS/732/Pneumatic/RPackSwitch",
                 "name": "pack2",
                 "title": "Pack 2",
                 "type": "dataref"
@@ -420,15 +313,43 @@
           {
             "elements": [
               {
-                "acts": {},
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/Pneumatic/FlightAltSelector",
                 "name": "flightalt",
                 "title": "Flight Altitude",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/Pneumatic/FltGndSwitch",
                 "name": "fltgndswitch",
                 "title": "Boeing FLT GND Switch",
-                "type": "undefined"
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/Pneumatic/FltGndSwitch",
+                "name": "fltgrd",
+                "title": "FLT GRD Mode",
+                "type": "dataref"
               },
               {
                 "acts": {},
@@ -437,9 +358,17 @@
                 "type": "undefined"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/Pneumatic/PressModeSelector",
                 "name": "pressuremode",
                 "title": "Pressurization mode selector",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "pressurization"
@@ -451,12 +380,6 @@
                 "name": "recircfan1",
                 "title": "Recirc Fan 1",
                 "type": "undefined"
-              },
-              {
-                "acts": {},
-                "name": "recircfan2",
-                "title": "Recirc Fan 2",
-                "type": "undefined"
               }
             ],
             "name": "recircfans"
@@ -464,22 +387,30 @@
           {
             "elements": [
               {
-                "acts": {},
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/Pneumatic/ContCabinTempSelector",
                 "name": "tempcontrol1",
                 "title": "Temp Control 1",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
-                "acts": {},
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/Pneumatic/PassCabinTempSelector",
                 "name": "tempcontrol2",
                 "title": "Temp Control 2",
-                "type": "undefined"
-              },
-              {
-                "acts": {},
-                "name": "tempcontrol3",
-                "title": "Temp Control 3",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "tempcontrols"
@@ -496,18 +427,6 @@
                 ],
                 "name": "trimair1",
                 "title": "Trim Air Switch 1",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "",
-                  "",
-                  "",
-                  "",
-                  ""
-                ],
-                "name": "trimair2",
-                "title": "Trim Air Switch 2",
                 "type": "undefined"
               }
             ],
@@ -654,17 +573,10 @@
                 "type": "undefined"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
                 "cmdtgl": "sim/autopilot/autothrottle_toggle",
-                "dref": "sim/cockpit2/autopilot/autothrottle_enabled",
                 "name": "autothrottle",
                 "title": "Autothrottle",
-                "type": "onofftgl"
+                "type": "undefined"
               }
             ],
             "name": "autothrust"
@@ -672,30 +584,14 @@
           {
             "elements": [
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  "set"
-                ],
-                "dref": "sim/cockpit2/autopilot/flight_director_mode",
                 "name": "flightdir1",
                 "title": "FD 1",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "set",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/autopilot/flight_director2_mode",
                 "name": "flightdir2",
                 "title": "FD 2",
-                "type": "dataref"
+                "type": "undefined"
               }
             ],
             "name": "flightdirs"
@@ -703,46 +599,19 @@
           {
             "elements": [
               {
-                "acts": [
-                  "chk",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/autopilot/altitude_hold_status",
-                "fcheck": "function (a) return a>0 end",
                 "name": "_alt",
                 "title": "ALT mode",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
-                "acts": [
-                  "chk",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/autopilot/approach_status",
-                "fcheck": "function (a) return a>0 end",
                 "name": "_appr",
                 "title": "APPR annunciator",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
-                "acts": [
-                  "chk",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/autopilot/heading_mode",
-                "fcheck": "function (a) return a==1 end",
                 "name": "_hdg",
                 "title": "HDG mode",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -829,17 +698,9 @@
                 "type": "undefined"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "cmdtgl": "sim/autopilot/altitude_hold",
-                "dref": "sim/cockpit2/autopilot/altitude_hold_status",
                 "name": "althold",
                 "title": "Altitude Hold",
-                "type": "onofftgl"
+                "type": "undefined"
               },
               {
                 "name": "apdisengage",
@@ -847,17 +708,9 @@
                 "type": "undefined"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "cmdtgl": "sim/autopilot/approach",
-                "dref": "sim/cockpit2/autopilot/approach_status",
                 "name": "approach",
                 "title": "Approach mode",
-                "type": "onofftgl"
+                "type": "undefined"
               },
               {
                 "name": "bankanglesel",
@@ -870,16 +723,9 @@
                 "type": "undefined"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/autopilot/heading_mode",
                 "name": "hdghold",
                 "title": "Heading Hold",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
                 "name": "hdgtrk",
@@ -902,18 +748,9 @@
                 "type": "undefined"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "cmdtgl": "sim/autopilot/NAV",
-                "dref": "sim/cockpit2/autopilot/nav_status",
-                "fcheck": "function (a) return true end",
                 "name": "navhold",
                 "title": "Nav Hold",
-                "type": "onofftgl"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -932,17 +769,9 @@
                 "type": "undefined"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "cmdtgl": "sim/autopilot/take_off_go_arounds",
-                "dref": "sim/cockpit2/autopilot/TOGA_status",
                 "name": "toga",
                 "title": "TOGO Btn",
-                "type": "onofftgl"
+                "type": "undefined"
               },
               {
                 "name": "vnavmode",
@@ -1028,7 +857,7 @@
                 "cmdup": "sim/autopilot/heading_up",
                 "dref": "sim/cockpit2/autopilot/heading_dial_deg_mag_pilot",
                 "incr": 1,
-                "max": 360,
+                "max": 361,
                 "min": -1,
                 "name": "hdgsel",
                 "title": "A/P Heading",
@@ -1060,10 +889,10 @@
                 ],
                 "cmddn": "sim/autopilot/vertical_speed_down",
                 "cmdup": "sim/autopilot/vertical_speed_up",
-                "dref": "sim/cockpit2/autopilot/vvi_dial_fpm",
+                "dref": "FJS/732/Autopilot/PitchComKnob",
                 "incr": 1,
-                "max": 7900,
-                "min": -7900,
+                "max": 15,
+                "min": -15,
                 "name": "vspsel",
                 "title": "A/P VSP",
                 "type": "dialdref"
@@ -1090,21 +919,6 @@
                 "name": "_flapsposition",
                 "title": "Flaps position",
                 "type": "dataref"
-              },
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/controls/flap_ratio",
-                "fcheck": "function (a) return a==0 end",
-                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0) end",
-                "name": "flapleverUP",
-                "title": "Flap Lever UP",
-                "type": "custom"
               },
               {
                 "acts": [
@@ -1220,6 +1034,21 @@
                   " "
                 ],
                 "dref": "sim/cockpit2/controls/flap_ratio",
+                "fcheck": "function (a) return a==0 end",
+                "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",0) end",
+                "name": "flapleverUP",
+                "title": "Flap Lever UP",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_ratio",
                 "fcheck": "function (a) return a==1 end",
                 "fset": "function (a) set(\"sim/cockpit2/controls/flap_ratio\",1) end",
                 "name": "flapleverfull",
@@ -1246,10 +1075,25 @@
                   "on",
                   "off",
                   "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "FJS/727/Hyd/Com/SpeedBrakeArm",
+                "dref": "FJS/732/FltControls/SpeedBreakHandleMo",
+                "fcheck": "function (a) return a == -0.5 end",
+                "name": "spdbrkarm",
+                "title": "Speedbrake arm",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/controls/speedbrake_ratio",
+                "dref": "FJS/732/FltControls/SpeedBreakHandleMo",
                 "name": "speedbrake",
                 "title": "Speedbrake Lever",
                 "type": "dataref"
@@ -1271,14 +1115,17 @@
               },
               {
                 "acts": [
+                  "on",
+                  "off",
+                  "tgl",
                   "set",
                   "chk"
                 ],
                 "dref": "sim/cockpit2/controls/elevator_trim",
-                "fcheck": "function (a) return -1 + ((2/17) * ng_getBriefPrefs():get(\"takeoff:pitchtrim\")) end",
+                "fcheck": "function (a) return true end",
                 "name": "pitchtrim",
                 "title": "Pitch Trim",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -1299,9 +1146,10 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "tgl"
                 ],
-                "dref": "sim/cockpit2/switches/yaw_damper_on",
+                "dref": "FJS/732/FltControls/YawDamperSwitch",
                 "name": "yawdamper",
                 "title": "Yaw Damper",
                 "type": "dataref"
@@ -1575,28 +1423,14 @@
           {
             "elements": [
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot",
                 "name": "barostd1",
                 "title": "Baro STD left",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot",
                 "name": "barostd2",
                 "title": "Baro STD right",
-                "type": "dataref"
+                "type": "undefined"
               }
             ],
             "name": "barostdbtns"
@@ -1665,7 +1499,7 @@
               {
                 "acts": [
                   "set",
-                  ""
+                  "chk"
                 ],
                 "dref": "sim/cockpit2/gauges/actuators/baro_altimeter_bug_ft_pilot",
                 "name": "da",
@@ -1675,9 +1509,9 @@
               {
                 "acts": [
                   "set",
-                  ""
+                  "chk"
                 ],
-                "dref": "sim/cockpit/misc/radio_altimeter_minimum",
+                "dref": "sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_pilot",
                 "name": "dh",
                 "title": "Decision Height",
                 "type": "dataref"
@@ -1766,20 +1600,37 @@
           {
             "elements": [
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  ""
-                ],
-                "cmdoff": "sim/instruments/EFIS_wxr_pws_off",
-                "cmdon": "sim/instruments/EFIS_wxr_pws_on",
-                "cmdtgl": "sim/instruments/EFIS_wxr_pws_tog",
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_pws_mode",
                 "name": "wxpws",
-                "title": "<title>",
-                "type": "onofftgl"
+                "title": "Predictive Windshear",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "fcheck": "function (a) return a == 4 end",
+                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",4)",
+                "name": "wxradarmap",
+                "title": "Weather radar MAP",
+                "type": "undefined"
+              },
+              {
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "name": "wxradarmode",
+                "title": "Weather radar mode pilot",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 0",
+                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",0)",
+                "name": "wxradaroff",
+                "title": "Weather radar OFF",
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -1789,10 +1640,65 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "dref": "FJS/732/wx/on_switch_uns",
                 "name": "wxradarstate",
-                "title": "WX Radar state",
+                "title": "Weather radar on/off",
                 "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "fcheck": "function (a) return a == 1 end",
+                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",1)",
+                "name": "wxradarstby",
+                "title": "Weather radar STBY",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 1",
+                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",1)",
+                "name": "wxradartest",
+                "title": "Weather radar TEST",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 5",
+                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",5)",
+                "name": "wxradarturb",
+                "title": "Weather radar TURB",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 2",
+                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",2)",
+                "name": "wxradarwx",
+                "title": "Weather radar WX",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "fcheck": "get(\"sim/cockpit2/EFIS/EFIS_weather_mode\") == 3",
+                "fon": "set(\"sim/cockpit2/EFIS/EFIS_weather_mode\",3)",
+                "name": "wxradarwxt",
+                "title": "Weather radar WX+T",
+                "type": "undefined"
               }
             ],
             "name": "wxradar"
@@ -1808,8 +1714,8 @@
                 "acts": [
                   "chk"
                 ],
-                "dref": "sim/cockpit/engine/APU_N1",
-                "fcheck": "function (a) return a<2 end",
+                "dref": "FJS/732/Annun/SysAnnunLIT_13",
+                "fcheck": "function (a) return a=0 end",
                 "name": "_apuoff",
                 "title": "APU off",
                 "type": "dataref"
@@ -1818,8 +1724,8 @@
                 "acts": [
                   "chk"
                 ],
-                "dref": "sim/cockpit/engine/APU_N1",
-                "fcheck": "function (a) return a > 98 end",
+                "dref": "FJS/732/Annun/SysAnnunLIT_13",
+                "fcheck": "function (a) return a > 0 end",
                 "name": "_apuon",
                 "title": "APU ON",
                 "type": "dataref"
@@ -1838,51 +1744,44 @@
                 "acts": [
                   "on",
                   "off",
-                  "set"
+                  "set",
+                  "chk"
                 ],
-                "dref": "sim/cockpit/electrical/generator_apu_on",
+                "dref": "FJS/732/Elec/APUgen1Switch",
                 "name": "apugen1",
                 "title": "APU Generator 1",
                 "type": "dataref"
               },
               {
                 "acts": [
-                  ""
+                  "on",
+                  "off",
+                  " ",
+                  "set",
+                  "chk"
                 ],
+                "dref": "FJS/732/Elec/APUgen2Switch",
                 "name": "apugen2",
                 "title": "APU Generator 2",
+                "type": "dataref"
+              },
+              {
+                "name": "apumaster",
+                "title": "APU Master in Airbus",
                 "type": "undefined"
               },
               {
                 "acts": [
                   "on",
                   "off",
-                  "tgl",
-                  "chk",
-                  ""
+                  " ",
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "laminar/A333/buttons/APU_master",
-                "dref": "laminar/A333/buttons/APU_master",
-                "name": "apumaster",
-                "title": "APU Master in Airbus",
-                "type": "onofftgl"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  ""
-                ],
-                "cmdtgl": "laminar/A333/buttons/APU_start",
-                "dref": "sim/cockpit2/electrical/APU_starter_switch",
-                "fcheck": "function (a) return a==2 end",
-                "foff": "function (a) command_end(\"laminar/A333/buttons/APU_start\") end",
-                "fon": "function (a) command_begin(\"laminar/A333/buttons/APU_start\") end",
+                "dref": "FJS/732/Elec/APUStartSwitch",
                 "name": "apustart",
                 "title": "APU starter",
-                "type": "custom"
+                "type": "dataref"
               }
             ],
             "name": "apu"
@@ -1894,39 +1793,14 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "tgl"
                 ],
                 "dref": "sim/cockpit2/electrical/battery_on",
                 "indx": 0,
                 "name": "battery1",
                 "title": "Battery 1",
                 "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/electrical/battery_on",
-                "indx": 1,
-                "name": "battery2",
-                "title": "Battery 2",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/electrical/battery_on",
-                "indx": 2,
-                "name": "battery3",
-                "title": "Battery 3",
-                "type": "undefined"
               }
             ],
             "name": "batteries"
@@ -1939,48 +1813,21 @@
                 "type": "undefined"
               },
               {
-                "name": "acbustie2",
-                "title": "AC Bus Tie 2",
-                "type": "undefined"
-              },
-              {
-                "name": "acbustie3",
-                "title": "AC Bus Tie 3",
-                "type": "undefined"
-              },
-              {
-                "name": "acbustie4",
-                "title": "AC Bus Tie 4",
-                "type": "undefined"
-              },
-              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/Elec/BusTransSwitch",
                 "name": "dcbustie1",
                 "title": "DC Bus Tie 1",
-                "type": "undefined"
-              },
-              {
-                "name": "dcbustie2",
-                "title": "DC Bus Tie 2",
-                "type": "undefined"
-              },
-              {
-                "name": "dcbustie3",
-                "title": "DC Bus Tie 2",
-                "type": "undefined"
-              },
-              {
-                "name": "dcbustie4",
-                "title": "DC Bus Tie 2",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
                 "name": "essentialbus1",
                 "title": "Essential Bus 1",
-                "type": "undefined"
-              },
-              {
-                "name": "essentialbus2",
-                "title": "Essential Bus 2",
                 "type": "undefined"
               }
             ],
@@ -1989,9 +1836,17 @@
           {
             "elements": [
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/Elec/GalleySwitch",
                 "name": "cabinpower",
-                "title": "Cabin power",
-                "type": "undefined"
+                "title": "Cabin / Galley power",
+                "type": "dataref"
               },
               {
                 "name": "ifepower",
@@ -2004,24 +1859,30 @@
           {
             "elements": [
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/Fail/GenDrive1Disconed",
                 "name": "gendrivedisc1",
                 "title": "Generator Drive Disconnect 1",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/Fail/GenDrive2Disconed",
                 "name": "gendrivedisc2",
                 "title": "Generator Drive Disconnect 2",
-                "type": "undefined"
-              },
-              {
-                "name": "gendrivedisc3",
-                "title": "Generator Drive Disconnect 3",
-                "type": "undefined"
-              },
-              {
-                "name": "gendrivedisc4",
-                "title": "Generator Drive Disconnect 4",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "gendrives"
@@ -2030,55 +1891,35 @@
             "elements": [
               {
                 "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
                 ],
-                "dref": "sim/cockpit2/electrical/generator_on",
-                "indx": 0,
+                "dref": "FJS/732/Elec/Gen1Switch",
+                "incr": 1,
+                "max": 1,
+                "min": -1,
                 "name": "generator1",
                 "title": "Engine Generator 1",
-                "type": "dataref"
+                "type": "dialdref"
               },
               {
                 "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
                 ],
-                "dref": "sim/cockpit2/electrical/generator_on",
-                "indx": 1,
+                "dref": "FJS/732/Elec/Gen2Switch",
+                "incr": 1,
+                "max": 1,
+                "min": -1,
                 "name": "generator2",
                 "title": "Engine Generator 2",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/electrical/generator_on",
-                "indx": 2,
-                "name": "generator3",
-                "title": "Engine Generator 3",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/electrical/generator_on",
-                "indx": 3,
-                "name": "generator4",
-                "title": "Engine Generator 4",
-                "type": "undefined"
+                "type": "dialdref"
               }
             ],
             "name": "generators"
@@ -2090,21 +1931,27 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  " "
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "sim/ground_ops/toggle_gpu_request",
-                "dref": "sim/cockpit2/electrical/GPU_generator_volts",
-                "fcheck": "function (a) return a>0 end",
-                "ftrans": "function (a) if a>0 then return 1 else return 0 end end",
+                "dref": "FJS/732/Elec/GndPowerAvailable",
                 "name": "gpuconnect",
                 "title": "GPU Connect",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "cmdtgl": "sim/electrical/GPU_toggle",
+                "dref": "FJS/732/Elec/GndPwrSwitch",
                 "name": "gpugen1",
                 "title": "GPU Generator 1",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "gpu"
@@ -2112,32 +1959,14 @@
           {
             "elements": [
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  ""
-                ],
-                "dref": "sim/cockpit/engine/inverter_on",
-                "indx": 0,
                 "name": "inverter1",
                 "title": "Inverter 1",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  ""
-                ],
-                "dref": "sim/cockpit/engine/inverter_on",
-                "indx": 1,
                 "name": "inverter2",
                 "title": "Inverter 2",
-                "type": "dataref"
+                "type": "undefined"
               }
             ],
             "name": "inverter"
@@ -2145,39 +1974,27 @@
           {
             "elements": [
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  ""
-                ],
-                "dref": "sim/cockpit2/electrical/RAT_generator_on",
                 "name": "extendrat",
                 "title": "Extend RAT",
-                "type": "dataref"
+                "type": "undefined"
+              },
+              {
+                "name": "ramairturbine",
+                "title": "RAT",
+                "type": "undefined"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "dref": "sim/cockpit2/electrical/air_driven_generator_on",
-                "name": "ramairturbine",
-                "title": "RAT",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  ""
-                ],
-                "dref": "",
+                "dref": "FJS/732/Elec/StbyPowerSwitch",
                 "name": "stbypower1",
                 "title": "Standby Power",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "standby"
@@ -2185,45 +2002,19 @@
           {
             "elements": [
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "set",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/electrical/inverter_on",
-                "indx": 0,
                 "name": "tru1",
                 "title": "Transformer Rectifier 1",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "set",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/electrical/inverter_on",
-                "indx": 1,
                 "name": "tru2",
                 "title": "Transformer Rectifier 2",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "set",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/electrical/cross_tie",
                 "name": "tru3",
                 "title": "TRU3 Essential",
-                "type": "dataref"
+                "type": "undefined"
               }
             ],
             "name": "trus"
@@ -2274,9 +2065,17 @@
                 "type": "undefined"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/FireProtect/FireTestSwitch",
                 "name": "engfiretest",
                 "title": "Engine fire test",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "enginefire"
@@ -2318,41 +2117,29 @@
             "elements": [
               {
                 "acts": [
+                  "on",
+                  "off",
+                  "tgl",
                   "set",
-                  "chk",
-                  "",
-                  "",
-                  ""
+                  "chk"
                 ],
-                "dref": "sim/cockpit2/engine/actuators/ignition_key",
-                "indx": 0,
+                "dref": "FJS/732/Eng/Engine1StartKnob",
                 "name": "engstartsel1",
                 "title": "Engine Start Selector 1",
                 "type": "dataref"
               },
               {
                 "acts": [
+                  "on",
+                  "off",
+                  "tgl",
                   "set",
-                  "chk",
-                  "",
-                  "",
-                  ""
+                  "chk"
                 ],
-                "dref": "sim/cockpit2/engine/actuators/ignition_key",
-                "indx": 1,
+                "dref": "FJS/732/Eng/Engine2StartKnob",
                 "name": "engstartsel2",
                 "title": "Engine Start Selector 2",
                 "type": "dataref"
-              },
-              {
-                "name": "engstartsel3",
-                "title": "Engine Start Selector 3",
-                "type": "undefined"
-              },
-              {
-                "name": "engstartsel4",
-                "title": "Engine Start Selector 4",
-                "type": "undefined"
               }
             ],
             "name": "engstartsel"
@@ -2362,14 +2149,12 @@
               {
                 "acts": [
                   "on",
-                  "on",
                   "off",
                   "tgl",
-                  "set"
+                  "set",
+                  "chk"
                 ],
-                "dref": "sim/cockpit2/engine/actuators/auto_ignite_on",
-                "fcheck": "get(\"sim/flightmodel2/engines/starter_is_running\",0)",
-                "indx": 0,
+                "dref": "FJS/732/fuel/FuelMixtureLever2",
                 "name": "engstrtlvr1",
                 "title": "Engine Start lever 1",
                 "type": "dataref"
@@ -2377,157 +2162,18 @@
               {
                 "acts": [
                   "on",
-                  "on",
                   "off",
                   "tgl",
-                  "set"
+                  "set",
+                  "chk"
                 ],
-                "dref": "sim/cockpit2/engine/actuators/auto_ignite_on",
-                "fcheck": "get(\"sim/flightmodel2/engines/starter_is_running\",1)",
-                "indx": 1,
+                "dref": "FJS/732/fuel/FuelMixtureLever1",
                 "name": "engstrtlvr2",
                 "title": "Engine Start lever 2",
                 "type": "dataref"
-              },
-              {
-                "acts": [
-                  " ",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "fcheck": "get(\"sim/flightmodel2/engines/starter_is_running\",2)",
-                "name": "engstrtlvr3",
-                "title": "Engine Start lever 3",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  " ",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "fcheck": "get(\"sim/flightmodel2/engines/starter_is_running\",3)",
-                "name": "engstrtlvr4",
-                "title": "Engine Start lever 4",
-                "type": "undefined"
               }
             ],
             "name": "engstrtlvrs"
-          },
-          {
-            "elements": [
-              {
-                "acts": [
-                  "set",
-                  "chk",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "sim/cockpit2/engine/actuators/ignition_key",
-                "indx": 0,
-                "name": "ignitionset1",
-                "title": "Ignition",
-                "type": "dataref"
-              }
-            ],
-            "name": "ignition"
-          },
-          {
-            "elements": [
-              {
-                "acts": [
-                  " ",
-                  " ",
-                  " ",
-                  " ",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/engine/actuators/mixture_ratio",
-                "indx": 0,
-                "name": "mixlever1",
-                "title": "Mixture lever 1",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  " ",
-                  " ",
-                  " ",
-                  " ",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/engine/actuators/mixture_ratio",
-                "indx": 1,
-                "name": "mixlever2",
-                "title": "Mixture lever 2",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  " ",
-                  " ",
-                  " ",
-                  " ",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/engine/actuators/mixture_ratio_all",
-                "name": "mixleversall",
-                "title": "mixture lever all",
-                "type": "dataref"
-              }
-            ],
-            "name": "mixturelevers"
-          },
-          {
-            "elements": [
-              {
-                "acts": [
-                  " ",
-                  " ",
-                  " ",
-                  " ",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/engine/actuators/prop_ratio",
-                "indx": 0,
-                "name": "proplever1",
-                "title": "Prop lever 1",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  " ",
-                  " ",
-                  " ",
-                  " ",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/engine/actuators/prop_ratio",
-                "indx": 1,
-                "name": "proplever2",
-                "title": "Prop lever 2",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  " ",
-                  " ",
-                  " ",
-                  " ",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/engine/actuators/prop_ratio_all",
-                "name": "propleversall",
-                "title": "Prop lever all",
-                "type": "dataref"
-              }
-            ],
-            "name": "proplevers"
           },
           {
             "elements": [
@@ -2547,7 +2193,7 @@
               },
               {
                 "acts": [
-                  " ",
+                  "chk",
                   " ",
                   " ",
                   " ",
@@ -2561,23 +2207,8 @@
               },
               {
                 "acts": [
-                  "set"
-                ],
-                "name": "thrustlever3",
-                "title": "Thrust lever 3",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "set"
-                ],
-                "name": "thrustlever4",
-                "title": "Thrust lever 4",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "chk"
+                  "chk",
+                  "tgl"
                 ],
                 "dref": "sim/cockpit2/engine/actuators/throttle_ratio_all",
                 "name": "thrustleverall",
@@ -2598,21 +2229,6 @@
                 "name": "fuelctrlsw1",
                 "title": "Fuel control switch 1",
                 "type": "undefined"
-              },
-              {
-                "name": "fuelctrlsw2",
-                "title": "Fuel control switch 2",
-                "type": "undefined"
-              },
-              {
-                "name": "fuelctrlsw3",
-                "title": "Fuel control switch 3",
-                "type": "undefined"
-              },
-              {
-                "name": "fuelctrlsw4",
-                "title": "Fuel control switch 4",
-                "type": "undefined"
               }
             ],
             "name": "fuelcontrolsws"
@@ -2624,10 +2240,10 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "set"
                 ],
-                "dref": "sim/cockpit/engine/fuel_pump_on",
-                "indx": 0,
+                "dref": "FJS/732/Fuel/FuelPumpL1Switch",
                 "name": "fuelpump1",
                 "title": "Fuel pump left 1",
                 "type": "dataref"
@@ -2637,49 +2253,65 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "set"
                 ],
-                "dref": "sim/cockpit/engine/fuel_pump_on",
-                "indx": 1,
+                "dref": "FJS/732/Fuel/FuelPumpL2Switch",
                 "name": "fuelpump2",
                 "title": "Fuel pump left 2",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "set"
                 ],
-                "dref": "sim/cockpit/engine/fuel_pump_on",
-                "indx": 2,
+                "dref": "FJS/732/Fuel/FuelPumpR1Switch",
                 "name": "fuelpump3",
                 "title": "Fuel pump right 1",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "set"
                 ],
-                "dref": "sim/cockpit/engine/fuel_pump_on",
-                "indx": 3,
+                "dref": "FJS/732/Fuel/FuelPumpR2Switch",
                 "name": "fuelpump4",
                 "title": "Fuel pump right 2",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/Fuel/FuelPumpC1Switch",
                 "name": "fuelpump5",
                 "title": "Fuel Pump 5",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/Fuel/FuelPumpC2Switch",
                 "name": "fuelpump6",
                 "title": "Fuel Pump 6",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "fuelpumps"
@@ -2691,19 +2323,13 @@
                   "on",
                   "off",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "cmdoff": "sim/fuel/auto_crossfeed_off",
-                "cmdon": "sim/fuel/auto_crossfeed_on_open",
-                "dref": "sim/cockpit2/fuel/auto_crossfeed",
+                "dref": "FJS/732/Fuel/FuelCrossFeedSelector",
                 "name": "fuelxfeed1",
                 "title": "Fuel Crossfeed 1",
-                "type": "onofftgl"
-              },
-              {
-                "name": "fuelxfeed2",
-                "title": "Fuel Crossfeed 2",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "fuelxfeeds"
@@ -2711,14 +2337,9 @@
           {
             "elements": [
               {
-                "acts": [
-                  "set",
-                  "chk"
-                ],
-                "dref": "sim/cockpit/engine/fuel_tank_selector",
                 "name": "tankselector",
                 "title": "Fuel Tank Selector",
-                "type": "dataref"
+                "type": "undefined"
               }
             ],
             "name": "tankselector"
@@ -2742,66 +2363,20 @@
             "elements": [
               {
                 "acts": [
-                  "on",
-                  " ",
-                  " ",
-                  " ",
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
                   ""
                 ],
                 "cmdon": "sim/flight_controls/brakes_1_auto",
-                "dref": "sim/cockpit2/switches/auto_brake_level",
-                "fcheck": "function (a) return a==3 end",
-                "fon": "function (a) if a~=3 then command_once(\"sim/flight_controls/brakes_1_auto\") end end",
-                "name": "autobrake1",
-                "title": "Autobrake LO",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "on",
-                  " ",
-                  " ",
-                  " ",
-                  ""
-                ],
-                "cmdon": "sim/flight_controls/brakes_2_auto",
-                "dref": "sim/cockpit2/switches/auto_brake_level",
-                "fcheck": "function (a) return a==4 end",
-                "fon": "function (a) if a~=4 then command_once(\"sim/flight_controls/brakes_2_auto\") end end",
-                "name": "autobrake2",
-                "title": "Autobrake MED",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "on",
-                  " ",
-                  " ",
-                  " ",
-                  ""
-                ],
-                "dref": "sim/cockpit2/switches/auto_brake_level",
-                "fcheck": "function (a) return a==1 end",
-                "fon": "function (a) if a~=1 then command_once(\"sim/flight_controls/brakes_off_auto\") end end",
-                "name": "autobrakeoff",
-                "title": "Autobrake OFF",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "on",
-                  " ",
-                  " ",
-                  " ",
-                  ""
-                ],
-                "cmdon": "sim/flight_controls/brakes_rto_auto",
-                "dref": "sim/cockpit2/switches/auto_brake_level",
-                "fcheck": "function (a) return a==0 end",
-                "fon": "function (a) if a~=0 then command_once(\"sim/flight_controls/brakes_rto_auto\") end end",
-                "name": "autobrakerto",
-                "title": "Autobrake RTO",
-                "type": "custom"
+                "dref": "FJS/732/FltControls/AutoBrakeKnob",
+                "incr": 1,
+                "max": 3,
+                "min": 0,
+                "name": "autobrake",
+                "title": "Autobrake switch",
+                "type": "dialdref"
               }
             ],
             "name": "autobrake"
@@ -2882,30 +2457,26 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  " "
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "sim/flight_controls/door_toggle_10",
-                "dref": "sim/cockpit2/switches/door_open",
-                "indx": 9,
+                "dref": "FJS/732/DoorSta/CargoDoorAft",
                 "name": "dooracargo",
                 "title": "Aft Cargo",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  " "
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "sim/flight_controls/door_toggle_9",
-                "dref": "sim/cockpit2/switches/door_open",
-                "indx": 8,
+                "dref": "FJS/732/DoorSta/CargoDoorFor",
                 "name": "doorfcargo",
                 "title": "Forward Cargo",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -2915,9 +2486,8 @@
                   "chk",
                   " "
                 ],
-                "cmdtgl": "sim/flight_controls/door_toggle_1",
-                "dref": "sim/cockpit2/switches/door_open",
-                "indx": 0,
+                "cmdtgl": "FJS/732/Doors/Door1",
+                "dref": "FJS/732/DoorSta/Door1",
                 "name": "doorl1",
                 "title": "Door Forward Left",
                 "type": "onofftgl"
@@ -2930,9 +2500,8 @@
                   "chk",
                   " "
                 ],
-                "cmdtgl": "sim/flight_controls/door_toggle_7",
-                "dref": "sim/cockpit2/switches/door_open",
-                "indx": 6,
+                "cmdtgl": "FJS/732/Doors/Door2",
+                "dref": "FJS/732/DoorSta/Door2",
                 "name": "doorl2",
                 "title": "Door Aft Left",
                 "type": "onofftgl"
@@ -2960,9 +2529,8 @@
                   "chk",
                   " "
                 ],
-                "cmdtgl": "sim/flight_controls/door_toggle_8",
-                "dref": "sim/cockpit2/switches/door_open",
-                "indx": 7,
+                "cmdtgl": "FJS/732/Doors/Door3",
+                "dref": "FJS/732/DoorSta/Door3",
                 "name": "doorr2",
                 "title": "Door Aft Right",
                 "type": "onofftgl"
@@ -2977,28 +2545,18 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "name": "airstair1",
-                "title": "Stairs",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  ""
-                ],
-                "cmdoff": "sim/flight_controls/door_close_12",
-                "cmdon": "sim/flight_controls/door_open_12",
-                "cmdtgl": "sim/flight_controls/door_toggle_12",
-                "dref": "laminar/A333/annun/cockpit_door_open",
+                "dref": "FJS/732/cabin/CockpitDoorTrig",
                 "name": "cockpitdoor",
                 "title": "Cockpit Door",
-                "type": "onofftgl"
+                "type": "dataref"
+              },
+              {
+                "name": "doorlock",
+                "title": "Door Lock",
+                "type": "undefined"
               }
             ],
             "name": "internaldoors"
@@ -3030,7 +2588,7 @@
                   "chk",
                   "set"
                 ],
-                "dref": "sim/cockpit2/switches/no_smoking",
+                "dref": "FJS/732/lights/NoSmokingSwitch",
                 "name": "nosmoking",
                 "title": "No Smoking",
                 "type": "dataref"
@@ -3043,7 +2601,7 @@
                   "chk",
                   "set"
                 ],
-                "dref": "sim/cockpit/switches/fasten_seat_belts",
+                "dref": "FJS/732/lights/FastenBeltsSwitch",
                 "name": "seatbelts",
                 "title": "Seatbelt Signs",
                 "type": "dataref"
@@ -3133,17 +2691,9 @@
           {
             "elements": [
               {
-                "acts": [
-                  "chk",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "dref": "laminar/A333/buttons/ecam/to_config_pos",
                 "name": "toconfig",
                 "title": "T.O Config",
-                "type": "dataref"
+                "type": "undefined"
               }
             ],
             "name": "toconfig"
@@ -3158,8 +2708,7 @@
                   " ",
                   " "
                 ],
-                "dref": "laminar/A333/annun/master_caution",
-                "fcheck": "function (a) return a>0 end",
+                "dref": "FJS/732/Annun/MasterCautionLITL",
                 "name": "_mastercaution",
                 "title": "Master Caution",
                 "type": "dataref"
@@ -3172,10 +2721,9 @@
                   " ",
                   " "
                 ],
-                "dref": "laminar/A333/annun/master_warning",
-                "fcheck": "function (a) return a>0 end",
+                "dref": "sim/cockpit2/annunciators/master_warning",
                 "name": "_masterwarn",
-                "title": "<title>",
+                "title": "Master Warning",
                 "type": "dataref"
               }
             ],
@@ -3190,23 +2738,9 @@
                   "set",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/switches/wiper_speed_switch",
-                "indx": 0,
+                "dref": "FJS/732/AntiIce/WiperKnob",
                 "name": "wiper1",
                 "title": "Left Windshield Wiper",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "set",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/switches/wiper_speed_switch",
-                "indx": 1,
-                "name": "wiper2",
-                "title": "Right Windshield Wiper",
                 "type": "dataref"
               }
             ],
@@ -3224,9 +2758,10 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "tgl"
                 ],
-                "dref": "sim/cockpit2/switches/electric_hydraulic_pump_on",
+                "dref": "FJS/732/FltControls/Elec1HydPumpSwitch",
                 "name": "elechydpump1",
                 "title": "Electric Hydraulic Pump 1",
                 "type": "dataref"
@@ -3236,22 +2771,13 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "tgl"
                 ],
-                "dref": "sim/cockpit2/switches/electric_hydraulic_pump2_on",
+                "dref": "FJS/732/FltControls/Elec2HydPumpSwitch",
                 "name": "elechydpump2",
                 "title": "Electric Hydraulic Pump 2",
                 "type": "dataref"
-              },
-              {
-                "name": "elechydpump3",
-                "title": "Electric Hydraulic Pump 3",
-                "type": "undefined"
-              },
-              {
-                "name": "elechydpump4",
-                "title": "Electric Hydraulic Pump 4",
-                "type": "undefined"
               }
             ],
             "name": "elechydpumps"
@@ -3263,9 +2789,10 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "tgl"
                 ],
-                "dref": "sim/cockpit2/hydraulics/actuators/engine_pump",
+                "dref": "FJS/732/FltControls/Eng1HydPumpSwitch",
                 "name": "enghydpump1",
                 "title": "Engine Hydraulic Pump 1",
                 "type": "dataref"
@@ -3275,35 +2802,12 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "tgl"
                 ],
-                "dref": "sim/cockpit2/hydraulics/actuators/engine_pumpA",
+                "dref": "FJS/732/FltControls/Eng2HydPumpSwitch",
                 "name": "enghydpump2",
                 "title": "Engine Hydraulic Pump 2",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/hydraulics/actuators/engine_pumpB",
-                "name": "enghydpump3",
-                "title": "Engine Hydraulic Pump 3",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/hydraulics/actuators/engine_pumpC",
-                "name": "enghydpump4",
-                "title": "Engine Hydraulic Pump 4",
                 "type": "dataref"
               }
             ],
@@ -3328,18 +2832,20 @@
             "elements": [
               {
                 "acts": [
-                  "chk"
+                  "chk",
+                  "tgl"
                 ],
-                "fcheck": "function (a) return get(\"sim/flightmodel2/gear/deploy_ratio\") == 1 end",
+                "dref": "FJS/732/Annun/SysAnnunLIT_118",
                 "name": "_gearlightsgreen",
                 "title": "Gear lights green",
                 "type": "dataref"
               },
               {
                 "acts": [
-                  "chk"
+                  "chk",
+                  "tgl"
                 ],
-                "fcheck": "function (a) return get(\"sim/flightmodel2/gear/deploy_ratio\") > 0 and get(\"sim/flightmodel2/gear/deploy_ratio\") < 1 end",
+                "dref": "FJS/732/Annun/SysAnnunLIT_117",
                 "name": "_gearlightsred",
                 "title": "Gear lights red",
                 "type": "dataref"
@@ -3374,55 +2880,67 @@
             "elements": [
               {
                 "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
                 ],
-                "dref": "sim/cockpit2/switches/landing_lights_switch",
-                "indx": 0,
+                "dref": "FJS/732/lights/OutBoundLLightSwitch1",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
                 "name": "landlight1",
                 "title": "Landing light 1",
-                "type": "dataref"
+                "type": "dialdref"
               },
               {
                 "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
                 ],
-                "dref": "sim/cockpit2/switches/landing_lights_switch",
-                "indx": 1,
+                "dref": "FJS/732/lights/OutBoundLLightSwitch2",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
                 "name": "landlight2",
                 "title": "Landing Light 2",
-                "type": "dataref"
+                "type": "dialdref"
               },
               {
                 "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
                 ],
-                "dref": "sim/cockpit2/switches/landing_lights_switch",
-                "indx": 2,
+                "dref": "FJS/732/lights/InBoundLLightSwitch1",
+                "incr": 1,
+                "max": 1,
+                "min": 0,
                 "name": "landlight3",
                 "title": "Landing Light 3",
-                "type": "dataref"
+                "type": "dialdref"
               },
               {
                 "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
                 ],
-                "dref": "sim/cockpit2/switches/landing_lights_switch",
-                "indx": 3,
+                "dref": "FJS/732/lights/InBoundLLightSwitch2",
+                "incr": 1,
+                "max": 1,
+                "min": 0,
                 "name": "landlight4",
                 "title": "Landing Light 4",
-                "type": "dataref"
+                "type": "dialdref"
               }
             ],
             "name": "alllandlights"
@@ -3434,22 +2952,13 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "set"
                 ],
-                "dref": "sim/cockpit/electrical/beacon_lights_on",
+                "dref": "FJS/732/lights/AntiColLightSwitch",
                 "name": "beacon1",
                 "title": "Beacon light 1",
                 "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl"
-                ],
-                "name": "beacon2",
-                "title": "Beacon light 2",
-                "type": "undefined"
               }
             ],
             "name": "beacons"
@@ -3461,10 +2970,10 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "set"
                 ],
-                "dref": "sim/cockpit2/switches/generic_lights_switch",
-                "indx": 10,
+                "dref": "FJS/732/lights/LogoLightSwitch",
                 "name": "logolight",
                 "title": "Logo light",
                 "type": "dataref"
@@ -3476,15 +2985,19 @@
             "elements": [
               {
                 "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
                 ],
-                "dref": "sim/cockpit2/switches/navigation_lights_on",
+                "dref": "FJS/732/lights/PositionLightSwitch",
+                "incr": 1,
+                "max": 1,
+                "min": -1,
                 "name": "positionlight",
                 "title": "Position light",
-                "type": "dataref"
+                "type": "dialdref"
               }
             ],
             "name": "positionlights"
@@ -3496,10 +3009,10 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "set"
                 ],
-                "dref": "sim/cockpit2/switches/generic_lights_switch",
-                "indx": 1,
+                "dref": "FJS/732/lights/RunwayTurnoffSwitch1",
                 "name": "rwylight1",
                 "title": "Runway light left",
                 "type": "dataref"
@@ -3509,10 +3022,10 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "set"
                 ],
-                "dref": "sim/cockpit2/switches/generic_lights_switch",
-                "indx": 2,
+                "dref": "FJS/732/lights/RunwayTurnoffSwitch2",
                 "name": "rwylight2",
                 "title": "Runway light right",
                 "type": "dataref"
@@ -3527,9 +3040,10 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "set"
                 ],
-                "dref": "sim/cockpit/electrical/strobe_lights_on",
+                "dref": "FJS/732/lights/StrobeLightSwitch",
                 "name": "strobelight",
                 "title": "Strobe light",
                 "type": "dataref"
@@ -3544,9 +3058,10 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "set"
                 ],
-                "dref": "sim/cockpit/electrical/taxi_light_on",
+                "dref": "FJS/732/lights/TaxiLightSwitch",
                 "name": "taxilight1",
                 "title": "Taxi light",
                 "type": "dataref"
@@ -3557,17 +3072,9 @@
           {
             "elements": [
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/switches/generic_lights_switch",
-                "indx": 11,
                 "name": "wheellight",
                 "title": "Wheel light",
-                "type": "dataref"
+                "type": "undefined"
               }
             ],
             "name": "wheellights"
@@ -3579,10 +3086,10 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "set"
                 ],
-                "dref": "sim/cockpit2/switches/generic_lights_switch",
-                "indx": 3,
+                "dref": "FJS/732/lights/WingLightSwitch",
                 "name": "winglight",
                 "title": "Wing light",
                 "type": "dataref"
@@ -3605,8 +3112,7 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit/electrical/cockpit_lights",
-                "indx": 0,
+                "dref": "FJS/732/lights/DomeWhiteSwitch",
                 "name": "domelight",
                 "title": "Dome light",
                 "type": "dataref"
@@ -3617,9 +3123,17 @@
           {
             "elements": [
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/lights/EmerExitSwitch",
                 "name": "emerlight",
                 "title": "EMER light",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "emerlights"
@@ -3635,7 +3149,7 @@
                   "chk"
                 ],
                 "dref": "sim/cockpit2/switches/instrument_brightness_ratio",
-                "indx": 0,
+                "indx": 1,
                 "name": "instrlight1",
                 "title": "Instrument light 1",
                 "type": "dataref"
@@ -3649,7 +3163,7 @@
                   "chk"
                 ],
                 "dref": "sim/cockpit2/switches/instrument_brightness_ratio",
-                "indx": 1,
+                "indx": 2,
                 "name": "instrlight2",
                 "title": "Instrument light 2",
                 "type": "dataref"
@@ -3663,7 +3177,7 @@
                   "chk"
                 ],
                 "dref": "sim/cockpit2/switches/instrument_brightness_ratio",
-                "indx": 2,
+                "indx": 3,
                 "name": "instrlight3",
                 "title": "Instrument light 3",
                 "type": "dataref"
@@ -3677,7 +3191,7 @@
                   "chk"
                 ],
                 "dref": "sim/cockpit2/switches/instrument_brightness_ratio",
-                "indx": 3,
+                "indx": 4,
                 "name": "instrlight4",
                 "title": "Instrument light 4",
                 "type": "dataref"
@@ -3691,7 +3205,7 @@
                   "chk"
                 ],
                 "dref": "sim/cockpit2/switches/instrument_brightness_ratio",
-                "indx": 4,
+                "indx": 5,
                 "name": "instrlight5",
                 "title": "Instrument light 5",
                 "type": "dataref"
@@ -3705,9 +3219,37 @@
                   "chk"
                 ],
                 "dref": "sim/cockpit2/switches/instrument_brightness_ratio",
-                "indx": 0,
+                "indx": 6,
                 "name": "instrlight6",
                 "title": "Instrument light 6",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/instrument_brightness_ratio",
+                "indx": 7,
+                "name": "instrlight7",
+                "title": "Instrument Light 7",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/instrument_brightness_ratio",
+                "indx": 8,
+                "name": "instrlight8",
+                "title": "Instrument Light 8",
                 "type": "dataref"
               }
             ],
@@ -3716,60 +3258,24 @@
           {
             "elements": [
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "set",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/switches/panel_brightness_ratio",
-                "indx": 0,
                 "name": "panellight1",
                 "title": "Panel light 1",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "set",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/switches/panel_brightness_ratio",
-                "indx": 1,
                 "name": "panellight2",
                 "title": "Panel light 2",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "set",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/switches/panel_brightness_ratio",
-                "indx": 2,
                 "name": "panellight3",
                 "title": "Panel light 3",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
-                "acts": [
-                  "on",
-                  "off",
-                  "set",
-                  "tgl",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/switches/panel_brightness_ratio",
-                "indx": 3,
                 "name": "panellight4",
                 "title": "Panel light 4",
-                "type": "dataref"
+                "type": "undefined"
               }
             ],
             "name": "panellights"
@@ -3817,13 +3323,64 @@
               },
               {
                 "acts": [
+                  "up",
+                  "dn",
                   "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
-                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
+                "dref": "FJS/732/Radios/TransponderModeKnob",
+                "incr": 1,
+                "max": 5,
+                "min": 0,
                 "name": "xpdrmode",
                 "title": "XPDR Mode",
-                "type": "dataref"
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "FJS/732/Radios/TransponderModeKnob",
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) return 1 end",
+                "name": "xpdrmodeoff",
+                "title": "XPDR Mode OFF",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "FJS/732/Radios/TransponderModeKnob",
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) return 1 end",
+                "name": "xpdrmodestby",
+                "title": "XPDR Mode STBY",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "FJS/732/Radios/TransponderModeKnob",
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) return 5 end",
+                "name": "xpdrmodetara",
+                "title": "XPDR Mode TARA",
+                "type": "custom"
               }
             ],
             "name": "transponder"
@@ -3832,10 +3389,230 @@
       },
       {
         "name": "xtensions",
-        "systems": {}
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "FJS/732/Autopilot/AP_PitchSelect",
+                "dref": "FJS/732/Autopilot/APPitchEngageSwitch",
+                "name": "apengagepitch",
+                "title": "AP Pitch Engage",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "FJS/732/Autopilot/AP_RollSelect",
+                "dref": "FJS/732/Autopilot/APRollEngageSwitch",
+                "name": "apengageroll",
+                "title": "AP Roll Engage",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "",
+                  ""
+                ],
+                "cmddn": "FJS/732/Autopilot/AP_HDG_DOWN",
+                "cmdup": "FJS/732/Autopilot/AP_HDG_UP",
+                "dref": "FJS/732/Autopilot/APHeadingSwitch",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "aphdgswitch",
+                "title": "AP Heading Switch",
+                "type": "dialcmd"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "FJS/732/Autopilot/NavSelectLeft",
+                "cmdup": "FJS/732/Autopilot/NavSelectRight",
+                "dref": "FJS/732/Autopilot/APModeSelector",
+                "incr": 1,
+                "max": 3,
+                "min": 0,
+                "name": "apmodeselector",
+                "title": "AP Mode Selector",
+                "type": "dialcmd"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "FJS/732/Autopilot/PitchSelectLeft",
+                "cmdup": "FJS/732/Autopilot/PitchSelectRight",
+                "dref": "FJS/732/Autopilot/APPitchSelector",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "appitchselect",
+                "title": "AP Pitch Select",
+                "type": "dialcmd"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "FJS/732/Autopilot/FD_SelectLeft",
+                "cmdup": "FJS/732/Autopilot/FD_SelectRight",
+                "dref": "FJS/732/Autopilot/FDModeSelector",
+                "incr": 1,
+                "max": 5,
+                "min": 0,
+                "name": "fdmodeselector",
+                "title": "FD Mode Selector",
+                "type": "dialcmd"
+              }
+            ],
+            "name": "autopilot"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/num/FlipPo_01",
+                "name": "batterycover",
+                "title": "Battery Cover",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/num/FlipMo_11",
+                "name": "dcbuscover",
+                "title": "DC Bus Transfer Cover",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/num/FlipPo_10",
+                "name": "emerexitcover",
+                "title": "EMER Exit Cover",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/num/FlipMo_08",
+                "name": "gendrive1cover",
+                "title": "Generator Drive Cover 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/num/FlipMo_09",
+                "name": "gendrive2cover",
+                "title": "Generator Drive Cover 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/num/FlipPo_07",
+                "name": "stbypwrcover",
+                "title": "STBY Power Cover",
+                "type": "dataref"
+              }
+            ],
+            "name": "covers"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/Elec/ACmeterKnob",
+                "name": "acmeterselector",
+                "title": "AC Meter Selector",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "FJS/732/Elec/DCmeterKnob",
+                "name": "dcmeterselector",
+                "title": "DC Power Meter",
+                "type": "dataref"
+              }
+            ],
+            "name": "electric"
+          }
+        ]
       }
     ]
   },
-  "icao": "DFLT",
-  "title": "DEFAULT AIRCRAFT"
+  "icao": "B732",
+  "title": "FLYJSIM B732"
 }

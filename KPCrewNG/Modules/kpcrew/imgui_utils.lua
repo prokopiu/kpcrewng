@@ -12,12 +12,14 @@ end
 -- ===== color definitions
 color_black				= 0xFF000000
 color_red 				= 0xFF0000FF
-color_green 			= 0xFF558817
+color_green 			= 0xFF85B847
+-- color_green 			= 0xFF558817
 color_bright_green 		= 0xFF00FF00
 color_dark_green 		= 0xFF002f00
 color_white 			= 0xFFFFFFFF
 color_light_blue 		= 0xFFFFFF00
 color_orange 			= 0xFF003FBF
+color_bright_orange		= 0xFF1b9af8
 color_grey 				= 0xFFC0C0C0
 color_dark_grey 		= 0xFF606060
 color_left_display 		= 0xFFA0AFFF
@@ -96,7 +98,8 @@ end
 -- @param int width - width of button
 -- @param int height - height of button
 -- @param function() action - activity to be triggered as function code
-function ng_imgui_in_button(push_id, btntext, width, height, action)
+-- @param string tooltip - optional tooltip
+function ng_imgui_in_button(push_id, btntext, width, height, action, tooltip)
 	if FLYWITHLUA then -- switch depending on execution environment
 		imgui.PushID(push_id)
 			if imgui.Button(btntext, width, height) then action() end
@@ -273,17 +276,20 @@ end
 -- @param int input - current selection
 -- @param function() output - code to return the new selection
 -- @param int width - width of drop-down
-function ng_imgui_in_combolist(push_id, options, input, output, width)
+function ng_imgui_in_combolist(push_id, options, input, output, width, color)
 	imgui.PushID(push_id)
 		if width then imgui.SetNextItemWidth(width) end
-		if imgui.BeginCombo("", options[input + 1]) then
-			for i = 2, #options do
-				if imgui.Selectable(options[i], input + 1 == i) then
-					output(i - 1)
+		if color == nil then color = color_white end
+		imgui.PushStyleColor(imgui.constant.Col.Text, color)
+			if imgui.BeginCombo("", options[input + 1]) then
+				for i = 2, #options do
+					if imgui.Selectable(options[i], input + 1 == i) then
+						output(i - 1)
+					end
 				end
+			imgui.EndCombo()
 			end
-		imgui.EndCombo()
-		end				
+		imgui.PopStyleColor()
 	imgui.PopID()
 end
 

@@ -180,7 +180,7 @@ function ngPreferenceSet:render(type)
 			imgui.SetNextItemOpen(true)
 			if imgui.TreeNode(self.title) then
 				for _, group in ipairs(self.groups) do
-					imgui.SetNextItemOpen(true)
+					-- imgui.SetNextItemOpen(true)
 					group:render(type)
 				end		
 			imgui.TreePop()

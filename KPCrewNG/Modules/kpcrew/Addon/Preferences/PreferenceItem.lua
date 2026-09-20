@@ -136,15 +136,15 @@ function ngPreferenceItem:render(type)
 			local splitTitle = ng_split(self:getTitle(),"|")
 			if type == "tree" then
 				if self.type == ng_type_int then
-					ng_imgui_in_lintfield(self:getName(), 10+string.len(self:getValue())*7, color_orange, tonumber(splitTitle[2]), splitTitle[1], color_white, 
+					ng_imgui_in_lintfield(self:getName(), 10+string.len(self:getValue())*7, color_white, tonumber(splitTitle[2]), splitTitle[1], color_white, 
 					tonumber(self:getValue()), function (textin) self:setValue(textin) end, 200)
 				end
 				if self.type == ng_type_float then
-					ng_imgui_in_lfloatfield(self:getName(), 25+string.len(self:getValue())*7, color_orange, tonumber(splitTitle[2]), splitTitle[3], splitTitle[1], color_white, 
+					ng_imgui_in_lfloatfield(self:getName(), 25+string.len(self:getValue())*7, color_white, tonumber(splitTitle[2]), splitTitle[3], splitTitle[1], color_white, 
 					tonumber(self:getValue()), function (textin) self:setValue(textin) end, 200)
 				end
 				if self.type == ng_type_text then
-					ng_imgui_in_ltfield(self:getName(), 10+string.len(self:getValue())*7, color_orange, 255, splitTitle[1], color_white, 
+					ng_imgui_in_ltfield(self:getName(), 10+string.len(self:getValue())*7, color_white, 255, splitTitle[1], color_white, 
 					self:getValue(), function (textin) self:setValue(textin) end, 200)
 				end
 				if self.type == ng_type_divider then
