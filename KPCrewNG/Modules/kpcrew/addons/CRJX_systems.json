@@ -1,0 +1,3749 @@
+{
+  "addonsystems": {
+    "categories": [
+      {
+        "name": "aice",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "cmdon": "",
+                "dref": "crj_series/anti_ice/cowl_lh_animation",
+                "name": "engaice1",
+                "title": "Engine Antiice 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/anti_ice/cowl_rh_animation",
+                "name": "engaice2",
+                "title": "Engine Antiice 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "engaice"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/anti_ice/probes_lh_animation",
+                "name": "probeheat1",
+                "title": "Probe Heat 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/anti_ice/probes_rh_animation",
+                "name": "probeheat2",
+                "title": "Probe Heat 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "probeheat"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/anti_ice/wshld_lh_switch_down",
+                "cmdon": "crj_series/anti_ice/wshld_lh_switch_up",
+                "dref": "crj_series/anti_ice/wshld_lh_switch_animation",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "windowheat1",
+                "title": "Window Heat 1",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/anti_ice/wshld_rh_switch_down",
+                "cmdon": "crj_series/anti_ice/wshld_rh_switch_up",
+                "dref": "crj_series/anti_ice/wshld_rh_switch_animation",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "windowheat2",
+                "title": "Window Heat 2",
+                "type": "dialdref"
+              }
+            ],
+            "name": "windowheat"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/anti_ice/wing_animation",
+                "name": "wingaice1",
+                "title": "Wing Anti Ice 1",
+                "type": "dataref"
+              }
+            ],
+            "name": "wingaice"
+          }
+        ]
+      },
+      {
+        "name": "air",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "crj_series/bleed_air/bleed_source_animation",
+                "foff": "function (a) set(\"crj_series/bleed_air/bleed_source_animation\",1) end",
+                "fon": "function (a) set(\"crj_series/bleed_air/bleed_source_animation\",3) end",
+                "ftrans": "function (a) if a==3 then return 1 else return 0 end end",
+                "name": "apubleed1",
+                "title": "APU  Bleed 1",
+                "type": "undefined"
+              }
+            ],
+            "name": "apubleeds"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "sim/cockpit2/bleedair/actuators/engine_bleed_sov",
+                "indx": 0,
+                "name": "bleed1",
+                "title": "Engine Bleed 1",
+                "type": "undefined"
+              }
+            ],
+            "name": "bleeds"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "crj_series/air_cond/aft_cargo_air_up",
+                "cmdup": "crj_series/air_cond/aft_cargo_air_dn",
+                "dref": "crj_series/air_cond/aft_cargo_air_animation",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "cargoheat1",
+                "title": "Cargo heat Switch 1",
+                "type": "dialcmd"
+              }
+            ],
+            "name": "cargoheat"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                "fcheck": "true",
+                "name": "equipcool1",
+                "title": "Equipment Cooling switch",
+                "type": "undefined"
+              }
+            ],
+            "name": "equipcooling"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                "name": "gasperfan1",
+                "title": "Gasper Fan 1",
+                "type": "undefined"
+              }
+            ],
+            "name": "gasperfans"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/bleed_air/isol_switch_down",
+                "cmdon": "crj_series/bleed_air/isol_switch_up",
+                "dref": "crj_series/bleed_air/isol_switch_animation",
+                "ftrans": "function (a) return 1-a end",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "isovalve1",
+                "title": "Isolation Valve 1",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "isovalves"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/oxygen/actuators/demand_flow_setting",
+                "name": "oxygen1",
+                "title": "Oxygen Master 1",
+                "type": "undefined"
+              }
+            ],
+            "name": "oxygen"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/air_cond/l_pack",
+                "dref": "sim/cockpit2/bleedair/actuators/pack_left",
+                "name": "pack1",
+                "title": "Pack 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/air_cond/r_pack",
+                "dref": "sim/cockpit2/bleedair/actuators/pack_right",
+                "name": "pack2",
+                "title": "Pack 2",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "packs"
+          },
+          {
+            "elements": [
+              {
+                "acts": {},
+                "name": "flightalt",
+                "title": "Flight Altitude",
+                "type": "undefined"
+              },
+              {
+                "name": "fltgndswitch",
+                "title": "Boeing FLT GND Switch",
+                "type": "undefined"
+              },
+              {
+                "acts": {},
+                "name": "landalt",
+                "title": "Landing Altitude",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/cabin_press/press_cont",
+                "dref": "crj_series/cabin_press/press_cont_man_lit",
+                "name": "pressuremode",
+                "title": "Pressurization mode selector",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "pressurization"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/air_cond/recirc_fan_up",
+                "cmdon": "crj_series/air_cond/recirc_fan_down",
+                "dref": "crj_series/air_cond/recirc_fan_animation",
+                "name": "recircfan1",
+                "title": "Recirc Fan 1",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "recircfans"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/air_cond/ckpt_temp_animation",
+                "name": "tempcontrol1",
+                "title": "Temp Control 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/air_cond/cabin_temp_animation",
+                "name": "tempcontrol2",
+                "title": "Temp Control 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "tempcontrols"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                "name": "trimair1",
+                "title": "Trim Air Switch 1",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                "name": "trimair2",
+                "title": "Trim Air Switch 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "trimair"
+          }
+        ]
+      },
+      {
+        "name": "autopilot",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": {},
+                "dref": "",
+                "fcheck": "true",
+                "name": "adiru1",
+                "title": "IRS Unit 1",
+                "type": "undefined"
+              },
+              {
+                "acts": {},
+                "dref": "",
+                "fcheck": "true",
+                "name": "adiru2",
+                "title": "IRS Unit 2",
+                "type": "undefined"
+              },
+              {
+                "acts": {},
+                "dref": "",
+                "fcheck": "true",
+                "name": "adiru3",
+                "title": "IRS Unit 3",
+                "type": "undefined"
+              }
+            ],
+            "name": "adirus"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/servos_on",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_ap1state",
+                "title": "AP1 state",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/servos2_on",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_ap2state",
+                "title": "AP2 state",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "sim/autopilot/servos_toggle",
+                "dref": "sim/cockpit2/autopilot/servos_on",
+                "name": "ap1",
+                "title": "AP 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "sim/autopilot/servos2_toggle",
+                "dref": "sim/cockpit2/autopilot/servos2_on",
+                "name": "ap2",
+                "title": "AP 2",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "sim/autopilot/servos3_toggle",
+                "dref": "sim/cockpit2/autopilot/servos3_on",
+                "name": "ap3",
+                "title": "AP 3",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl"
+                ],
+                "cmdtgl": "sim/autopilot/disconnect",
+                "dref": "sim/cockpit2/datarefs/autopilot_disconnect",
+                "name": "yokedisc",
+                "title": "Yoke disc",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "autopilots"
+          },
+          {
+            "elements": [
+              {
+                "name": "athrclbmode",
+                "title": "Autothrust Climb mode",
+                "type": "undefined"
+              },
+              {
+                "name": "athrconmode",
+                "title": "Autothrust CONtinous power mode",
+                "type": "undefined"
+              },
+              {
+                "name": "athrcrzmode",
+                "title": "Autothrust Cruise Mode",
+                "type": "undefined"
+              },
+              {
+                "name": "athrtogamode",
+                "title": "TOGA Mode button",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "sim/autopilot/autothrottle_toggle",
+                "dref": "sim/cockpit2/autopilot/autothrottle_enabled",
+                "name": "autothrottle",
+                "title": "Autothrottle",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "autothrust"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "sim/cockpit2/autopilot/flight_director_mode",
+                "name": "flightdir1",
+                "title": "FD 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/autopilot/flight_director2_mode",
+                "name": "flightdir2",
+                "title": "FD 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "flightdirs"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/altitude_hold_status",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_alt",
+                "title": "ALT mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/approach_status",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_appr",
+                "title": "APPR annunciator",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/heading_mode",
+                "fcheck": "function (a) return a==1 end",
+                "name": "_hdg",
+                "title": "HDG mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/vnav_speed_window_open",
+                "fcheck": "function (a) return a==1 end",
+                "name": "_ias",
+                "title": "IAS mode",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/gpss_status",
+                "fcheck": "function (a) return a==1 end",
+                "name": "_lnav",
+                "title": "LNAV mode",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/annun/autopilot/loc_mode",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_loc",
+                "title": "LOC mode annunciator",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/vnav_speed_window_open",
+                "fcheck": "function (a) return a==1 end",
+                "name": "_n1",
+                "title": "N1 mode",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/autopilot/vnav_speed_window_open",
+                "fcheck": "function (a) return a==0 end",
+                "name": "_vnav",
+                "title": "VNAV mode",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "laminar/A333/autopilot/vvi_fpa_window_open",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_vsp",
+                "title": "VSP mode",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "sim/autopilot/altitude_hold",
+                "dref": "sim/cockpit2/autopilot/altitude_hold_status",
+                "name": "althold",
+                "title": "Altitude Hold",
+                "type": "onofftgl"
+              },
+              {
+                "name": "apdisengage",
+                "title": "A/P Disengage",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "sim/autopilot/approach",
+                "dref": "sim/cockpit2/autopilot/approach_status",
+                "name": "approach",
+                "title": "Approach mode",
+                "type": "onofftgl"
+              },
+              {
+                "name": "bankanglesel",
+                "title": "Bank Angle Selector",
+                "type": "undefined"
+              },
+              {
+                "name": "flch",
+                "title": "Level Change",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/autopilot/heading_mode",
+                "name": "hdghold",
+                "title": "Heading Hold",
+                "type": "dataref"
+              },
+              {
+                "name": "hdgtrk",
+                "title": "HDG Track Switch",
+                "type": "undefined"
+              },
+              {
+                "name": "iasmach",
+                "title": "IAR Mach Switch",
+                "type": "undefined"
+              },
+              {
+                "name": "lnavmode",
+                "title": "VNAV",
+                "type": "undefined"
+              },
+              {
+                "name": "n1mode",
+                "title": "VNAV",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "sim/autopilot/NAV",
+                "dref": "sim/cockpit2/autopilot/nav_status",
+                "fcheck": "function (a) return true end",
+                "name": "navhold",
+                "title": "Nav Hold",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "set",
+                  "tgl",
+                  "chk",
+                  " ",
+                  ""
+                ],
+                "dref": "sim/cockpit2/autopilot/vnav_speed_window_open",
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) if a == 0 then command_once(\"laminar/A333/autopilot/speed_knob_pull\") else command_once(\"laminar/A333/autopilot/speed_knob_push\") end end",
+                "ftgl": "function (a) if a == 0 then command_once(\"laminar/A333/autopilot/speed_knob_pull\") else command_once(\"laminar/A333/autopilot/speed_knob_push\") end end",
+                "name": "spdmode",
+                "title": "SPD mode",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "sim/autopilot/take_off_go_arounds",
+                "dref": "sim/cockpit2/autopilot/TOGA_status",
+                "name": "toga",
+                "title": "TOGO Btn",
+                "type": "onofftgl"
+              },
+              {
+                "name": "vnavmode",
+                "title": "VNAV",
+                "type": "undefined"
+              },
+              {
+                "name": "vsfpa",
+                "title": "VS FPA Switch",
+                "type": "undefined"
+              },
+              {
+                "acts": {},
+                "fcheck": "true",
+                "name": "vspmode",
+                "title": "Vertical Speed mode",
+                "type": "undefined"
+              }
+            ],
+            "name": "modes"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/autopilot/altitude_down",
+                "cmdup": "sim/autopilot/altitude_up",
+                "dref": "sim/cockpit2/autopilot/altitude_dial_ft",
+                "incr": 100,
+                "max": 99999,
+                "min": 0,
+                "name": "altsel",
+                "title": "A/P Altitude",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/radios/obs_HSI_down",
+                "cmdup": "sim/radios/obs_HSI_up",
+                "dref": "sim/cockpit2/radios/actuators/nav1_obs_deg_mag_pilot",
+                "incr": 1,
+                "max": 361,
+                "min": -1,
+                "name": "crs1",
+                "title": "Course 1",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/radios/copilot_obs_HSI_down",
+                "cmdup": "sim/radios/copilot_obs_HSI_up",
+                "dref": "sim/cockpit2/radios/actuators/nav2_obs_deg_mag_pilot",
+                "incr": 1,
+                "max": 361,
+                "min": -1,
+                "name": "crs2",
+                "title": "Course 2",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/autopilot/heading_down",
+                "cmdup": "sim/autopilot/heading_up",
+                "dref": "sim/cockpit2/autopilot/heading_dial_deg_mag_pilot",
+                "incr": 1,
+                "max": 360,
+                "min": -1,
+                "name": "hdgsel",
+                "title": "A/P Heading",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/autopilot/airspeed_down",
+                "cmdup": "sim/autopilot/airspeed_up",
+                "dref": "sim/cockpit2/autopilot/airspeed_dial_kts",
+                "incr": 1,
+                "max": 999,
+                "min": 0,
+                "name": "speedsel",
+                "title": "A/P Speed",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/autopilot/vertical_speed_down",
+                "cmdup": "sim/autopilot/vertical_speed_up",
+                "dref": "sim/cockpit2/autopilot/vvi_dial_fpm",
+                "incr": 1,
+                "max": 7900,
+                "min": -7900,
+                "name": "vspsel",
+                "title": "A/P VSP",
+                "type": "dialdref"
+              }
+            ],
+            "name": "selectors"
+          }
+        ]
+      },
+      {
+        "name": "controls",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/controls/flap_handle_request_ratio",
+                "name": "_flapsposition",
+                "title": "Flaps position",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/controls/flap_handle_request_ratio",
+                "name": "flapset",
+                "title": "Set flap directly",
+                "type": "dataref"
+              }
+            ],
+            "name": "flaps"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/pedestal/speedbrake_animation",
+                "name": "speedbrake",
+                "title": "Speedbrake Lever",
+                "type": "dataref"
+              }
+            ],
+            "name": "speedbrake"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/controls/aileron_trim",
+                "name": "ailerontrim",
+                "title": "Aileron Trim",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/controls/elevator_trim",
+                "fcheck": "function (a) return -1 + ((2/17) * ng_getBriefPrefs():get(\"takeoff:pitchtrim\")) end",
+                "name": "pitchtrim",
+                "title": "Pitch Trim",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "set"
+                ],
+                "dref": "sim/cockpit2/controls/rudder_trim",
+                "name": "ruddertrim",
+                "title": "Rudder Trim",
+                "type": "dataref"
+              }
+            ],
+            "name": "trims"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/pedestal/yawdamper_1_sw",
+                "dref": "sim/cockpit2/switches/yaw_damper_on",
+                "name": "yawdamper",
+                "title": "Yaw Damper",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "yawdamper"
+          }
+        ]
+      },
+      {
+        "name": "datarefs",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/gauges/indicators/altitude_ft_pilot",
+                "fcheck": "function (a) return a > 10000 end",
+                "name": "_above10k",
+                "title": "above 10.000 ft",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/gauges/indicators/altitude_ft_pilot",
+                "fcheck": "function (a) return a > ng_getBriefPrefs():get(\"origin:transalt\") end",
+                "name": "_abovetalt",
+                "title": "above transition altitude",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/gauges/indicators/altitude_ft_pilot",
+                "fcheck": "function (a) return a < 10000 end",
+                "name": "_below10k",
+                "title": "below 10.000 ft",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/gauges/indicators/altitude_ft_pilot",
+                "fcheck": "function (a) return a < ng_getBriefPrefs():get(\"destination:translvl\") end",
+                "name": "_belowtlvl",
+                "title": "below transition level",
+                "type": "dataref"
+              }
+            ],
+            "name": "_altitudechecks"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/autopilot/autopilot_on",
+                "fcheck": "function (a) return a == 1 end",
+                "name": "_autopilot1on",
+                "title": "Autopilot 1 ON",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/autopilot/autopilot2_on",
+                "fcheck": "function (a) return a == 1 end",
+                "name": "_autopilot2on",
+                "title": "Autopilot 2 ON",
+                "type": "dataref"
+              }
+            ],
+            "name": "_autopilot"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/controls/left_brake_ratio",
+                "fcheck": "function (a) return get(\"sim/cockpit2/controls/left_brake_ratio\") + get(\"sim/cockpit2/controls/right_brake_ratio\") > 1.5 end",
+                "name": "_brakecheck",
+                "title": "true if both wheelbrake 1",
+                "type": "dataref"
+              }
+            ],
+            "name": "_brakeaction"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N1_percent",
+                "indx": 0,
+                "name": "_eng1n1",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N1_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N1_percent\",0) > get(\"sim/weather/aircraft/temperature_ambient_deg_c\") end",
+                "indx": 0,
+                "name": "_eng1n1gtoat",
+                "title": "Engine 1 N1 value > OAT",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N1_percent",
+                "indx": 1,
+                "name": "_eng2n1",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N1_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N1_percent\",1) > get(\"sim/weather/aircraft/temperature_ambient_deg_c\") end",
+                "indx": 1,
+                "name": "_eng2n1gtoat",
+                "title": "Engine 2 N1 value > OAT",
+                "type": "dataref"
+              }
+            ],
+            "name": "_enginen1"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N2_percent\",0) > 0 end",
+                "indx": 0,
+                "name": "_eng1n2gt0",
+                "title": "Engine 1 N2 value > 0",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return (get(\"sim/cockpit2/engine/indicators/N2_percent\",0) > ng_getAcfPrefs():get(\"engines:n2afterstart\")) end",
+                "indx": 0,
+                "name": "_eng1n2start",
+                "title": "Engine 1 N2 value > x",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N2_percent\",1) > 0 end",
+                "indx": 1,
+                "name": "_eng2n2gt0",
+                "title": "Engine 2 N2 value > 0",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return (get(\"sim/cockpit2/engine/indicators/N2_percent\",1) > ng_getAcfPrefs():get(\"engines:n2afterstart\")) end",
+                "indx": 1,
+                "name": "_eng2n2start",
+                "title": "Engine 2 N2 value > n",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N2_percent\",2) > 0 end",
+                "indx": 2,
+                "name": "_eng3n2gt0",
+                "title": "Engine 3 N2 value > 0",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return (get(\"sim/cockpit2/engine/indicators/N2_percent\",2) > ng_getAcfPrefs():get(\"engines:n2afterstart\")) end",
+                "indx": 2,
+                "name": "_eng3n2start",
+                "title": "Engine 3 N2 value > n",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return get(\"sim/cockpit2/engine/indicators/N2_percent\",3) > 0 end",
+                "indx": 3,
+                "name": "_eng4n2gt0",
+                "title": "Engine 4 N2 value > 0",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "fcheck": "function (a) return (get(\"sim/cockpit2/engine/indicators/N2_percent\",3) > ng_getAcfPrefs():get(\"engines:n2afterstart\")) end",
+                "indx": 3,
+                "name": "_eng4n2start",
+                "title": "Engine 4 N2 value > n",
+                "type": "dataref"
+              }
+            ],
+            "name": "_enginen2"
+          }
+        ]
+      },
+      {
+        "name": "efis",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": {},
+                "fcheck": "true",
+                "name": "baromode1",
+                "title": "Baro Mode left",
+                "type": "undefined"
+              },
+              {
+                "acts": {},
+                "fcheck": "true",
+                "name": "baromode2",
+                "title": "Baro mode right",
+                "type": "undefined"
+              },
+              {
+                "acts": {},
+                "fcheck": "true",
+                "name": "baromode3",
+                "title": "Baro mode standby",
+                "type": "undefined"
+              }
+            ],
+            "name": "baromodes"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_is_std_pilot",
+                "name": "barostd1",
+                "title": "Baro STD left",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_is_std_copilot",
+                "name": "barostd2",
+                "title": "Baro STD right",
+                "type": "dataref"
+              }
+            ],
+            "name": "barostdbtns"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/instruments/barometer_down",
+                "cmdup": "sim/instruments/barometer_up",
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
+                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
+                "incr": 0.01,
+                "max": 32,
+                "min": 22,
+                "name": "barovalue1",
+                "title": "Baro Mode left",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/instruments/barometer_copilot_down",
+                "cmdup": "sim/instruments/barometer_copilot_up",
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot",
+                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
+                "incr": 0.01,
+                "max": 32,
+                "min": 22,
+                "name": "barovalue2",
+                "title": "Baro mode right",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "dn",
+                  "up",
+                  "chk"
+                ],
+                "cmddn": "sim/instruments/barometer_stby_down",
+                "cmdup": "sim/instruments/barometer_stby__up",
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_stby",
+                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
+                "incr": 0.01,
+                "max": 32,
+                "min": 22,
+                "name": "barovalue3",
+                "title": "Baro mode standby",
+                "type": "dialdref"
+              }
+            ],
+            "name": "barovalues"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  ""
+                ],
+                "dref": "sim/cockpit2/gauges/actuators/baro_altimeter_bug_ft_pilot",
+                "name": "da",
+                "title": "Decision altitude",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set",
+                  ""
+                ],
+                "dref": "sim/cockpit/misc/radio_altimeter_minimum",
+                "name": "dh",
+                "title": "Decision Height",
+                "type": "dataref"
+              }
+            ],
+            "name": "dhda"
+          },
+          {
+            "elements": [
+              {
+                "name": "arptmode",
+                "title": "Airport Mode",
+                "type": "undefined"
+              },
+              {
+                "name": "datamode",
+                "title": "DATA mode Boeing",
+                "type": "undefined"
+              },
+              {
+                "name": "posmode",
+                "title": "POS Mode Boeing",
+                "type": "undefined"
+              },
+              {
+                "name": "stamode",
+                "title": "STA Mode Boeing",
+                "type": "undefined"
+              },
+              {
+                "name": "terrainmode",
+                "title": "Terrain mode",
+                "type": "undefined"
+              },
+              {
+                "name": "wptmode",
+                "title": "WPT Mode",
+                "type": "undefined"
+              },
+              {
+                "name": "wxrmode",
+                "title": "Weather Radar mode",
+                "type": "undefined"
+              }
+            ],
+            "name": "modes"
+          },
+          {
+            "elements": [
+              {
+                "name": "mapmode",
+                "title": "ND Mode",
+                "type": "undefined"
+              },
+              {
+                "name": "maprange",
+                "title": "ND Zoom",
+                "type": "undefined"
+              }
+            ],
+            "name": "nd"
+          },
+          {
+            "elements": {},
+            "name": "pfd"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "sim/instruments/EFIS_terr",
+                "dref": "laminar/A333/buttons/EFIS_terr_on_nd_capt",
+                "name": "terronnd",
+                "title": "Terrain",
+                "type": "undefined"
+              }
+            ],
+            "name": "terrain"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "sim/instruments/EFIS_wxr_pws_off",
+                "cmdon": "sim/instruments/EFIS_wxr_pws_on",
+                "cmdtgl": "sim/instruments/EFIS_wxr_pws_tog",
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_pws_mode",
+                "name": "wxpws",
+                "title": "<title>",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/EFIS/EFIS_weather_mode",
+                "name": "wxradarstate",
+                "title": "WX Radar state",
+                "type": "dataref"
+              }
+            ],
+            "name": "wxradar"
+          }
+        ]
+      },
+      {
+        "name": "electric",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit/engine/APU_N1",
+                "fcheck": "function (a) return a<2 end",
+                "name": "_apuoff",
+                "title": "APU off",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "crj_series/apu/avail_lit",
+                "name": "_apuon",
+                "title": "APU ON",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/electrical/apu_gen_up",
+                "cmdon": "crj_series/electrical/apu_gen_down",
+                "dref": "crj_series/electrical/apu_gen_animation",
+                "name": "apugen1",
+                "title": "APU Generator 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/apu/pwr_fuel",
+                "dref": "sim/cockpit/engine/APU_switch",
+                "name": "apumaster",
+                "title": "Fuel Switch",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/apu/start_stop",
+                "dref": "crj_series/apu/start_stop_animation",
+                "foff": "function (a) command_end(\"laminar/A333/buttons/APU_start\") end",
+                "fon": "function (a) command_begin(\"laminar/A333/buttons/APU_start\") end",
+                "name": "apustart",
+                "title": "APU starter",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "apu"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/electrical/batt_master_up",
+                "cmdon": "crj_series/electrical/batt_master_down",
+                "dref": "crj_series/electrical/batt_master_animation",
+                "name": "battery1",
+                "title": "Battery 1",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "batteries"
+          },
+          {
+            "elements": [
+              {
+                "name": "acbustie1",
+                "title": "AC Bus Tie 1",
+                "type": "undefined"
+              },
+              {
+                "name": "dcbustie1",
+                "title": "DC Bus Tie 1",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/electrical/ac_ess_xfer",
+                "dref": "crj_series/electrical_panel/ac_ess_xfer_lit",
+                "name": "essentialbus1",
+                "title": "Essential Bus 1",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "busties"
+          },
+          {
+            "elements": [
+              {
+                "name": "cabinpower",
+                "title": "Cabin power",
+                "type": "undefined"
+              },
+              {
+                "name": "ifepower",
+                "title": "Inflight Entertainment",
+                "type": "undefined"
+              }
+            ],
+            "name": "consumers"
+          },
+          {
+            "elements": [
+              {
+                "name": "gendrivedisc1",
+                "title": "Generator Drive Disconnect 1",
+                "type": "undefined"
+              },
+              {
+                "name": "gendrivedisc2",
+                "title": "Generator Drive Disconnect 2",
+                "type": "undefined"
+              },
+              {
+                "name": "gendrivedisc3",
+                "title": "Generator Drive Disconnect 3",
+                "type": "undefined"
+              },
+              {
+                "name": "gendrivedisc4",
+                "title": "Generator Drive Disconnect 4",
+                "type": "undefined"
+              }
+            ],
+            "name": "gendrives"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/electrical/gen_1_up",
+                "cmdon": "crj_series/electrical/gen_1_down",
+                "dref": "crj_series/electrical/gen_1_animation",
+                "name": "generator1",
+                "title": "Engine Generator 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/electrical/gen_2_up",
+                "cmdon": "crj_series/electrical/gen_2_down",
+                "dref": "crj_series/electrical/gen_2_animation",
+                "name": "generator2",
+                "title": "Engine Generator 2",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "generators"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  " "
+                ],
+                "cmdtgl": "crj_series/tablet/menu/settings/hot_external_power_command",
+                "dref": "crj_series/misc/external_power_avail",
+                "name": "gpuconnect",
+                "title": "GPU Connect",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/electrical/ac_power",
+                "dref": "crj_series/electrical/ac_power_animation",
+                "name": "gpugen1",
+                "title": "GPU Generator 1",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "gpu"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "dref": "sim/cockpit/engine/inverter_on",
+                "indx": 0,
+                "name": "inverter1",
+                "title": "Inverter 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "dref": "sim/cockpit/engine/inverter_on",
+                "indx": 1,
+                "name": "inverter2",
+                "title": "Inverter 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "inverter"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "dref": "sim/cockpit2/electrical/RAT_generator_on",
+                "name": "extendrat",
+                "title": "Extend RAT",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "dref": "sim/cockpit2/electrical/air_driven_generator_on",
+                "name": "ramairturbine",
+                "title": "RAT",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  ""
+                ],
+                "dref": "",
+                "name": "stbypower1",
+                "title": "Standby Power",
+                "type": "undefined"
+              }
+            ],
+            "name": "standby"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/electrical/inverter_on",
+                "indx": 0,
+                "name": "tru1",
+                "title": "Transformer Rectifier 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/electrical/inverter_on",
+                "indx": 1,
+                "name": "tru2",
+                "title": "Transformer Rectifier 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/electrical/cross_tie",
+                "name": "tru3",
+                "title": "TRU3 Essential",
+                "type": "dataref"
+              }
+            ],
+            "name": "trus"
+          }
+        ]
+      },
+      {
+        "name": "engines",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  ""
+                ],
+                "fcheck": "true",
+                "name": "eec1",
+                "title": "EEC Mode 1",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  ""
+                ],
+                "fcheck": "true",
+                "name": "eec2",
+                "title": "EEC Mode 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "eec"
+          },
+          {
+            "elements": [
+              {
+                "name": "_apufire",
+                "title": "APU Fire",
+                "type": "undefined"
+              },
+              {
+                "name": "_eng1fire",
+                "title": "ENG1 Fire",
+                "type": "undefined"
+              },
+              {
+                "name": "_eng2fire",
+                "title": "ENG2 Fire",
+                "type": "undefined"
+              },
+              {
+                "name": "engfiretest",
+                "title": "Engine fire test",
+                "type": "undefined"
+              }
+            ],
+            "name": "enginefire"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "indx": 0,
+                "name": "_eng1n2",
+                "title": "Engine 1 N2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/indicators/N2_percent",
+                "indx": 1,
+                "name": "_eng2n2",
+                "title": "Engine 2 N2",
+                "type": "dataref"
+              }
+            ],
+            "name": "enginen2"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/engine/l_start",
+                "dref": "crj_series/engine/l_start_lit",
+                "name": "engstartsel1",
+                "title": "Engine Start Selector 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/engine/r_start",
+                "dref": "crj_series/engine/r_start_lit",
+                "name": "engstartsel2",
+                "title": "Engine Start Selector 2",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "engstartsel"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  "on",
+                  "off",
+                  "tgl",
+                  "set"
+                ],
+                "dref": "crj_series/pedestal/throttlelock_left_sw",
+                "name": "engstrtlvr1",
+                "title": "Engine Start lever 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  "on",
+                  "off",
+                  "tgl",
+                  "set"
+                ],
+                "dref": "crj_series/pedestal/throttlelock_right_sw",
+                "name": "engstrtlvr2",
+                "title": "Engine Start lever 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "engstrtlvrs"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/engine/cont_ignition",
+                "dref": "crj_series/engine/cont_ignition_animation",
+                "name": "ignitionset1",
+                "title": "Ignition",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "ignition"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/actuators/mixture_ratio",
+                "indx": 0,
+                "name": "mixlever1",
+                "title": "Mixture lever 1",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/actuators/mixture_ratio_all",
+                "name": "mixleversall",
+                "title": "mixture lever all",
+                "type": "undefined"
+              }
+            ],
+            "name": "mixturelevers"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/actuators/prop_ratio",
+                "indx": 0,
+                "name": "proplever1",
+                "title": "Prop lever 1",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/actuators/prop_ratio_all",
+                "name": "propleversall",
+                "title": "Prop lever all",
+                "type": "undefined"
+              }
+            ],
+            "name": "proplevers"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "crj_series/pedestal/throttle/left/lever_ratio",
+                "name": "thrustlever1",
+                "title": "Thrust lever 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "crj_series/pedestal/throttle/right/lever_ratio",
+                "name": "thrustlever2",
+                "title": "Thrust lever 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/engine/actuators/throttle_ratio_all",
+                "name": "thrustleverall",
+                "title": "Thrust lever all",
+                "type": "dataref"
+              }
+            ],
+            "name": "thrustlevers"
+          }
+        ]
+      },
+      {
+        "name": "fuel",
+        "systems": [
+          {
+            "elements": [
+              {
+                "name": "fuelctrlsw1",
+                "title": "Fuel control switch 1",
+                "type": "undefined"
+              },
+              {
+                "name": "fuelctrlsw2",
+                "title": "Fuel control switch 2",
+                "type": "undefined"
+              },
+              {
+                "name": "fuelctrlsw3",
+                "title": "Fuel control switch 3",
+                "type": "undefined"
+              },
+              {
+                "name": "fuelctrlsw4",
+                "title": "Fuel control switch 4",
+                "type": "undefined"
+              }
+            ],
+            "name": "fuelcontrolsws"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/fuel/l_boost_pump",
+                "dref": "crj_series/fuel/l_boost_pump_on_lit",
+                "name": "fuelpump1",
+                "title": "Fuel pump left 1",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "fuelpumps"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "crj_series/fuel/gravity_xflow",
+                "dref": "crj_series/fuel/gravity_xflow_animation",
+                "name": "fuelxfeed1",
+                "title": "Fuel Crossfeed 1",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "fuelxfeeds"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit/engine/fuel_tank_selector",
+                "name": "tankselector",
+                "title": "Fuel Tank Selector",
+                "type": "undefined"
+              }
+            ],
+            "name": "tankselector"
+          }
+        ]
+      },
+      {
+        "name": "general",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/landgearpanel/anti_skid_sw_down",
+                "cmdon": "crj_series/landgearpanel/anti_skid_sw_up",
+                "dref": "crj_series/landgearpanel/anti_skid_sw_animation",
+                "name": "antiskid",
+                "title": "Anti-skid Switch",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "antiskid"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "cmdon": "sim/flight_controls/brakes_1_auto",
+                "dref": "sim/cockpit2/switches/auto_brake_level",
+                "fcheck": "function (a) return a==3 end",
+                "fon": "function (a) if a~=3 then command_once(\"sim/flight_controls/brakes_1_auto\") end end",
+                "name": "autobrake1",
+                "title": "Autobrake LO",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "cmdon": "sim/flight_controls/brakes_2_auto",
+                "dref": "sim/cockpit2/switches/auto_brake_level",
+                "fcheck": "function (a) return a==4 end",
+                "fon": "function (a) if a~=4 then command_once(\"sim/flight_controls/brakes_2_auto\") end end",
+                "name": "autobrake2",
+                "title": "Autobrake MED",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "dref": "sim/cockpit2/switches/auto_brake_level",
+                "fcheck": "function (a) return a==1 end",
+                "fon": "function (a) if a~=1 then command_once(\"sim/flight_controls/brakes_off_auto\") end end",
+                "name": "autobrakeoff",
+                "title": "Autobrake OFF",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "cmdon": "sim/flight_controls/brakes_rto_auto",
+                "dref": "sim/cockpit2/switches/auto_brake_level",
+                "fcheck": "function (a) return a==0 end",
+                "fon": "function (a) if a~=0 then command_once(\"sim/flight_controls/brakes_rto_auto\") end end",
+                "name": "autobrakerto",
+                "title": "Autobrake RTO",
+                "type": "undefined"
+              }
+            ],
+            "name": "autobrake"
+          },
+          {
+            "elements": [
+              {
+                "name": "chronometer1",
+                "title": "Chronometer 1",
+                "type": "undefined"
+              },
+              {
+                "name": "chronometer2",
+                "title": "Chronometer 2",
+                "type": "undefined"
+              }
+            ],
+            "name": "clocks"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  " ",
+                  " "
+                ],
+                "cmdtgl": "sim/flight_controls/toggle_chocks",
+                "dref": "sim/flightmodel2/gear/is_chocked",
+                "foff": "function (a) return 1 end",
+                "fon": "function (a) return 0 end",
+                "indx": 0,
+                "name": "chocks",
+                "title": "Chocks",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  ""
+                ],
+                "cmdtgl": "openSAM/toggle_jwy",
+                "dref": "opensam/jetway/status",
+                "fcheck": "function (a) return a==2 end",
+                "fon": "function (a) if a~= 2 then command_once(\"openSAM/toggle_jwy\") end end",
+                "name": "samjetwaydock",
+                "title": "Dock openSAM jetway",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "cmdtgl": "openSAM/toggle_jwy",
+                "dref": "opensam/jetway/status",
+                "fcheck": "function (a) return a==1 end",
+                "fon": "function (a) if a == 2 then command_once(\"openSAM/toggle_jwy\") end end",
+                "name": "samjetwayundock",
+                "title": "Undock openSAM jetway",
+                "type": "custom"
+              }
+            ],
+            "name": "external"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "cmdtgl": "sim/flight_controls/door_toggle_10",
+                "dref": "sim/cockpit2/switches/custom_slider_on",
+                "indx": 3,
+                "name": "dooracargo",
+                "title": "Aft Cargo",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "cmdtgl": "sim/flight_controls/door_toggle_9",
+                "dref": "sim/cockpit2/switches/custom_slider_on",
+                "indx": 2,
+                "name": "doorfcargo",
+                "title": "Forward Cargo",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/custom_slider_on",
+                "indx": 0,
+                "name": "doorl1",
+                "title": "Door Forward Left",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/custom_slider_on",
+                "indx": 4,
+                "name": "doorl2",
+                "title": "Door Aft Left",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "cmdtgl": "sim/flight_controls/door_toggle_2",
+                "dref": "sim/cockpit2/switches/custom_slider_on",
+                "indx": 1,
+                "name": "doorr1",
+                "title": "Door Fwd Right",
+                "type": "dataref"
+              }
+            ],
+            "name": "externaldoors"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "name": "airstair1",
+                "title": "Stairs",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "cmdoff": "sim/flight_controls/door_close_12",
+                "cmdon": "sim/flight_controls/door_open_12",
+                "cmdtgl": "sim/flight_controls/door_toggle_12",
+                "dref": "sim/cockpit2/switches/custom_slider_on",
+                "indx": 10,
+                "name": "cockpitdoor",
+                "title": "Cockpit Door",
+                "type": "dataref"
+              }
+            ],
+            "name": "internaldoors"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/flightmodel/controls/parkbrake",
+                "name": "parkbrake",
+                "title": "Parkingbrake",
+                "type": "dataref"
+              }
+            ],
+            "name": "parkbrake"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "crj_series/pass_sign/no_smkg",
+                "foff": "function (a) command_once(\"crj_series/pass_sign/no_smkg_up\") command_once(\"crj_series/pass_sign/no_smkg_up\") command_once(\"crj_series/pass_sign/no_smkg_down\") end",
+                "fon": "function (a) command_once(\"crj_series/pass_sign/no_smkg_up\") command_once(\"crj_series/pass_sign/no_smkg_up\")  end",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "nosmoking",
+                "title": "No Smoking",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "cmddn": "crj_series/pass_sign/seat_belt_up",
+                "cmdup": "crj_series/pass_sign/seat_belt_down",
+                "dref": "crj_series/pass_sign/seat_belts",
+                "foff": "function (a) command_once(\"crj_series/pass_sign/seat_belt_up\") command_once(\"crj_series/pass_sign/seat_belt_up\") command_once(\"crj_series/pass_sign/seat_belt_down\") end",
+                "fon": "function (a) command_once(\"crj_series/pass_sign/seat_belt_up\") command_once(\"crj_series/pass_sign/seat_belt_up\") end",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "seatbelts",
+                "title": "Seatbelt Signs",
+                "type": "custom"
+              }
+            ],
+            "name": "paxsigns"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return false end",
+                "name": "wait",
+                "title": "wait for interaction",
+                "type": "custom"
+              }
+            ],
+            "name": "simulator"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) ng_getBckVars():set(\"general:timein\",ng_dispTimeHHMM(get(\"sim/time/zulu_time_sec\"))) end",
+                "name": "intimer",
+                "title": "in timer",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) ng_getBckVars():set(\"general:timeoff\",ng_dispTimeHHMM(get(\"sim/time/zulu_time_sec\"))) end",
+                "name": "offtimer",
+                "title": "Off Timer",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) ng_getBckVars():set(\"general:timeon\",ng_dispTimeHHMM(get(\"sim/time/zulu_time_sec\"))) end",
+                "name": "ontimer",
+                "title": "on timer",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  " ",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "fcheck": "function (a) return true end",
+                "fon": "function (a) ng_getBckVars():set(\"general:timeout\",ng_dispTimeHHMM(get(\"sim/time/zulu_time_sec\"))) end",
+                "name": "outtimer",
+                "title": "Out Timer",
+                "type": "custom"
+              }
+            ],
+            "name": "timers"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "name": "toconfig",
+                "title": "T.O Config",
+                "type": "undefined"
+              }
+            ],
+            "name": "toconfig"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return a>0 end",
+                "name": "_mastercaution",
+                "title": "Master Caution",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return a>0 end",
+                "name": "_masterwarn",
+                "title": "<title>",
+                "type": "undefined"
+              }
+            ],
+            "name": "warncaution"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "crj_series/cockpit/cap_wiper_knob_right_command",
+                "cmdup": "crj_series/cockpit/cap_wiper_knob_left_command",
+                "dref": "crj_series/cockpit/captain_wiper_knob_anim",
+                "incr": 1,
+                "max": 3,
+                "min": 0,
+                "name": "wiper1",
+                "title": "Windshield Wipers",
+                "type": "dialcmd"
+              }
+            ],
+            "name": "wipers"
+          }
+        ]
+      },
+      {
+        "name": "hydraulics",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmddn": "crj_series/hydraulics/3a_switch_down",
+                "cmdoff": "crj_series/hydraulics/3a_switch_down",
+                "cmdon": "crj_series/hydraulics/3a_switch_up",
+                "cmdup": "crj_series/hydraulics/3a_switch_up",
+                "dref": "crj_series/hydraulics/3a_switch_animation",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "elechydpump1",
+                "title": "Electric Hydraulic Pump 3A",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "crj_series/hydraulics/3b_switch_down",
+                "cmdtgl": "crj_series/hydraulics/r_hyd_sov",
+                "cmdup": "crj_series/hydraulics/3b_switch_up",
+                "dref": "crj_series/hydraulics/3b_switch_animation",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "elechydpump2",
+                "title": "Electric Hydraulic Pump 3B",
+                "type": "dialcmd"
+              }
+            ],
+            "name": "elechydpumps"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "crj_series/hydraulics/1_switch_down",
+                "cmdup": "crj_series/hydraulics/1_switch_up",
+                "dref": "crj_series/hydraulics/1_switch_animation",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "enghydpump1",
+                "title": "Engine Hydraulic Pump 1",
+                "type": "dialcmd"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "crj_series/hydraulics/2_switch_down",
+                "cmdup": "crj_series/hydraulics/2_switch_up",
+                "dref": "crj_series/hydraulics/2_switch_animation",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "enghydpump2",
+                "title": "Engine Hydraulic Pump 2",
+                "type": "dialcmd"
+              }
+            ],
+            "name": "enghydpumps"
+          },
+          {
+            "elements": [
+              {
+                "name": "ptu1",
+                "title": "Hydraulic PTU",
+                "type": "undefined"
+              }
+            ],
+            "name": "ptus"
+          }
+        ]
+      },
+      {
+        "name": "landinggears",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "chk"
+                ],
+                "fcheck": "function (a) return get(\"sim/flightmodel2/gear/deploy_ratio\") == 1 end",
+                "name": "_gearlightsgreen",
+                "title": "Gear lights green",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk"
+                ],
+                "fcheck": "function (a) return get(\"sim/flightmodel2/gear/deploy_ratio\") > 0 and get(\"sim/flightmodel2/gear/deploy_ratio\") < 1 end",
+                "name": "_gearlightsred",
+                "title": "Gear lights red",
+                "type": "dataref"
+              }
+            ],
+            "name": "gearlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit/switches/gear_handle_status",
+                "name": "gearhandle",
+                "title": "Gearhandle",
+                "type": "dataref"
+              }
+            ],
+            "name": "gears"
+          }
+        ]
+      },
+      {
+        "name": "lightsexternal",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/LDG_LTS/left_up",
+                "cmdon": "crj_series/LDG_LTS/left_down",
+                "dref": "crj_series/LDG_LTS/left_anim",
+                "name": "landlight1",
+                "title": "Landing light 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/LDG_LTS/nose_up",
+                "cmdon": "crj_series/LDG_LTS/nose_down",
+                "dref": "crj_series/LDG_LTS/nose_anim",
+                "name": "landlight2",
+                "title": "Landing Light 2",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/LDG_LTS/right_up",
+                "cmdon": "crj_series/LDG_LTS/right_down",
+                "dref": "crj_series/LDG_LTS/right_anim",
+                "name": "landlight3",
+                "title": "Landing Light 3",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "alllandlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/EXT_LTS/beacon_up",
+                "cmdon": "crj_series/EXT_LTS/beacon_down",
+                "dref": "crj_series/EXT_LTS/beacon_anim",
+                "name": "beacon1",
+                "title": "Beacon light 1",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "beacons"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/EXT_LTS/logo_up",
+                "cmdon": "crj_series/EXT_LTS/logo_down",
+                "dref": "crj_series/EXT_LTS/logo_anim",
+                "name": "logolight",
+                "title": "Logo light",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "logolights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/EXT_LTS/nav_up",
+                "cmdon": "crj_series/EXT_LTS/nav_down",
+                "dref": "crj_series/EXT_LTS/nav_anim",
+                "name": "positionlight",
+                "title": "Position light",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "positionlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/generic_lights_switch",
+                "indx": 1,
+                "name": "rwylight1",
+                "title": "Runway light left",
+                "type": "undefined"
+              }
+            ],
+            "name": "rwylights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/EXT_LTS/strobe_up",
+                "cmdon": "crj_series/EXT_LTS/strobe_down",
+                "dref": "crj_series/EXT_LTS/strobe_anim",
+                "name": "strobelight",
+                "title": "Strobe light",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "strobelights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/LDG_LTS/taxi_up",
+                "cmdon": "crj_series/LDG_LTS/taxi_down",
+                "dref": "crj_series/LDG_LTS/taxi_anim",
+                "name": "taxilight1",
+                "title": "Taxi light",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "taxilights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/generic_lights_switch",
+                "indx": 11,
+                "name": "wheellight",
+                "title": "Wheel light",
+                "type": "undefined"
+              }
+            ],
+            "name": "wheellights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/EXT_LTS/wing_up",
+                "cmdon": "crj_series/EXT_LTS/wing_down",
+                "dref": "crj_series/EXT_LTS/wing_anim",
+                "name": "winglight",
+                "title": "Wing light",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "winglights"
+          }
+        ]
+      },
+      {
+        "name": "lightsinternal",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/lighting/dome_lights_up",
+                "cmdon": "crj_series/lighting/dome_lights_down",
+                "dref": "crj_series/lighting/dome_lights",
+                "name": "domelight",
+                "title": "Dome light",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "domelights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "crj_series/emergency/emer_lts_down",
+                "cmdup": "crj_series/emergency/emer_lts_up",
+                "dref": "crj_series/emergency/emer_lts_animation",
+                "incr": 1,
+                "max": 1,
+                "min": -1,
+                "name": "emerlight",
+                "title": "EMER light",
+                "type": "dialcmd"
+              }
+            ],
+            "name": "emerlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/mainleft/lighting_integ_left_lit",
+                "incr": 1,
+                "max": 5,
+                "min": 0,
+                "name": "instrlight1",
+                "title": "Instrument light 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/mainleft/lighting_display_left_sw",
+                "incr": 1,
+                "max": 5,
+                "min": 0,
+                "name": "instrlight2",
+                "title": "Instrument light 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/mainright/lighting_display_right_sw",
+                "incr": 1,
+                "max": 5,
+                "min": 0,
+                "name": "instrlight3",
+                "title": "Instrument light 3",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/mainright/lighting_integ_right_sw",
+                "incr": 1,
+                "max": 5,
+                "min": 0,
+                "name": "instrlight4",
+                "title": "Instrument light 4",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/pedestal/lighting_DSPL_sw",
+                "incr": 1,
+                "max": 5,
+                "min": 0,
+                "name": "instrlight5",
+                "title": "Instrument light 5",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "crj_series/pedestal/lighting_INTEG_sw",
+                "name": "instrlight6",
+                "title": "Instrument light 6",
+                "type": "dataref"
+              }
+            ],
+            "name": "instrlights"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "set",
+                  "tgl",
+                  "chk"
+                ],
+                "dref": "crj_series/lighting/ovhd_animation",
+                "name": "panellight1",
+                "title": "Panel light 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "crj_series/overhead/dome_lights_right",
+                "incr": 1,
+                "max": 5,
+                "min": 0,
+                "name": "panellight2",
+                "title": "Panel light 2",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "crj_series/overhead/dome_lights_left",
+                "incr": 1,
+                "max": 5,
+                "min": 0,
+                "name": "panellight3",
+                "title": "Panel light 3",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "crj_series/mainleft/lighting_flood_left_sw",
+                "incr": 1,
+                "max": 5,
+                "min": 0,
+                "name": "panellight4",
+                "title": "Panel light 4",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "crj_series/mainright/lighting_flood_right_sw",
+                "incr": 1,
+                "max": 5,
+                "min": 0,
+                "name": "panellight5",
+                "title": "<title>",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "crj_series/pedestal/lighting_FLOOD_sw",
+                "incr": 1,
+                "max": 3,
+                "min": 0,
+                "name": "panellight6",
+                "title": "<title>",
+                "type": "dialdref"
+              }
+            ],
+            "name": "panellights"
+          }
+        ]
+      },
+      {
+        "name": "radios",
+        "systems": [
+          {
+            "elements": {},
+            "name": "adf1"
+          },
+          {
+            "elements": {},
+            "name": "adf2"
+          },
+          {
+            "elements": {},
+            "name": "com1"
+          },
+          {
+            "elements": {},
+            "name": "com2"
+          },
+          {
+            "elements": {},
+            "name": "nav1"
+          },
+          {
+            "elements": {},
+            "name": "nav2"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/radios/actuators/transponder_code",
+                "name": "xpdrcode",
+                "title": "XPDR Code",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/radios/actuators/transponder_mode",
+                "name": "xpdrmode",
+                "title": "XPDR Mode",
+                "type": "dataref"
+              }
+            ],
+            "name": "transponder"
+          }
+        ]
+      },
+      {
+        "name": "xtensions",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "crj_series/bleed_air/wing_ai_cross_bleed_down",
+                "cmdup": "crj_series/bleed_air/wing_ai_cross_bleed_up",
+                "dref": "crj_series/bleed_air/wing_ai_cross_bleed_animation",
+                "incr": 1,
+                "max": 1,
+                "min": -1,
+                "name": "bleedaircross",
+                "title": "<title>",
+                "type": "dialcmd"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "crj_series/bleed_air/bleed_source_down",
+                "cmdup": "crj_series/bleed_air/bleed_source_up",
+                "dref": "crj_series/bleed_air/bleed_source_animation",
+                "incr": 1,
+                "max": 3,
+                "min": 0,
+                "name": "bleedsource",
+                "title": "<title>",
+                "type": "dialcmd"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
+                ],
+                "cmddn": "crj_series/bleed_air/bleed_valves_down",
+                "cmdup": "crj_series/bleed_air/bleed_valves_up",
+                "dref": "crj_series/bleed_air/bleed_valves_animation",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "bleedvalves",
+                "title": "<title>",
+                "type": "dialcmd"
+              }
+            ],
+            "name": "air"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/command/hydraulics/l_hyd_sov_cover",
+                "dref": "crj_series/command/hydraulics/l_hyd_sov_cover_animation",
+                "name": "lhydsovcover",
+                "title": "Left Hyd SOV Cover",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/command/hydraulics/r_hyd_sov_cover",
+                "dref": "crj_series/command/hydraulics/r_hyd_sov_cover_animation",
+                "name": "rhydsovcover",
+                "title": "Right Hyd SOV cover",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "covers"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/electrical/dc_service_up",
+                "cmdon": "crj_series/electrical/dc_service_down",
+                "dref": "crj_series/electrical/dc_service_animation",
+                "name": "dcservice",
+                "title": "<title>",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "electric"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/pedestal/throttlelock_left_sw",
+                "name": "throttlelock1",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/pedestal/throttlelock_right_sw",
+                "name": "throttlelock2",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/pedestal/thrustreverese_left_state_sw_down",
+                "cmdon": "crj_series/pedestal/thrustreverese_left_state_sw_up",
+                "dref": "crj_series/pedestal/thrustreverese_left_state_sw_animation",
+                "name": "thrustrevswitch1",
+                "title": "<title>",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/pedestal/thrustreverese_right_state_sw_down",
+                "cmdon": "crj_series/pedestal/thrustreverese_right_state_sw_up",
+                "dref": "crj_series/pedestal/thrustreverese_right_state_sw_animation",
+                "name": "thrustrevswitch2",
+                "title": "<title>",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "engine"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/emergency/elt_up",
+                "cmdon": "crj_series/emergency/elt_down",
+                "dref": "crj_series/emergency/elt_animation",
+                "name": "eltswitch",
+                "title": "<title>",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/pedestal/mach_trim_engage_sw",
+                "dref": "crj_series/trim/mach_trim_toggle",
+                "name": "machtrim",
+                "title": "<title>",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/mainleft/nosewheel_steering",
+                "name": "nwsteeringl",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/pedestal/stab_trim_ch1_sw",
+                "dref": "crj_series/trim/stab_trim_ch1_toggle",
+                "name": "stabtrim1",
+                "title": "<title>",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/pedestal/stab_trim_ch1_sw",
+                "dref": "crj_series/trim/stab_trim_ch2_toggle",
+                "name": "stabtrim2",
+                "title": "<title>",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "general"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/hydraulics/l_hyd_sov",
+                "dref": "crj_series/hydraulics/l_hyd_sov_animation",
+                "name": "lhydsov",
+                "title": "Electric Hydraulic Pump 1",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "crj_series/hydraulics/r_hyd_sov",
+                "dref": "crj_series/hydraulics/r_hyd_sov_animation",
+                "name": "rhydsov",
+                "title": "Electric Hydraulic Pump 2",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "hydaulics"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "crj_series/cabindoor/stairlights",
+                "name": "exitlight",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdoff": "crj_series/lighting/sterile_up",
+                "cmdon": "crj_series/lighting/sterile_down",
+                "dref": "crj_series/lighting/sterile",
+                "name": "sterilelight",
+                "title": "Sterile light",
+                "type": "onofftgl"
+              }
+            ],
+            "name": "lights"
+          }
+        ]
+      }
+    ]
+  },
+  "icao": "CRJX",
+  "title": "DeltaWing CRJs"
+}
