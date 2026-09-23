@@ -177,12 +177,23 @@ function ngFlowItem:render(type)
 			imgui.TableSetColumnIndex(1) ng_imgui_out_text(getItemColor(self), self:getLine(60))
 			imgui.TableSetColumnIndex(0) ng_imgui_out_text(getItemColor(self), "")
 		end
+		return ""
 	end
+	
 	if type == "i" then
 		if self:isSimUser() then
 			ng_imgui_out_text(getItemColor(self), self:getLine(59))
 		else
 			ng_imgui_out_text(getItemColor(self), "  "..self:getLine(59))
+		end
+		
+	end 
+	if type == "t" then
+		local cltext = ""
+		if self:isSimUser() then
+			return self:getLine(59) .. "\n"
+		else
+			return "  "..self:getLine(59) .. "\n"
 		end
 	end 
 end

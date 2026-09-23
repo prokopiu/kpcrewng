@@ -203,7 +203,8 @@ function ngSOP:load()
 end
 
 --- Output and render functions
--- @param type string - f=full display, i=for SOP window
+-- @param type string - f=full display, i=for SOP window, t=text only
+-- @return text if type t or html if type h
 function ngSOP:render(type)
 	
 	if type == "f" then 
@@ -225,6 +226,7 @@ function ngSOP:render(type)
 				end
 			end
 		end
+		return ""
 	end
 	
 -- render list of flows in SOP window
@@ -282,7 +284,23 @@ function ngSOP:render(type)
 				end
 			end
 		end
+		return ""
 	end		
+
+	if type == "t" then 
+		local cltext = ""
+		for k, flow in ipairs(self.flows) do
+			if flow:getFlightPhase() ~= nil and flow:getFlightPhase() >= 0 then
+				if flow:getClassName() ~= "StateFlow" and flow:getClassName() ~= "BackgroundFlow" then 
+					cltext = cltext .. flow:render("t")
+				end
+			end
+		end
+		cltext = string.gsub(cltext, "<", "[")
+		cltext = string.gsub(cltext, ">", "]")
+		print(cltext)
+		return cltext
+	end
 
 end
 

@@ -145,7 +145,7 @@ end
 -- Output and render functions
 
 --- render the items of this flow
--- @param char "f"=SOP View 2 columns, "i"=SOP window view 
+-- @param char "f"=SOP View 2 columns, "i"=SOP window view, "t"=text only
 function ngFlow:render(type)
 	if type == "f" then
 		imgui.BeginTable(self:getTitle(),2,color_white)
@@ -166,7 +166,9 @@ function ngFlow:render(type)
 			end
 		end
 		imgui.EndTable()
+		return ""
 	end
+	
 	if type == "i" then
 		for _, item in pairs(self.items) do
 			if item:getItemNode().condition ~= nil then
@@ -177,6 +179,21 @@ function ngFlow:render(type)
 				item:render("i")
 			end
 		end
+		return ""
+	end
+	
+	if type == "t" then
+		local cltext = ""
+		for _, item in pairs(self.items) do
+			if item:getItemNode().condition ~= nil then
+				if loadstring("return "..item:getItemNode().condition)() then 
+					cltext = cltext .. item:render("t")
+				end
+			else
+				cltext = cltext .. item:render("t")
+			end
+		end
+		return cltext
 	end
 end
 
