@@ -846,12 +846,7 @@
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "AS REQUIRED",
             "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
+            "setelements": {}
           },
           {
             "challenge": "GEAR HANDLE",
@@ -949,12 +944,7 @@
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "______ KG/LB",
             "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
+            "setelements": {}
           },
           {
             "challenge": "ALTIMETERS",
@@ -962,12 +952,7 @@
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "______",
             "role": "ng_firole_BOTH",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
+            "setelements": {}
           },
           {
             "challenge": "OXYGEN",
@@ -1195,8 +1180,9 @@
             "role": "ng_firole_FO",
             "setelements": [
               {
-                "action": "on",
-                "element": "#bleeds"
+                "action": "set",
+                "element": "#bleeds",
+                "value": 0
               }
             ]
           },
@@ -1750,12 +1736,7 @@
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "SET",
             "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
+            "setelements": {}
           },
           {
             "challenge": "TAKEOFF DATA & BUGS",
@@ -1763,12 +1744,7 @@
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "SET",
             "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
+            "setelements": {}
           },
           {
             "challenge": "AUTO COARSEN",
@@ -1844,12 +1820,7 @@
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "SET & CHECKED",
             "role": "ng_firole_CPT",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
+            "setelements": {}
           },
           {
             "challenge": "AIR CONDITIONING",
@@ -1861,7 +1832,7 @@
               {
                 "action": "set",
                 "element": "#bleeds",
-                "value": 1
+                "value": 0
               },
               {
                 "action": "set",
@@ -2044,12 +2015,7 @@
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
             "response": "CROSSCHECKED",
             "role": "ng_firole_BOTH",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
-              }
-            ]
+            "setelements": {}
           },
           {
             "challenge": "BRAKES",
@@ -2101,7 +2067,7 @@
             ]
           },
           {
-            "challenge": "AUTOPILOT",
+            "challenge": "*AUTOPILOT",
             "classname": "ProcedureItem",
             "response": "SET AS REQUIRED",
             "role": "ng_firole_CPT",
@@ -3880,7 +3846,6 @@
           {
             "challenge": "*BEACON",
             "classname": "ProcedureItem",
-            "delay": 5,
             "response": "OFF",
             "role": "ng_firole_CPT",
             "setelements": [

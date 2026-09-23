@@ -72,6 +72,66 @@
         }
       },
       {
+        "name": "DeltaWing CRJ 900",
+        "planeicao": "CRJ900",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "CRJX",
+          "sopicao": "CRJX",
+          "sysicao": "CRJX"
+        }
+      },
+      {
+        "name": "FlightFactor 757-200",
+        "planeicao": "B752",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "B7X7",
+          "sopicao": "B7X7",
+          "sysicao": "B7X7"
+        }
+      },
+      {
+        "name": "FlightFactor 757-300",
+        "planeicao": "B753",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "B7X7",
+          "sopicao": "B7X7",
+          "sysicao": "B7X7"
+        }
+      },
+      {
+        "name": "FlightFactor 767-200",
+        "planeicao": "B762",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "B7X7",
+          "sopicao": "B7X7",
+          "sysicao": "B7X7"
+        }
+      },
+      {
+        "name": "FlightFactor 767-300",
+        "planeicao": "B763",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "B7X7",
+          "sopicao": "B7X7",
+          "sysicao": "B7X7"
+        }
+      },
+      {
+        "name": "FlightFactor 767-400",
+        "planeicao": "B764",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "B7X7",
+          "sopicao": "B7X7",
+          "sysicao": "B7X7"
+        }
+      },
+      {
         "name": "Laminar A330",
         "planeicao": "A333",
         "planetailnum": "",
@@ -219,6 +279,16 @@
           "preficao": "B738",
           "sopicao": "B737",
           "sysicao": "B737"
+        }
+      },
+      {
+        "name": "mSparks B747-400",
+        "planeicao": "B744",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "B747",
+          "sopicao": "B747",
+          "sysicao": "B747"
         }
       }
     ]

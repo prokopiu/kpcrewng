@@ -3097,6 +3097,34 @@
                 "name": "spdchkflapup",
                 "title": "speak text",
                 "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"starting engine 1\") end",
+                "name": "startineng1",
+                "title": "starting engine 1",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"starting engine 2\") end",
+                "name": "startineng2",
+                "title": "starting engine 2",
+                "type": "custom"
               }
             ],
             "name": "speak"
@@ -3255,6 +3283,25 @@
             "elements": [
               {
                 "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/HydOHPArray",
+                "indx": 3,
+                "name": "elechydpmpx",
+                "title": "<title>",
+                "type": "dataref"
+              }
+            ],
+            "name": "a340elechydpmps"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
                   "chk",
                   " ",
                   " ",
@@ -3280,23 +3327,9 @@
                   "set"
                 ],
                 "dref": "AirbusFBW/HydOHPArray",
-                "indx": 5,
+                "indx": 2,
                 "name": "elechydpump1",
-                "title": "Electric Hydraulic Pump 1",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  "set"
-                ],
-                "dref": "AirbusFBW/HydOHPArray",
-                "indx": 9,
-                "name": "elechydpump2",
-                "title": "Electric Hydraulic Pump 2",
+                "title": "Electric Hydraulic Pump Blue",
                 "type": "dataref"
               },
               {
@@ -3309,8 +3342,8 @@
                 ],
                 "dref": "AirbusFBW/HydOHPArray",
                 "indx": 3,
-                "name": "elechydpump3",
-                "title": "Electric Hydraulic Pump 3",
+                "name": "elechydpump2",
+                "title": "Electric Hydraulic Pump Yellow",
                 "type": "dataref"
               }
             ],
@@ -3380,9 +3413,18 @@
           {
             "elements": [
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "AirbusFBW/HydOHPArray",
+                "indx": 4,
                 "name": "ptu1",
                 "title": "Hydraulic PTU",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "ptus"

@@ -139,7 +139,7 @@
             "setelements": [
               {
                 "action": "set",
-                "element": "wxradarstate",
+                "element": "wxrmode",
                 "value": 1
               }
             ]
@@ -151,8 +151,9 @@
             "role": "ng_firole_CM2",
             "setelements": [
               {
-                "action": "off",
-                "element": "wxpws"
+                "action": "set",
+                "element": "wxpws",
+                "value": 0
               }
             ]
           },
@@ -879,6 +880,7 @@
             "challenge": "ADIRS MODE SELECTORS",
             "classname": "ChecklistItem",
             "condition": "ng_getAppPrefs():get(\"general:usechecklist\")",
+            "delay": 1,
             "response": "NAV",
             "role": "ng_firole_CM2",
             "setelements": [
@@ -1327,6 +1329,10 @@
                 "action": "chk",
                 "element": "_eng1n2",
                 "fcheck": "function (a) return a>50 end"
+              },
+              {
+                "action": "set",
+                "element": "startineng1"
               }
             ]
           },
@@ -1357,6 +1363,10 @@
                 "action": "chk",
                 "element": "_eng2n2",
                 "fcheck": "function (a) return a>50 end"
+              },
+              {
+                "action": "set",
+                "element": "startineng2"
               }
             ]
           },
@@ -1640,7 +1650,7 @@
           }
         ],
         "phase": "ng_phase_before_start",
-        "title": "BEFORE TAXI"
+        "title": "ENGINE START"
       },
       {
         "classname": "ProcedureFlow",
@@ -3467,7 +3477,7 @@
               {
                 "action": "chk",
                 "element": "wxrmode",
-                "value": 0
+                "value": 1
               }
             ]
           },
@@ -3603,8 +3613,8 @@
             "role": "ng_firole_CM1",
             "setelements": [
               {
-                "action": "chk",
-                "element": "wait"
+                "action": "off",
+                "element": "elechydpump2"
               }
             ]
           },
@@ -3936,7 +3946,13 @@
             "classname": "ChecklistItem",
             "response": "OFF",
             "role": "ng_firole_CM1",
-            "setelements": {}
+            "setelements": [
+              {
+                "action": "chk",
+                "element": "elechydpump2",
+                "value": 0
+              }
+            ]
           },
           {
             "challenge": "PARKING CHECKLIST",
