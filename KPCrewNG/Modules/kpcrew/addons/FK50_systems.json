@@ -1173,6 +1173,19 @@
               },
               {
                 "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/flightmodel/position/y_agl",
+                "name": "_agl",
+                "title": "Altitude above ground",
+                "type": "dataref"
+              },
+              {
+                "acts": [
                   "chk"
                 ],
                 "dref": "sim/cockpit2/gauges/indicators/altitude_ft_pilot",
@@ -2476,8 +2489,8 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  " ",
+                  " "
                 ],
                 "cmdtgl": "sim/flight_controls/toggle_chocks",
                 "dref": "sim/flightmodel2/gear/is_chocked",
@@ -2489,15 +2502,16 @@
               {
                 "acts": [
                   "on",
-                  " ",
+                  "off",
                   " ",
                   " ",
                   ""
                 ],
                 "cmdtgl": "openSAM/toggle_jwy",
                 "dref": "opensam/jetway/status",
-                "fcheck": "function (a) return a==2 end",
-                "fon": "function (a) if a~= 2 then command_once(\"openSAM/toggle_jwy\") end end",
+                "foff": "function (a) command_once(\"openSAM/undock_jwy\") end",
+                "fon": "function (a) command_once(\"openSAM/dock_jwy\") end",
+                "ftrans": "function (a) if a==2 then return 1 else return 0 end end",
                 "name": "samjetwaydock",
                 "title": "Dock openSAM jetway",
                 "type": "custom"
@@ -2505,34 +2519,17 @@
               {
                 "acts": [
                   "on",
-                  " ",
-                  " ",
+                  "off",
+                  "chk",
                   " ",
                   " "
                 ],
-                "cmdtgl": "openSAM/toggle_jwy",
-                "dref": "opensam/jetway/status",
-                "fcheck": "function (a) return a==1 end",
-                "fon": "function (a) if a == 2 then command_once(\"openSAM/toggle_jwy\") end end",
-                "name": "samjetwayundock",
-                "title": "Undock openSAM jetway",
+                "foff": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 1 then command_once(\"sim/ground_ops/jetway\") ng_getBckVars():set(\"general:sgesstairs\",0) end end",
+                "fon": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 0 then command_once(\"sim/ground_ops/jetway\") ng_getBckVars():set(\"general:sgesstairs\",1) end end",
+                "ftrans": "function (a) return ng_getBckVars():get(\"general:sgesstairs\") end",
+                "name": "xpjetwaydock",
+                "title": "Dock XP jetway",
                 "type": "custom"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "set",
-                  "chk"
-                ],
-                "cmdtgl": "sim/flight_controls/toggle_chocks",
-                "dref": "thranda/views/staticelements",
-                "foff": "function (a) return 1 end",
-                "fon": "function (a) return 0 end",
-                "name": "staticelements",
-                "title": "Chocks",
-                "type": "dataref"
               }
             ],
             "name": "external"
@@ -2722,6 +2719,40 @@
               }
             ],
             "name": "simulator"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "params/stairs",
+                "name": "externalstairs",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  " ",
+                  " "
+                ],
+                "cmdtgl": "Simple_Ground_Equipment_and_Services/Toggle/StairsXPJ",
+                "foff": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 1 then command_once(\"Simple_Ground_Equipment_and_Services/Toggle/StairsXPJ\") ng_getBckVars():set(\"general:sgesstairs\",0) end end",
+                "fon": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 0 then command_once(\"Simple_Ground_Equipment_and_Services/Toggle/StairsXPJ\") ng_getBckVars():set(\"general:sgesstairs\",1) end end",
+                "ftrans": "function (a) return ng_getBckVars():get(\"general:sgesstairs\") end",
+                "name": "sgesstairs",
+                "title": "SGES Nark III",
+                "type": "custom"
+              }
+            ],
+            "name": "stairs"
           },
           {
             "elements": [
@@ -3620,25 +3651,6 @@
               }
             ],
             "name": "gustlock"
-          },
-          {
-            "elements": [
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "set",
-                  "chk"
-                ],
-                "dref": "sim/cockpit2/switches/door_open_ratio",
-                "indx": 2,
-                "name": "stairs",
-                "title": "Pax stairs",
-                "type": "dataref"
-              }
-            ],
-            "name": "stairs"
           },
           {
             "elements": [

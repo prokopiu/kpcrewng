@@ -27,9 +27,35 @@
                   "set",
                   "chk"
                 ],
+                "dref": "anim/41/button/anim",
+                "name": "engaice1l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
                 "dref": "anim/42/button",
                 "name": "engaice2",
                 "title": "Engine Antiice 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/42/button/anim",
+                "name": "engaice2l",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -45,8 +71,8 @@
                   "chk",
                   ""
                 ],
-                "cmdtgl": "laminar/B738/toggle_switch/capt_probes_pos",
-                "dref": "laminar/B738/toggle_switch/capt_probes_pos",
+                "cmdtgl": "",
+                "dref": "",
                 "name": "probeheat1",
                 "title": "Probe Heat 1",
                 "type": "undefined"
@@ -59,8 +85,8 @@
                   "chk",
                   ""
                 ],
-                "cmdtgl": "laminar/B738/toggle_switch/fo_probes_pos",
-                "dref": "laminar/B738/toggle_switch/fo_probes_pos",
+                "cmdtgl": "",
+                "dref": "",
                 "name": "probeheat2",
                 "title": "Probe Heat 2",
                 "type": "undefined"
@@ -78,10 +104,22 @@
                   "set",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/toggle_switch/window_heat_l_side",
                 "dref": "anim/47/button",
                 "name": "windowheat1",
                 "title": "Window Heat 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/47/button/anim",
+                "name": "windowheat1l",
+                "title": "<title>",
                 "type": "dataref"
               },
               {
@@ -105,6 +143,19 @@
                   "set",
                   "chk"
                 ],
+                "dref": "anim/48/button/anim",
+                "name": "windowheat2l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
                 "dref": "anim/49/button",
                 "name": "windowheat3",
                 "title": "Window Heat 3",
@@ -118,9 +169,35 @@
                   "set",
                   "chk"
                 ],
+                "dref": "anim/49/button/anim",
+                "name": "windowheat3l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
                 "dref": "anim/50/button",
                 "name": "windowheat4",
                 "title": "Window Heat 4",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/50/button/anim",
+                "name": "windowheat4l",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -140,6 +217,19 @@
                 "name": "wingaice1",
                 "title": "Wing Anti Ice 1",
                 "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/40/button/anim",
+                "name": "wingaice1l",
+                "title": "<title>",
+                "type": "dataref"
               }
             ],
             "name": "wingaice"
@@ -153,6 +243,27 @@
             "elements": [
               {
                 "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "1-sim/press/landingAltitudeSelector",
+                "incr": 1,
+                "max": 10,
+                "min": -5,
+                "name": "landingalt",
+                "title": "<title>",
+                "type": "dialdref"
+              }
+            ],
+            "name": "altitudes"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
                   "on",
                   "off",
                   "tgl",
@@ -162,6 +273,19 @@
                 "dref": "anim/61/button",
                 "name": "apubleed",
                 "title": "APU Bleed on/off",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/61/button/anim",
+                "name": "apubleedl",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -190,9 +314,35 @@
                   "set",
                   "chk"
                 ],
-                "dref": "anim/61/button",
+                "dref": "anim/60/button/anim",
+                "name": "bleed1l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/62/button",
                 "name": "bleed2",
                 "title": "Engine Bleed 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/62/button/anim",
+                "name": "bleed2l",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -228,10 +378,22 @@
                   "set",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/toggle_switch/eq_cool_exhaust",
                 "dref": "anim/51/button",
                 "name": "equipcool1",
                 "title": "Equipment Cooling Exhaust",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/51/button/anim",
+                "name": "equipcool1l",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -264,6 +426,71 @@
                 "name": "isovalve1",
                 "title": "Isolation Valve 1",
                 "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/59/button/anim",
+                "name": "isovalve1l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/87/button",
+                "name": "isovalve2",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/87/button/anim",
+                "name": "isovalve2l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/90/button",
+                "name": "isovalve3",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/90/button/anim",
+                "name": "isovalve3l",
+                "title": "<title>",
+                "type": "dataref"
               }
             ],
             "name": "isovalves"
@@ -278,9 +505,7 @@
                   "chk",
                   ""
                 ],
-                "cmdoff": "laminar/B738/one_way_switch/pax_oxy_norm",
-                "cmdon": "laminar/B738/one_way_switch/pax_oxy_on",
-                "dref": "laminar/B738/one_way_switch/pax_oxy_pos",
+                "dref": "",
                 "name": "oxygen1",
                 "title": "Oxygen Master",
                 "type": "undefined"
@@ -314,12 +539,44 @@
                   "chk",
                   ""
                 ],
+                "dref": "1-sim/cond/leftPackSelector/anim",
+                "incr": 1,
+                "max": 4,
+                "min": 0,
+                "name": "pack1l",
+                "title": "<title>",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
                 "dref": "1-sim/cond/rightPackSelector",
                 "incr": 1,
                 "max": 4,
                 "min": 0,
                 "name": "pack2",
                 "title": "Pack 2",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "1-sim/cond/rightPackSelector/anim",
+                "incr": 1,
+                "max": 4,
+                "min": 0,
+                "name": "pack2l",
+                "title": "<title>",
                 "type": "dialdref"
               }
             ],
@@ -351,9 +608,7 @@
                   "set",
                   "chk"
                 ],
-                "cmddn": "laminar/B738/knob/land_alt_press_dn",
-                "cmdup": "laminar/B738/knob/land_alt_press_up",
-                "dref": "laminar/B738/pressurization/knobs/landing_alt",
+                "dref": "",
                 "incr": 10,
                 "max": 13600,
                 "min": -1000,
@@ -375,6 +630,22 @@
                 "min": 0,
                 "name": "prsmodeselector",
                 "title": "Pressurization Mode Selector",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "1-sim/press/modeSelector/anim",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "prsmodeselectorl",
+                "title": "<title>",
                 "type": "dialdref"
               }
             ],
@@ -403,9 +674,35 @@
                   "set",
                   "chk"
                 ],
+                "dref": "anim/55/button/anim",
+                "name": "recircfan1l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
                 "dref": "anim/56/button",
                 "name": "recircfan2",
                 "title": "Recirc Fan 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/56/button/anim",
+                "name": "recircfan2l",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -469,6 +766,19 @@
                 "name": "trimair1",
                 "title": "Trim Air Switch 1",
                 "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/54/button/anim",
+                "name": "trimair1l",
+                "title": "<title>",
+                "type": "dataref"
               }
             ],
             "name": "trimair"
@@ -484,37 +794,88 @@
                 "acts": [
                   "up",
                   "dn",
-                  "chk",
                   "set",
+                  "chk",
                   ""
                 ],
-                "cmddn": "laminar/B738/toggle_switch/irs_L_left",
-                "cmdup": "laminar/B738/toggle_switch/irs_L_right",
-                "dref": "laminar/B738/toggle_switch/irs_left",
+                "dref": "anim/rhotery/3",
                 "incr": 1,
                 "max": 3,
                 "min": 0,
                 "name": "adiru1",
                 "title": "IRS Unit 1",
-                "type": "dialcmd"
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/rhotery/3/anim",
+                "name": "adiru1l",
+                "title": "<title>",
+                "type": "dataref"
               },
               {
                 "acts": [
                   "up",
                   "dn",
-                  "chk",
                   "set",
+                  "chk",
                   ""
                 ],
-                "cmddn": "laminar/B738/toggle_switch/irs_R_left",
-                "cmdup": "laminar/B738/toggle_switch/irs_R_right",
-                "dref": "laminar/B738/toggle_switch/irs_right",
+                "dref": "anim/rhotery/4",
                 "incr": 1,
                 "max": 3,
                 "min": 0,
                 "name": "adiru2",
                 "title": "IRS Unit 2",
-                "type": "dialcmd"
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/rhotery/4/anim",
+                "name": "adiru2l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "anim/rhotery/5",
+                "incr": 1,
+                "max": 3,
+                "min": 0,
+                "name": "adiru3",
+                "title": "IRS Unit 3",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/rhotery/5/anim",
+                "name": "adiru3l",
+                "title": "<title>",
+                "type": "dataref"
               }
             ],
             "name": "adirus"
@@ -529,11 +890,11 @@
                   " ",
                   " "
                 ],
-                "dref": "laminar/B738/autopilot/cmd_a_status",
+                "dref": "",
                 "fcheck": "function (a) return a>0 end",
                 "name": "_ap1state",
                 "title": "AP1 state",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -543,11 +904,11 @@
                   " ",
                   " "
                 ],
-                "dref": "laminar/B738/autopilot/cmd_b_status",
+                "dref": "",
                 "fcheck": "function (a) return a>0 end",
                 "name": "_ap2state",
                 "title": "AP2 state",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -556,11 +917,10 @@
                   "tgl",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/autopilot/cmd_a_press",
-                "dref": "laminar/B738/autopilot/cmd_a_status",
+                "dref": "",
                 "name": "ap1",
                 "title": "CMD A",
-                "type": "onofftgl"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -569,18 +929,22 @@
                   "tgl",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/autopilot/cmd_b_press",
-                "dref": "laminar/B738/autopilot/cmd_b_status",
+                "dref": "",
                 "name": "ap2",
                 "title": "CMD B",
-                "type": "onofftgl"
+                "type": "undefined"
               },
               {
                 "acts": [
-                  "tgl"
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
                 ],
-                "cmdtgl": "laminar/B738/autopilot/capt_disco_press",
-                "dref": "laminar/B738/autopilot/cmd_a_status",
+                "cmdtgl": "1-sim/comm/AP/ap_disc",
+                "dref": "",
+                "fcheck": "function (a) return true end",
                 "name": "yokedisc",
                 "title": "Yoke disc",
                 "type": "onofftgl"
@@ -592,10 +956,29 @@
             "elements": [
               {
                 "acts": [
-                  "tgl"
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
                 ],
-                "cmdtgl": "laminar/B738/autopilot/left_toga_press",
-                "dref": "laminar/B738/autopilot/ap_takeoff",
+                "cmdtgl": "1-sim/comm/AP/at_disc",
+                "fcheck": "function (a) return true end",
+                "name": "athrdisc",
+                "title": "Autothrottle",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
+                ],
+                "cmdtgl": "1-sim/comm/AP/at_toga",
+                "dref": "",
+                "fcheck": "function (a) return true end",
                 "name": "athrtogamode",
                 "title": "TOGA Mode button",
                 "type": "onofftgl"
@@ -605,13 +988,16 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
+                  "chk",
+                  "set"
                 ],
-                "cmdtgl": "laminar/B738/autopilot/autothrottle_arm_toggle",
-                "dref": "laminar/B738/autopilot/autothrottle_arm_pos",
+                "dref": "1-sim/AP/atSwitcher",
+                "foff": "function (a) set(\"1-sim/AP/atSwitcher\",1) end",
+                "fon": "function (a) set(\"1-sim/AP/atSwitcher\",0) end",
+                "ftrans": "function (a) return 1-a end",
                 "name": "autothrottle",
-                "title": "Autothrottle",
-                "type": "onofftgl"
+                "title": "<title>",
+                "type": "custom"
               }
             ],
             "name": "autothrust"
@@ -626,8 +1012,12 @@
                   "chk",
                   ""
                 ],
-                "cmdtgl": "laminar/B738/autopilot/flight_director_toggle",
-                "dref": "laminar/B738/autopilot/flight_director_pos",
+                "cmdtgl": "1-sim/command/AP/fd1Switcher_trigger",
+                "dref": "1-sim/AP/fd1Switcher",
+                "foff": "function (a) set(\"1-sim/AP/fd1Switcher\",1) end",
+                "fon": "function (a) set(\"1-sim/AP/fd1Switcher\",0) end",
+                "ftgl": "function (a) if set(\"1-sim/AP/fd1Switcher\",1-a) end",
+                "ftrans": "function (a) return 1-a end",
                 "name": "flightdir1",
                 "title": "FD 1",
                 "type": "onofftgl"
@@ -640,8 +1030,12 @@
                   "chk",
                   ""
                 ],
-                "cmdtgl": "laminar/B738/autopilot/flight_director_fo_toggle",
-                "dref": "laminar/B738/autopilot/flight_director_fo_pos",
+                "cmdtgl": "1-sim/command/AP/fd2Switcher_trigger",
+                "dref": "1-sim/AP/fd2Switcher",
+                "foff": "function (a) set(\"1-sim/AP/fd2Switcher\",1) end",
+                "fon": "function (a) set(\"1-sim/AP/fd2Switcher\",0) end",
+                "ftgl": "function (a) if set(\"1-sim/AP/fd2Switcher\",1-a) end",
+                "ftrans": "function (a) return 1-a end",
                 "name": "flightdir2",
                 "title": "FD 2",
                 "type": "onofftgl"
@@ -653,13 +1047,13 @@
             "elements": [
               {
                 "acts": [
-                  "chk",
                   " ",
                   " ",
                   " ",
-                  " "
+                  " ",
+                  "chk"
                 ],
-                "dref": "laminar/B738/autopilot/alt_hld_status",
+                "dref": "1-sim/AP/lamp/8",
                 "fcheck": "function (a) return a>0 end",
                 "name": "_alt",
                 "title": "ALT mode",
@@ -667,13 +1061,13 @@
               },
               {
                 "acts": [
-                  "chk",
                   " ",
                   " ",
                   " ",
-                  " "
+                  " ",
+                  "chk"
                 ],
-                "dref": "laminar/B738/autopilot/app_status",
+                "dref": "1-sim/AP/lamp/10",
                 "fcheck": "function (a) return a>0 end",
                 "name": "_appr",
                 "title": "APPR annunciator",
@@ -681,28 +1075,28 @@
               },
               {
                 "acts": [
-                  "chk",
                   " ",
                   " ",
                   " ",
-                  " "
+                  " ",
+                  "chk"
                 ],
-                "dref": "laminar/B738/autopilot/hdg_sel_status",
-                "fcheck": "function (a) return a==1 end",
+                "dref": "1-sim/AP/hdgConfButton",
+                "fcheck": "function (a) return a==0 end",
                 "name": "_hdg",
                 "title": "HDG mode",
                 "type": "dataref"
               },
               {
                 "acts": [
-                  "chk",
                   " ",
                   " ",
                   " ",
-                  " "
+                  " ",
+                  "chk"
                 ],
-                "dref": "laminar/B738/autopilot/speed_status1",
-                "fcheck": "function (a) return a==1 end",
+                "dref": "1-sim/AP/lamp/2",
+                "fcheck": "function (a) return a>0 end",
                 "name": "_ias",
                 "title": "IAS mode",
                 "type": "dataref"
@@ -715,36 +1109,36 @@
                   " ",
                   " "
                 ],
-                "dref": "laminar/B738/autopilot/lnav_status",
-                "fcheck": "function (a) return a==1 end",
+                "dref": "1-sim/AP/lamp/3",
+                "fcheck": "function (a) return a>0 end",
                 "name": "_lnav",
                 "title": "LNAV mode",
                 "type": "dataref"
               },
               {
                 "acts": [
-                  "chk",
                   " ",
                   " ",
                   " ",
-                  " "
+                  " ",
+                  "chk"
                 ],
-                "dref": "laminar/B738/autopilot/vorloc_status",
-                "fcheck": "function (a) return a>0 end",
+                "dref": "1-sim/AP/lamp/9",
+                "fcheck": "function (a) return a==0 end",
                 "name": "_loc",
                 "title": "LOC mode annunciator",
                 "type": "dataref"
               },
               {
                 "acts": [
-                  "chk",
-                  " ",
-                  " ",
-                  " ",
-                  " "
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
                 ],
-                "dref": "laminar/B738/autopilot/n1_status",
-                "fcheck": "function (a) return a==1 end",
+                "dref": "1-sim/AP/lamp/1",
+                "fcheck": "function (a) return a>0 end",
                 "name": "_n1",
                 "title": "N1 mode",
                 "type": "dataref"
@@ -757,21 +1151,21 @@
                   " ",
                   " "
                 ],
-                "dref": "laminar/B738/autopilot/vnav_status1",
-                "fcheck": "function (a) return a==0 end",
+                "dref": "1-sim/AP/lamp/4",
+                "fcheck": "function (a) return a>0 end",
                 "name": "_vnav",
                 "title": "VNAV mode",
                 "type": "dataref"
               },
               {
                 "acts": [
-                  "chk",
-                  " ",
-                  " ",
-                  " ",
-                  " "
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
                 ],
-                "dref": "laminar/B738/autopilot/vs_status",
+                "dref": "1-sim/AP/lamp/7",
                 "fcheck": "function (a) return a>0 end",
                 "name": "_vsp",
                 "title": "VSP mode",
@@ -782,13 +1176,13 @@
                   "on",
                   "off",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/autopilot/alt_hld_press",
-                "dref": "laminar/B738/autopilot/alt_hld_status",
+                "dref": "1-sim/AP/altHoldButton",
                 "name": "althold",
                 "title": "Altitude Hold",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -810,24 +1204,23 @@
                   "tgl",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/autopilot/disconnect_toggle",
                 "dref": "laminar/B738/autopilot/disconnect_pos",
                 "name": "apdisengage",
                 "title": "A/P Disengage",
-                "type": "onofftgl"
+                "type": "undefined"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/autopilot/app_press",
-                "dref": "laminar/B738/autopilot/app_status",
+                "dref": "1-sim/AP/appButton",
                 "name": "approach",
                 "title": "Approach mode",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "name": "bankanglesel",
@@ -841,24 +1234,24 @@
                   "tgl",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/autopilot/lvl_chg_press",
                 "dref": "laminar/B738/autopilot/lvl_chg_status",
                 "name": "flch",
                 "title": "Level Change",
-                "type": "onofftgl"
+                "type": "undefined"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/autopilot/hdg_sel_press",
-                "dref": "laminar/B738/autopilot/hdg_sel_status",
+                "dref": "1-sim/AP/hdgConfButton",
+                "fcheck": "function (a) return a==0 end",
                 "name": "hdghold",
                 "title": "Heading Hold",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "name": "hdgtrk",
@@ -872,66 +1265,71 @@
                   "tgl",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/autopilot/change_over_press",
                 "dref": "laminar/B738/autopilot/change_over_pos",
                 "name": "iasmach",
                 "title": "IAR Mach Switch",
-                "type": "onofftgl"
+                "type": "undefined"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/autopilot/lnav_press",
-                "dref": "laminar/B738/autopilot/lnav_status",
+                "dref": "1-sim/AP/lnavButton",
                 "name": "lnavmode",
                 "title": "LNAV",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/autopilot/vnav_press",
-                "dref": "laminar/B738/autopilot/vnav_status1",
-                "name": "vnavmode",
-                "title": "VNAV",
-                "type": "onofftgl"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
-                "cmdtgl": "laminar/B738/autopilot/vorloc_press",
-                "dref": "laminar/B738/autopilot/vorloc_status",
-                "fcheck": "function (a) return true end",
+                "dref": "1-sim/AP/locButton",
                 "name": "navhold",
                 "title": "Nav Hold",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/autopilot/speed_press",
-                "dref": "laminar/B738/autopilot/speed_status1",
+                "dref": "1-sim/AP/spdButton",
                 "name": "spdmode",
                 "title": "SPD mode",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/AP/vnavButton",
+                "name": "vnavmode",
+                "title": "VNAV",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
                 "name": "vsfpa",
                 "title": "VS FPA Switch",
                 "type": "undefined"
@@ -941,13 +1339,13 @@
                   "on",
                   "off",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/autopilot/vs_press",
-                "dref": "laminar/B738/autopilot/vs_status",
+                "dref": "1-sim/AP/vviButton",
                 "name": "vspmode",
                 "title": "Vertical Speed mode",
-                "type": "onofftgl"
+                "type": "dataref"
               }
             ],
             "name": "modes"
@@ -958,88 +1356,95 @@
                 "acts": [
                   "up",
                   "dn",
-                  "set",
                   "chk",
+                  "set",
                   ""
                 ],
-                "cmddn": "sim/autopilot/altitude_down",
-                "cmdup": "sim/autopilot/altitude_up",
-                "dref": "laminar/B738/autopilot/mcp_alt_dial",
-                "incr": 50,
+                "cmddn": "1-sim/comm/AP/altDN",
+                "cmdup": "1-sim/comm/AP/altUP",
+                "dref": "757Avionics/ap/alt_act",
+                "incr": 100,
                 "max": 49000,
                 "min": 0,
                 "name": "altsel",
                 "title": "A/P Altitude",
-                "type": "dialdref"
+                "type": "dialcmd"
               },
               {
                 "acts": [
                   "up",
                   "dn",
-                  "set",
                   "chk",
+                  "set",
                   ""
                 ],
-                "cmddn": "laminar/B738/autopilot/course_pilot_dn",
-                "cmdup": "laminar/B738/autopilot/course_pilot_up",
-                "dref": "laminar/B738/autopilot/course_pilot",
+                "cmddn": "1-sim/comm/vor1crsRotaryDN",
+                "cmdup": "1-sim/comm/vor1crsRotaryUP",
+                "dref": "sim/cockpit2/radios/actuators/nav_obs_deg_mag_pilot",
+                "ftrans": "function (a) return string.format(\"%3.0f\",a)+0 end",
                 "incr": 1,
+                "indx": 0,
                 "max": 359,
                 "min": -1,
                 "name": "crs1",
                 "title": "Course 1",
-                "type": "dialdref"
+                "type": "dialcmd"
               },
               {
                 "acts": [
                   "up",
                   "dn",
-                  "set",
                   "chk",
+                  "set",
                   ""
                 ],
-                "cmddn": "laminar/B738/autopilot/course_copilot_dn",
-                "cmdup": "laminar/B738/autopilot/course_copilot_up",
-                "dref": "laminar/B738/autopilot/course_copilot",
+                "cmddn": "1-sim/comm/vor2crsRotaryDN",
+                "cmdup": "1-sim/comm/vor2crsRotaryUP",
+                "dref": "sim/cockpit2/radios/actuators/nav_obs_deg_mag_pilot",
+                "ftrans": "function (a) return string.format(\"%3.0f\",a)+0 end",
                 "incr": 1,
+                "indx": 2,
                 "max": 359,
                 "min": -1,
                 "name": "crs2",
                 "title": "Course 2",
-                "type": "dialdref"
+                "type": "dialcmd"
               },
               {
                 "acts": [
-                  "set",
-                  "dn",
                   "up",
-                  "chk"
+                  "dn",
+                  "chk",
+                  "set",
+                  ""
                 ],
-                "dref": "laminar/B738/autopilot/mcp_hdg_dial",
+                "cmddn": "1-sim/comm/AP/hdgDN",
+                "cmdup": "1-sim/comm/AP/hdgUP",
+                "dref": "757Avionics/ap/hdg_act",
                 "incr": 1,
                 "max": 361,
                 "min": -1,
                 "name": "hdgsel",
                 "title": "A/P Heading",
-                "type": "dialdref"
+                "type": "dialcmd"
               },
               {
                 "acts": [
                   "up",
                   "dn",
-                  "set",
                   "chk",
+                  "set",
                   ""
                 ],
-                "cmddn": "sim/autopilot/airspeed_down",
-                "cmdup": "sim/autopilot/airspeed_up",
-                "dref": "laminar/B738/autopilot/mcp_speed_dial_kts_mach",
+                "cmddn": "1-sim/comm/AP/spdDN",
+                "cmdup": "1-sim/comm/AP/spdUP",
+                "dref": "757Avionics/ap/spd_act",
                 "incr": 1,
                 "max": 999,
                 "min": 0,
                 "name": "speedsel",
                 "title": "A/P Speed",
-                "type": "dialdref"
+                "type": "dialcmd"
               },
               {
                 "acts": [
@@ -1051,16 +1456,283 @@
                 ],
                 "cmddn": "sim/autopilot/vertical_speed_down",
                 "cmdup": "sim/autopilot/vertical_speed_up",
-                "dref": "laminar/B738/autopilot/ap_vvi_pos",
                 "incr": 100,
                 "max": 7900,
                 "min": -7900,
                 "name": "vspsel",
                 "title": "A/P VSP",
-                "type": "dialdref"
+                "type": "undefined"
               }
             ],
             "name": "selectors"
+          }
+        ]
+      },
+      {
+        "name": "callouts",
+        "systems": [
+          {
+            "elements": [
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"Starting engine 1\") end",
+                "name": "spkstarteng1",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"Starting engine 2\") end",
+                "name": "spkstarteng2",
+                "title": "speak",
+                "type": "custom"
+              }
+            ],
+            "name": "engines"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 1\") end",
+                "name": "spkcheckflaps1",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 15\") end",
+                "name": "spkcheckflaps15",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 20\") end",
+                "name": "spkcheckflaps20",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 25\") end",
+                "name": "spkcheckflaps25",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 30\") end",
+                "name": "spkcheckflaps30",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 5\") end",
+                "name": "spkcheckflaps5",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"speed check flaps up\") end",
+                "name": "spkcheckflapsup",
+                "title": "speak",
+                "type": "custom"
+              }
+            ],
+            "name": "flaps"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"gear down\") end",
+                "name": "spkgeardown",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"gear up\") end",
+                "name": "spkgearup",
+                "title": "<title>",
+                "type": "custom"
+              }
+            ],
+            "name": "gears"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"then thousand\") end",
+                "name": "spk10k",
+                "title": "<title>",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"transition altitude\") end",
+                "name": "spktransalt",
+                "title": "<title>",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"transition level\") end",
+                "name": "spktranslvl",
+                "title": "<title>",
+                "type": "custom"
+              }
+            ],
+            "name": "transition"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "",
+                "fset": "function (a) ng_speakNoText(0, \"v 1\") end",
+                "name": "spkv1",
+                "title": "<title>",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"v 2\") end",
+                "name": "spkv2",
+                "title": "<title>",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"rotate\") end",
+                "name": "spkvr",
+                "title": "<title>",
+                "type": "custom"
+              }
+            ],
+            "name": "vspeeds"
           }
         ]
       },
@@ -1146,6 +1818,19 @@
               },
               {
                 "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/controls/elevator_trim",
+                "name": "elevtrim",
+                "title": "elevator trim",
+                "type": "dataref"
+              },
+              {
+                "acts": [
                   "set",
                   "chk"
                 ],
@@ -1192,9 +1877,35 @@
                   "set",
                   "chk"
                 ],
+                "dref": "anim/1/button/anim",
+                "name": "yawdamper1l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
                 "dref": "anim/2/button",
                 "name": "yawdamper2",
                 "title": "Yaw Damper 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/2/button/anim",
+                "name": "yawdamper2l",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -1229,6 +1940,19 @@
               },
               {
                 "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "sim/flightmodel/position/y_agl",
+                "name": "_agl",
+                "title": "Altitude above ground",
+                "type": "dataref"
+              },
+              {
+                "acts": [
                   "chk"
                 ],
                 "dref": "sim/cockpit2/gauges/indicators/altitude_ft_pilot",
@@ -1245,6 +1969,19 @@
                 "fcheck": "function (a) return a < ng_getBriefPrefs():get(\"destination:translvl\") end",
                 "name": "_belowtlvl",
                 "title": "below transition level",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "chk",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "dref": "1-sim/press/landingAltitude",
+                "name": "_landingAlt",
+                "title": "Landing Altitude",
                 "type": "dataref"
               }
             ],
@@ -1378,6 +2115,32 @@
                 "indx": 3,
                 "name": "_eng4n1gtoat",
                 "title": "Engine 4 N1 value > OAT",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/eng/N1/L",
+                "name": "_n1L",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/eng/N1/R",
+                "name": "_n1R",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -1547,28 +2310,26 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "laminar/B738/EFIS_control/capt/push_button/std_press",
-                "dref": "laminar/B738/EFIS/baro_set_std_pilot",
+                "dref": "1-sim/ng/baro/std/L",
                 "name": "barostd1",
                 "title": "Baro STD left",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "laminar/B738/EFIS_control/fo/push_button/std_press",
-                "dref": "laminar/B738/EFIS/baro_set_std_copilot",
+                "dref": "1-sim/ng/baro/std/R",
                 "name": "barostd2",
                 "title": "Baro STD right",
-                "type": "onofftgl"
+                "type": "dataref"
               }
             ],
             "name": "barostdbtns"
@@ -1577,15 +2338,15 @@
             "elements": [
               {
                 "acts": [
-                  "set",
+                  " ",
                   "dn",
                   "up",
                   "chk"
                 ],
                 "cmddn": "laminar/B738/pilot/barometer_down",
                 "cmdup": "laminar/B738/pilot/barometer_up",
-                "dref": "laminar/B738/EFIS/baro_sel_in_hg_pilot",
-                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
+                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0 end",
                 "incr": 0.01,
                 "max": 32,
                 "min": 22,
@@ -1595,15 +2356,15 @@
               },
               {
                 "acts": [
-                  "set",
+                  " ",
                   "dn",
                   "up",
                   "chk"
                 ],
                 "cmddn": "laminar/B738/copilot/barometer_down",
                 "cmdup": "laminar/B738/copilot/barometer_up",
-                "dref": "laminar/B738/EFIS/baro_sel_in_hg_copilot",
-                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_stby",
+                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0 end",
                 "incr": 0.01,
                 "max": 32,
                 "min": 22,
@@ -1613,21 +2374,22 @@
               },
               {
                 "acts": [
+                  "on",
+                  "off",
+                  "tgl",
                   "set",
-                  "dn",
-                  "up",
                   "chk"
                 ],
-                "cmddn": "laminar/B738/knob/standby_alt_baro_dn",
-                "cmdup": "laminar/B738/knob/standby_alt_baro_up",
-                "dref": "laminar/B738/knobs/standby_alt_baro",
-                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0.0 end",
-                "incr": 0.01,
-                "max": 32,
-                "min": 22,
+                "cmddn": "1-sim/command/gauges/baroRotary_stby_rotary-",
+                "cmdup": "1-sim/command/gauges/baroRotary_stby_rotary+",
+                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_stby",
+                "ftrans": "function (a) return string.format(\"%4.0f\",a)+0 end",
+                "incr": 1,
+                "max": 3200,
+                "min": 2200,
                 "name": "barovalue3",
                 "title": "Baro mode stby",
-                "type": "dialdref"
+                "type": "dataref"
               }
             ],
             "name": "barovalues"
@@ -1648,7 +2410,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "laminar/B738/pfd/dh_pilot",
+                "dref": "1-sim/ng/dhL",
                 "incr": 1,
                 "max": 999,
                 "min": 0,
@@ -1856,15 +2618,6 @@
                 "acts": [
                   "chk"
                 ],
-                "dref": "laminar/B738/annunciator/apu_gen_off_bus",
-                "name": "_apugenready",
-                "title": "APU Generator ready",
-                "type": "dataref"
-              },
-              {
-                "acts": [
-                  "chk"
-                ],
                 "dref": "sim/cockpit/engine/APU_N1",
                 "fcheck": "function (a) return a<2 end",
                 "name": "_apuoff",
@@ -1875,59 +2628,52 @@
                 "acts": [
                   "chk"
                 ],
-                "dref": "laminar/B738/electrical/apu_bus_enable",
-                "fcheck": "function (a) return a == 1 end",
+                "dref": "sim/cockpit/engine/APU_N1",
+                "fcheck": "function (a) return a > 98 end",
                 "name": "_apuon",
                 "title": "APU ON",
                 "type": "dataref"
               },
               {
                 "acts": [
-                  "up",
-                  "dn",
-                  "chk",
+                  "on",
+                  "off",
+                  "tgl",
                   "set",
-                  ""
+                  "chk"
                 ],
-                "cmddn": "laminar/B738/toggle_switch/apu_gen1_dn",
-                "cmdup": "laminar/B738/toggle_switch/apu_gen1_up",
-                "dref": "laminar/B738/electrical/apu_gen1_pos",
+                "dref": "anim/15/button",
                 "incr": 1,
                 "max": 1,
                 "min": -1,
                 "name": "apugen1",
                 "title": "APU Generator 1",
-                "type": "dialcmd"
-              },
-              {
-                "acts": [
-                  "up",
-                  "dn",
-                  "chk",
-                  "set",
-                  ""
-                ],
-                "cmddn": "laminar/B738/toggle_switch/apu_gen2_dn",
-                "cmdup": "laminar/B738/toggle_switch/apu_gen2_up",
-                "dref": "laminar/B738/electrical/apu_gen2_pos",
-                "incr": 1,
-                "max": 1,
-                "min": -1,
-                "name": "apugen2",
-                "title": "APU Generator 2",
-                "type": "dialcmd"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
-                  "chk",
+                  "tgl",
                   "set",
+                  "chk"
+                ],
+                "dref": "anim/15/button/anim",
+                "name": "apugen1l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
                   ""
                 ],
                 "cmddn": "laminar/B738/spring_toggle_switch/APU_start_pos_dn",
                 "cmdup": "laminar/B738/spring_toggle_switch/APU_start_pos_up",
-                "dref": "laminar/B738/spring_toggle_switch/APU_start_pos",
+                "dref": "1-sim/engine/APUStartSelector",
                 "foff": "function (a) command_end(\"laminar/B738/spring_toggle_switch/APU_start_pos_dn\") end",
                 "fon": "function (a) command_once(\"laminar/B738/spring_toggle_switch/APU_start_pos_dn\") command_begin(\"laminar/B738/spring_toggle_switch/APU_start_pos_dn\") end",
                 "fset": "function (a) command_once(\"laminar/B738/spring_toggle_switch/APU_start_pos_up\") end",
@@ -1936,6 +2682,53 @@
                 "min": 0,
                 "name": "apustart",
                 "title": "APU starter",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "1-sim/engine/APUStartSelector/anim",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "apustartl",
+                "title": "<title>",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) command_begin(\"sim/electrical/APU_start\") end",
+                "incr": 1,
+                "max": 999,
+                "min": 0,
+                "name": "apuxpstart1",
+                "title": "<title>",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) command_end(\"sim/electrical/APU_start\") end",
+                "name": "apuxpstart2",
+                "title": "<title>",
                 "type": "custom"
               }
             ],
@@ -1958,6 +2751,19 @@
                 "fon": "function (a) command_once(\"laminar/B738/switch/battery_dn\") if get(\"laminar/B738/button_switch/cover_position\",2) ~= 0 then command_once(\"laminar/B738/button_switch_cover02\") end end",
                 "name": "battery1",
                 "title": "Battery 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/14/button/anim",
+                "name": "battery1l",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -1986,15 +2792,36 @@
                   "set",
                   "chk"
                 ],
+                "dref": "anim/17/button/anim",
+                "name": "acbustie1l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
                 "dref": "anim/18/button",
                 "name": "dcbustie1",
                 "title": "DC Bus Tie 1",
                 "type": "dataref"
               },
               {
-                "name": "essentialbus1",
-                "title": "Essential Bus 1",
-                "type": "undefined"
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/18/button",
+                "name": "dcbustie1l",
+                "title": "<title>",
+                "type": "dataref"
               }
             ],
             "name": "busties"
@@ -2028,6 +2855,58 @@
                 "name": "ifepower",
                 "title": "Inflight Entertainment",
                 "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/20/button",
+                "name": "utilitybus1",
+                "title": "Utility Bus 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/20/button/anim",
+                "name": "utilitybus1l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/21/button",
+                "name": "utilitybus2",
+                "title": "Utility Bus 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/21/button/anim",
+                "name": "utilitybus2l",
+                "title": "<title>",
+                "type": "dataref"
               }
             ],
             "name": "consumers"
@@ -2058,12 +2937,38 @@
                   "set",
                   "chk"
                 ],
+                "dref": "anim/22/button/anim",
+                "name": "generator1l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
                 "dref": "anim/25/button",
                 "incr": 1,
                 "max": 1,
                 "min": -1,
                 "name": "generator2",
                 "title": "Engine Generator 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/25/button/anim",
+                "name": "generator2l",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -2076,16 +2981,13 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "dref": "laminar/B738/fmod/gpu_deployed",
-                "foff": "function (a) if get(\"laminar/B738/fmod/gpu_deployed\") == 1 then command_once(\"laminar/B738/gpu_toggle\") end end",
-                "fon": "function (a) if get(\"laminar/B738/fmod/gpu_deployed\") == 0 then command_once(\"laminar/B738/tab/home\") command_once(\"laminar/B738/tab/menu6\") command_once(\"laminar/B738/tab/menu1\") end end",
-                "ftgl": "function (a) function () command_once(\"laminar/B738/gpu_toggle\") end",
+                "dref": "params/gpu",
                 "name": "gpuconnect",
                 "title": "GPU Connect",
-                "type": "custom"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -2093,14 +2995,14 @@
                   "off",
                   "tgl",
                   "chk",
-                  ""
+                  "set"
                 ],
-                "cmdoff": "laminar/B738/toggle_switch/gpu_up",
-                "cmdon": "laminar/B738/toggle_switch/gpu_dn",
-                "dref": "sim/cockpit2/electrical/GPU_generator_on",
+                "dref": "anim/16/button",
+                "foff": "function (a) if get(\"1-sim/elec/busStatusL\") == 3 then set(\"anim/16/button\",1) set(\"anim/16/button\",1) end end",
+                "fon": "function (a) if get(\"1-sim/elec/busStatusL\") ~= 3 then set(\"anim/16/button\",1) set(\"anim/16/button\",1) end end",
                 "name": "gpugen1",
                 "title": "GPU Generator 1",
-                "type": "onofftgl"
+                "type": "custom"
               }
             ],
             "name": "gpu"
@@ -2159,6 +3061,19 @@
                 "fon": "function (a) command_once(\"laminar/B738/switch/standby_bat_on\") if get(\"laminar/B738/button_switch/cover_position\",3) ~= 0 then command_once(\"laminar/B738/button_switch_cover03\") end end",
                 "name": "stbypower1",
                 "title": "Standby Power",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/electrical/stbyPowerSelector/anim",
+                "name": "stbypower1l",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -2278,39 +3193,123 @@
             "elements": [
               {
                 "acts": [
-                  "up",
-                  "dn",
+                  "on",
+                  "off",
+                  "tgl",
                   "chk",
-                  "set",
-                  ""
+                  "set"
                 ],
-                "cmddn": "laminar/B738/knob/eng1_start_left",
-                "cmdup": "laminar/B738/knob/eng1_start_right",
-                "dref": "laminar/B738/engine/starter1_pos",
-                "incr": 1,
-                "max": 3,
-                "min": 0,
-                "name": "engstartsel1",
-                "title": "Engine Start Selector 1",
-                "type": "dialcmd"
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) command_begin(\"sim/ignition/engage_starter_1\") end",
+                "name": "eng1xpstarter1",
+                "title": "<title>",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) command_end(\"sim/ignition/engage_starter_1\") end",
+                "name": "eng1xpstarter2",
+                "title": "<title>",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) command_begin(\"sim/ignition/engage_starter_2\") end",
+                "name": "eng2xpstarter1",
+                "title": "<title>",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) command_end(\"sim/ignition/engage_starter_2\") end",
+                "name": "eng2xpstarter2",
+                "title": "<title>",
+                "type": "custom"
               },
               {
                 "acts": [
                   "up",
                   "dn",
-                  "chk",
                   "set",
+                  "chk",
                   ""
                 ],
-                "cmddn": "laminar/B738/knob/eng2_start_left",
-                "cmdup": "laminar/B738/knob/eng2_start_right",
-                "dref": "laminar/B738/engine/starter2_pos",
+                "dref": "anim/rhotery/8",
                 "incr": 1,
-                "max": 3,
+                "max": 4,
+                "min": 0,
+                "name": "engstartsel1",
+                "title": "Engine Start Selector 1",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "anim/rhotery/8/anim",
+                "incr": 1,
+                "max": 4,
+                "min": 0,
+                "name": "engstartsel1l",
+                "title": "<title>",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "anim/rhotery/9",
+                "incr": 1,
+                "max": 4,
                 "min": 0,
                 "name": "engstartsel2",
                 "title": "Engine Start Selector 2",
-                "type": "dialcmd"
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "anim/rhotery/9/anim",
+                "incr": 1,
+                "max": 4,
+                "min": 0,
+                "name": "engstartsel2l",
+                "title": "<title>",
+                "type": "dialdref"
               }
             ],
             "name": "engstartsel"
@@ -2327,7 +3326,7 @@
                 ],
                 "cmdoff": "laminar/B738/engine/mixture1_cutoff",
                 "cmdon": "laminar/B738/engine/mixture1_idle",
-                "dref": "laminar/B738/engine/mixture_ratio1",
+                "dref": "1-sim/fuel/fuelCutOffLeft",
                 "name": "engstrtlvr1",
                 "title": "Engine Start lever 1",
                 "type": "dataref"
@@ -2340,11 +3339,37 @@
                   "set",
                   "chk"
                 ],
+                "dref": "1-sim/fuel/fuelCutOffLeft/anim",
+                "name": "engstrtlvr1l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
                 "cmdoff": "laminar/B738/engine/mixture2_cutoff",
                 "cmdon": "laminar/B738/engine/mixture2_idle",
-                "dref": "laminar/B738/engine/mixture_ratio2",
+                "dref": "1-sim/fuel/fuelCutOffRight",
                 "name": "engstrtlvr2",
                 "title": "Engine Start lever 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/fuel/fuelCutOffRight/anim",
+                "name": "engstrtlvr2l",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -2421,9 +3446,35 @@
                   "set",
                   "chk"
                 ],
+                "dref": "1-sim/fuel/fuelCutOffLeft/anim",
+                "name": "fuelctrlsw1l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
                 "dref": "1-sim/fuel/fuelCutOffRight",
                 "name": "fuelctrlsw2",
                 "title": "Fuel control switch 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/fuel/fuelCutOffRight/anim",
+                "name": "fuelctrlsw2l",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -2449,11 +3500,37 @@
                   "on",
                   "off",
                   "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/32/button/anim",
+                "name": "fuelpump1l",
+                "title": "Fuel pump left  aft",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
                   "chk",
                   "set"
                 ],
                 "dref": "anim/35/button",
                 "name": "fuelpump2",
+                "title": "Fuel pump left fwd",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "anim/35/button/anim",
+                "name": "fuelpump2l",
                 "title": "Fuel pump left fwd",
                 "type": "dataref"
               },
@@ -2478,8 +3555,34 @@
                   "chk",
                   "set"
                 ],
+                "dref": "anim/34/button/anim",
+                "name": "fuelpump3l",
+                "title": "Fuel pump right aft",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
                 "dref": "anim/37/button",
                 "name": "fuelpump4",
+                "title": "Fuel pump right fwd",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "anim/37/button/anim",
+                "name": "fuelpump4l",
                 "title": "Fuel pump right fwd",
                 "type": "dataref"
               },
@@ -2504,8 +3607,34 @@
                   "chk",
                   "set"
                 ],
+                "dref": "anim/38/button/anim",
+                "name": "fuelpump5l",
+                "title": "Fuel Pump ctr left",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
                 "dref": "anim/39/button",
                 "name": "fuelpump6",
+                "title": "Fuel Pump ctr right",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "dref": "anim/39/button/anim",
+                "name": "fuelpump6l",
                 "title": "Fuel Pump ctr right",
                 "type": "dataref"
               }
@@ -2535,9 +3664,35 @@
                   "set",
                   "chk"
                 ],
+                "dref": "anim/33/button/anim",
+                "name": "fuelxfeed1l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
                 "dref": "anim/36/button",
                 "name": "fuelxfeed2",
                 "title": "Fuel Crossfeed 2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/36/button/anim",
+                "name": "fuelxfeed2l",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -2583,16 +3738,32 @@
                   "chk",
                   ""
                 ],
-                "dref": "laminar/B738/autobrake/autobrake_pos",
+                "dref": "anim/rhotery/25",
                 "incr": 1,
                 "max": 6,
                 "min": -1,
                 "name": "autobrake",
                 "title": "Autobrake value",
                 "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "anim/rhotery/25/anim",
+                "incr": 1,
+                "max": 6,
+                "min": -1,
+                "name": "autobrakel",
+                "title": "<title>",
+                "type": "dialdref"
               }
             ],
-            "name": "autobrake"
+            "name": "autobrakes"
           },
           {
             "elements": [
@@ -2633,13 +3804,42 @@
                   "on",
                   "off",
                   "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/elt/mode",
+                "name": "eltswitch",
+                "title": "ELT Switch",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/elt/mode/anim",
+                "name": "eltswitchl",
+                "title": "<title>",
+                "type": "dataref"
+              }
+            ],
+            "name": "elt"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
                   " ",
                   " "
                 ],
                 "cmdtgl": "sim/flight_controls/toggle_chocks",
                 "dref": "sim/flightmodel2/gear/is_chocked",
-                "foff": "function (a) return 1 end",
-                "fon": "function (a) return 0 end",
                 "indx": 0,
                 "name": "chocks",
                 "title": "Chocks",
@@ -2648,15 +3848,16 @@
               {
                 "acts": [
                   "on",
-                  " ",
+                  "off",
                   " ",
                   " ",
                   ""
                 ],
                 "cmdtgl": "openSAM/toggle_jwy",
                 "dref": "opensam/jetway/status",
-                "fcheck": "function (a) return a==2 end",
-                "fon": "function (a) if a~= 2 then command_once(\"openSAM/toggle_jwy\") end end",
+                "foff": "function (a) command_once(\"openSAM/undock_jwy\") end",
+                "fon": "function (a) command_once(\"openSAM/dock_jwy\") end",
+                "ftrans": "function (a) if a==2 then return 1 else return 0 end end",
                 "name": "samjetwaydock",
                 "title": "Dock openSAM jetway",
                 "type": "custom"
@@ -2664,17 +3865,16 @@
               {
                 "acts": [
                   "on",
-                  " ",
-                  " ",
+                  "off",
+                  "chk",
                   " ",
                   " "
                 ],
-                "cmdtgl": "openSAM/toggle_jwy",
-                "dref": "opensam/jetway/status",
-                "fcheck": "function (a) return a==1 end",
-                "fon": "function (a) if a == 2 then command_once(\"openSAM/toggle_jwy\") end end",
-                "name": "samjetwayundock",
-                "title": "Undock openSAM jetway",
+                "foff": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 1 then command_once(\"sim/ground_ops/jetway\") ng_getBckVars():set(\"general:sgesstairs\",0) end end",
+                "fon": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 0 then command_once(\"sim/ground_ops/jetway\") ng_getBckVars():set(\"general:sgesstairs\",1) end end",
+                "ftrans": "function (a) return ng_getBckVars():get(\"general:sgesstairs\") end",
+                "name": "xpjetwaydock",
+                "title": "Dock XP jetway",
                 "type": "custom"
               }
             ],
@@ -2687,42 +3887,44 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
                 "cmdtgl": "laminar/B738/door/fwd_cargo_toggle",
-                "dref": "737u/doors/aft_Cargo",
+                "dref": "sim/cockpit2/switches/custom_slider_on",
+                "indx": 6,
                 "name": "dooracargo",
                 "title": "Aft Cargo",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
                 "cmdtgl": "laminar/B738/door/aft_cargo_toggle",
-                "dref": "737u/doors/Fwd_Cargo",
+                "dref": "sim/cockpit2/switches/custom_slider_on",
+                "indx": 7,
                 "name": "doorfcargo",
                 "title": "Forward Cargo",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "laminar/B738/door/fwd_L_toggle",
-                "dref": "737u/doors/L1",
+                "dref": "sim/cockpit2/switches/custom_slider_on",
+                "indx": 0,
                 "name": "doorl1",
                 "title": "Door Forward Left",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -2732,8 +3934,8 @@
                   "chk",
                   ""
                 ],
-                "cmdtgl": "laminar/B738/door/aft_L_toggle",
-                "dref": "737u/doors/L2",
+                "dref": "sim/cockpit2/switches/custom_slider_on",
+                "indx": 4,
                 "name": "doorl2",
                 "title": "Door Aft Left",
                 "type": "onofftgl"
@@ -2743,28 +3945,42 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "laminar/B738/door/fwd_R_toggle",
-                "dref": "737u/doors/R1",
+                "dref": "sim/cockpit2/switches/custom_slider_on",
+                "indx": 1,
                 "name": "doorr1",
                 "title": "Door Fwd Right",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "laminar/B738/door/aft_R_toggle",
-                "dref": "737u/doors/R2",
+                "dref": "sim/cockpit2/switches/custom_slider_on",
+                "indx": 5,
                 "name": "doorr2",
                 "title": "Door Aft Right",
-                "type": "onofftgl"
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit2/switches/custom_slider_on",
+                "indx": 2,
+                "name": "freighterdoor",
+                "title": "-F door",
+                "type": "dataref"
               }
             ],
             "name": "externaldoors"
@@ -2776,33 +3992,26 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "laminar/B738/airstairs_toggle",
-                "dref": "laminar/B738/airstairs_hide",
-                "name": "airstair1",
-                "title": "Airstair",
-                "type": "onofftgl"
+                "dref": "anim/cabindoor",
+                "name": "cockpitdoor",
+                "title": "Cockpit Door",
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "laminar/B738/toggle_switch/flt_dk_door_open",
-                "dref": "laminar/B738/door/flt_dk_door_ratio",
-                "name": "cockpitdoor",
-                "title": "Cockpit Door",
-                "type": "onofftgl"
-              },
-              {
+                "dref": "1-sim/cockpitDoor/switch",
                 "name": "doorlock",
                 "title": "Door Lock",
-                "type": "undefined"
+                "type": "dataref"
               }
             ],
             "name": "internaldoors"
@@ -2830,37 +4039,59 @@
                 "acts": [
                   "up",
                   "dn",
-                  "chk",
                   "set",
+                  "chk",
                   ""
                 ],
-                "cmddn": "laminar/B738/toggle_switch/no_smoking_up",
-                "cmdup": "laminar/B738/toggle_switch/no_smoking_dn",
-                "dref": "laminar/B738/toggle_switch/no_smoking_pos",
+                "dref": "sim/cockpit/switches/no_smoking",
                 "incr": 1,
                 "max": 2,
                 "min": 0,
                 "name": "nosmoking",
                 "title": "No Smoking",
-                "type": "dialcmd"
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit/switches/no_smoking/anim",
+                "name": "nosmokingl",
+                "title": "<title>",
+                "type": "dataref"
               },
               {
                 "acts": [
                   "up",
                   "dn",
-                  "chk",
                   "set",
+                  "chk",
                   ""
                 ],
-                "cmddn": "laminar/B738/toggle_switch/seatbelt_sign_up",
-                "cmdup": "laminar/B738/toggle_switch/seatbelt_sign_dn",
-                "dref": "laminar/B738/toggle_switch/seatbelt_sign_pos",
+                "dref": "sim/cockpit/switches/fasten_seat_belts",
                 "incr": 1,
                 "max": 2,
                 "min": 0,
                 "name": "seatbelts",
                 "title": "Seatbelt Signs",
-                "type": "dialcmd"
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "sim/cockpit/switches/fasten_seat_belts/anim",
+                "name": "seatbeltsl",
+                "title": "<title>",
+                "type": "dataref"
               }
             ],
             "name": "paxsigns"
@@ -2869,8 +4100,8 @@
             "elements": [
               {
                 "acts": [
-                  "chk",
                   " ",
+                  "set",
                   " ",
                   " ",
                   " "
@@ -2887,174 +4118,35 @@
             "elements": [
               {
                 "acts": [
+                  "on",
+                  "off",
+                  "tgl",
                   "set",
-                  " ",
-                  " ",
-                  " ",
-                  " "
+                  "chk"
                 ],
-                "fcheck": "function (a) return true end",
-                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 1\") end",
-                "name": "spkcheckflaps1",
-                "title": "speak",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  " ",
-                  " ",
-                  " ",
-                  " ",
-                  "set"
-                ],
-                "fcheck": "function (a) return true end",
-                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 10\") end",
-                "name": "spkcheckflaps10",
-                "title": "speak",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "fcheck": "function (a) return true end",
-                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 15\") end",
-                "name": "spkcheckflaps15",
-                "title": "speak",
-                "type": "custom"
+                "dref": "params/stairs",
+                "name": "externalstairs",
+                "title": "<title>",
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
-                  "tgl",
                   "chk",
-                  "set"
-                ],
-                "fcheck": "function (a) return true end",
-                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 25\") end",
-                "name": "spkcheckflaps25",
-                "title": "speak",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  " ",
-                  " ",
                   " ",
                   " "
                 ],
-                "fcheck": "function (a) return true end",
-                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 30\") end",
-                "name": "spkcheckflaps30",
-                "title": "speak",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "fcheck": "function (a) return true end",
-                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 40\") end",
-                "name": "spkcheckflaps40",
-                "title": "speak",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "fcheck": "function (a) return true end",
-                "fset": "function (a) ng_speakNoText(0, \"speed check flaps 5\") end",
-                "name": "spkcheckflaps5",
-                "title": "speak",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "fcheck": "function (a) return true end",
-                "fset": "function (a) ng_speakNoText(0, \"speed check flaps up\") end",
-                "name": "spkcheckflapsup",
-                "title": "speak",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  "set"
-                ],
-                "fcheck": "function (a) return true end",
-                "fset": "function (a) ng_speakNoText(0, \"gear down\") end",
-                "name": "spkgeardown",
-                "title": "speak",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  "set"
-                ],
-                "fcheck": "function (a) return true end",
-                "fset": "function (a) ng_speakNoText(0, \"gear up\") end",
-                "name": "spkgearup",
-                "title": "speak",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "fcheck": "function (a) return true end",
-                "fset": "function (a) ng_speakNoText(0, \"Starting engine 1\") end",
-                "name": "spkstarteng1",
-                "title": "speak",
-                "type": "custom"
-              },
-              {
-                "acts": [
-                  "set",
-                  " ",
-                  " ",
-                  " ",
-                  " "
-                ],
-                "fcheck": "function (a) return true end",
-                "fset": "function (a) ng_speakNoText(0, \"Starting engine 2\") end",
-                "name": "spkstarteng2",
-                "title": "speak",
+                "cmdtgl": "Simple_Ground_Equipment_and_Services/Toggle/StairsXPJ",
+                "foff": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 1 then command_once(\"Simple_Ground_Equipment_and_Services/Toggle/StairsXPJ\") ng_getBckVars():set(\"general:sgesstairs\",0) end end",
+                "fon": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 0 then command_once(\"Simple_Ground_Equipment_and_Services/Toggle/StairsXPJ\") ng_getBckVars():set(\"general:sgesstairs\",1) end end",
+                "ftrans": "function (a) return ng_getBckVars():get(\"general:sgesstairs\") end",
+                "name": "sgesstairs",
+                "title": "SGES Nark III",
                 "type": "custom"
               }
             ],
-            "name": "speak"
+            "name": "stairs"
           },
           {
             "elements": [
@@ -3161,32 +4253,14 @@
                   "set",
                   ""
                 ],
-                "cmddn": "laminar/B738/knob/left_wiper_dn",
-                "cmdup": "laminar/B738/knob/left_wiper_up",
-                "dref": "laminar/B738/switches/left_wiper_pos",
+                "cmddn": "1-sim/command/anim/rhotery/10_switch-",
+                "cmdup": "1-sim/command/anim/rhotery/10_switch+",
+                "dref": "anim/rhotery/10",
                 "incr": 1,
                 "max": 3,
                 "min": 0,
                 "name": "wiper1",
                 "title": "Left Windshield Wiper",
-                "type": "dialcmd"
-              },
-              {
-                "acts": [
-                  "up",
-                  "dn",
-                  "chk",
-                  "set",
-                  ""
-                ],
-                "cmddn": "laminar/B738/knob/right_wiper_dn",
-                "cmdup": "laminar/B738/knob/right_wiper_up",
-                "dref": "laminar/B738/switches/right_wiper_pos",
-                "incr": 1,
-                "max": 3,
-                "min": 0,
-                "name": "wiper2",
-                "title": "Right Windshield Wiper",
                 "type": "dialcmd"
               }
             ],
@@ -3207,8 +4281,7 @@
                   "set",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/toggle_switch/electric_hydro_pumps1",
-                "dref": "anim/12/button",
+                "dref": "anim/8/button",
                 "name": "elechydpump1",
                 "title": "Electric Hydraulic Pump LEFT",
                 "type": "dataref"
@@ -3221,9 +4294,34 @@
                   "set",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/toggle_switch/electric_hydro_pumps2",
-                "dref": "anim/13/button",
+                "dref": "anim/8/button/anim",
+                "name": "elechydpump1l",
+                "title": "Electric Hydraulic Pump LEFT",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/11/button",
                 "name": "elechydpump2",
+                "title": "Electric Hydraulic Pump RIGHT",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/11/button/anim",
+                "name": "elechydpump2l",
                 "title": "Electric Hydraulic Pump RIGHT",
                 "type": "dataref"
               },
@@ -3248,8 +4346,34 @@
                   "set",
                   "chk"
                 ],
+                "dref": "anim/9/button/anim",
+                "name": "elechydpump3l",
+                "title": "Electric Hydraulic Pump C1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
                 "dref": "anim/10/button",
                 "name": "elechydpump4",
+                "title": "Electric Hydraulic Pump C2",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/10/button/anim",
+                "name": "elechydpump4l",
                 "title": "Electric Hydraulic Pump C2",
                 "type": "dataref"
               }
@@ -3263,28 +4387,52 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "laminar/B738/toggle_switch/hydro_pumps1",
-                "dref": "laminar/B738/toggle_switch/hydro_pumps1_pos",
+                "dref": "anim/12/button",
                 "name": "enghydpump1",
                 "title": "Engine Hydraulic Pump 1",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "laminar/B738/toggle_switch/hydro_pumps2",
-                "dref": "laminar/B738/toggle_switch/hydro_pumps2_pos",
+                "dref": "anim/12/button/anim",
+                "name": "enghydpump1l",
+                "title": "Engine Hydraulic Pump 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/13/button",
                 "name": "enghydpump2",
                 "title": "Engine Hydraulic Pump 2",
-                "type": "onofftgl"
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/13/button/anim",
+                "name": "enghydpump2l",
+                "title": "Engine Hydraulic Pump 2",
+                "type": "dataref"
               }
             ],
             "name": "enghydpumps"
@@ -3357,60 +4505,78 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdoff": "laminar/B738/switch/land_lights_ret_left_off",
-                "cmdon": "laminar/B738/switch/land_lights_ret_left_on",
-                "dref": "laminar/B738/switch/land_lights_ret_left_pos",
+                "dref": "1-sim/lights/landingL/switch",
                 "name": "landlight1",
                 "title": "Landing light 1",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdoff": "laminar/B738/switch/land_lights_ret_right_off",
-                "cmdon": "laminar/B738/switch/land_lights_ret_right_on",
-                "dref": "laminar/B738/switch/land_lights_ret_right_pos",
+                "dref": "1-sim/lights/landingL/switch/anim",
+                "name": "landlight1l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/lights/landingR/switch",
                 "name": "landlight2",
                 "title": "Landing Light 2",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdoff": "laminar/B738/switch/land_lights_left_off",
-                "cmdon": "laminar/B738/switch/land_lights_left_on",
-                "dref": "laminar/B738/switch/land_lights_left_pos",
+                "dref": "1-sim/lights/landingR/switch/anim",
+                "name": "landlight2l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/lights/landingN/switch",
                 "name": "landlight3",
-                "title": "Landing Light 3",
-                "type": "onofftgl"
+                "title": "Nose Lights",
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdoff": "laminar/B738/switch/land_lights_right_off",
-                "cmdon": "laminar/B738/switch/land_lights_right_on",
-                "dref": "laminar/B738/switch/land_lights_right_pos",
-                "name": "landlight4",
-                "title": "Landing Light 4",
-                "type": "onofftgl"
+                "dref": "1-sim/lights/landingN/switch/anim",
+                "name": "landlight3l",
+                "title": "<title>",
+                "type": "dataref"
               }
             ],
             "name": "alllandlights"
@@ -3424,9 +4590,22 @@
                   "tgl",
                   "chk"
                 ],
-                "dref": "sim/cockpit2/switches/beacon_on",
+                "dref": "anim/44/button",
                 "name": "beacon1",
                 "title": "Beacon light 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/44/button/anim",
+                "name": "beacon1l",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -3439,16 +4618,26 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdoff": "laminar/B738/switch/logo_light_off",
-                "cmdon": "laminar/B738/switch/logo_light_on",
-                "cmdtgl": "laminar/B738/switch/logo_light_toggle",
-                "dref": "laminar/B738/toggle_switch/logo_light",
+                "dref": "anim/52/button",
                 "name": "logolight",
                 "title": "Logo light",
-                "type": "onofftgl"
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/52/button/anim",
+                "name": "logolightl",
+                "title": "<title>",
+                "type": "dataref"
               }
             ],
             "name": "logolights"
@@ -3457,21 +4646,32 @@
             "elements": [
               {
                 "acts": [
-                  "up",
-                  "dn",
-                  "chk",
+                  "on",
+                  "off",
+                  "tgl",
                   "set",
-                  ""
+                  "chk"
                 ],
-                "cmddn": "laminar/B738/toggle_switch/position_light_down",
-                "cmdup": "laminar/B738/toggle_switch/position_light_up",
-                "dref": "laminar/B738/toggle_switch/position_light_pos",
+                "dref": "anim/43/button",
                 "incr": 1,
                 "max": 1,
                 "min": -1,
                 "name": "positionlight",
                 "title": "Position light",
-                "type": "dialcmd"
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/43/button/anim",
+                "name": "positionlightl",
+                "title": "<title>",
+                "type": "dataref"
               }
             ],
             "name": "positionlights"
@@ -3486,7 +4686,7 @@
                   "set",
                   "chk"
                 ],
-                "dref": "laminar/B738/toggle_switch/rwy_light_left",
+                "dref": "1-sim/lights/runwayL/switch",
                 "name": "rwylight1",
                 "title": "Runway light left",
                 "type": "dataref"
@@ -3499,9 +4699,35 @@
                   "set",
                   "chk"
                 ],
-                "dref": "laminar/B738/toggle_switch/rwy_light_right",
+                "dref": "1-sim/lights/runwayL/switch/anim",
+                "name": "rwylight1l",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/lights/runwayR/switch",
                 "name": "rwylight2",
                 "title": "Runway light right",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/lights/runwayR/switch/anim",
+                "name": "rwylight2l",
+                "title": "<title>",
                 "type": "dataref"
               }
             ],
@@ -3510,10 +4736,30 @@
           {
             "elements": [
               {
-                "dref": "sim/cockpit/electrical/strobe_lights_on",
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/45/button",
                 "name": "strobelight",
                 "title": "Strobe light",
-                "type": "undefined"
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/45/button/anim",
+                "name": "strobelightl",
+                "title": "<title>",
+                "type": "dataref"
               }
             ],
             "name": "strobelights"
@@ -3525,16 +4771,26 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdoff": "laminar/B738/toggle_switch/taxi_light_brightness_off",
-                "cmdon": "laminar/B738/toggle_switch/taxi_light_brightness_on",
-                "dref": "laminar/B738/toggle_switch/taxi_light_brightness_pos",
-                "ftrans": "function (a) if a == 2 then return 1 end end",
+                "dref": "1-sim/lights/taxi/switch",
                 "name": "taxilight1",
                 "title": "Taxi light",
-                "type": "onofftgl"
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/lights/taxi/switch/anim",
+                "name": "taxilight1l",
+                "title": "<title>",
+                "type": "dataref"
               }
             ],
             "name": "taxilights"
@@ -3551,7 +4807,7 @@
                 "dref": "laminar/B738/toggle_switch/wheel_light",
                 "name": "wheellight",
                 "title": "Wheel light",
-                "type": "dataref"
+                "type": "undefined"
               }
             ],
             "name": "wheellights"
@@ -3563,15 +4819,26 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdoff": "laminar/B738/switch/wing_light_off",
-                "cmdon": "laminar/B738/switch/wing_light_on",
-                "dref": "laminar/B738/toggle_switch/wing_light",
+                "dref": "anim/46/button",
                 "name": "winglight",
                 "title": "Wing light",
-                "type": "onofftgl"
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/46/button/anim",
+                "name": "winglightl",
+                "title": "<title>",
+                "type": "dataref"
               }
             ],
             "name": "winglights"
@@ -3585,21 +4852,19 @@
             "elements": [
               {
                 "acts": [
-                  "up",
-                  "dn",
-                  "chk",
+                  "on",
+                  "off",
+                  "tgl",
                   "set",
-                  ""
+                  "chk"
                 ],
-                "cmddn": "laminar/B738/toggle_switch/cockpit_dome_dn",
-                "cmdup": "laminar/B738/toggle_switch/cockpit_dome_up",
-                "dref": "laminar/B738/toggle_switch/cockpit_dome_pos",
+                "dref": "lights/dome/flood_rhe",
                 "incr": 1,
                 "max": 1,
                 "min": -1,
                 "name": "domelight",
                 "title": "Dome light",
-                "type": "dialcmd"
+                "type": "dataref"
               }
             ],
             "name": "domelights"
@@ -3608,23 +4873,34 @@
             "elements": [
               {
                 "acts": [
-                  "up",
-                  "dn",
-                  "chk",
+                  "on",
+                  "off",
+                  "tgl",
                   "set",
-                  ""
+                  "chk"
                 ],
-                "cmddn": "laminar/B738/toggle_switch/emer_exit_lights_up",
                 "cmdon": "laminar/B738/toggle_switch/emer_exit_lights_dn",
                 "cmdtgl": "laminar/B738/toggle_switch/elt_arm",
-                "cmdup": "laminar/B738/toggle_switch/emer_exit_lights_dn",
-                "dref": "laminar/B738/toggle_switch/emer_exit_lights",
+                "dref": "1-sim/emer/lights",
                 "incr": 1,
                 "max": 2,
                 "min": 0,
                 "name": "emerlight",
                 "title": "EMER light",
-                "type": "dialcmd"
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/emer/lights/anim",
+                "name": "emerlightl",
+                "title": "<title>",
+                "type": "dataref"
               }
             ],
             "name": "emerlights"
@@ -3635,12 +4911,11 @@
                 "acts": [
                   "on",
                   "off",
-                  "set",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "dref": "laminar/B738/electric/instrument_brightness",
-                "indx": 0,
+                "dref": "lights/aisel_rhe",
                 "name": "instrlight1",
                 "title": "Instrument light 1",
                 "type": "dataref"
@@ -3649,12 +4924,11 @@
                 "acts": [
                   "on",
                   "off",
-                  "set",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "dref": "laminar/B738/electric/instrument_brightness",
-                "indx": 1,
+                "dref": "lights/aux_rhe",
                 "name": "instrlight2",
                 "title": "Instrument light 2",
                 "type": "dataref"
@@ -3663,12 +4937,11 @@
                 "acts": [
                   "on",
                   "off",
-                  "set",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "dref": "laminar/B738/electric/instrument_brightness",
-                "indx": 2,
+                "dref": "lights/glareshield1_rhe",
                 "name": "instrlight3",
                 "title": "Instrument light 3",
                 "type": "dataref"
@@ -3677,12 +4950,11 @@
                 "acts": [
                   "on",
                   "off",
-                  "set",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "dref": "laminar/B738/electric/instrument_brightness",
-                "indx": 3,
+                "dref": "lights/buttomflood_rhe",
                 "name": "instrlight4",
                 "title": "Instrument light 4",
                 "type": "dataref"
@@ -3699,7 +4971,7 @@
                 "indx": 4,
                 "name": "instrlight5",
                 "title": "Instrument light 5",
-                "type": "dataref"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -3713,7 +4985,7 @@
                 "indx": 0,
                 "name": "instrlight6",
                 "title": "Instrument light 6",
-                "type": "dataref"
+                "type": "undefined"
               }
             ],
             "name": "instrlights"
@@ -3724,12 +4996,11 @@
                 "acts": [
                   "on",
                   "off",
-                  "set",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "dref": "laminar/B738/electric/panel_brightness",
-                "indx": 0,
+                "dref": "lights/panel_rhe",
                 "name": "panellight1",
                 "title": "Panel light 1",
                 "type": "dataref"
@@ -3738,12 +5009,11 @@
                 "acts": [
                   "on",
                   "off",
-                  "set",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "dref": "laminar/B738/electric/panel_brightness",
-                "indx": 1,
+                "dref": "lights/flood_rhe",
                 "name": "panellight2",
                 "title": "Panel light 2",
                 "type": "dataref"
@@ -3752,12 +5022,11 @@
                 "acts": [
                   "on",
                   "off",
-                  "set",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "dref": "laminar/B738/electric/panel_brightness",
-                "indx": 2,
+                "dref": "lights/mapL",
                 "name": "panellight3",
                 "title": "Panel light 3",
                 "type": "dataref"
@@ -3766,12 +5035,11 @@
                 "acts": [
                   "on",
                   "off",
-                  "set",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "dref": "laminar/B738/electric/panel_brightness",
-                "indx": 3,
+                "dref": "lights/mapR",
                 "name": "panellight4",
                 "title": "Panel light 4",
                 "type": "dataref"
@@ -3825,17 +5093,16 @@
                   "up",
                   "dn",
                   "set",
-                  "chk"
+                  "chk",
+                  ""
                 ],
-                "cmddn": "laminar/B738/knob/transponder_mode_dn",
-                "cmdup": "laminar/B738/knob/transponder_mode_up",
-                "dref": "laminar/B738/knob/transponder_pos",
+                "dref": "1-sim/transponder/systemMode",
                 "incr": 1,
                 "max": 5,
                 "min": 0,
                 "name": "xpdrmode",
                 "title": "XPDR Mode",
-                "type": "dialcmd"
+                "type": "dialdref"
               }
             ],
             "name": "transponder"
@@ -3846,51 +5113,49 @@
         "name": "xtensions",
         "systems": [
           {
+            "elements": {},
+            "name": "controls"
+          },
+          {
             "elements": [
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "laminar/B738/button_switch_cover02",
-                "dref": "laminar/B738/button_switch/cover_position",
-                "indx": 2,
+                "dref": "1-sim/electrical/batteryCover/anim",
                 "name": "batterycover",
                 "title": "Battery cover",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
-                  "chk",
-                  ""
+                  "set",
+                  "chk"
                 ],
-                "cmdtgl": "laminar/B738/button_switch_cover09",
-                "dref": "laminar/B738/button_switch/cover_position",
-                "indx": 9,
+                "dref": "1-sim/elt/cover/anim",
+                "name": "eltcover",
+                "title": "<title>",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/emer/lightsCover/anim",
                 "name": "emerlightcover",
                 "title": "Emergency Lights cover",
-                "type": "onofftgl"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk",
-                  ""
-                ],
-                "cmdtgl": "laminar/B738/button_switch_cover03",
-                "dref": "laminar/B738/button_switch/cover_position",
-                "indx": 3,
-                "name": "standbycover",
-                "title": "Standby Power Cover",
-                "type": "onofftgl"
+                "type": "dataref"
               }
             ],
             "name": "covers"
@@ -3935,6 +5200,138 @@
               }
             ],
             "name": "displaypanel"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/reverseL",
+                "name": "revthrustlvr1",
+                "title": "Reverse Thrust lever 1",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "anim/reverseR",
+                "name": "revthrustlvr2",
+                "title": "Reverse Thrust lever 2",
+                "type": "dataref"
+              }
+            ],
+            "name": "engines"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "1-sim/hyd/airSwitch",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "hydairswitch",
+                "title": "<title>",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "1-sim/hyd/airSwitch/anim",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "hydairswitchl",
+                "title": "<title>",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "1-sim/hyd/elecSwitchLeft",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "hydelecswitchleft",
+                "title": "<title>",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "1-sim/hyd/elecSwitchLeft/anim",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "hydelecswitchleftl",
+                "title": "<title>",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "1-sim/hyd/elecSwitchRight",
+                "incr": 1,
+                "max": 2,
+                "min": 0,
+                "name": "hydelecswitchright",
+                "title": "<title>",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "1-sim/hyd/elecSwitchRight/anim",
+                "incr": 1,
+                "max": 999,
+                "min": 0,
+                "name": "hydelecswitchrightl",
+                "title": "<title>",
+                "type": "dialdref"
+              }
+            ],
+            "name": "hydraulics"
           },
           {
             "elements": [
@@ -4005,9 +5402,9 @@
                   "set",
                   "chk"
                 ],
-                "dref": "laminar/B738/buttons/capt_6_pack_pos",
-                "name": "_6packbtncpt",
-                "title": "Warning button CPT",
+                "dref": "1-sim/gauges/caution_recall",
+                "name": "recallbtn",
+                "title": "RECALL button",
                 "type": "dataref"
               }
             ],

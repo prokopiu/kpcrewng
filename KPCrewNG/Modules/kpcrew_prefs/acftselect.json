@@ -2,6 +2,26 @@
   "acftselect": {
     "addons": [
       {
+        "name": "Aerobask Epic E1000 G",
+        "planeicao": "EPIC",
+        "planetailnum": "E1000",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "Aerobask Epic Victory-G",
+        "planeicao": "EVIC",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
         "name": "Aerobask Phenom 300",
         "planeicao": "E55P",
         "planetailnum": "",
@@ -22,6 +42,27 @@
         }
       },
       {
+        "name": "AirSim3D Citation C-560XL",
+        "planedescr": "Mid sized business jet",
+        "planeicao": "",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "C560",
+          "sopicao": "C560",
+          "sysicao": "C560"
+        }
+      },
+      {
+        "name": "Airfoillabs B350",
+        "planeicao": "B350",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
         "name": "Carenado CT210M",
         "planeicao": "T210",
         "planetailnum": "N3888Y",
@@ -29,6 +70,16 @@
           "preficao": "T210",
           "sopicao": "GAAC",
           "sysicao": "T210"
+        }
+      },
+      {
+        "name": "Carenado FA50EX",
+        "planeicao": "FA50",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
         }
       },
       {
@@ -62,8 +113,38 @@
         }
       },
       {
+        "name": "Colimata Concord",
+        "planeicao": "CONC",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
         "name": "DFLT",
         "planeicao": "DFLT",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "Ddenn Design Bombardier Challenger 300",
+        "planeicao": "CL30",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "Deanarica Airbus A220-300",
+        "planeicao": "A220",
         "planetailnum": "",
         "settings": {
           "preficao": "DFLT",
@@ -79,6 +160,66 @@
           "preficao": "CRJX",
           "sopicao": "CRJX",
           "sysicao": "CRJX"
+        }
+      },
+      {
+        "name": "Deltawing CRJ 700",
+        "planeicao": "CRJ900",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "CRJX",
+          "sopicao": "CRJX",
+          "sysicao": "CRJX"
+        }
+      },
+      {
+        "name": "FJS 732 TwinJet",
+        "planeicao": "B732",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "FPS 747-8 Intercontinental",
+        "planeicao": "B748",
+        "planetailnum": "501",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "FPS Embraer 195",
+        "planeicao": "E195",
+        "planetailnum": "PP-FPS",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "Felis 747-200 PW XP12",
+        "planeicao": "B742",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "Felis Tu-154B2",
+        "planeicao": "T154",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
         }
       },
       {
@@ -132,6 +273,106 @@
         }
       },
       {
+        "name": "FlightFactor A350 XWB",
+        "planeicao": "A359",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "FlightFactor B777-200ER",
+        "planeicao": "B772",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "FlightFactor B777-Freighter",
+        "planeicao": "B77L",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "FlyJSim Q4XP",
+        "planeicao": "DH8D",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "GLF650 AKD XP12",
+        "planeicao": "GLF650",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "Hot Start Challenger 650",
+        "planeicao": "CL60",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "IXEG B-737-300",
+        "planeicao": "B733",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "JF12_BAe_146 100",
+        "planeicao": "B461",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "JF12_BAe_146 200",
+        "planeicao": "B462",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "JF12_BAe_146 300",
+        "planeicao": "B463",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
         "name": "Laminar A330",
         "planeicao": "A333",
         "planetailnum": "",
@@ -142,6 +383,16 @@
         }
       },
       {
+        "name": "Laminar Beechcraft King Air C90B",
+        "planeicao": "BE9L",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
         "name": "Laminar C172",
         "planeicao": "C172",
         "planetailnum": "N172SP",
@@ -149,6 +400,36 @@
           "preficao": "C172",
           "sopicao": "GAAC",
           "sysicao": "C172"
+        }
+      },
+      {
+        "name": "Laminar Cirrus SF50",
+        "planeicao": "SF50",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "Laminar Citation X",
+        "planeicao": "C750",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "Laminar MD82",
+        "planeicao": "MD82",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
         }
       },
       {
@@ -192,6 +473,96 @@
         }
       },
       {
+        "name": "MSparks B747-400",
+        "planeicao": "B744",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "MSparks B747-400F",
+        "planeicao": "B744F",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "Magknight 787-8 Aviators XP12",
+        "planeicao": "B788",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "RWDesign Citation Mustang",
+        "planeicao": "",
+        "planetailnum": "N682SU",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "Rotate MD-11F",
+        "planeicao": "MD11",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "Rotate MD-80",
+        "planeicao": "MD88",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "SSG 747-8 Freighter",
+        "planeicao": "B748",
+        "planetailnum": "502",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "SSG 747-8 Intercontinental",
+        "planeicao": "B748",
+        "planetailnum": "501",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "Shenshee Boeing 720-048 (JT3C-7)",
+        "planeicao": "B720",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
         "name": "Starving Pilot Metroliner III",
         "planeicao": "AMF",
         "planetailnum": "N360AE",
@@ -199,6 +570,16 @@
           "preficao": "SW4",
           "sopicao": "SW4",
           "sysicao": "SW4"
+        }
+      },
+      {
+        "name": "Thranda Design Pilatus PC12",
+        "planeicao": "PC12",
+        "planetailnum": "",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
         }
       },
       {
@@ -262,6 +643,126 @@
         }
       },
       {
+        "name": "VSKYLABS X510",
+        "planeicao": "C510",
+        "planetailnum": "N510MV",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "X-Crafts E170",
+        "planeicao": "E170",
+        "planetailnum": "E170",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "X-Crafts E175",
+        "planeicao": "E175",
+        "planetailnum": "E175",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "X-Crafts E190",
+        "planeicao": "E190",
+        "planetailnum": "E190",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "X-Crafts E195",
+        "planeicao": "E195",
+        "planetailnum": "E195",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "X-Crafts ERJ 135",
+        "planeicao": "E135",
+        "planetailnum": "E135",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "X-Crafts ERJ 140",
+        "planeicao": "E140",
+        "planetailnum": "E140",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "X-Crafts ERJ 145",
+        "planeicao": "E145",
+        "planetailnum": "E145",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "X-Crafts ERJ 145XR",
+        "planeicao": "E45X",
+        "planetailnum": "E45X",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "X-Crafts Free E175",
+        "planeicao": "E170",
+        "planetailnum": "E175",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "X-Crafts Free E195",
+        "planeicao": "E190",
+        "planetailnum": "E195",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "X-Crafts Legacy 650",
+        "planeicao": "E35L",
+        "planetailnum": "E35L",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
         "name": "X-Works A330",
         "planeicao": "A332",
         "planetailnum": "D-AIKN",
@@ -279,6 +780,26 @@
           "preficao": "B738",
           "sopicao": "B737",
           "sysicao": "B737"
+        }
+      },
+      {
+        "name": "iniSimualtions A300-600R(F) V2 Freighter",
+        "planeicao": "A306",
+        "planetailnum": "N603GP",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
+        }
+      },
+      {
+        "name": "iniSimualtions A300-600R(F) V2 Passenger",
+        "planeicao": "A306",
+        "planetailnum": "N394GP",
+        "settings": {
+          "preficao": "DFLT",
+          "sopicao": "DFLT",
+          "sysicao": "DFLT"
         }
       },
       {

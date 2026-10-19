@@ -2379,8 +2379,6 @@
                 ],
                 "cmdtgl": "sim/flight_controls/toggle_chocks",
                 "dref": "sim/flightmodel2/gear/is_chocked",
-                "foff": "function (a) return 1 end",
-                "fon": "function (a) return 0 end",
                 "indx": 0,
                 "name": "chocks",
                 "title": "Chocks",
@@ -2394,10 +2392,10 @@
                   " ",
                   ""
                 ],
-                "cmdtgl": "openSAM/toggle_jwy",
                 "dref": "opensam/jetway/status",
-                "fcheck": "function (a) return a==2 end",
-                "fon": "function (a) if a~= 2 then command_once(\"openSAM/toggle_jwy\") end end",
+                "foff": "function (a) command_once(\"openSAM/undock_jwy\") end",
+                "fon": "function (a) if a==2 then return 1 else return 0 end end",
+                "ftrans": "function (a) if a==2 then return 1 else return 0 end end",
                 "name": "samjetwaydock",
                 "title": "Dock openSAM jetway",
                 "type": "custom"
@@ -2408,14 +2406,13 @@
                   " ",
                   " ",
                   " ",
-                  " "
+                  ""
                 ],
-                "cmdtgl": "openSAM/toggle_jwy",
-                "dref": "opensam/jetway/status",
-                "fcheck": "function (a) return a==1 end",
-                "fon": "function (a) if a == 2 then command_once(\"openSAM/toggle_jwy\") end end",
-                "name": "samjetwayundock",
-                "title": "Undock openSAM jetway",
+                "foff": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 1 then command_once(\"sim/ground_ops/jetway\") ng_getBckVars():set(\"general:sgesstairs\",0) end end",
+                "fon": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 0 then command_once(\"sim/ground_ops/jetway\") ng_getBckVars():set(\"general:sgesstairs\",1) end end",
+                "ftrans": "function (a) return ng_getBckVars():get(\"general:sgesstairs\") end",
+                "name": "xpjetwaydock",
+                "title": "Dock XP jetway",
                 "type": "custom"
               }
             ],
@@ -2512,6 +2509,18 @@
                 "name": "doorr2",
                 "title": "Door Aft Right",
                 "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "name": "freighterdoor",
+                "title": "-F door",
+                "type": "undefined"
               }
             ],
             "name": "externaldoors"
@@ -2703,6 +2712,39 @@
               }
             ],
             "name": "speak"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "name": "externalstairs",
+                "title": "<title>",
+                "type": "undefined"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  " ",
+                  " "
+                ],
+                "cmdtgl": "Simple_Ground_Equipment_and_Services/Toggle/StairsXPJ",
+                "foff": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 1 then command_once(\"Simple_Ground_Equipment_and_Services/Toggle/StairsXPJ\") ng_getBckVars():set(\"general:sgesstairs\",0) end end",
+                "fon": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 0 then command_once(\"Simple_Ground_Equipment_and_Services/Toggle/StairsXPJ\") ng_getBckVars():set(\"general:sgesstairs\",1) end end",
+                "ftrans": "function (a) return ng_getBckVars():get(\"general:sgesstairs\") end",
+                "name": "sgesstairs",
+                "title": "SGES Nark III",
+                "type": "custom"
+              }
+            ],
+            "name": "stairs"
           },
           {
             "elements": [
@@ -3563,7 +3605,7 @@
                   "up",
                   "dn",
                   "chk",
-                  " ",
+                  "set",
                   " "
                 ],
                 "cmddn": "laminar/A333/transponder/auto_on_off_left",

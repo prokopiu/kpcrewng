@@ -822,11 +822,11 @@
                   " ",
                   " "
                 ],
-                "dref": "laminar/A333/autopilot/vvi_fpa_window_open",
+                "dref": "sim/cockpit2/autopilot/st55_vs",
                 "fcheck": "function (a) return a>0 end",
                 "name": "_vsp",
                 "title": "VSP mode",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -910,7 +910,7 @@
                 ],
                 "cmdtgl": "sim/autopilot/NAV",
                 "dref": "sim/cockpit2/autopilot/nav_status",
-                "fcheck": "function (a) return true end",
+                "fcheck": "function (a) return a>0 end",
                 "name": "navhold",
                 "title": "Nav Hold",
                 "type": "onofftgl"
@@ -955,11 +955,17 @@
                 "type": "undefined"
               },
               {
-                "acts": {},
-                "fcheck": "true",
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+				"cmdtgl": "sim/autopilot/vertical_speed",
+				"dref": "sim/cockpit2/autopilot/st55_vs",
                 "name": "vspmode",
                 "title": "Vertical Speed mode",
-                "type": "undefined"
+                "type": "onofftgl"
               }
             ],
             "name": "modes"
@@ -998,7 +1004,7 @@
                 "min": -1,
                 "name": "crs1",
                 "title": "Course 1",
-                "type": "dialdref"
+                "type": "dialcmd"
               },
               {
                 "acts": [
@@ -1015,7 +1021,7 @@
                 "min": -1,
                 "name": "crs2",
                 "title": "Course 2",
-                "type": "dialdref"
+                "type": "dialcmd"
               },
               {
                 "acts": [
@@ -1307,7 +1313,7 @@
                 "type": "dataref"
               }
             ],
-            "name": "yawdamper"
+            "name": "yawdampers"
           }
         ]
       },

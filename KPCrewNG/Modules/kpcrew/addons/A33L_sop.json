@@ -14,9 +14,20 @@
             "setelements": {}
           },
           {
+            "challenge": "*SIMBRIEF / EFB / ACARS",
+            "classname": "ProcedureItem",
+            "response": "SET AND CHECK",
+            "role": "ng_firole_CM1",
+            "setelements": [
+              {
+                "action": "chk",
+                "element": "wait"
+              }
+            ]
+          },
+          {
             "challenge": "<GND>CHOCKS",
             "classname": "ProcedureItem",
-            "condition": "ng_getAcfPrefs():get(\"general:haschocks\")",
             "response": "SET",
             "role": "ng_firole_SYS",
             "setelements": [
@@ -27,16 +38,43 @@
             ]
           },
           {
+            "challenge": "<GND>STAIRS",
+            "classname": "ProcedureItem",
+            "condition": "ng_getBriefPrefs():get(\"origin:standtype\") > 1",
+            "nocheck": 1,
+            "response": "SET",
+            "role": "ng_firole_SYS",
+            "setelements": [
+              {
+                "action": "on",
+                "condition": "ng_getAcfPrefs():get(\"general:hasstairs\") == false and ng_getAppPrefs():get(\"general:sges\")",
+                "element": "sgesstairs"
+              },
+              {
+                "action": "on",
+                "condition": "ng_getAcfPrefs():get(\"general:hasstairs\")",
+                "element": "externalstairs"
+              }
+            ]
+          },
+          {
             "challenge": "<GND>JETWAY",
             "classname": "ProcedureItem",
-            "condition": "ng_getAppPrefs():get(\"general:opensam\")",
+            "condition": "ng_getBriefPrefs():get(\"origin:standtype\") == 1",
+            "delay": 3,
             "nocheck": 1,
             "response": "CONNECT",
             "role": "ng_firole_SYS",
             "setelements": [
               {
                 "action": "on",
+                "condition": "ng_getAppPrefs():get(\"general:opensam\")",
                 "element": "samjetwaydock"
+              },
+              {
+                "action": "on",
+                "condition": "ng_getAppPrefs():get(\"general:opensam\") == false",
+                "element": "xpjetwaydock"
               }
             ]
           },
@@ -74,6 +112,11 @@
               {
                 "action": "on",
                 "element": "cockpitdoor"
+              },
+              {
+                "action": "on",
+                "condition": "get(\"sim/aircraft2/metadata/is_cargo\") == 1",
+                "element": "freighterdoor"
               }
             ]
           },
@@ -499,18 +542,6 @@
               {
                 "action": "on",
                 "element": "parkbrake"
-              }
-            ]
-          },
-          {
-            "challenge": "*SIMBRIEF / EFB / ACARS",
-            "classname": "ProcedureItem",
-            "response": "SET AND CHECK",
-            "role": "ng_firole_CM1",
-            "setelements": [
-              {
-                "action": "chk",
-                "element": "wait"
               }
             ]
           },
@@ -990,18 +1021,6 @@
             "setelements": {}
           },
           {
-            "challenge": "PARKING BRAKE",
-            "classname": "ProcedureItem",
-            "response": "ON",
-            "role": "ng_firole_CM2",
-            "setelements": [
-              {
-                "action": "on",
-                "element": "parkbrake"
-              }
-            ]
-          },
-          {
             "challenge": "<GND>CHOCKS",
             "classname": "ProcedureItem",
             "response": "OFF",
@@ -1014,15 +1033,68 @@
             ]
           },
           {
-            "challenge": "<GND>DOORS & WINDOWS",
+            "challenge": "PARKING BRAKE",
+            "classname": "ProcedureItem",
+            "response": "ON",
+            "role": "ng_firole_CM2",
+            "setelements": [
+              {
+                "action": "on",
+                "element": "parkbrake"
+              }
+            ]
+          },
+          {
+            "challenge": "<GND>DOORS",
             "classname": "ProcedureItem",
             "delay": 5,
-            "response": "CLOSE & LOCK",
+            "response": "CLOSE",
             "role": "ng_firole_SYS",
             "setelements": [
               {
                 "action": "off",
                 "element": "#externaldoors"
+              }
+            ]
+          },
+          {
+            "challenge": "<GND>STAIRS",
+            "classname": "ProcedureItem",
+            "condition": "ng_getBriefPrefs():get(\"origin:standtype\") > 1",
+            "nocheck": 1,
+            "response": "REMOVE",
+            "role": "ng_firole_SYS",
+            "setelements": [
+              {
+                "action": "off",
+                "condition": "ng_getAcfPrefs():get(\"general:hasstairs\") == false and ng_getAppPrefs():get(\"general:sges\")",
+                "element": "sgesstairs"
+              },
+              {
+                "action": "off",
+                "condition": "ng_getAcfPrefs():get(\"general:hasstairs\")",
+                "element": "externalstairs"
+              }
+            ]
+          },
+          {
+            "challenge": "<GND>JETWAY",
+            "classname": "ProcedureItem",
+            "condition": "ng_getBriefPrefs():get(\"origin:standtype\") == 1",
+            "delay": 3,
+            "nocheck": 1,
+            "response": "DISCONNECT",
+            "role": "ng_firole_SYS",
+            "setelements": [
+              {
+                "action": "off",
+                "condition": "ng_getAppPrefs():get(\"general:opensam\")",
+                "element": "samjetwaydock"
+              },
+              {
+                "action": "off",
+                "condition": "ng_getAppPrefs():get(\"general:opensam\") == false",
+                "element": "xpjetwaydock"
               }
             ]
           },
@@ -1249,20 +1321,6 @@
             "response": "COMPLETED",
             "role": "ng_firole_FO",
             "setelements": {}
-          },
-          {
-            "challenge": "<GND>JETWAY",
-            "classname": "ProcedureItem",
-            "condition": "ng_getAppPrefs():get(\"general:opensam\")",
-            "nocheck": 1,
-            "response": "DISCONNECT",
-            "role": "ng_firole_SYS",
-            "setelements": [
-              {
-                "action": "on",
-                "element": "samjetwayundock"
-              }
-            ]
           },
           {
             "challenge": "*START / PUSHBACK CLEARANCE",
@@ -3467,6 +3525,18 @@
             ]
           },
           {
+            "challenge": "PARKING BRAKE",
+            "classname": "ProcedureItem",
+            "response": "SET",
+            "role": "ng_firole_CM1",
+            "setelements": [
+              {
+                "action": "on",
+                "element": "parkbrake"
+              }
+            ]
+          },
+          {
             "challenge": "*ACCU PRESS",
             "classname": "ProcedureItem",
             "response": "CHECK",
@@ -3476,6 +3546,18 @@
                 "action": "chk",
                 "element": "accupress",
                 "fcheck": "function (a) return a>0.8 end"
+              }
+            ]
+          },
+          {
+            "challenge": "<GND>CHOCKS",
+            "classname": "ProcedureItem",
+            "response": "SET",
+            "role": "ng_firole_SYS",
+            "setelements": [
+              {
+                "action": "on",
+                "element": "chocks"
               }
             ]
           },
@@ -3492,18 +3574,6 @@
               {
                 "action": "off",
                 "element": "#engaice"
-              }
-            ]
-          },
-          {
-            "challenge": "*PARKING BRAKE",
-            "classname": "ProcedureItem",
-            "response": "SET",
-            "role": "ng_firole_CM1",
-            "setelements": [
-              {
-                "action": "on",
-                "element": "parkbrake"
               }
             ]
           },
@@ -3668,16 +3738,43 @@
             "setelements": {}
           },
           {
+            "challenge": "<GND>STAIRS",
+            "classname": "ProcedureItem",
+            "condition": "ng_getBriefPrefs():get(\"destination:standtype\") > 1",
+            "nocheck": 1,
+            "response": "SET",
+            "role": "ng_firole_SYS",
+            "setelements": [
+              {
+                "action": "on",
+                "condition": "ng_getAcfPrefs():get(\"general:hasstairs\") == false and ng_getAppPrefs():get(\"general:sges\")",
+                "element": "sgesstairs"
+              },
+              {
+                "action": "on",
+                "condition": "ng_getAcfPrefs():get(\"general:hasstairs\")",
+                "element": "externalstairs"
+              }
+            ]
+          },
+          {
             "challenge": "<GND>JETWAY",
             "classname": "ProcedureItem",
-            "condition": "ng_getAppPrefs():get(\"general:opensam\")",
+            "condition": "ng_getBriefPrefs():get(\"destination:standtype\") == 1",
+            "delay": 3,
             "nocheck": 1,
             "response": "CONNECT",
             "role": "ng_firole_SYS",
             "setelements": [
               {
                 "action": "on",
+                "condition": "ng_getAppPrefs():get(\"general:opensam\")",
                 "element": "samjetwaydock"
+              },
+              {
+                "action": "on",
+                "condition": "ng_getAppPrefs():get(\"general:opensam\") == false",
+                "element": "xpjetwaydock"
               }
             ]
           },

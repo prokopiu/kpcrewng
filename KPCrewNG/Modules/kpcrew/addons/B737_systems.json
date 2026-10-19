@@ -609,10 +609,15 @@
               },
               {
                 "acts": [
-                  "tgl"
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  ""
                 ],
                 "cmdtgl": "laminar/B738/autopilot/capt_disco_press",
                 "dref": "laminar/B738/autopilot/cmd_a_status",
+                "ftgl": "function (a) command_once(\"laminar/B738/autopilot/capt_disco_press\") end",
                 "name": "yokedisc",
                 "title": "Yoke disc",
                 "type": "onofftgl"
@@ -930,19 +935,6 @@
                   "tgl",
                   "chk"
                 ],
-                "cmdtgl": "laminar/B738/autopilot/vnav_press",
-                "dref": "laminar/B738/autopilot/vnav_status1",
-                "name": "vnavmode",
-                "title": "VNAV",
-                "type": "onofftgl"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
-                  "chk"
-                ],
                 "cmdtgl": "laminar/B738/autopilot/vorloc_press",
                 "dref": "laminar/B738/autopilot/vorloc_status",
                 "fcheck": "function (a) return true end",
@@ -961,6 +953,19 @@
                 "dref": "laminar/B738/autopilot/speed_status1",
                 "name": "spdmode",
                 "title": "SPD mode",
+                "type": "onofftgl"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk"
+                ],
+                "cmdtgl": "laminar/B738/autopilot/vnav_press",
+                "dref": "laminar/B738/autopilot/vnav_status1",
+                "name": "vnavmode",
+                "title": "VNAV",
                 "type": "onofftgl"
               },
               {
@@ -2626,8 +2631,9 @@
                 ],
                 "cmdtgl": "openSAM/toggle_jwy",
                 "dref": "opensam/jetway/status",
-                "fcheck": "function (a) return a==2 end",
-                "fon": "function (a) if a~= 2 then command_once(\"openSAM/toggle_jwy\") end end",
+                "foff": "function (a) command_once(\"openSAM/undock_jwy\") end",
+                "fon": "function (a) command_once(\"openSAM/dock_jwy\") end",
+                "ftrans": "function (a) if a==2 then return 1 else return 0 end end",
                 "name": "samjetwaydock",
                 "title": "Dock openSAM jetway",
                 "type": "custom"
@@ -2635,17 +2641,16 @@
               {
                 "acts": [
                   "on",
-                  " ",
-                  " ",
+                  "off",
+                  "chk",
                   " ",
                   " "
                 ],
-                "cmdtgl": "openSAM/toggle_jwy",
-                "dref": "opensam/jetway/status",
-                "fcheck": "function (a) return a==1 end",
-                "fon": "function (a) if a == 2 then command_once(\"openSAM/toggle_jwy\") end end",
-                "name": "samjetwayundock",
-                "title": "Undock openSAM jetway",
+                "foff": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 1 then command_once(\"sim/ground_ops/jetway\") ng_getBckVars():set(\"general:sgesstairs\",0) end end",
+                "fon": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 0 then command_once(\"sim/ground_ops/jetway\") ng_getBckVars():set(\"general:sgesstairs\",1) end end",
+                "ftrans": "function (a) return ng_getBckVars():get(\"general:sgesstairs\") end",
+                "name": "xpjetwaydock",
+                "title": "Dock XP jetway",
                 "type": "custom"
               }
             ],
@@ -2858,6 +2863,27 @@
             "elements": [
               {
                 "acts": [
+                  "on",
+                  "off",
+                  "chk",
+                  " ",
+                  " "
+                ],
+                "cmdtgl": "Simple_Ground_Equipment_and_Services/Toggle/StairsXPJ",
+                "foff": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 1 then command_once(\"Simple_Ground_Equipment_and_Services/Toggle/StairsXPJ\") ng_getBckVars():set(\"general:sgesstairs\",0) end end",
+                "fon": "function (a) if ng_getBckVars():get(\"general:sgesstairs\") == 0 then command_once(\"Simple_Ground_Equipment_and_Services/Toggle/StairsXPJ\") ng_getBckVars():set(\"general:sgesstairs\",1) end end",
+                "ftrans": "function (a) return ng_getBckVars():get(\"general:sgesstairs\") end",
+                "name": "sgesstairs",
+                "title": "SGES Nark III",
+                "type": "custom"
+              }
+            ],
+            "name": "stairs"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
                   "set",
                   " ",
                   " ",
@@ -3021,6 +3047,20 @@
                 "fcheck": "function (a) return true end",
                 "fset": "function (a) ng_speakNoText(0, \"Starting engine 2\") end",
                 "name": "spkstarteng2",
+                "title": "speak",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "set",
+                  " ",
+                  " ",
+                  " ",
+                  " "
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"takeoff power set\") end",
+                "name": "spktopower",
                 "title": "speak",
                 "type": "custom"
               }

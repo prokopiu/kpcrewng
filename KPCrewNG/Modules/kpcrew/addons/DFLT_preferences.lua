@@ -103,8 +103,13 @@ air:add(preference:new("hasvacuum",			false,ng_type_flag,"Has Vacuum|Yes|No"))		
 
 -- --------------------------- Autopilot related settings 
 local autopilot 			= preferenceGroup:new("autopilot","AUTOPILOT")
-autopilot:add(preference:new("hasautopilot",	true,ng_type_flag,"Has A/P?|Yes|No"))				-- autopilot:hasathr
-autopilot:add(preference:new("hasathr",	false,ng_type_flag,"Has A/THR?|Yes|No"))				-- autopilot:hasathr
+autopilot:add(preference:new("hasautopilot",true,ng_type_flag,"Has A/P?|Yes|No"))				-- autopilot:hasathr
+	autopilot:add(preference:new("sopapatonoff",	false,ng_type_flag,"A/P A/T Switch in SOP|Yes|No",
+		nil,"return ng_getAcfPrefs():get(\"autopilot:hasathr\")"))									-- autopilot:sopapatonoff
+autopilot:add(preference:new("hasathr",		false,ng_type_flag,"Has A/THR?|Yes|No"))				-- autopilot:hasathr
+autopilot:add(preference:new("hastogamode",	false,ng_type_flag,"Has TO GA Mode|Yes|No"))			-- autopilot:hastogamode
+	autopilot:add(preference:new("atoffwithap",	false,ng_type_flag,"A/T off with AP|Yes|No",
+		nil,"return ng_getAcfPrefs():get(\"autopilot:hasathr\")"))									-- autopilot:atoffwithap
 autopilot:add(preference:new("hasirs",		false,ng_type_flag,"Has IRS?|Yes|No"))				-- autopilot:hasirs
 	autopilot:add(preference:new("irsoff",		0,ng_type_int,"IRS OFF INDX|0",
 		nil,"return ng_getAcfPrefs():get(\"autopilot:hasirs\")"))									-- autopilot:irsoff
@@ -230,7 +235,14 @@ weights:add(preference:new("maxfuel",		-1,ng_type_int,"Max Fuel|0"))						-- wei
 -- --------------------------------------------------------------------------------------------
 -- ---------------------- Weight related settings
 local radios 				= preferenceGroup:new("radios","RADIOS")
-radios:add(preference:new("hasxpdrtara", 	false,ng_type_flag,"XPDR has TARA|Yes|No"))			-- radios:xpdrtara
+radios:add(preference:new("hasxpdrtara", 	false,ng_type_flag,"XPDR has TARA|Yes|No"))			-- adios:xpdrtara
+
+local speak 				= preferenceGroup:new("speak","SPEAK")
+speak:add(preference:new("flapcallouts", false,ng_type_flag,"Flaps callouts|Yes|No"))			-- 
+speak:add(preference:new("gearcallouts", false,ng_type_flag,"Gear callouts|Yes|No"))			-- 
+speak:add(preference:new("vspdcallouts", false,ng_type_flag,"V-Speed callouts|Yes|No"))			-- 
+speak:add(preference:new("transcallouts", false,ng_type_flag,"Transition callouts|Yes|No"))			-- 
+speak:add(preference:new("engcallouts", false,ng_type_flag,"Engine callouts|Yes|No"))			-- 
 
 aircraftPrefSet:addGroup(addon)
 aircraftPrefSet:addGroup(general)
@@ -245,6 +257,7 @@ aircraftPrefSet:addGroup(fuel)
 aircraftPrefSet:addGroup(hydraulic)
 aircraftPrefSet:addGroup(lights)
 aircraftPrefSet:addGroup(radios)
+aircraftPrefSet:addGroup(speak)
 aircraftPrefSet:addGroup(weights)
 
 --- optional custom steps on loading the set
