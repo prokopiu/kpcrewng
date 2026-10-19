@@ -87,6 +87,7 @@ dprint("ng_action_element: "..element.title)
 			local result = nil
 			if dref ~= nil then 
 				if idx ~= nil then result = get(element.dref,idx) else result = get(element.dref) end
+
 				if element.ftrans ~= nil then 
 					local func = loadstring("return "..element.ftrans)()
 					if func ~= nil then result = func(result) end

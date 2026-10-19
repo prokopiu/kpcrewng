@@ -13,7 +13,7 @@ local ngAssignmentElement = {}
 -- @param string title 
 -- @param string elementnode from json 
 -- @return SystemElement - the created SystemElement object
-function ngAssignmentElement:new(name, planeicao, planetailnum, elementNode)
+function ngAssignmentElement:new(name, planeicao, planetailnum, elementNode, planedescr)
     ngAssignmentElement.__index = ngAssignmentElement
     local obj = {}
     setmetatable(obj, ngAssignmentElement)
@@ -23,6 +23,7 @@ function ngAssignmentElement:new(name, planeicao, planetailnum, elementNode)
     obj.name = name
 	obj.planeicao = planeicao
 	obj.planetailnum = planetailnum
+	obj.planedescr = planedescr
 	obj.elementNode = elementNode
 	
 	dprint("+ "..obj.className.." {"..obj.name.."}")
@@ -57,6 +58,14 @@ function ngAssignmentElement:getPlanetailnum() return self.planetailnum end
 --- set planetailnum
 -- @param string planetailnum
 function ngAssignmentElement:setPlanetailnum(planetailnum) self.planetailnum = planetailnum end
+
+--- get planedescr string
+-- @return string - planetailnum text
+function ngAssignmentElement:getPlanedescr() return self.planedescr end
+
+--- set planedescr
+-- @param string planetailnum
+function ngAssignmentElement:setPlanedescr(planedescr) self.planedescr = planedescr end
 
 --- set element node
 -- @param table elementNode

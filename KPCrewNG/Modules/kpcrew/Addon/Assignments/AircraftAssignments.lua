@@ -93,17 +93,16 @@ end
 -- key contains 
 -- @param string inkey Key of assignment element to find
 -- @return assignment found or nil
-function ngAircraftAssignments:findAssignment(planeicao,planetail)
+function ngAircraftAssignments:findAssignment(planeicao,planetail,planedescr)
 
 	local foundnode = nil
 	local dfltnode = nil
 
-	print("ICAO/TAILNUM:"..planeicao.."/"..planetail.."/")
 	for _,assignnode in pairs(self.assignments) do
 	
 		local aplaneicao = assignnode:getPlaneicao()
 		local aplanetail = assignnode:getPlanetailnum()
-		print("ASSIGN ICAO/TAILNUM:"..aplaneicao.."/"..aplanetail.."/")
+		local aplanedescr = assignnode:getPlanedescr()
 		
 		if aplaneicao == "DFLT" then
 			dfltnode = assignnode
@@ -112,21 +111,23 @@ function ngAircraftAssignments:findAssignment(planeicao,planetail)
 		if aplaneicao == "" and aplanetail ~= "" then
 			if planetail == aplanetail then
 				foundnode = assignnode
-				print("tailonly "..foundnode.name)
+				return foundnode
+			end
+		elseif aplaneicao == "" and aplanetail == "" and aplanedescr ~= "" then
+			if aplanedescr == planedescr then
+				foundnode = assignnode
 				return foundnode
 			end
 		elseif aplaneicao ~= "" and aplanetail == "" then
 			--search for icao only
 			if aplaneicao == planeicao then
 				foundnode = assignnode
-				print("icaoonly "..foundnode.name)
 				return foundnode
 			end
 		elseif aplaneicao ~= "" and aplanetail ~= "" then
 			-- search for both
 			if aplaneicao == planeicao and planetail == aplanetail then
 				foundnode = assignnode
-				print("both "..foundnode.name)
 				return foundnode
 			end
 		end
@@ -148,7 +149,7 @@ function ngAircraftAssignments:load()
 		local assignments = json.parse(jsonstr)
 
 		for assignmentkey,assignmentnode in pairs(assignments.acftselect.addons) do
-		    local assignment = Assignment:new(assignmentnode.name,assignmentnode.planeicao, assignmentnode.planetailnum, assignmentnode.settings)
+		    local assignment = Assignment:new(assignmentnode.name,assignmentnode.planeicao, assignmentnode.planetailnum, assignmentnode.settings, assignmentnode.planedescr)
 			self:appendAssignment(assignment)
 		end
 		

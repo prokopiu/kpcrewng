@@ -139,7 +139,7 @@ function ngFlow:complete()
 	for k, item in ipairs(self.items) do item:setState(ng_fistate_end) end
 	self.state = ng_flowstate_end
 	self.activeItem = 0
-	ng_stateindex = 0
+	ng_stateindex = 40
 end
 
 -- Output and render functions

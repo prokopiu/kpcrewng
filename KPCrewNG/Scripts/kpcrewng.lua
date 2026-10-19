@@ -73,9 +73,9 @@ logMsg ( "FWL: ** Starting KPCrewNG version " .. ng_version .. " on XP " .. ng_s
 local Assignments	= require("kpcrew.Addon.Assignments.AircraftAssignments")
 local activeAssignments = Assignments:new("Aircraft Assignments",SCRIPT_DIRECTORY.."../Modules/kpcrew_prefs/acftselect.json")
 activeAssignments:load()
-ng_acf_sopicao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER):getElementNode().sopicao
-ng_acf_prficao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER):getElementNode().preficao
-ng_acf_sysicao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER):getElementNode().sysicao
+ng_acf_sopicao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER,get("sim/aircraft/view/acf_descrip")):getElementNode().sopicao
+ng_acf_prficao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER,get("sim/aircraft/view/acf_descrip")):getElementNode().preficao
+ng_acf_sysicao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER,get("sim/aircraft/view/acf_descrip")):getElementNode().sysicao
 logMsg("ICAO: ".. ng_acf_sopicao)
 
 -- ====== Aircraft Addon Specific SOP/Checklist/Procedure Definitions & Preferences

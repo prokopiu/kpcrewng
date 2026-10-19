@@ -24,9 +24,9 @@ logMsg ("FWL: ** Starting KPHWNG version " .. nh_version .." **")
 local Assignments	= require("kpcrew.Addon.Assignments.AircraftAssignments")
 local activeAssignments = Assignments:new("Aircraft Assignments",SCRIPT_DIRECTORY.."../Modules/kpcrew_prefs/acftselect.json")
 activeAssignments:load()
-nh_acf_prficao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER):getElementNode().preficao
-nh_acf_sysicao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER):getElementNode().sysicao
-logMsg("ICAO: ".. ng_acf_sopicao)
+nh_acf_prficao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER,get("sim/aircraft/view/acf_descrip")):getElementNode().preficao
+nh_acf_sysicao = activeAssignments:findAssignment(PLANE_ICAO,PLANE_TAILNUMBER,get("sim/aircraft/view/acf_descrip")):getElementNode().sysicao
+logMsg("ICAO: ".. nh_acf_sysicao)
 
 -- level of exposure (to save memory and ressources
 -- 0 = basic (a/p, basic functions (gear, flaps etc...)
@@ -234,9 +234,9 @@ create_command("kp/xsp/systems/parking_brake_on",	"Parking Brake On",			"ng_exec
 create_command("kp/xsp/systems/parking_brake_off",	"Parking Brake Off",		"ng_execute_actions('parkbrake','off',nil)",		"","")
 create_command("kp/xsp/systems/parking_brake_tgl",	"Parking Brake Toggle",		"ng_execute_actions('parkbrake','tgl',nil)",		"","")
 
-create_command("kp/xsp/systems/gears_up",			"Gears Up",					"ng_execute_actions('#gearhandle','on',nil)",			"","")
-create_command("kp/xsp/systems/gears_down",			"Gears Down",				"ng_execute_actions('#gearhandle','off',nil)",			"","")
-create_command("kp/xsp/systems/gears_off",			"Gears OFF",				"ng_execute_actions('#gearhandle','tgl',nil)",		"","")
+create_command("kp/xsp/systems/gears_up",			"Gears Up",					"ng_execute_actions('gearhandle','off',nil)",			"","")
+create_command("kp/xsp/systems/gears_down",			"Gears Down",				"ng_execute_actions('gearhandle','on',nil)",			"","")
+create_command("kp/xsp/systems/gears_off",			"Gears OFF",				"ng_execute_actions('gearhandle','tgl',nil)",		"","")
 
 create_command("kp/xsp/systems/door_l1_toggle",		"Toggle door L1",			"ng_execute_actions('doorl1','tgl',nil)","","")	
 create_command("kp/xsp/systems/door_l2_toggle",		"Toggle door L2",			"ng_execute_actions('doorl2','tgl',nil)","","")	
@@ -315,10 +315,15 @@ create_command("kp/xsp/autopilot/nav_tgl",			"Toggle Nav Mode", 	"ng_execute_act
 create_command("kp/xsp/autopilot/app_tgl",			"Toggle Approach", 	"ng_execute_actions('approach','tgl',nil)","","")
 create_command("kp/xsp/autopilot/vs_tgl",			"Toggle Vert Speed", "ng_execute_actions('vspmode','tgl',nil)","","")
 create_command("kp/xsp/autopilot/ias_tgl",			"Toggle IAS/Speed mode", "ng_execute_actions('spdmode','tgl',nil)","","")
+create_command("kp/xsp/autopilot/hdg_sync",			"Hdg Sync", 		"ng_execute_actions('hdgsel','set',get('sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot'))","","")
 
 create_command("kp/xsp/autopilot/at_tgl",			"A/T Tgl", "ng_execute_actions('autothrottle','tgl',nil)","","")
 create_command("kp/xsp/autopilot/at_arm",			"A/T Arm", "ng_execute_actions('autothrottle','on',nil)","","")
-create_command("kp/xsp/autopilot/at_off",			"A/T OFF", "ng_execute_actions('autothrottle','off',nil)","","")
+create_command("kp/xsp/autopilot/at_off",			"A/T OFF", "ng_execute_actions('athrdisc','off',nil)","","")
+
+create_command("kp/xsp/autopilot/yawd_tgl",			"Yawdamper Tgl", "ng_execute_actions('yawdamper','tgl',nil)","","")
+create_command("kp/xsp/autopilot/yawd_on",			"Yawdamper On", "ng_execute_actions('yawdamper','on',nil)","","")
+create_command("kp/xsp/autopilot/yawd_off",			"Yawdamper OFF", "ng_execute_actions('yawdamper','off',nil)","","")
 
 create_command("kp/xsp/autopilot/toga_press",		"Press Left TOGA", "ng_execute_actions('toga','tgl',nil)","","")
 
@@ -576,6 +581,9 @@ xsp_mcp_athr[0] = 0
 xsp_mcp_toga 			= create_dataref_table("kp/xsp/autopilot/mcp_toga", "Int")
 xsp_mcp_toga[0] = 0
 
+xsp_mcp_yawdamp			= create_dataref_table("kp/xsp/autopilot/mcp_yawdamp", "Int")
+xsp_mcp_yawdamp[0] = 0
+
 -- datarefs for MCP values
 xsp_mcp_altval = create_dataref_table("kp/xsp/bravo/mcp_altval", "Int")
 xsp_mcp_altval[0] = 0
@@ -729,7 +737,7 @@ function xsp_set_light_drefs()
 	xsp_mcp_hdg[0] = ng_get_state("_hdg","chk",nil)
 
 	-- NAV annunciator
-	xsp_mcp_nav[0] = ng_get_state("_loc","chk",nil) + ng_get_state("_lnav","chk",nil)
+	xsp_mcp_nav[0] = ng_get_state("_loc","chk",nil)
 
 	-- APR annunciator
 	xsp_mcp_app[0] = ng_get_state("_appr","chk",nil)
@@ -751,6 +759,9 @@ function xsp_set_light_drefs()
 
 	-- TOGA light
 	xsp_mcp_toga[0] = ng_get_state("toga","chk",0)
+
+	-- YawDamper light
+	xsp_mcp_yawdamp[0] = ng_get_state("yawdamper","chk",1)
 
 	-- Altitude display
 	-- xsp_mcp_altval[0] = ng_get_state("","chk",nil)

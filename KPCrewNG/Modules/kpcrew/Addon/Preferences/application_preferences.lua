@@ -7,7 +7,7 @@ local preference = require("kpcrew.Addon.Preferences.PreferenceItem")
 local applicationPrefSet = preferenceSet:new("application","APPLICATION SETTINGS",SCRIPT_DIRECTORY .. "../Modules/kpcrew_prefs/application.preferences")
 
 local general = preferenceGroup:new("general","GENERAL SETTINGS")
-general:add(preference:new("assistance",	false,ng_type_flag,"Assistance|On|Off"))
+general:add(preference:new("assistance",	false,ng_type_flag,"Assistanceby FO|On|Off"))
 general:add(preference:new("usechecklist",	true,ng_type_flag,"Use Checklists|Yes|No"))
 general:add(preference:new("showstars",		true,ng_type_flag,"Show * Items|Yes|No"))
 general:add(preference:new("jumpflow",		false,ng_type_flag,"Jump to next flow|On|Off"))
@@ -18,6 +18,8 @@ general:add(preference:new("barounit",		1,ng_type_list,"Baro Unit|mb|inhg"))
 general:add(preference:new("deftransalt",	5000,ng_type_int,"Default Transalt|0"))
 general:add(preference:new("deftranslvl",	6000,ng_type_int,"Default Translvl|0"))
 general:add(preference:new("opensam",		false,ng_type_flag,"Use OpenSAM|On|Off"))
+general:add(preference:new("sges",			false,ng_type_flag,"Use SGES|On|Off"))
+general:add(preference:new("activatega",	false,ng_type_flag,"Activate Go-Around Mode|On|Off"))
 
 local kphwng = preferenceGroup:new("kphwng","KPHWNG SETTINGS")
 -- level of exposure (to save memory and ressources
