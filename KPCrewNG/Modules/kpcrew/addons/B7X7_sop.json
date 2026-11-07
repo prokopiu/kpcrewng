@@ -531,6 +531,7 @@
             "challenge": "GLARESHIELD",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:isairbus\") == false",
+            "nocheck": 1,
             "response": "INITIAL SETUP",
             "role": "ng_firole_FO",
             "setelements": [
@@ -569,7 +570,7 @@
             ]
           },
           {
-            "challenge": "*MAINTENANCE",
+            "challenge": "*MAINTENANCE & LOAD",
             "classname": "ProcedureItem",
             "response": "PERFORM",
             "role": "ng_firole_CPT",
@@ -2536,13 +2537,43 @@
             "role": "ng_firole_PF",
             "setelements": [
               {
-                "action": "set",
-                "condition": "ng_getAcfPrefs():get(\"speak:spktopower\")",
-                "element": "spkgearup"
-              },
-              {
                 "action": "tgl",
                 "element": "athrtogamode"
+              }
+            ]
+          },
+          {
+            "challenge": "<WAIT>V1",
+            "classname": "ProcedureItem",
+            "response": " ",
+            "role": "ng_firole_FO",
+            "setelements": [
+              {
+                "action": "set",
+                "element": "spkthrustset"
+              },
+              {
+                "action": "chk",
+                "element": "_airspeed",
+                "fcheck": "function (a) return a>=ng_getBriefPrefs():get(\"takeoff:rwyv1\") end"
+              }
+            ]
+          },
+          {
+            "challenge": "<WAIT>VR",
+            "classname": "ProcedureItem",
+            "response": " ",
+            "role": "ng_firole_FO",
+            "setelements": [
+              {
+                "action": "set",
+                "condition": "ng_getAcfPrefs():get(\"speak:vspdcallouts\")",
+                "element": "spkv1"
+              },
+              {
+                "action": "chk",
+                "element": "_airspeed",
+                "fcheck": "function (a) return a>=ng_getBriefPrefs():get(\"takeoff:rwyv1\") end"
               }
             ]
           },
@@ -2553,7 +2584,12 @@
             "role": "ng_firole_PF",
             "setelements": [
               {
-                "action": "function",
+                "action": "set",
+                "condition": "ng_getAcfPrefs():get(\"speak:vspdcallouts\")",
+                "element": "spkrotatego"
+              },
+              {
+                "action": "chk",
                 "element": "wait"
               }
             ]
@@ -3184,19 +3220,21 @@
           {
             "challenge": "BARO QNH",
             "classname": "ProcedureItem",
-            "condition": "ng_getBriefPrefs():get(\"destination:translvl\") < 10000",
+            "condition": "ng_getBriefPrefs():get(\"destination:translvl\") >= 10000",
             "response": "SET",
             "role": "ng_firole_BOTH",
             "setelements": [
               {
-                "action": "off",
+                "action": "set",
                 "element": "barostd1",
-                "nocheck": 1
+                "nocheck": 1,
+                "value": 0
               },
               {
-                "action": "off",
+                "action": "set",
                 "element": "barostd2",
-                "nocheck": 1
+                "nocheck": 1,
+                "value": 0
               }
             ]
           },
@@ -3211,12 +3249,6 @@
                 "action": "set",
                 "condition": "ng_getAcfPrefs():get(\"speak:transcallouts\")",
                 "element": "spktranslvl"
-              },
-              {
-                "action": "set",
-                "element": "barovalue3",
-                "fvalue": "string.format(\"%5.2f\",ng_getBriefPrefs():get(\"landing:altimeter\"))+0.0",
-                "nocheck": 1
               }
             ]
           },
@@ -3363,24 +3395,6 @@
               {
                 "action": "on",
                 "element": "#rwylights"
-              }
-            ]
-          },
-          {
-            "challenge": "*ALTIMETERS",
-            "classname": "ProcedureItem",
-            "response": "ALL SET DESTINATION QNH",
-            "role": "ng_firole_BOTH",
-            "setelements": [
-              {
-                "action": "set",
-                "element": "barovalue1",
-                "fvalue": "string.format(\"%4.0f\",ng_getBriefPrefs():get(\"landing:altimeter\")*100)+0"
-              },
-              {
-                "action": "set",
-                "element": "barovalue2",
-                "fvalue": "string.format(\"%4.0f\",ng_getBriefPrefs():get(\"landing:altimeter\")*100)+0"
               }
             ]
           },
@@ -3862,6 +3876,10 @@
             "role": "ng_firole_PF",
             "setelements": [
               {
+                "action": "tgl",
+                "element": "yokedisc"
+              },
+              {
                 "action": "chk",
                 "element": "wait"
               }
@@ -3894,7 +3912,7 @@
             ]
           },
           {
-            "challenge": "GLARESHIELD",
+            "challenge": "GA GLARESHIELD",
             "classname": "ProcedureItem",
             "nocheck": 1,
             "response": "SET HDG, SPD AND ALT",
@@ -3918,7 +3936,7 @@
             ]
           },
           {
-            "challenge": "AUTOPILOT",
+            "challenge": "GA AUTOPILOT",
             "classname": "ProcedureItem",
             "condition": "ng_get_active_prefs():get(\"autopilot:sopapatonoff\")",
             "response": "ON",
@@ -3931,7 +3949,7 @@
             ]
           },
           {
-            "challenge": "HDG SEL MODE",
+            "challenge": "GA HDG SEL MODE",
             "classname": "ProcedureItem",
             "response": "ON",
             "role": "ng_firole_PF",
@@ -3943,10 +3961,10 @@
             ]
           },
           {
-            "challenge": "VSP MODE",
+            "challenge": "GA VSP MODE",
             "classname": "ProcedureItem",
             "response": " ",
-            "role": "ng_firole_FO",
+            "role": "ng_firole_PF",
             "setelements": [
               {
                 "action": "on",
@@ -3955,7 +3973,7 @@
             ]
           },
           {
-            "challenge": "AUTOTHRUST",
+            "challenge": "GA AUTOTHRUST",
             "classname": "ProcedureItem",
             "condition": "ng_get_active_prefs():get(\"autopilot:sopapatonoff\") and ng_get_active_prefs():get(\"autopilot:atoffwithap\")",
             "response": "OFF",
@@ -3968,7 +3986,7 @@
             ]
           },
           {
-            "challenge": "TOGA MODE",
+            "challenge": "GA TOGA MODE",
             "classname": "ProcedureItem",
             "condition": "ng_get_active_prefs():get(\"autopilot:hastogamode\")",
             "delay": 2,
@@ -3982,7 +4000,7 @@
             ]
           },
           {
-            "challenge": "*CALL FOR FLAPS 5",
+            "challenge": "*GA CALL FOR FLAPS 5",
             "classname": "ProcedureItem",
             "response": " ",
             "role": "ng_firole_CPT",
@@ -3994,7 +4012,7 @@
             ]
           },
           {
-            "challenge": "FLAPS 5",
+            "challenge": "GA FLAPS 5",
             "classname": "ProcedureItem",
             "delay": 6,
             "response": "SET",
@@ -4658,6 +4676,7 @@
             "challenge": "GLARESHIELD",
             "classname": "ProcedureItem",
             "condition": "ng_getAcfPrefs():get(\"general:isairbus\") == false",
+            "nocheck": 1,
             "response": "INITIAL SETUP",
             "role": "ng_firole_FO",
             "setelements": [
@@ -5230,33 +5249,6 @@
         ],
         "phase": "ng_phase_colddark",
         "title": "SECURING THE AIRCRAFT FLOW"
-      },
-      {
-        "classname": "ProcedureFlow",
-        "flowitem": [
-          {
-            "challenge": "STD",
-            "classname": "ProcedureItem",
-            "response": " ",
-            "role": "ng_firole_FO",
-            "setelements": [
-              {
-                "action": "off",
-                "element": "autothrottle"
-              }
-            ]
-          },
-          {
-            "challenge": "END",
-            "classname": "ProcedureItem",
-            "nocheck": 1,
-            "response": " ",
-            "role": "ng_firole_SYS",
-            "setelements": {}
-          }
-        ],
-        "phase": "ng_phase_colddark",
-        "title": "TEST"
       }
     ],
     "title": "FLIGHTFACTOR 757/767"

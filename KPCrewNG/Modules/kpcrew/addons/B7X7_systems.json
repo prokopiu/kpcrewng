@@ -884,55 +884,57 @@
             "elements": [
               {
                 "acts": [
-                  "chk",
                   " ",
                   " ",
                   " ",
-                  " "
+                  " ",
+                  "chk"
                 ],
-                "dref": "",
+                "dref": "1-sim/AP/lamp/12",
                 "fcheck": "function (a) return a>0 end",
                 "name": "_ap1state",
                 "title": "AP1 state",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
                 "acts": [
-                  "chk",
-                  " ",
-                  " ",
-                  " ",
-                  " "
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
                 ],
-                "dref": "",
+                "dref": "1-sim/AP/lamp/14",
                 "fcheck": "function (a) return a>0 end",
                 "name": "_ap2state",
                 "title": "AP2 state",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "dref": "",
+                "dref": "1-sim/AP/cmd_L_Button",
                 "name": "ap1",
                 "title": "CMD A",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
                 "acts": [
                   "on",
                   "off",
                   "tgl",
+                  "set",
                   "chk"
                 ],
-                "dref": "",
+                "dref": "1-sim/AP/cmd_R_Button",
                 "name": "ap2",
                 "title": "CMD B",
-                "type": "undefined"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -977,7 +979,7 @@
                   ""
                 ],
                 "cmdtgl": "1-sim/comm/AP/at_toga",
-                "dref": "",
+                "dref": "1-sim/AP/togaButton",
                 "fcheck": "function (a) return true end",
                 "name": "athrtogamode",
                 "title": "TOGA Mode button",
@@ -1013,11 +1015,10 @@
                   ""
                 ],
                 "cmdtgl": "1-sim/command/AP/fd1Switcher_trigger",
-                "dref": "1-sim/AP/fd1Switcher",
+                "dref": "757Avionics/ap/leftFdState",
                 "foff": "function (a) set(\"1-sim/AP/fd1Switcher\",1) end",
                 "fon": "function (a) set(\"1-sim/AP/fd1Switcher\",0) end",
                 "ftgl": "function (a) if set(\"1-sim/AP/fd1Switcher\",1-a) end",
-                "ftrans": "function (a) return 1-a end",
                 "name": "flightdir1",
                 "title": "FD 1",
                 "type": "onofftgl"
@@ -1031,11 +1032,10 @@
                   ""
                 ],
                 "cmdtgl": "1-sim/command/AP/fd2Switcher_trigger",
-                "dref": "1-sim/AP/fd2Switcher",
+                "dref": "757Avionics/ap/rghtFdState",
                 "foff": "function (a) set(\"1-sim/AP/fd2Switcher\",1) end",
                 "fon": "function (a) set(\"1-sim/AP/fd2Switcher\",0) end",
                 "ftgl": "function (a) if set(\"1-sim/AP/fd2Switcher\",1-a) end",
-                "ftrans": "function (a) return 1-a end",
                 "name": "flightdir2",
                 "title": "FD 2",
                 "type": "onofftgl"
@@ -1067,10 +1067,23 @@
                   " ",
                   "chk"
                 ],
-                "dref": "1-sim/AP/lamp/10",
+                "dref": "1-sim/AP/lamp/11",
                 "fcheck": "function (a) return a>0 end",
                 "name": "_appr",
                 "title": "APPR annunciator",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "1-sim/AP/lamp/5",
+                "fcheck": "function (a) return a>0 end",
+                "name": "_flch",
+                "title": "Level Change",
                 "type": "dataref"
               },
               {
@@ -1082,7 +1095,6 @@
                   "chk"
                 ],
                 "dref": "1-sim/AP/hdgConfButton",
-                "fcheck": "function (a) return a==0 end",
                 "name": "_hdg",
                 "title": "HDG mode",
                 "type": "dataref"
@@ -1111,6 +1123,7 @@
                 ],
                 "dref": "1-sim/AP/lamp/3",
                 "fcheck": "function (a) return a>0 end",
+                "ftrans": "function (a) if a>0 then return 1 else return 0 end end",
                 "name": "_lnav",
                 "title": "LNAV mode",
                 "type": "dataref"
@@ -1123,7 +1136,7 @@
                   " ",
                   "chk"
                 ],
-                "dref": "1-sim/AP/lamp/9",
+                "dref": "1-sim/AP/lamp/10",
                 "fcheck": "function (a) return a==0 end",
                 "name": "_loc",
                 "title": "LOC mode annunciator",
@@ -1232,23 +1245,10 @@
                   "on",
                   "off",
                   "tgl",
-                  "chk"
-                ],
-                "dref": "laminar/B738/autopilot/lvl_chg_status",
-                "name": "flch",
-                "title": "Level Change",
-                "type": "undefined"
-              },
-              {
-                "acts": [
-                  "on",
-                  "off",
-                  "tgl",
                   "set",
                   "chk"
                 ],
                 "dref": "1-sim/AP/hdgConfButton",
-                "fcheck": "function (a) return a==0 end",
                 "name": "hdghold",
                 "title": "Heading Hold",
                 "type": "dataref"
@@ -1307,6 +1307,32 @@
                 "dref": "1-sim/AP/spdButton",
                 "name": "spdmode",
                 "title": "SPD mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/AP/flchButton",
+                "name": "flchmode",
+                "title": "LVL CHG mode",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/AP/eprButton",
+                "name": "n1mode",
+                "title": "N1 mode",
                 "type": "dataref"
               },
               {
@@ -1438,30 +1464,31 @@
                 ],
                 "cmddn": "1-sim/comm/AP/spdDN",
                 "cmdup": "1-sim/comm/AP/spdUP",
-                "dref": "757Avionics/ap/spd_act",
+                "dref": "1-sim/AP/spdSetting",
                 "incr": 1,
                 "max": 999,
                 "min": 0,
-                "name": "speedsel",
-                "title": "A/P Speed",
+                "name": "spdsel",
+                "title": "AP Speed",
                 "type": "dialcmd"
               },
               {
                 "acts": [
                   "up",
                   "dn",
-                  "set",
                   "chk",
+                  "set",
                   ""
                 ],
-                "cmddn": "sim/autopilot/vertical_speed_down",
-                "cmdup": "sim/autopilot/vertical_speed_up",
+                "cmddn": "1-sim/comm/AP/vviDN",
+                "cmdup": "1-sim/comm/AP/vviUP",
+                "dref": "1-sim/AP/vviSetting",
                 "incr": 100,
                 "max": 7900,
                 "min": -7900,
                 "name": "vspsel",
                 "title": "A/P VSP",
-                "type": "undefined"
+                "type": "dialcmd"
               }
             ],
             "name": "selectors"
@@ -1651,6 +1678,39 @@
                   "set"
                 ],
                 "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"autobrake off\") end",
+                "name": "spkautobroff",
+                "title": "<title>",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"takeoff thrust set\") end",
+                "name": "spkthrustset",
+                "title": "<title>",
+                "type": "custom"
+              }
+            ],
+            "name": "general"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "chk",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
                 "fset": "function (a) ng_speakNoText(0, \"then thousand\") end",
                 "name": "spk10k",
                 "title": "<title>",
@@ -1697,7 +1757,21 @@
                   "chk",
                   "set"
                 ],
-                "dref": "",
+                "fcheck": "function (a) return true end",
+                "fset": "function (a) ng_speakNoText(0, \"rotate\") end",
+                "name": "spkrotatego",
+                "title": "<title>",
+                "type": "custom"
+              },
+              {
+                "acts": [
+                  "",
+                  "",
+                  "",
+                  "",
+                  "set"
+                ],
+                "fcheck": "function (a) return true end",
                 "fset": "function (a) ng_speakNoText(0, \"v 1\") end",
                 "name": "spkv1",
                 "title": "<title>",
@@ -2256,6 +2330,24 @@
               }
             ],
             "name": "_rudder"
+          },
+          {
+            "elements": [
+              {
+                "acts": [
+                  " ",
+                  " ",
+                  " ",
+                  " ",
+                  "chk"
+                ],
+                "dref": "sim/flightmodel/position/indicated_airspeed",
+                "name": "_airspeed",
+                "title": "<title>",
+                "type": "dataref"
+              }
+            ],
+            "name": "_speed"
           }
         ]
       },
@@ -2266,21 +2358,23 @@
             "elements": [
               {
                 "acts": [
-                  "up",
-                  "dn",
+                  "on",
+                  "off",
+                  "tgl",
                   "chk",
-                  "",
-                  ""
+                  "set"
                 ],
                 "cmddn": "laminar/B738/EFIS_control/capt/baro_in_hpa_dn",
                 "cmdup": "laminar/B738/EFIS_control/capt/baro_in_hpa_up",
-                "dref": "laminar/B738/EFIS_control/capt/baro_in_hpa",
+                "dref": "1-sim/ng/baroLargeL/anim",
+                "foff": "function (a) set(\"1-sim/ng/baroLargeL/anim/anim\",0) set(\"1-sim/ng/baroLargeL/anim\",0) end",
+                "fon": "function (a) set(\"1-sim/ng/baroLargeL/anim/anim\",-1) set(\"1-sim/ng/baroLargeL/anim\",-1) end",
                 "incr": 1,
                 "max": 1,
                 "min": 0,
                 "name": "baromode1",
                 "title": "Baro Mode left",
-                "type": "dialcmd"
+                "type": "custom"
               },
               {
                 "acts": [
@@ -2298,7 +2392,7 @@
                 "min": 0,
                 "name": "baromode2",
                 "title": "Baro mode right",
-                "type": "dialcmd"
+                "type": "undefined"
               }
             ],
             "name": "baromodes"
@@ -2338,36 +2432,34 @@
             "elements": [
               {
                 "acts": [
-                  " ",
-                  "dn",
                   "up",
-                  "chk"
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
                 ],
                 "cmddn": "laminar/B738/pilot/barometer_down",
                 "cmdup": "laminar/B738/pilot/barometer_up",
-                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
-                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0 end",
-                "incr": 0.01,
-                "max": 32,
-                "min": 22,
+                "dref": "1-sim/ng/baroSmallL/anim",
+                "incr": 5,
+                "max": 1105,
+                "min": -1105,
                 "name": "barovalue1",
                 "title": "Baro Mode left",
                 "type": "dialdref"
               },
               {
                 "acts": [
-                  " ",
-                  "dn",
                   "up",
-                  "chk"
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
                 ],
-                "cmddn": "laminar/B738/copilot/barometer_down",
-                "cmdup": "laminar/B738/copilot/barometer_up",
-                "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_stby",
-                "ftrans": "function (a) return string.format(\"%5.2f\",a)+0 end",
-                "incr": 0.01,
-                "max": 32,
-                "min": 22,
+                "dref": "1-sim/ng/baroSmallR/anim",
+                "incr": 5,
+                "max": 1105,
+                "min": -1105,
                 "name": "barovalue2",
                 "title": "Baro mode right",
                 "type": "dialdref"
@@ -2383,13 +2475,13 @@
                 "cmddn": "1-sim/command/gauges/baroRotary_stby_rotary-",
                 "cmdup": "1-sim/command/gauges/baroRotary_stby_rotary+",
                 "dref": "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_stby",
-                "ftrans": "function (a) return string.format(\"%4.0f\",a)+0 end",
+                "ftrans": "function (a) return string.format(\"%4.2f\",a)+0 end",
                 "incr": 1,
                 "max": 3200,
                 "min": 2200,
                 "name": "barovalue3",
                 "title": "Baro mode stby",
-                "type": "dataref"
+                "type": "undefined"
               }
             ],
             "name": "barovalues"
@@ -2404,18 +2496,46 @@
               },
               {
                 "acts": [
+                  "up",
+                  "dn",
+                  " ",
+                  "chk",
+                  ""
+                ],
+                "dref": "1-sim/ng/minsSmallL/anim",
+                "incr": 5,
+                "max": 5000,
+                "min": 0,
+                "name": "dh",
+                "title": "Decision height",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  " ",
+                  "chk",
+                  " "
+                ],
+                "dref": "1-sim/ng/isDaActiveL",
+                "foff": "function (a) set(\"1-sim/ng/minsLargeL/anim\",0) set(\"1-sim/ng/minsLargeL/anim/anim\",0) end",
+                "fon": "function (a) set(\"1-sim/ng/minsLargeL/anim\",-1) set(\"1-sim/ng/minsLargeL/anim/anim\",-1) end",
+                "name": "minbaro",
+                "title": "MIN BARO",
+                "type": "custom"
+              },
+              {
+                "acts": [
                   "on",
                   "off",
                   "tgl",
                   "set",
                   "chk"
                 ],
-                "dref": "1-sim/ng/dhL",
-                "incr": 1,
-                "max": 999,
-                "min": 0,
-                "name": "dh",
-                "title": "Decision height",
+                "dref": "1-sim/ng/mins/rst/L",
+                "name": "minrst",
+                "title": "Minimum RST",
                 "type": "dataref"
               }
             ],
@@ -2431,11 +2551,24 @@
                   "chk",
                   ""
                 ],
-                "cmdtgl": "laminar/B738/EFIS_control/capt/push_button/arpt_press",
-                "dref": "laminar/B738/EFIS_control/capt/push_button/arpt",
+                "dref": "1-sim/ndpanel/1/map3",
                 "name": "arptmode",
                 "title": "Airport Mode",
-                "type": "onofftgl"
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/ndpanel/1/hsiModeButton",
+                "fcheck": "function (a) return a==0 end",
+                "name": "ctrmode",
+                "title": "CTR",
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -2443,13 +2576,38 @@
                   "off",
                   "tgl",
                   "chk",
-                  ""
+                  "set"
                 ],
-                "cmdtgl": "laminar/B738/EFIS_control/capt/push_button/data_press",
-                "dref": "laminar/B738/EFIS_control/capt/push_button/data",
+                "dref": "1-sim/ndpanel/1/map4",
                 "name": "datamode",
                 "title": "DATA mode Boeing",
-                "type": "onofftgl"
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/ng/FPV/L",
+                "name": "fpvmode",
+                "title": "FPV",
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/ng/mtrs/L",
+                "name": "mtrmode",
+                "title": "MTR",
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -2459,11 +2617,10 @@
                   "chk",
                   ""
                 ],
-                "cmdtgl": "laminar/B738/EFIS_control/capt/push_button/pos_press",
-                "dref": "laminar/B738/EFIS_control/capt/push_button/pos",
+                "dref": "",
                 "name": "posmode",
                 "title": "POS Mode Boeing",
-                "type": "onofftgl"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -2473,11 +2630,10 @@
                   "chk",
                   ""
                 ],
-                "cmdtgl": "laminar/B738/EFIS_control/capt/push_button/sta_press",
-                "dref": "laminar/B738/EFIS_control/capt/push_button/sta",
+                "dref": "",
                 "name": "stamode",
                 "title": "STA Mode Boeing",
-                "type": "onofftgl"
+                "type": "undefined"
               },
               {
                 "acts": [
@@ -2485,13 +2641,26 @@
                   "off",
                   "tgl",
                   "chk",
-                  ""
+                  "set"
                 ],
-                "cmdtgl": "laminar/B738/EFIS_control/capt/push_button/terr_press",
-                "dref": "laminar/B738/EFIS_control/capt/push_button/terr",
+                "dref": "1-sim/ng/wxrBrt/sel/L",
                 "name": "terrainmode",
                 "title": "Terrain mode",
-                "type": "onofftgl"
+                "type": "dataref"
+              },
+              {
+                "acts": [
+                  "on",
+                  "off",
+                  "tgl",
+                  "set",
+                  "chk"
+                ],
+                "dref": "1-sim/ng/map/tfc/L",
+                "fcheck": "function (a) return a==0 end",
+                "name": "tfcmode",
+                "title": "<title>",
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -2499,13 +2668,12 @@
                   "off",
                   "tgl",
                   "chk",
-                  ""
+                  "set"
                 ],
-                "cmdtgl": "laminar/B738/EFIS_control/capt/push_button/wpt_press",
-                "dref": "laminar/B738/EFIS_control/capt/push_button/wpt",
+                "dref": "1-sim/ndpanel/1/map5",
                 "name": "wptmode",
                 "title": "WPT Mode",
-                "type": "onofftgl"
+                "type": "dataref"
               },
               {
                 "acts": [
@@ -2513,13 +2681,12 @@
                   "off",
                   "tgl",
                   "chk",
-                  ""
+                  "set"
                 ],
-                "cmdtgl": "laminar/B738/EFIS_control/capt/push_button/wxr_press",
-                "dref": "laminar/B738/EFIS/EFIS_wx_on",
+                "dref": "1-sim/ndpanel/1/map1",
                 "name": "wxrmode",
                 "title": "Weather Radar mode",
-                "type": "onofftgl"
+                "type": "dataref"
               }
             ],
             "name": "modes"
@@ -2531,14 +2698,14 @@
                   "up",
                   "dn",
                   "chk",
-                  "",
+                  "set",
                   ""
                 ],
-                "cmddn": "laminar/B738/EFIS_control/capt/map_range_dn",
-                "cmdup": "laminar/B738/EFIS_control/capt/map_range_up",
-                "dref": "laminar/B738/EFIS/capt/map_range",
+                "cmddn": "1-sim/command/ndpanel/1/hsiModeRotary_switch-",
+                "cmdup": "1-sim/command/ndpanel/1/hsiModeRotary_switch+",
+                "dref": "1-sim/ndpanel/1/hsiModeRotary",
                 "incr": 1,
-                "max": 7,
+                "max": 3,
                 "min": 0,
                 "name": "mapmode",
                 "title": "ND Mode",
@@ -2552,15 +2719,47 @@
                   "",
                   ""
                 ],
-                "cmddn": "laminar/B738/EFIS_control/capt/map_mode_dn",
-                "cmdup": "laminar/B738/EFIS_control/capt/map_mode_up",
-                "dref": "laminar/B738/EFIS_control/capt/map_mode_pos",
+                "cmddn": "1-sim/command/ng/rangeL/anim_rotary-",
+                "cmdup": "1-sim/command/ng/rangeL/anim_rotary+",
+                "dref": "1-sim/ndpanel/1/hsiRangeRotary",
                 "incr": 1,
-                "max": 3,
+                "max": 6,
                 "min": 0,
                 "name": "maprange",
                 "title": "ND Zoom",
                 "type": "dialcmd"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "1-sim/ng/leftVor/L/anim",
+                "incr": 1,
+                "max": 1,
+                "min": -1,
+                "name": "voradf1",
+                "title": "<title>",
+                "type": "dialdref"
+              },
+              {
+                "acts": [
+                  "up",
+                  "dn",
+                  "set",
+                  "chk",
+                  ""
+                ],
+                "dref": "1-sim/ng/rightVor/L/anim",
+                "incr": 1,
+                "max": 1,
+                "min": -1,
+                "name": "voradf2",
+                "title": "<title>",
+                "type": "dialdref"
               }
             ],
             "name": "nd"
@@ -2583,7 +2782,7 @@
                 "dref": "laminar/B738/EFIS_control/capt/terr_on",
                 "name": "terronnd",
                 "title": "Terrain",
-                "type": "onofftgl"
+                "type": "undefined"
               }
             ],
             "name": "terrain"
@@ -2602,7 +2801,7 @@
                 "dref": "laminar/B738/EFIS/EFIS_wx_on",
                 "name": "wxradarmode",
                 "title": "Weather radar mode pilot",
-                "type": "onofftgl"
+                "type": "undefined"
               }
             ],
             "name": "wxradar"
@@ -4101,7 +4300,7 @@
               {
                 "acts": [
                   " ",
-                  "set",
+                  "chk",
                   " ",
                   " ",
                   " "
