@@ -78,24 +78,33 @@ function render_assignment_editor()
 						imgui.SetColumnWidth(1, 150)
 													
 							ng_imgui_out_text(color_white, "Name") imgui.NextColumn()
-								ng_imgui_in_tfield(naddon.name.."name", 300, color_white, 255,  
+							ng_imgui_in_tfield(naddon.name.."name", 300, color_white, 255,  
 							naddon.name, function (textout) naddon.name = textout end) imgui.NextColumn()
 
 							ng_imgui_out_text(color_white, "ACF Plane ICAO") imgui.NextColumn()
-								ng_imgui_in_tfield(naddon.name.."planeicao", 50, color_white, 255,  
+							ng_imgui_in_tfield(naddon.name.."planeicao", 50, color_white, 255,  
 							naddon.planeicao, function (textout) naddon.planeicao = textout end) imgui.NextColumn()
 
 							ng_imgui_out_text(color_white, "ACF Plane TAIL") imgui.NextColumn()
-							if naddon.planetailnum ~= nil then
-								ng_imgui_in_button(naddon.name.."niltail", "-", 15, 20, 
-									function () naddon.planetailnum = nil end) imgui.SameLine()
-								ng_imgui_in_tfield(naddon.name.."planetailnum", 300, color_white, 255,  
+							-- if naddon.planetailnum ~= nil then
+								-- ng_imgui_in_button(naddon.name.."niltail", "-", 15, 20, 
+									-- function () naddon.planetailnum = nil end) imgui.SameLine()
+							ng_imgui_in_tfield(naddon.name.."planetailnum", 300, color_white, 255,  
 									naddon.planetailnum, function (textout) naddon.planetailnum = textout end) imgui.NextColumn()
-							else
-								ng_imgui_in_button(naddon.name.."addtail", "+", 15, 20, 
-									function () naddon.planetailnum = "" end) imgui.NextColumn()
-							end
+							-- else
+								-- ng_imgui_in_button(naddon.name.."addtail", "+", 15, 20, 
+									-- function () naddon.planetailnum = "" end) imgui.NextColumn()
+							-- end
 
+							ng_imgui_out_text(color_white, "ACF Description") imgui.NextColumn()
+							if naddon.planedescr ~= nil then
+								ng_imgui_in_tfield(naddon.name.."planedescr", 300, color_white, 255,  
+								naddon.planedescr, function (textout) naddon.planedescr = textout end) imgui.NextColumn()
+							else
+								ng_imgui_in_tfield(naddon.name.."planedescr", 300, color_white, 255,  
+								"", function (textout) naddon.planedescr = textout end) imgui.NextColumn()
+							end
+							
 							ng_imgui_out_text(color_white, "SOP ICAO") imgui.NextColumn()
 								ng_imgui_in_tfield(naddon.name.."sopicao", 50, color_white, 255,  
 							naddon.settings.sopicao, function (textout) naddon.settings.sopicao = string.upper(textout) end) imgui.NextColumn()

@@ -41,7 +41,7 @@ general:add(preference:new("acficao",		"",ng_type_text,"Aircraft ICAO|","aircraf
 general:add(preference:new("acfname",		"",ng_type_text,"Aircraft Name|","aircraft.name"))		                    -- general:acfname
 general:add(preference:new("acfreg",		"",ng_type_text,"Aircraft Registration|","aircraft.reg"))		            -- general:acfreg
 general:add(preference:new("acfselcal",		"",ng_type_text,"Aircraft SELCAL|","aircraft.selcal"))		                -- general:acfselcal
-general:add(preference:new("acftlr",		0,ng_type_int,"Aircraft TLR|1","aircraft.supports_tlr"))		            -- general:acftlr
+general:add(preference:new("acftlr",		1,ng_type_int,"Aircraft TLR|1","aircraft.supports_tlr"))		            -- general:acftlr
 -- --------------------------------------------------------------------------------------------
 
 -- --------------------------- Origin airport related fields and settings
@@ -492,7 +492,7 @@ function ng_load_simbrief()
 					ng_getBriefPrefs():set("landing:rwycourse",ng_briefing_ld_rwys[ng_briefing_ld_rwyidx].magnetic_course)
 					ng_getBriefPrefs():set("landing:rwyheadwind",ng_briefing_ld_rwys[ng_briefing_ld_rwyidx].headwind_component)
 					ng_getBriefPrefs():set("landing:rwycrosswind",ng_briefing_ld_rwys[ng_briefing_ld_rwyidx].crosswind_component)
-					ng_getBriefPrefs():set("landing:rwyilsfreq",ng_briefing_ld_rwys[ng_briefing_ld_rwyidx].ils_frequency)
+					-- ng_getBriefPrefs():set("landing:rwyilsfreq",ng_briefing_ld_rwys[ng_briefing_ld_rwyidx].ils_frequency)
 					
 				end
 			end

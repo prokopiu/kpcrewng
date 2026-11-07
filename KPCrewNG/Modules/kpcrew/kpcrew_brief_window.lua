@@ -1516,11 +1516,13 @@ function render_flight_arr_info()
 			function (textin) ng_getBriefPrefs():set("landing:approachtype",textin) end, ddwidth)
 
 		if ng_getBriefPrefs():get("landing:approachtype") == 1 then
-			imgui.TableNextColumn()
-			ng_imgui_out_text(color_bright_orange,"ILS FREQ")
-			imgui.TableNextColumn()
-			ng_imgui_in_tfield("dilsfreq", ddwidth, color_white, 10, ng_getBriefPrefs():get("landing:rwyilsfreq"), 
-				function (textout) ng_getBriefPrefs():set("landing:rwyilsfreq",textout) end )	
+			if ng_getBriefPrefs():get("landing:rwyilsfreq")  == nil then
+				imgui.TableNextColumn()
+				ng_imgui_out_text(color_bright_orange,"ILS FREQ")
+				imgui.TableNextColumn()
+				ng_imgui_in_tfield("dilsfreq", ddwidth, color_white, 10, ng_getBriefPrefs():get("landing:rwyilsfreq") , 
+					function (textout) ng_getBriefPrefs():set("landing:rwyilsfreq",textout) end )	
+			end
 		end 
 
 		imgui.TableNextRow()

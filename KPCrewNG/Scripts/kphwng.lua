@@ -109,6 +109,24 @@ function ng_get_state(syselem, action, value)
 		if result then return 1 else return 0 end
 	end
 end 
+
+function ng_get_value(syselem)
+	if ng_get_active_sys():find(syselem) ~= nil then
+	
+		local element = ng_get_active_sys():find(syselem):getElementNode()
+		local dref = element.dref
+		local idx = element.indx
+		local etype = string.lower(element.type)
+
+		local result = nil
+		if dref ~= nil then 
+			if idx ~= nil then result = get(element.dref,idx) else result = get(element.dref) end
+			return result
+		end
+	end
+	return -1
+end
+ 
 -- -----------------------------------------------------------------------------------------
 
 xsp_bravo_mode 			= 1
@@ -139,7 +157,7 @@ function xsp_bravo_knob_up()
 			ng_execute_actions('crs1','up',nil)
 		end
 		if xsp_bravo_mode == 5 then
-			ng_execute_actions('speedsel','up',nil)
+			ng_execute_actions('spdsel','up',nil)
 		end
 	end
 	
@@ -163,7 +181,7 @@ function xsp_bravo_knob_dn()
 			ng_execute_actions('crs1','dn',nil)
 		end
 		if xsp_bravo_mode == 5 then
-			ng_execute_actions('speedsel','dn',nil)
+			ng_execute_actions('spdsel','dn',nil)
 		end
 	end
 
@@ -194,25 +212,21 @@ create_command("kp/xsp/lights/landing_switch_tgl",	"Landing Lights Toggle",	"ng_
 
 -- only optional
 
-if ng_getAppPrefs():get("kphwng:extlights") then
+create_command("kp/xsp/lights/rwyto_switch_on",		"Runway Lights On",			"ng_execute_actions('#rwylights','on',nil)",			"","")
+create_command("kp/xsp/lights/rwyto_switch_off",	"Runway Lights Off",		"ng_execute_actions('#rwylights','off',nil)",			"","")
+create_command("kp/xsp/lights/rwyto_switch_tgl",	"Runway Lights Toggle",		"ng_execute_actions('#rwylights','tgl',nil)",		"","")
 
-	create_command("kp/xsp/lights/rwyto_switch_on",		"Runway Lights On",			"ng_execute_actions('#rwylights','on',nil)",			"","")
-	create_command("kp/xsp/lights/rwyto_switch_off",	"Runway Lights Off",		"ng_execute_actions('#rwylights','off',nil)",			"","")
-	create_command("kp/xsp/lights/rwyto_switch_tgl",	"Runway Lights Toggle",		"ng_execute_actions('#rwylights','tgl',nil)",		"","")
+create_command("kp/xsp/lights/logo_switch_on",		"Logo Lights On",			"ng_execute_actions('#logolights','on',nil)",		"","")
+create_command("kp/xsp/lights/logo_switch_off",		"Logo Lights Off",			"ng_execute_actions('#logolights','off',nil)",		"","")
+create_command("kp/xsp/lights/logo_switch_tgl",		"Logo Lights Toggle",		"ng_execute_actions('#logolights','tgl',nil)",		"","")
 
-	create_command("kp/xsp/lights/logo_switch_on",		"Logo Lights On",			"ng_execute_actions('#logolights','on',nil)",		"","")
-	create_command("kp/xsp/lights/logo_switch_off",		"Logo Lights Off",			"ng_execute_actions('#logolights','off',nil)",		"","")
-	create_command("kp/xsp/lights/logo_switch_tgl",		"Logo Lights Toggle",		"ng_execute_actions('#logolights','tgl',nil)",		"","")
+create_command("kp/xsp/lights/wing_switch_on",		"Wing Lights On",			"ng_execute_actions('#winglights','on',nil)",		"","")
+create_command("kp/xsp/lights/wing_switch_off",		"Wing Lights Off",			"ng_execute_actions('#winglights','off',nil)",		"","")
+create_command("kp/xsp/lights/wing_switch_tgl",		"Wing Lights Toggle",		"ng_execute_actions('#winglights','tgl',nil)",		"","")
 
-	create_command("kp/xsp/lights/wing_switch_on",		"Wing Lights On",			"ng_execute_actions('#winglights','on',nil)",		"","")
-	create_command("kp/xsp/lights/wing_switch_off",		"Wing Lights Off",			"ng_execute_actions('#winglights','off',nil)",		"","")
-	create_command("kp/xsp/lights/wing_switch_tgl",		"Wing Lights Toggle",		"ng_execute_actions('#winglights','tgl',nil)",		"","")
-
-	create_command("kp/xsp/lights/wheel_switch_on",		"Wheel Lights On",			"ng_execute_actions('#wheellights','on',nil)",		"", "")
-	create_command("kp/xsp/lights/wheel_switch_off",	"Wheel Lights Off",			"ng_execute_actions('#wheellights','off',nil)",		"", "")
-	create_command("kp/xsp/lights/wheel_switch_tgl",	"Wheel Lights Toggle",		"ng_execute_actions('#wheellights','tgl',nil)",	"", "")
-
-end
+create_command("kp/xsp/lights/wheel_switch_on",		"Wheel Lights On",			"ng_execute_actions('#wheellights','on',nil)",		"", "")
+create_command("kp/xsp/lights/wheel_switch_off",	"Wheel Lights Off",			"ng_execute_actions('#wheellights','off',nil)",		"", "")
+create_command("kp/xsp/lights/wheel_switch_tgl",	"Wheel Lights Toggle",		"ng_execute_actions('#wheellights','tgl',nil)",	"", "")
 
 ---- internal lights
 
@@ -319,21 +333,21 @@ create_command("kp/xsp/autopilot/hdg_sync",			"Hdg Sync", 		"ng_execute_actions(
 
 create_command("kp/xsp/autopilot/at_tgl",			"A/T Tgl", "ng_execute_actions('autothrottle','tgl',nil)","","")
 create_command("kp/xsp/autopilot/at_arm",			"A/T Arm", "ng_execute_actions('autothrottle','on',nil)","","")
-create_command("kp/xsp/autopilot/at_off",			"A/T OFF", "ng_execute_actions('athrdisc','off',nil)","","")
+create_command("kp/xsp/autopilot/at_off",			"A/T OFF", "ng_execute_actions('autothrottle','off',nil)","","")
 
 create_command("kp/xsp/autopilot/yawd_tgl",			"Yawdamper Tgl", "ng_execute_actions('yawdamper','tgl',nil)","","")
 create_command("kp/xsp/autopilot/yawd_on",			"Yawdamper On", "ng_execute_actions('yawdamper','on',nil)","","")
 create_command("kp/xsp/autopilot/yawd_off",			"Yawdamper OFF", "ng_execute_actions('yawdamper','off',nil)","","")
 
-create_command("kp/xsp/autopilot/toga_press",		"Press Left TOGA", "ng_execute_actions('toga','tgl',nil)","","")
+create_command("kp/xsp/autopilot/toga_press",		"Press Left TOGA", "ng_execute_actions('athrtogamode','tgl',nil)","","")
 
 create_command("kp/xsp/autopilot/crs1_dn",			"CRS 1 decrease", "ng_execute_actions('crs1','dn',nil)","","")
 create_command("kp/xsp/autopilot/crs1_up",			"CRS 1 increase", "ng_execute_actions('crs1','up',nil)","","")
 create_command("kp/xsp/autopilot/crs2_dn",			"CRS 2 decrease", "ng_execute_actions('crs2','dn',nil)","","")
 create_command("kp/xsp/autopilot/crs2_up",			"CRS 2 increase", "ng_execute_actions('crs2','up',nil)","","")
 
-create_command("kp/xsp/autopilot/spd_dn",			"Speed decrease", "ng_execute_actions('speedsel','dn',nil)","","")
-create_command("kp/xsp/autopilot/spd_up",			"Speed increase", "ng_execute_actions('speedsel','up',nil)","","")
+create_command("kp/xsp/autopilot/spd_dn",			"Speed decrease", "ng_execute_actions('spdsel','dn',nil)","","")
+create_command("kp/xsp/autopilot/spd_up",			"Speed increase", "ng_execute_actions('spdsel','up',nil)","","")
 
 create_command("kp/xsp/autopilot/hdg_dn",			"Heading decrease", "ng_execute_actions('hdgsel','dn',nil)","","")
 create_command("kp/xsp/autopilot/hdg_up",			"Heading increase", "ng_execute_actions('hdgsel','up',nil)","","")
@@ -346,88 +360,99 @@ create_command("kp/xsp/autopilot/vsp_up",			"Vertical Speed increase", "ng_execu
 
 create_command("kp/xsp/autopilot/APDiscYoke",		"Disconnect A/P from Yoke", "ng_execute_actions('yokedisc','tgl',nil)","","")
 
-if ng_getAppPrefs():get("kphwng:levelfull") then
 
-	if ng_getAppPrefs():get("kphwng:extmcp") then
-	
-		create_command("kp/xsp/autopilot/n1_tgl",	"Toggle N1/EPR mode", "ng_execute_actions('n1mode','tgl',nil)","","")
-		create_command("kp/xsp/autopilot/vnav_tgl",	"Toggle VNAV mode", "ng_execute_actions('vnavmode','tgl',nil)","","")
-		create_command("kp/xsp/autopilot/flch_tgl",	"Toggle Level Change mode", "ng_execute_actions('flchmode','tgl',nil)","","")
-		create_command("kp/xsp/autopilot/lnav_tgl",	"Toggle LNAV mode", "ng_execute_actions('lnavmode','tgl',nil)","","")
-	
-	end
+create_command("kp/xsp/autopilot/n1_tgl",	"Toggle N1/EPR mode", "ng_execute_actions('n1mode','tgl',nil)","","")
 
-end
+create_command("kp/xsp/autopilot/vnav_tgl",	"Toggle VNAV mode", "ng_execute_actions('vnavmode','tgl',nil)","","")
+
+create_command("kp/xsp/autopilot/flch_tgl",	"Toggle Level Change mode", "ng_execute_actions('flchmode','tgl',nil)","","")
+
+create_command("kp/xsp/autopilot/lnav_tgl",	"Toggle LNAV mode", "ng_execute_actions('lnavmode','tgl',nil)","","")
+	
 -- --------------- EFIS all captain side
 
 create_command("kp/xsp/systems/all_alt_std",		"ALTS STD/QNH toggle",		"ng_execute_actions('#barostdbtns','tgl',nil)",		"","")
 
 create_command("kp/xsp/systems/baro_mode_tgl",		"Baro inch/mb toggle",		"ng_execute_actions('#baromodes','tgl',nil)",	"","")
+create_command("kp/xsp/systems/baro_mode_in",		"Baro inch toggle",		"ng_execute_actions('#baromodes','off',nil)",	"","")
+create_command("kp/xsp/systems/baro_mode_hpa",		"Baro hpa toggle",		"ng_execute_actions('#baromodes','on',nil)",	"","")
 
-create_command("kp/xsp/systems/all_baro_down",		"All baro down",			"ng_execute_actions('#barovalues','dn',nil)","","")
+create_command("kp/xsp/systems/all_baro_dn",		"All baro down",			"ng_execute_actions('#barovalues','dn',nil)","","")
 create_command("kp/xsp/systems/all_baro_up",		"All baro up",				"ng_execute_actions('#barovalues','up',nil)","","")
 
 
 -- MAP zoom
--- create_command("kp/xsp/efis/map_zoom_dn",			"EFIS Map Zoom In", "sysEFIS.mapZoomPilot:step(cmdDown)","","")
--- create_command("kp/xsp/efis/map_zoom_up",			"EFIS Map Zoom Out", "sysEFIS.mapZoomPilot:step(cmdUp)","","")
+create_command("kp/xsp/efis/map_zoom_dn",			"EFIS Map Zoom In", "ng_execute_actions('maprange','dn',nil)","","")
+create_command("kp/xsp/efis/map_zoom_up",			"EFIS Map Zoom Out", "ng_execute_actions('maprange','up',nil)","","")
 
 -- MAP mode
--- create_command("kp/xsp/efis/map_mode_dn",			"EFIS Map Mode Left", "sysEFIS.mapModePilot:step(cmdDown)","","")
--- create_command("kp/xsp/efis/map_mode_up",			"EFIS Map Mode Right", "sysEFIS.mapModePilot:step(cmdUp)","","")
+create_command("kp/xsp/efis/map_mode_dn",			"EFIS Map Mode Left", "ng_execute_actions('mapmode','dn',nil)","","")
+create_command("kp/xsp/efis/map_mode_up",			"EFIS Map Mode Right", "ng_execute_actions('mapmode','up',nil)","","")
 
 -- CTR Boeing
--- create_command("kp/xsp/efis/ctr_toggle",			"EFIS CTR Toggle", "sysEFIS.ctrPilot:actuate(modeToggle)","","")
+create_command("kp/xsp/efis/ctr_toggle",			"EFIS CTR Toggle", 
+"ng_execute_actions('ctrmode','tgl',nil)","","")
 
 -- TFC Traffic 
--- create_command("kp/xsp/efis/tfc_toggle",			"EFIS TFC Toggle", "sysEFIS.tfcPilot:actuate(modeToggle)","","")
+create_command("kp/xsp/efis/tfc_toggle",			"EFIS TFC Toggle", 
+"ng_execute_actions('tfcmode','tgl',nil)","","")
+
+-- VORADF1/2
+create_command("kp/xsp/efis/voradf1_dn",			"EFIS VORADF 1 dn", 
+"ng_execute_actions('voradf1','up',nil)","","")
+create_command("kp/xsp/efis/voradf1_up",			"EFIS VORADF 1 up",
+ "ng_execute_actions('voradf1','dn',nil)","","")
+
+create_command("kp/xsp/efis/voradf2_dn",			"EFIS VORADF 2 dn", 
+"ng_execute_actions('voradf2','up',nil)","","")
+create_command("kp/xsp/efis/voradf2_up",			"EFIS VORADF 2 up",
+ "ng_execute_actions('voradf2','dn',nil)","","")
 
 -- WXR Weather
--- create_command("kp/xsp/efis/wxr_toggle",			"EFIS Weather Toggle", "sysEFIS.wxrPilot:actuate(modeToggle)","","")
+create_command("kp/xsp/efis/wxr_toggle",			"EFIS Weather Toggle", "ng_execute_actions('wxrmode','tgl',nil)","","")
 
 -- STA Boeing / VOR DFLT
--- create_command("kp/xsp/efis/sta_toggle",			"EFIS STA Toggle", "sysEFIS.staPilot:actuate(modeToggle)","","")
+create_command("kp/xsp/efis/sta_toggle",			"EFIS STA Toggle",
+"ng_execute_actions('stamode','tgl',nil)","","")
 
 -- WPT / FIX
--- create_command("kp/xsp/efis/wpt_toggle",			"EFIS WPT Toggle", "sysEFIS.wptPilot:actuate(modeToggle)","","")
+create_command("kp/xsp/efis/wpt_toggle",			"EFIS WPT Toggle",
+"ng_execute_actions('wptmode','tgl',nil)","","")
 
 -- APT
--- create_command("kp/xsp/efis/apt_toggle",			"EFIS Airport Toggle", "sysEFIS.arptPilot:actuate(modeToggle)","","")
+create_command("kp/xsp/efis/apt_toggle",			"EFIS Airport Toggle", "ng_execute_actions('arptmode','tgl',nil)","","")
 
 -- DATA Boeing
--- create_command("kp/xsp/efis/dat_toggle",			"EFIS DATA Toggle", "sysEFIS.dataPilot:actuate(modeToggle)","","")
+create_command("kp/xsp/efis/dat_toggle",			"EFIS DATA Toggle",
+"ng_execute_actions('datamode','tgl',nil)","","")
 
 -- POS Boeing / NAV DFLT
--- create_command("kp/xsp/efis/pos_toggle",			"EFIS POS Toggle", "sysEFIS.posPilot:actuate(modeToggle)","","")
+create_command("kp/xsp/efis/pos_toggle",			"EFIS POS Toggle",
+"ng_execute_actions('posmode','tgl',nil)","","")
 
 -- Terrain
--- create_command("kp/xsp/efis/ter_toggle",			"EFIS Terrain Toggle", "sysEFIS.terrPilot:actuate(modeToggle)","","")
+create_command("kp/xsp/efis/ter_toggle",			"EFIS Terrain Toggle", "ng_execute_actions('terrainmode','tgl',nil)","","")
 
 -- FPV Boeing
--- create_command("kp/xsp/efis/fpv_toggle",			"EFIS FPV Toggle", "sysEFIS.fpvPilot:actuate(modeToggle)","","")
+create_command("kp/xsp/efis/fpv_toggle",			"EFIS FPV Toggle", 
+"ng_execute_actions('fpvmode','tgl',nil)","","")
 
 -- MTRS Boeing
--- create_command("kp/xsp/efis/mtr_toggle",			"EFIS FPV Toggle", "sysEFIS.mtrsPilot:actuate(modeToggle)","","")
+create_command("kp/xsp/efis/mtr_toggle",			"EFIS FPV Toggle",
+"ng_execute_actions('mtrmode','tgl',nil)","","")
 
 -- MINS type Boeing RADIO/BARO
--- create_command("kp/xsp/efis/mins_type_dn",			"EFIS Mins Type Knob Left", "sysEFIS.minsTypePilot:step(cmdDown)","","")
--- create_command("kp/xsp/efis/mins_type_up",			"EFIS Mins Type Knob Right", "sysEFIS.minsTypePilot:step(cmdUp)","","")
+create_command("kp/xsp/efis/mins_type_radio",			"EFIS Mins Type Knob Left", "ng_execute_actions('minbaro','off',nil)","","")
+create_command("kp/xsp/efis/mins_type_baro",			"EFIS Mins Type Knob Right", "ng_execute_actions('minbaro','on',nil)","","")
 
 -- MINS RESET/ON OFF Boeing
--- create_command("kp/xsp/efis/mins_toggle",			"EFIS Minimums Reset", "sysEFIS.minsResetPilot:actuate(modeToggle)","","")
+create_command("kp/xsp/efis/mins_rst",			"EFIS Minimums Reset", "ng_execute_actions('minrst','tgl',nil)","","")
 
 -- MINS SET or DH/DA
--- create_command("kp/xsp/efis/mins_dn",				"EFIS Minimums Down", "sysEFIS.minsPilot:step(cmdDown)","","")
--- create_command("kp/xsp/efis/mins_up",				"EFIS Minimums Up", "sysEFIS.minsPilot:step(cmdUp)","","")
-
--- VOR/ADF 1
--- create_command("kp/xsp/efis/voradf_1_dn",			"EFIS VORADF1 Down/Left", "sysEFIS.voradf1Pilot:step(cmdDown)","","")
--- create_command("kp/xsp/efis/voradf_1_up",			"EFIS VORADF1 Up/Right", "sysEFIS.voradf1Pilot:step(cmdUp)","","")
-
--- VOR/ADF 2
--- create_command("kp/xsp/efis/voradf_2_dn",			"EFIS VORADF2 Down/Left", "sysEFIS.voradf2Pilot:step(cmdDown)","","")
--- create_command("kp/xsp/efis/voradf_2_up",			"EFIS VORADF2 Up/Right", "sysEFIS.voradf2Pilot:step(cmdUp)","","")
-
+create_command("kp/xsp/efis/mins_dn",				"EFIS Minimums Down", 
+"ng_execute_actions('dh','dn',nil)","","")
+create_command("kp/xsp/efis/mins_up",				"EFIS Minimums Up", 
+"ng_execute_actions('dh','up',nil)","","")
 
 -- ------------- Instantiate Datarefs for general annunciators ----------- 
 
@@ -585,22 +610,22 @@ xsp_mcp_yawdamp			= create_dataref_table("kp/xsp/autopilot/mcp_yawdamp", "Int")
 xsp_mcp_yawdamp[0] = 0
 
 -- datarefs for MCP values
-xsp_mcp_altval = create_dataref_table("kp/xsp/bravo/mcp_altval", "Int")
+xsp_mcp_altval = create_dataref_table("kp/xsp/autopilot/mcp_altval", "Int")
 xsp_mcp_altval[0] = 0
 
-xsp_mcp_hdgval = create_dataref_table("kp/xsp/bravo/mcp_hdgval", "Int")
+xsp_mcp_hdgval = create_dataref_table("kp/xsp/autopilot/mcp_hdgval", "Int")
 xsp_mcp_hdgval[0] = 0
 
-xsp_mcp_spdval = create_dataref_table("kp/xsp/bravo/mcp_spdval", "Int")
+xsp_mcp_spdval = create_dataref_table("kp/xsp/autopilot/mcp_spdval", "Int")
 xsp_mcp_spdval[0] = 0
 
-xsp_mcp_vsival = create_dataref_table("kp/xsp/bravo/mcp_vsival", "Int")
+xsp_mcp_vsival = create_dataref_table("kp/xsp/autopilot/mcp_vsival", "Int")
 xsp_mcp_vsival[0] = 0
 
-xsp_mcp_crs1val = create_dataref_table("kp/xsp/bravo/mcp_crs1val", "Int")
+xsp_mcp_crs1val = create_dataref_table("kp/xsp/autopilot/mcp_crs1val", "Int")
 xsp_mcp_crs1val[0] = 0
 
-xsp_mcp_crs2val = create_dataref_table("kp/xsp/bravo/mcp_crs2val", "Int")
+xsp_mcp_crs2val = create_dataref_table("kp/xsp/autopilot/mcp_crs2val", "Int")
 xsp_mcp_crs2val[0] = 0
 
 -- extended MCP/FCU
@@ -610,9 +635,32 @@ xsp_mcp_n1mode[0] = 0
 xsp_mcp_vnavmode = create_dataref_table("kp/xsp/autopilot/mcp_vnav", "Int")
 xsp_mcp_vnavmode[0] = 0	
 
+xsp_mcp_lnavmode = create_dataref_table("kp/xsp/autopilot/mcp_lnav", "Int")
+xsp_mcp_lnavmode[0] = 0	
+
 xsp_mcp_flchmode = create_dataref_table("kp/xsp/autopilot/mcp_flch", "Int")
 xsp_mcp_flchmode[0] = 0	
-		
+
+-- datarefs EFIS
+
+xsp_efis_map_rng = create_dataref_table("kp/xsp/efis/map_rng", "Int")
+xsp_efis_map_rng[0] = 0
+
+xsp_efis_map_mode = create_dataref_table("kp/xsp/efis/map_mode", "Int")
+xsp_efis_map_mode[0] = 0
+
+xsp_efis_mins_mode = create_dataref_table("kp/xsp/efis/mins_mode", "Int")
+xsp_efis_mins_mode[0] = 0
+
+xsp_efis_voradf1_mode = create_dataref_table("kp/xsp/efis/voradf1", "Int")
+xsp_efis_voradf1_mode[0] = 0
+
+xsp_efis_voradf2_mode = create_dataref_table("kp/xsp/efis/voradf2", "Int")
+xsp_efis_voradf2_mode[0] = 0
+
+xsp_efis_baro_mode = create_dataref_table("kp/xsp/efis/baromode1", "Int")
+xsp_efis_baro_mode[0] = 0
+
 -- background function every 1 sec to set lights/annunciators for hardware (honeycomb bravo)
 function xsp_set_light_drefs()
 
@@ -655,7 +703,7 @@ function xsp_set_light_drefs()
 	end
 
 	-- PARKING BRAKE 0=off 1=set
-	xsp_parking_brake[0] 				= ng_get_state("parkbrake","chk",1)
+	xsp_parking_brake[0] 				= ng_get_value("parkbrake","chk",1)
 
 	-- General Gear light green on/off
 	xsp_gear_light_green[0] 			= ng_get_state("_gearlightsgreen","chk",1)
@@ -730,69 +778,80 @@ function xsp_set_light_drefs()
 -- --- Autopilot/MCP/FCU	
 
 	-- FLIGHT DIRECTOR annunciator
-	xsp_mcp_fdir[0] = ng_get_state("flightdir1","chk",0)	
-	xsp_mcp_fdir2[0] = ng_get_state("flightdir2","chk",0)	
+	xsp_mcp_fdir[0] = ng_get_value("flightdir1")	
+	xsp_mcp_fdir2[0] = ng_get_value("flightdir2")	
 	
 	-- HDG annunciator
-	xsp_mcp_hdg[0] = ng_get_state("_hdg","chk",nil)
+	if ng_get_value("_hdg") > 0 then xsp_mcp_hdg[0] = 1 else xsp_mcp_hdg[0] = 0 end
 
 	-- NAV annunciator
-	xsp_mcp_nav[0] = ng_get_state("_loc","chk",nil)
+	if ng_get_value("_loc") > 0 then xsp_mcp_nav[0] = 1 else xsp_mcp_nav[0] = 0 end
 
 	-- APR annunciator
-	xsp_mcp_app[0] = ng_get_state("_appr","chk",nil)
-
+	if ng_get_value("_appr") > 0 then xsp_mcp_app[0] = 1 else xsp_mcp_app[0] = 0 end
+	
 	-- ALT annunciator
-	xsp_mcp_alt[0] = ng_get_state("_alt","chk",nil)
+	if ng_get_value("_alt") > 0 then xsp_mcp_alt[0] = 1 else xsp_mcp_alt[0] = 0 end
 
 	-- VS annunciator
-	xsp_mcp_vsp[0] = ng_get_state("_vsp","chk",nil)
+	if ng_get_value("_vsp") > 0 then xsp_mcp_vsp[0] = 1 else xsp_mcp_vsp[0] = 0 end
 
 	-- IAS annunciator
-	xsp_mcp_ias[0] = ng_get_state("_ias","chk",nil)
+	if ng_get_value("_ias") > 0 then xsp_mcp_ias[0] = 1 else xsp_mcp_ias[0] = 0 end
 
 	-- AUTO PILOT annunciator
-	xsp_mcp_ap1[0] = ng_get_state("_ap1state","chk",nil) + ng_get_state("_ap2state","chk",nil)
+	if ng_get_value("_ap1state") > 0 then xsp_mcp_ap1[0] = 1 else xsp_mcp_ap1[0] = 0 end
+	if ng_get_value("_ap2state") > 0 then xsp_mcp_ap2[0] = 1 else xsp_mcp_ap2[0] = 0 end
 
 	-- Autothrottle light
-	-- xsp_mcp_athr[0] = ng_get_state("","chk",nil)
+	xsp_mcp_athr[0] = ng_get_value("autothrottle")
 
 	-- TOGA light
-	xsp_mcp_toga[0] = ng_get_state("toga","chk",0)
+	xsp_mcp_toga[0] = ng_get_value("athrtogamode")
 
 	-- YawDamper light
 	xsp_mcp_yawdamp[0] = ng_get_state("yawdamper","chk",1)
 
 	-- Altitude display
-	-- xsp_mcp_altval[0] = ng_get_state("","chk",nil)
+	xsp_mcp_altval[0] = ng_get_value("altsel")
 
 	-- Heading dispay
-	-- xsp_mcp_hdgval[0] = ng_get_state("","chk",nil)
+	xsp_mcp_hdgval[0] = ng_get_value("hdgsel")
 
 	-- Speed value
-	xsp_mcp_spdval[0] = ng_get_state("","chk",nil)
+	xsp_mcp_spdval[0] = ng_get_value("spdsel")
 
 	-- VS value
-	-- xsp_mcp_vsival[0] = ng_get_state("","chk",nil)
+	xsp_mcp_vsival[0] = ng_get_value("vspsel")
 
 	-- CRS1 value
-	-- xsp_mcp_crs1val[0] = ng_get_state("","chk",nil)
+	xsp_mcp_crs1val[0] = ng_get_value("crs1")
 
 	-- CRS2 value
-	-- xsp_mcp_crs2val[0] = ng_get_state("","chk",nil)
+	xsp_mcp_crs2val[0] = ng_get_value("crs2")
 
 	-- extended MCP/FCU
-	if ng_getAppPrefs():get("kphwng:levelfull") then
-
-		if ng_getAppPrefs():get("kphwng:extmcp") then
 		
-			xsp_mcp_n1mode[0] = ng_get_state("_n1","chk",nil)
-			xsp_mcp_vnavmode[0] = ng_get_state("_vnavmode","chk",nil)
-			xsp_mcp_flchmode[0] = ng_get_state("_flchmode","chk",nil)
-			
-		end
+	if ng_get_value("_n1") > 0 then xsp_mcp_n1mode[0] = 1 else xsp_mcp_n1mode[0] = 0 end
+	if ng_get_value("_vnav") > 0 then xsp_mcp_vnavmode[0] = 1 else xsp_mcp_vnavmode[0] = 0 end
+	if ng_get_value("_lnav") > 0 then xsp_mcp_lnavmode[0] = 1 else xsp_mcp_lnavmode[0] = 0 end
+	if ng_get_value("_flch") > 0 then xsp_mcp_flchmode[0] = 1 else xsp_mcp_flchmode[0] = 0 end
 
-	end	
+			
+	-- EFIS map range
+	xsp_efis_map_rng[0] = ng_get_value("maprange")
+	xsp_efis_map_mode[0] = ng_get_value("mapmode")
+	
+	-- EFIS min mode
+	xsp_efis_mins_mode[0] = ng_get_value("minbaro")
+	
+	-- EFIS VORADF1/2
+	xsp_efis_voradf1_mode[0] = ng_get_value("voradf1")
+	xsp_efis_voradf2_mode[0] = ng_get_value("voradf2")
+	
+	-- EFIS Baro mode in/hpa
+	xsp_efis_baro_mode[0] = ng_get_value("baromode1")
+	
 end
 
 -- ===== UIs =====
@@ -803,6 +862,6 @@ end
 -- local start_y_pos = 0
 
 -- regularly update the drefs for annunciators and lights (every 1 second)
-do_often("xsp_set_light_drefs()")
+do_every_frame("xsp_set_light_drefs()")
 
 
